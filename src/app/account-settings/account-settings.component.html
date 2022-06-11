@@ -1,0 +1,119 @@
+<div class="container-fluid">
+  <div class="main-row">
+    <h3 class="account-heading__main">{{ "ACCOUNT_SETTINGS" | translate }}</h3>
+    <div class="account-setting-wrap">
+      <div class="account-left-menu">
+        <div class="account-wrapper">
+          <div class="box-wrapper">
+            <div class="box-container">
+              <div class="left-nav-section">
+                <div class="side-menu" [ngClass]="isSideNavDisabled ? 'sideNavDisabled' : 'sideNavEnable'">
+                  <div
+                    class="menu cursor-hand" [hidden]="checkPermission('MY_PROFILE')"
+                    [ngClass]="{ active: type.includes('profile') }"
+                  >
+                    <img
+                      src="./../../assets/images/user-user-circle.svg"
+                      alt=""
+                    />
+                    <div
+                      (click)="navigateTo('profile')"
+                      class="sprite-img"
+                      id="href_navigate_profile"
+                    >
+                      {{ "MY_PROFILE" | translate }}
+                    </div>
+                  </div>
+
+                  <div
+                    class="menu cursor-hand" [hidden]="checkPermission('PRACTICE_DETAILS')"
+                    [ngClass]="{ active: type.includes('practice') }"
+                  >
+                    <img
+                      src="./../../assets/images/basic-settings.svg"
+                      alt=""
+                    />
+                    <div
+                      (click)="navigateTo('practice')"
+                      class="sprite-img"
+                      id="href_navigate_practice"
+                    >
+                      {{ "PRACTICE_DETAILS" | translate }}
+                    </div>
+                  </div>
+
+                  <div
+                    class="menu cursor-hand"  [hidden]="checkPermission('SUBSCRIPTION_DETAILS')"
+                    [ngClass]="{ active: type.includes('subscription') }"
+                  >
+                    <img src="./../../assets/images/user-id-card.svg" alt="" />
+                    <div
+                      (click)="navigateTo('subscription')"
+                      class="sprite-img subscription-detail"
+                      id="href_navigate_subscription"
+                    >
+                      {{ "SUBSCRIPTION_DETAILS" | translate }}
+                    </div>
+                  </div>
+
+                  <div
+                    class="menu cursor-hand"
+                    [ngClass]="{ active: type.includes('settings') }"
+                  >
+                    <img
+                      src="./../../assets/images/basic-settings-non-selected.svg"
+                      alt=""
+                    />
+                    <div
+                      (click)="navigateTo('settings')"
+                      class="sprite-img settings"
+                      id="href_navigate_settings"
+                    >
+                      {{ "SETTINGS" | translate }}
+                    </div>
+                  </div>
+                  <span *ngIf="!UnApprovedDoctor">
+                    <div *ngIf="profileManager.length != 0" [hidden]="checkPermission('MANAGE_PROFILE')" class="menu cursor-hand" [ngClass]="{ active: type.includes('Manager') }">
+                      <img
+                        src="./../../assets/images/user-user-circle.svg"
+                        alt=""
+                      />
+                      <div
+                        (click)="navigateTo('Manager')"
+                        class="sprite-img"
+                        id="href_navigate_manager"
+                      >
+                        {{ "PROFILE_MANAGER" | translate }}
+                      </div>
+                    </div>
+                  </span>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="account-right-content">
+        <div class="account-right-area">
+          <ng-container *ngIf="type.includes('profile')">
+            <app-personal-details></app-personal-details>
+          </ng-container>
+          <ng-container *ngIf="type.includes('Manager')">
+            <app-profilemanager></app-profilemanager>
+          </ng-container>
+          <ng-container *ngIf="type.includes('practice')">
+            <app-practice-details [isEditMode]="true"></app-practice-details>
+          </ng-container>
+          <ng-container *ngIf="type.includes('subscription')">
+            <app-subscription-details></app-subscription-details>
+          </ng-container>
+          <ng-container *ngIf="type.includes('settings')">
+            <router-outlet></router-outlet>
+          </ng-container>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

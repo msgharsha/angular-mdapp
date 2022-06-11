@@ -1,0 +1,53 @@
+@import "../../../styles.scss";
+
+.container-fluid {
+  margin: 0;
+  padding: 0;
+}
+
+.settings-wrapper {
+  background-color: $white-color;
+  .main-heading {
+    font-size: 18px;
+    color: $deep-blue;
+    font-weight: bold;
+  }
+  .navbar {
+    display: flex;
+    margin-top: 25px;
+    padding: 15px auto;
+    background-color: $light-gray2;
+    height: 48px;
+    min-height: 48px;
+    border-radius: 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-bottom: 24px;
+    @include justify-content(flex-start);
+    flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    .navbar-items {
+      padding: 7px 20px 9px;
+      a {
+        color: $light-blue1;
+        font-size: 14px;
+        text-decoration: none;
+      }
+      &.nav-active {
+        a {
+          color: $light-blue2;
+          font-weight: $font-bold;
+          border-bottom: 2px solid $light-blue2;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .settings-wrapper .navbar {
+    height: auto;
+  }
+}

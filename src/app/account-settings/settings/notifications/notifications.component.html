@@ -1,0 +1,27 @@
+<div class="notification-wrapper">
+  <h3>{{ "NOTIFICATION" | translate }}</h3>
+  <div class="notification-switches">
+    <div class="switcher-wrap">
+      <label class="switch">
+        <input
+          type="checkbox"
+          [(ngModel)]="isEmailCheck"
+          (change)="onToggleChange()"
+        />
+        <span class="slider round"></span>
+      </label>
+      <span> {{ "EMAIL_NOTIFICATION" | translate }}</span>
+    </div>
+    <div class="switcher-wrap">
+      <label class="switch">
+        <input
+          type="checkbox"
+          [(ngModel)]="isSmsCheck"
+          (change)="onToggleChange()"
+        />
+        <span class="slider round"></span>
+      </label>
+      <span>{{ "SMS_NOTIFICATION" | translate }}</span>
+    </div>
+  </div>
+</div>

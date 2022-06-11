@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <div class="settings-wrapper">
+    <div class="row">
+      <div class="col-lg-12 main-heading">
+        {{ "SETTINGS" | translate }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="navbar">
+          <div
+            [class.nav-active]="selectedTab == 1"
+            (click)="moveToSelectedTab(1)"
+            class="navbar-items"
+          >
+            <a>{{ "NOTIFICATION" | translate }}</a>
+          </div>
+          <div
+            [class.nav-active]="selectedTab == 2"
+            (click)="moveToSelectedTab(2)"
+            class="navbar-items"
+          >
+            <a class="active">{{ "CHANGE_PASSWORD" | translate }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

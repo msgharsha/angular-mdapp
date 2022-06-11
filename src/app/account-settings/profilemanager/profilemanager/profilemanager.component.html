@@ -1,0 +1,39 @@
+<div class="text-right">
+    <p class="add-notes" (click)="addManager()">{{ "ADD_MANAGER" | translate }}</p>
+  </div>
+  <table
+    class="table"
+    
+    aria-describedby="table"
+  >
+    <thead>
+      <tr>
+        <th id="header" *ngFor="let header of headers">
+          {{ header | translate }}
+        </th>
+        <th id="header"></th>
+        <th id="invite"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of profileManagerList">
+        <td *ngFor="let header of headersBind" [innerHTML]="row[header]"></td>
+        <td>{{row.speciality | translate}}</td>
+        <td>{{row.statusType | translate}}</td>
+        <td *ngIf="row.doctorNames == 'NON_WORKING_PROFILE_MANAGER'">{{row.doctorNames | translate}}</td>
+				<td *ngIf="row.doctorNames != 'NON_WORKING_PROFILE_MANAGER'">{{row.doctorNames}}</td>
+        <td class="notes-actions">
+          <span class="edit" (click)="editMyManager(row.id)" *ngIf="row.userStatus == '1'"></span>
+          <span class="view" (click)="editMyManager(row.id)" *ngIf="row.userStatus == '2'"></span>
+          <span class="delete" (click)="deleteMyManager(row)" ></span>
+        </td>
+        <td><button class="view-button"  (click)="inviteAgain(row)" *ngIf="row.userStatus == '1'">
+          {{ "RESEND" | translate }}
+        </button></td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!(profileManagerList && profileManagerList.length)" class="center-text-div">
+    {{ "NO_DATA_FOUND" | translate }}
+  </div>
+  

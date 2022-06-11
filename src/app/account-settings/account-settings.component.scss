@@ -1,0 +1,233 @@
+@import "../../styles.scss";
+
+.container-fluid {
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.side-menu {
+  border-radius: 4px;
+  background-color: #ffffff;
+  .heading-div {
+    border-bottom: 1px solid rgba(101, 101, 130, 0.4);
+    padding-left: 10px;
+    .heading {
+      font-weight: 600;
+    }
+  }
+  .menu {
+    color: $light-gray5;
+    font-weight: $font-semi-bold;
+    border-radius: 2px;
+    font-size: $font-ml;
+    display: flex;
+    img {
+      padding-left: 30px;
+    }
+    div {
+      padding: 18px 16px;
+      line-height: 1.5;
+      font-weight: 500;
+      padding-left: 10px;
+    }
+  }
+  .menu.active {
+    color: $light-blue2;
+    position: relative;
+    &::before {
+      content: "";
+      background: $light-blue2;
+      height: 100%;
+      width: 4px;
+      position: absolute;
+      left: 0;
+    }
+    // border-left: 4px solid $light-blue2;
+    div {
+      font-weight: $font-bold;
+    }
+  }
+}
+
+.cursor-hand {
+  cursor: pointer;
+}
+
+.subscription-detail {
+  padding-left: 9px !important;
+}
+
+.settings {
+  padding-left: 05px !important;
+}
+
+// .box-wrapper{
+//     max-width: 338px;
+//     margin: auto;
+//     position: fixed;
+//     width: 338px;
+//     .box-container{
+//         padding-top: 45px;
+//         .heading-div{
+//             color: $secondary-grey;
+//             div{
+//                 padding-left: 3px;
+//             }
+//         }
+//     }
+// }
+
+/* account css */
+
+.account-heading__main {
+  font-size: $font-24;
+  font-weight: $font-bold;
+  color: $deep-blue;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  padding-left: 15px;
+}
+
+.account-wrapper {
+  // display: -webkit-flex;
+  .box-wrapper {
+    width: 100%;
+    .box-container {
+      .heading-div {
+        color: $secondary-grey;
+        div {
+          padding-left: 3px;
+        }
+      }
+    }
+  }
+  .account-right-area {
+    width: calc(100% - 249px);
+    margin-left: 249px;
+  }
+}
+
+.main-row {
+  margin: 10px 0px 30px;
+}
+.account-setting-wrap {
+  @include flexbox();
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 450px;
+  .account-left-menu {
+    min-width: 247px;
+    background: $white-color;
+    position: relative;
+    border-top-left-radius: 8px;
+    overflow: hidden;
+    &:before {
+      content: "";
+      background: #99abb2;
+      height: calc(100% - 30px);
+      width: 1px;
+      position: absolute;
+      right: 0;
+      opacity: 0.2;
+    }
+  }
+  .account-right-content {
+    width: calc(100% - 247px);
+    background: $white-color;
+    @include border-radius(4px);
+    padding: 30px;
+  }
+}
+
+.left-nav-section {
+  .side-menu {
+    .menu {
+      // padding-left: 60px;
+      #href_navigate_profile {
+        &:before {
+          background: url("./../../assets/images/user-user-circle.svg");
+          background-position: -47px -212px;
+          position: absolute;
+          width: 18px;
+          height: 19px;
+          left: -16px;
+          top: calc(50% - 10px);
+        }
+      }
+      #href_navigate_family {
+        &:before {
+          background-position: -47px -246px;
+          position: absolute;
+          width: 18px;
+          height: 19px;
+          left: -16px;
+          top: calc(50% - 10px);
+        }
+      }
+      #href_navigate_settings {
+        &:before {
+          background-position: -47px -280px;
+          position: absolute;
+          width: 18px;
+          height: 19px;
+          left: -16px;
+          top: calc(50% - 10px);
+        }
+      }
+      &.active {
+        #href_navigate_profile {
+          &:before {
+            background: url("./../../assets/images/user-user-circle.svg");
+            background-position: -12px -212px;
+            position: absolute;
+            width: 18px;
+            height: 19px;
+            left: -16px;
+            top: calc(50% - 10px);
+          }
+        }
+        #href_navigate_family {
+          &:before {
+            background-position: -12px -246px;
+            position: absolute;
+            width: 18px;
+            height: 19px;
+            left: -16px;
+            top: calc(50% - 10px);
+          }
+        }
+        #href_navigate_settings {
+          &:before {
+            background-position: -12px -280px;
+            position: absolute;
+            width: 18px;
+            height: 19px;
+            left: -16px;
+            top: calc(50% - 10px);
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .account-setting-wrap {
+    display: block;
+    .account-right-content {
+      width: 100%;
+      margin-top: 12px;
+      padding: 15px 12px;
+    }
+  }
+}
+
+.sideNavDisabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.sideNavEnable {
+  opacity: 1;
+  pointer-events: auto;
+}
