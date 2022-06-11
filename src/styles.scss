@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import '~@angular/material/theming';
+@include mat-core();
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+@import 'assets/sass/mixins';
+@import "assets/sass/variable";
+@import "assets/sass/global";
+@import "angular-calendar/css/angular-calendar.css";
+@import "app/doctor/dentist-global";
+
+
+$candy-app-primary: mat-palette($mat-teal, A700);
+$candy-app-accent : mat-palette($mat-teal, A700);
+// The warn palette is optional (defaults to red).
+$candy-app-warn : mat-palette($mat-teal, A700);
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+$mat-theme-ignore-duplication-warnings: true;
+
+@include angular-material-theme($candy-app-theme);
+/* Importing Bootstrap SCSS file. */
+// @import '~bootstrap/scss/bootstrap';
+.mat-dialog-content,.mat-dialog-actions{margin: 0 !important;}
+.timepicker mat-toolbar.timepicker-header {
+    background: #0074a3 !important;
+    color: #fff !important;
+}
+.timepicker__main-content .timepicker__body .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+    background-color: #0074a3;
+    color: #fff;
+}
+.timepicker__main-content .timepicker__body .clock-face .mat-toolbar.mat-primary {
+    background: #0074a3 !important;
+}
+
+.ngx-mat-timepicker-dialog .mat-dialog-actions .mat-button.mat-primary{
+    color: #0074a3 !important;
+}
