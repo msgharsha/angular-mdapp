@@ -1,0 +1,64 @@
+<div class="row justify-content-between calendar-header">
+  <div class="col-lg-1" *ngIf="!isAppointment">
+    <h2 class="page-heading" >{{ "CALENDAR" | translate }}</h2>
+  </div>
+  <div class="col-lg-1" *ngIf="isAppointment">
+    <h2 class="page-heading" >{{ "APPOINTMENTS" | translate }}</h2>
+  </div>
+
+  <div class="col-lg-auto">
+    <div class="group-toggle-button">
+      <button
+        type="button"
+        class="btn btn-default"
+        [ngClass]="!isAppointment ? 'active' : ''"
+        (click)="availability()"
+      >
+        <span class="sprite availabilty"></span>
+        <span >{{ "AVAILABILITY" | translate }}</span>
+      </button>
+      <button id="available_step2"
+        type="button"
+        class="btn btn-default"
+        [ngClass]="isAppointment ? 'active' : ''"
+        (click)="appointment()"
+      >
+        <span class="sprite appointment"></span>
+        <span >{{ "APPOINTMENT" | translate }}</span>
+      </button>
+    </div>
+    <button
+      type="button"
+      (click)="openFullscreen()"
+      title="Full Screen"
+      class="btn btn-tools fullscreen btn-secondary"
+    ></button>
+    <ng-container *ngIf="isAppointment">
+      <button
+        type="button"
+        (click)="openAppointmentTable()"
+        title="List View"
+        *ngIf="toggleView"
+        class="btn btn-tools list-view btn-secondary"
+      >
+        ☰
+      </button>
+      <button
+        type="button"
+        (click)="openAppointmentTable()"
+        title="Calendar View"
+        *ngIf="!toggleView"
+        class="btn btn-tools calculator-view btn-secondary"
+      ></button>
+    </ng-container>
+  </div>
+  <div class="col-lg-12" *ngIf="deleteAllMsg">
+    <div class="alert msg_text_color alert-dismissible fade show pl-5" role="alert">
+      <mat-icon class="info_icon" >info</mat-icon>
+      <span >{{ "CALANDER_DELETE_ALL_MSG" | translate }}</span>
+      <button type="button" class="close" (click)="isCalenderDeleteAllPopup()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+</div>

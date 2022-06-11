@@ -1,0 +1,95 @@
+@import "../../../../../assets/sass/variable";
+@import "../../../../../assets/sass/mixins";
+
+.main-page-wrap {
+  margin: 30px;
+  h4 {
+    color: $deep-blue;
+    font-weight: $font-bold;
+    margin-bottom: 30px;
+  }
+  .form-card {
+    padding: 30px;
+    h5 {
+      font-size: 16px;
+      color: $deep-blue;
+      font-weight: $font-bold;
+    }
+    .form-card-footer {
+      box-shadow: none;
+    }
+  }
+  .inner-heading {
+    color: $light-gray4;
+    font-size: $font-sms;
+    font-weight: $font-semi-bold;
+  }
+}
+
+.group-radio-wrap {
+  @include flexbox;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+  .custom-radio-btn {
+    margin-right: 115px;
+  }
+}
+
+.time-wrap {
+  position: relative;
+  &::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: url("../../../../../assets/images/clock-icon.png");
+    position: absolute;
+    right: 16px;
+    top: 35px;
+    z-index: 9;
+    pointer-events: none;
+  }
+  select.form-control {
+    background-image: none;
+  }
+}
+
+.time-select {
+  background-color: #fff;
+}
+.disabled {
+  opacity: 3.5;
+  padding: 0;
+  // background: #fff;
+}
+
+.chk-box-disabled {
+  cursor: not-allowed;
+  .custom-radio-btn {
+    opacity: 0.5;
+    .radio-btn-container {
+      cursor: not-allowed;
+      .checkmark {
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .main-page-wrap {
+    margin: 30px 15px;
+  }
+  .group-radio-wrap {
+    .custom-radio-btn {
+      margin-right: 12px;
+    }
+  }
+}
+
+.info-wrap .bg_none [type=radio]:checked + label:before{
+  display: none;
+}
+
+.info-wrap .bg_none [type=radio]:checked + label:before, .info-wrap .bg_none [type=radio]:not(:checked) + label:before{
+  display: none;
+}

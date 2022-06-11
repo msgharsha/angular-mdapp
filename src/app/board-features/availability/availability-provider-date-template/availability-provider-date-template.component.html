@@ -1,0 +1,113 @@
+<div
+  [autoClose]="'outside'"
+  triggers="manual"
+  #p="ngbPopover"
+  (click)="openEventsPopOver(p, day.events)"
+  [ngbPopover]="popContent"
+  popoverClass="calendar-popover popover-sm"
+>
+  <div class="d-flex">
+    <div class="cal-cell-top">
+      <span class="cal-day-number">{{
+        day.date | calendarDate: "monthViewDayNumber":locale
+      }}</span>
+      <div *ngIf="day.badgeTotal && day.events[0].meta.slots.length > 2">
+        <small class="more-events"
+          >+ {{ day.events[0].meta.slots.length - 2 }} More</small
+        >
+      </div>
+    </div>
+  </div>
+  <ul
+    *ngIf="day.events.length && day.events[0].meta?.slots.length"
+    class="event-cal"
+  >
+    <li [ngStyle]="{'background-color':(day.events[0].meta.slots[0].appointmentType == 1) ? '#b9deef' : '#c9fdc9' }">
+      {{
+        day.events[0].meta.slots[0].fromTimeStamp | amDateFormat: "hh:mmA"
+      }}
+      to {{ day.events[0].meta.slots[0].toTimeStamp | amDateFormat: "hh:mmA" }}({{day.events[0].meta.slots[0].timezonename}})
+    </li>
+    <li *ngIf="day.events[0].meta.slots.length > 1" [ngStyle]="{'background-color':(day.events[0].meta.slots[1].appointmentType == 1) ? '#b9deef' : '#c9fdc9' }">
+      {{
+        day.events[0].meta.slots[1].fromTimeStamp | amDateFormat: "hh:mmA"
+      }}
+      to {{ day.events[0].meta.slots[1].toTimeStamp | amDateFormat: "hh:mmA" }}({{day.events[0].meta.slots[1].timezonename}})
+    </li>
+  </ul>
+</div>
+<!-- calendar popover content -->
+<ng-template #popContent>
+  <div class="availabilty-modal">
+    <div>
+      <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+        <div class="modal-head">
+          <strong>{{ "AVAILABILITY_SLOTS" | translate }}</strong>
+          <div class="modal-action">
+            <!-- Add Availability -->
+            <span
+              *ngIf="!dateIsPast(day.events[0].start)"
+              (click)="addAvailability(day.events)"
+            >
+              <img src="../../assets/images/add-icon-grey.svg" alt="" />
+            </span>
+
+            <!-- Edit Availability -->
+            <span
+              *ngIf="!dateIsPast(day.events[0].start)"
+              [ngClass]="{ disabled: !selectedSlot.size }"
+              (click)="editAvailability(day.events)"
+            >
+              <img src="../../assets/images/edit-grey.svg" alt="" />
+            </span>
+
+            <!-- Delete Availability -->
+            <span
+              *ngIf="!dateIsPast(day.events[0].start)"
+              [ngClass]="{ disabled: !selectedSlot.size }"
+              (click)="confirmDeleteRequest(day.events, p)"
+            >
+              <img src="../../assets/images/delete-icon.svg" alt="" />
+            </span>
+
+            <!-- Close Popover -->
+            <span (click)="p.close()">
+              <img src="../../assets/images/popup-close.svg" alt="" />
+            </span>
+          </div>
+        </div>
+        <div class="modal-list">
+          <ul>
+            <li *ngFor="let item of day.events; let i = index">
+              <div class="d-flex">
+                <div>
+                  <p class="dr-name">
+                    {{ item.meta.firstName }} {{ item.meta.lastName }}
+                  </p>
+                  <div class="time-slots">
+                    <div
+                      *ngFor="let slot of item.meta.slots; let i = index"
+                      class="appt-info"
+                    >
+                      <span
+                        (click)="selectSlotHandler(item, slot, item.meta.id)"
+                        class="appt-time-label"
+                        [ngClass]="{ active: selectedSlotExists(slot) }" [ngStyle]="{'background-color':(slot.appointmentType == 1) ? '#b9deef' : '#c9fdc9' }"
+                        >{{ slot.fromTimeStamp | amDateFormat: "hh:mmA" }} to
+                        {{ slot.toTimeStamp | amDateFormat: "hh:mmA" }} ({{slot.timezonename}})</span
+                      >
+                      <span class="clinic-name">{{
+                        item.meta.officeName
+                      }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+<!-- calendar popover content -->
