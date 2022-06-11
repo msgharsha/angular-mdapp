@@ -1,0 +1,149 @@
+@import "../../styles.scss";
+
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 10px 0;
+  margin-top: 75px;
+  margin-bottom: 65px;
+  .auth-card {
+    display: flex;
+    flex-direction: column;
+    margin-right: 60px;
+    hr {
+      margin: 25px 0px;
+      border: 1px dashed $light-gray1;
+    }
+    .start_text {
+      display: flex;
+      width: fit-content;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      color: $light-green1;
+      margin: 0px 0px 5px 0px;
+      padding-left: 5px;
+      img {
+        margin-right: 10px;
+      }
+    }
+    .page_title {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-top: 0px;
+      padding-left: 0px;
+      margin-left: 0px;
+      h2 {
+        font-size: 30px;
+        font-weight: bold;
+        color: $deep-blue;
+        margin: 0px 5px 10px 5px;
+      }
+      small {
+        color: $light-blue1;
+        font-size: 12px;
+        margin-bottom: 10px;
+        .current-step {
+          font-size: 14px;
+          font-weight: 800;
+        }
+      }
+    }
+    .auth-wrapper {
+      width: 460px;
+      height: fit-content;
+      background: $white-color;
+      border-radius: 20px;
+      padding: 40px 30px;
+      margin-top: 30px;
+      box-shadow: 0 8px 20px 6px rgba(0, 116, 163, 0.16);
+      span.icon {
+        width: 25px;
+        height: 25px;
+        display: block;
+        background-image: url("/assets/images/signin-icons/sprite.png");
+        background-size: 500px;
+        position: relative;
+        z-index: 1;
+        &.email {
+          background-position: -4px -866px;
+        }
+        &.email-selected {
+          background-position: -33px -866px;
+        }
+        &.password {
+          background-position: -67px -617px;
+        }
+        &.password-selected {
+          background-position: -91px -617px;
+          cursor: pointer;
+        }
+        &.password-hide {
+          background-position: -91px -645px;
+          cursor: pointer;
+        }
+      }
+      .account-text {
+        text-align: center;
+        font-weight: 600;
+        margin: 30px auto;
+        .signIn_text {
+          color: $light-green2;
+        }
+      }
+      h5 {
+        font-weight: $font-bold;
+        margin-top: 0;
+      }
+      .forgot-password {
+        line-height: 1.4;
+        text-align: right;
+        color: $deep-blue;
+        margin-bottom: 64px;
+      }
+      .auth-here {
+        font-size: $font-ml;
+        font-weight: $font-semi-bold;
+        line-height: 1.4;
+        color: $deep-blue;
+        margin-top: 30px;
+        .auth-up {
+          font-weight: $font-bold;
+          color: $light-blue2;
+          outline: none;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+// media query for mobile
+@media screen and (max-width: 767px) {
+  .auth-container {
+    margin-top: 15px;
+    .auth-card {
+      margin-right: 0;
+      width: 100%;
+      .auth-wrapper {
+        width: 100%;
+      }
+    }
+  }
+  .auth-section {
+    padding: 0;
+    .logo {
+      margin-top: 15px;
+      img {
+        max-width: 130px;
+      }
+    }
+    .Translater_Dropdown {
+      right: 15px;
+      margin-top: 5px;
+      margin-right: 0;
+    }
+  }
+}
