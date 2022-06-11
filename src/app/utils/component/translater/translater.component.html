@@ -1,0 +1,49 @@
+<nav *ngIf="+innerWidth >= 768">
+  <div id="navbarlanguage">
+    <button id="selectid" (click)="dropdownOpen()">
+      <div
+        *ngIf="
+          this.localStorageService.getItem('language') == 'en' ||
+          this.localStorageService.getItem('language') != 'fr'
+        "
+      >
+        EN
+      </div>
+      <div *ngIf="this.localStorageService.getItem('language') == 'fr'">FR</div>
+    </button>
+
+    <div *ngIf="dropdown_open && dropdown_open">
+      <div id="dropdownbox">
+        <ul>
+          <li class="dropdown-language">{{ "LANGUAGE" | translate }}</li>
+          <li class="dropdown-content" (click)="changeLang('en')">
+            {{ "ENGLISH" | translate }}
+          </li>
+          <li class="dropdown-content" (click)="changeLang('fr')">
+            {{ "FRENCH" | translate }}
+          </li>
+        </ul>
+        <div class="menu-backdrop" (click)="dropdown_open = false"></div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div *ngIf="+innerWidth < 768" class="btn-group language-btns" role="group">
+  <button
+    type="button"
+    (click)="changeLang('en')"
+    class="btn"
+    [class.active]="lang == 'en'"
+  >
+    {{ "ENGLISH" | translate }}
+  </button>
+  <button
+    type="button"
+    (click)="changeLang('fr')"
+    class="btn"
+    [class.active]="lang == 'fr'"
+  >
+    {{ "FRENCH" | translate }}
+  </button>
+</div>

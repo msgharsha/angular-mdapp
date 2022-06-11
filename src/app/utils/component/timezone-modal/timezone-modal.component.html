@@ -1,0 +1,29 @@
+<div class="dialog-wrapper">
+  <div class="heading-wrapper">
+    <h1 mat-dialog-title class="dialog-title">
+      {{ "CONFIRMATION" | translate }}
+    </h1>
+    <span class="close-icon" (click)="cancel()"></span>
+  </div>
+  <div class="dialogue-content">
+    
+    {{data.message1 | translate}}
+    <span style="font-weight: bold;">({{data.data.clinicZone}})</span>
+    {{data.message2 | translate}}
+    <span style="font-weight: bold;">({{data.data.currentTimeZone}})</span>
+    {{data.message3 | translate}}
+    <span style="font-weight: bold;">({{data.data.currentTimeZone}})</span>
+    {{data.message4 | translate}}
+  </div>
+
+  <div class="button-full-div">
+    <div class="btn-wrapper">
+      <button mat-button class="btn btn-ghost" (click)="confirm()">
+        {{ data.confirmLabel || "CONFIRM" | translate }}
+      </button>
+      <button mat-button class="btn btn-primary" (click)="cancel()">
+        {{ data.cancelLabel || "CANCEL" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

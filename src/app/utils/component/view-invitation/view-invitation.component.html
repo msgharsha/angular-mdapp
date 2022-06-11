@@ -1,0 +1,81 @@
+<div class="dialog-wrapper">
+  <div class="heading-wrapper">
+    <h1 mat-dialog-title class="dialog-title">
+      {{ "EMAIL_TEMPLATE" | translate }}
+    </h1>
+    <span class="close-icon" (click)="cancel()"></span>
+  </div>
+  <!-- <div class="dialogue-content">
+    {{
+      (data.message | translate: params) || "All Unsaved Changes Will Be Lost"
+    }}
+  </div> -->
+  <section class="basic-container m-15">
+    <div class="app-table-wrap">
+      <div class="row info-wrap">
+        <div class="form-group col-6">
+          <label for="subject"> {{ "ENGLISH_SUBJECT" | translate }} </label>
+          <input
+            [(ngModel)]="emailEnSubject"
+            class="form-control"
+            name="subject"
+            #subject="ngModel"
+          />
+        </div>
+        <div class="form-group col-6">
+          <label for="subject"> {{ "FRENCH_SUBJECT" | translate }} </label>
+          <input
+            [(ngModel)]="emailFrSubject"
+            class="form-control"
+            name="subject"
+            #subject="ngModel"
+          />
+        </div>
+      </div>
+      <div class="row mb-30 mb-1">
+        <div class="col-6">
+          <label class="template-label">{{
+            "ENGLISH_TEMPLATE" | translate
+          }}</label>
+          <editor
+            initialValue=""
+            [apiKey]="editorApiKey"
+            [init]="editorConfig"
+            [(ngModel)]="emailEnContent"
+          >
+          </editor>
+        </div>
+        <div class="col-6" >
+          <label class="template-label">{{
+            "FRANCAIS_TEMPLATE" | translate
+          }}</label>
+          <editor
+            initialValue=""
+            [apiKey]="editorApiKey"
+            [init]="editorConfig"
+            [(ngModel)]="emailFrContent"
+          >
+          </editor>
+        </div>
+      </div>
+      
+      
+      
+    </div>
+  </section>
+
+  <div class="button-full-div">
+    <div class="btn-wrapper mt-0">
+      <div class="row">
+        <div class="col-12">
+          <p class="text-left"><span class="font-weight-bold">{{ "NOTE" | translate }}</span> : {{"DONT_MODIFY" | translate}} <span class="font-weight-bold">"{{"PATIENTNAME" | translate}}"</span> {{"AND" | translate}} <span class="font-weight-bold">"{{"PORTALLINK" | translate}}"</span> {{"CONTENT" | translate}}</p>
+        </div>
+        <div class=" col-12">
+          <button mat-button class="btn btn-primary" (click)="confirm()">
+            {{ "SEND_INVITATION" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

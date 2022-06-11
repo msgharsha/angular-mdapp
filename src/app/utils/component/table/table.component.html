@@ -1,0 +1,26 @@
+<table
+  class="table"
+  [ngClass]="{ 'notes-table': isNote == true }"
+  aria-describedby="table"
+>
+  <thead>
+    <tr>
+      <th id="header" *ngFor="let header of headers">
+        {{ header | translate }}
+      </th>
+      <th id="header"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of data">
+      <td *ngFor="let header of headersBind" [innerHTML]="row[header]"></td>
+      <td class="notes-actions">
+        <span class="edit" (click)="editMyNotes(row.id)"></span>
+        <span class="delete" (click)="deleteMyNotes(row.id)"></span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div *ngIf="!(data && data.length)" class="center-text-div">
+  {{ "NO_DATA_FOUND" | translate }}
+</div>

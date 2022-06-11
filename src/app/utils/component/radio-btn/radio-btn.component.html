@@ -1,0 +1,29 @@
+<div
+  class="radio-box-group"
+  [class.medical-history-radio-wrapper]="isMedicalHistoryForm"
+>
+  <div *ngFor="let radioBtn of radioBtnGroup; let i = index" class="wrapper">
+    <!-- inactive radio btn -->
+    <div
+      *ngIf="!radioBtn.value"
+      (click)="radioBtnClick(i, radioBtn.value)"
+      class="radio-box-wrapper"
+    >
+      <div class="inactive-radio-border">
+        <div class="inactive-radio"></div>
+      </div>
+      <div class="radio-label">{{ radioBtn.label | translate }}</div>
+    </div>
+    <!-- active radio btn -->
+    <div
+      *ngIf="radioBtn.value"
+      (click)="radioBtnClick(i, radioBtn.value)"
+      class="radio-box-wrapper"
+    >
+      <div class="active-radio-border">
+        <div class="active-radio"></div>
+      </div>
+      <div class="radio-label">{{ radioBtn.label | translate }}</div>
+    </div>
+  </div>
+</div>

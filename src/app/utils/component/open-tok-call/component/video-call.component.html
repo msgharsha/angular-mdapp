@@ -1,0 +1,30 @@
+<div id="videos">
+  <div
+    id="subscriber"
+    [ngStyle]="{
+      display: (sessionManager.$screenSubscribed | async) ? 'none' : 'block'
+    }"
+  ></div>
+  <div
+    id="subscriberScreen"
+    [ngStyle]="{
+      display: !(sessionManager.$screenSubscribed | async) ? 'none' : 'block'
+    }"
+  ></div>
+  <div id="publisher"></div>
+</div>
+<div class="btn-wrapper">
+  <ul *ngIf="true">
+    <li
+      class="icon mic-icon"
+      [ngClass]="{ active: isAudioDisable }"
+      (click)="toggleAudio()"
+    ></li>
+    <li class="icon end-icon" (click)="close()"></li>
+    <li
+      class="icon video-icon"
+      [ngClass]="{ active: isVideoDisable }"
+      (click)="toggleVideo()"
+    ></li>
+  </ul>
+</div>
