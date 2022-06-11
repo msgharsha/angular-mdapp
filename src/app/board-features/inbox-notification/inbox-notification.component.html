@@ -1,0 +1,24 @@
+<div class="content-area">
+  <div>
+    <h3 class="page-heading">{{ "INBOX" | translate }}</h3>
+  </div>
+  <div class="main-panel">
+    <div
+      class="search-results"
+      infiniteScroll
+      (scrolled)="onScrollDown($event)"
+    >
+      <div class="notification-list active" *ngFor="let inbox of inboxList">
+        <div class="notification-head">
+          <h5>{{ inbox?.title }}</h5>
+          <div class="date-time">
+            <span> {{ inbox?.timestamp }}</span>
+          </div>
+        </div>
+        <div class="notification-content">
+          <p>{{ inbox?.messages }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

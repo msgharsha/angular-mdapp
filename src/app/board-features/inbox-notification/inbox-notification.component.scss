@@ -1,0 +1,72 @@
+@import "../../../assets/sass/variable";
+
+.content-area {
+  padding: 24px 30px;
+}
+.page-heading {
+  font-size: 24px;
+  font-weight: 700;
+  color: $deep-blue;
+  margin-bottom: 30px;
+  margin-top: 5px;
+}
+.notification-list {
+  padding: 20px;
+  min-height: 97px;
+  background-color: $white-color;
+  border-radius: 10px;
+  box-shadow: 0 0 22px 0 rgba(46, 51, 138, 0.13);
+  margin-bottom: 16px;
+  &.active {
+    padding-left: 14px;
+    border-left: 6px solid $light-blue2;
+    .notification-head {
+      h5 {
+        color: $light-blue2;
+      }
+    }
+  }
+}
+.notification-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  h5 {
+    font-size: 20px;
+    font-weight: 600;
+    color: $deep-blue;
+    margin: 0;
+  }
+  .date-time {
+    font-size: 14px;
+    font-weight: 600;
+    color: $light-blue1;
+    span {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 5px;
+    }
+  }
+}
+
+.notification-content {
+  p {
+    font-size: 16px;
+    font-style: italic;
+    color: $light-gray4;
+    margin: 0;
+  }
+  a {
+    font-weight: bold;
+    color: $light-gray4;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.main-panel {
+  height: auto;
+  flex: none;
+  margin-bottom: 16px;
+  overflow: auto;
+}

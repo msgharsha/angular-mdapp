@@ -1,0 +1,153 @@
+<div class="container-fluid dashboard-screen-doctor" [ngClass]="{'screenfreeze': screenFreeze == true }">
+  
+
+  <div class="row" *ngIf="showUnApprovedDoctorMessage">
+    <div class="col-lg-12">
+      <div class="status-card">
+        <div class="status-card__content" *ngIf="userData && userData.doctorRole != 4">
+          {{ "UNAPPROVED_DOCTOR_LABEL_MESSAGE" | translate }}
+        </div>
+        <div class="status-card__content" *ngIf="userData && userData.doctorRole == 4">
+          {{ "UNAPPROVED_ROLE_MESSAGE" | translate }} {{counter}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="showRegenerateButton">
+    <div class="col-lg-12">
+      <div class="status-card">
+        <div class="status-card__content" >
+          {{ "REGENERATEQRMSG" | translate }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" [hidden]="checkPermission('DASHBOARD_GRAPH')">
+    <div class="col-lg-8">
+      <div class="dentist-dashboard-wrapper pr-md-0">
+        <div class="welcome-card">
+          <div class="welcome-card-content">
+            <h3 >{{ "HELLO" | translate }}! Dr. {{ userName }}</h3>
+            <p class="sub-head-text">
+              {{ "YOU_HAVE" | translate }} {{ todaysCount }}
+              {{ "APPOINTMENT_FOR_TODAY" | translate }}
+            </p>
+          </div>
+          <div>
+            <img src="assets/images/home-page-left.svg" alt="Welcome Image" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="all-dentist-dashboard-wrapper">
+        <div class="dentist-dashboard-wrapper bg-2">
+          <div class="right-card__background">
+            <div class="right-card__content" >
+              <p>{{ "NO_OF_NEW_PATIENTS" | translate }}</p>
+              <p class="date">{{ weekStart }} - {{ weekEND }}</p>
+              <p class="total-num">{{ patientCount }}</p>
+            </div>
+            <div class="btm-img">
+              <img src="assets/images/patient-bg-img.png" alt="Welcome Image" />
+            </div>
+          </div>
+        </div>
+        <div class="dentist-dashboard-wrapper">
+          <div class="right-card__background">
+            <div class="right-card__content" data-step="2" data-title="vcdessssss!" data-intro="Ahhhhhhhhhhhhh">
+              <p>{{ "TOTAL_BOOKING_THROUGH_CACTUS_MD" | translate }}</p>
+              <p class="total-num">{{ totalBookings }}</p>
+            </div>
+            <div class="btm-img">
+              <img
+                src="assets/images/home-page-right.svg"
+                alt="Welcome Image"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" [hidden]="checkPermission('DASHBOARD_GRAPH')">
+    <div class="col-lg-5">
+      <div class="revenue-chart">
+        <p class="revenue">
+          <input
+            type="radio"
+            id="revenue"
+            name="revenue"
+            value="revenue"
+            (change)="valueChange('revenue')"
+            [checked]="revenue"
+          />
+          <label for="revenue">{{ "REVENUE" | translate }}</label>
+        </p>
+        <p class="revenue">
+          <input
+            type="radio"
+            id="consultation"
+            name="revenue"
+            value="consultation"
+            (change)="valueChange('consultation')"
+            [checked]="!revenue"
+          />
+          <label for="consultation">{{ "CONSULTATION" | translate }}</label>
+        </p>
+        <div class="char-img">
+          <canvas
+            baseChart
+            [chartType]="barChartType"
+            [data]="barChartData"
+            [labels]="barChartLabels[lang]"
+            [options]="barChartOptions"
+            [colors]="barChartColors"
+            [plugins]="barChartPlugins"
+            [legend]="barChartLegend"
+          ></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="pie-chart">
+        <div class="graph-img">
+          <canvas
+            baseChart
+            [chartType]="pieChartType"
+            [data]="pieChartData"
+            [labels]="pieChartLabels"
+            [options]="pieChartOptions"
+            [colors]="pieChartColors"
+            [plugins]="pieChartPlugins"
+            [legend]="pieChartLegend"
+          >
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 15px;">
+    <div class="col-lg-12">
+      <div class="dentist-dashboard-wrapper pr-md-0">
+        <div class="row">
+          <div class="col-lg-6">
+            <h4 class="appointment-wrapper__heading" *ngIf="!fromCalendarView">
+              {{ "TODAYS_APPOINTMENTS" | translate }}
+            </h4>
+          </div>
+          <div class="col-lg-6" style="text-align: end;" *ngIf="userData && userData.subAccount && availableDoctors && availableDoctors.length > 0">
+            <button *ngIf="!data" type="button" class="btn btn-primary min-width" (click)="changeDoctor()">
+              {{ "CHANGE_DOCTOR" | translate }}
+            </button>
+          </div>
+        </div>
+        <app-appointment-listing [selectedDoctorId] ="selectedDoctorId"
+          (getAppointmentCount)="getAppointmentCount($event)"
+          [list]="false"
+        ></app-appointment-listing>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,289 @@
+@import "../../../styles.scss";
+
+.dentist-dashboard-wrapper {
+  padding: 0px 30px;
+  position: relative;
+  height: fit-content;
+  background-color: $light-gray2;
+  @include flexbox;
+  // @include justify-content(center);
+  // @include align-items(center);
+  @include flex-direction(column);
+  .video {
+    position: fixed;
+    width: 100%;
+    margin-top: 33px;
+  }
+  .dentist-search-text-wrapper {
+    position: relative;
+    color: $deep-blue;
+    font-size: $font-24;
+    font-weight: $font-bold;
+    line-height: 1.35;
+    span {
+      color: $white-color;
+    }
+  }
+  .dentist-search-wrapper {
+    padding-top: 20px;
+  }
+}
+
+.welcome-card {
+  display: flex;
+  background-color: $white-color;
+  height: 190px;
+  border-radius: 8px;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 60px;
+  margin-bottom: 24px;
+  h3 {
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 1.2;
+    color: $light-blue2;
+    margin: 0 0 16px;
+  }
+  .sub-head-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: #012e40;
+    margin-bottom: 6px;
+  }
+  .p-text {
+    font-size: 12px;
+    color: #67818c;
+    margin: 0;
+  }
+  .welcome-card-content {
+    height: 100%;
+    padding: 50px 10px 10px 40px;
+    line-height: 1.4;
+
+    h3 {
+      text-transform: capitalize;
+    }
+  }
+}
+
+.status-card {
+  text-align: center;
+  padding: 20px 0px;
+  margin: 24px 0px 8px 0;
+  border-radius: 8px;
+  background-color: #fbd2cc;
+  &__content {
+    font-weight: 600;
+    font-size: 16px;
+  }
+}
+
+.right-card__background {
+  display: flex;
+  // align-items: center;
+  justify-content: space-between;
+  height: 190px;
+  border-radius: 8px;
+  margin-top: 60px;
+  margin-bottom: 24px;
+  background-color: $light-blue3;
+  .right-card__content {
+    padding: 22px 25px 20px 20px;
+    z-index: 1;
+    p {
+      font-size: $font-body;
+      color: $deep-blue;
+      margin: 0 0 8px;
+      font-weight: $font-semi-bold;
+    }
+    .total-num {
+      font-size: 20px;
+      font-weight: bold;
+      color: $light-blue2;
+      margin: 0;
+    }
+  }
+}
+
+.search-wrapper {
+  padding: 25px 32px;
+  background: $dark-grey;
+  .form-control {
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 58px;
+  }
+}
+
+.map-wrapper {
+  width: 100%;
+  border: 1px solid rgba(101, 101, 130, 0.1);
+  border-radius: 8px;
+  margin-top: 16px;
+  ::ng-deep .map-area {
+    width: 100%;
+    height: 75vh;
+    margin-bottom: 0;
+  }
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.redo-wrapper {
+  margin-top: 15px;
+}
+
+.col-lg-8,
+.col-lg-4 {
+  margin: 0px;
+  // padding: 0px;
+}
+
+.pl-0 {
+  padding-left: 0px;
+}
+.char-img,
+.graph-img {
+  margin-bottom: 30px;
+  background-color: white;
+  img {
+    width: 100%;
+  }
+}
+
+// .char-img > canvas {
+//   height: 250px !important;
+// }
+.container-fluid.dashboard-screen-doctor {
+  padding: 0 30px;
+}
+.all-dentist-dashboard-wrapper {
+  @include flexbox;
+  .dentist-dashboard-wrapper {
+    width: calc(50% - 15px);
+    margin-right: 15px;
+    padding: 0;
+    & + .dentist-dashboard-wrapper {
+      margin-right: 0px;
+      margin-left: 15px;
+    }
+    &.bg-2 {
+      .right-card__background {
+        background: #e6f0e6;
+        .btm-img {
+          position: absolute;
+          bottom: 25px;
+          right: 5px;
+          img {
+            max-width: 122px;
+            height: 114px;
+          }
+        }
+        .right-card__content {
+          .date {
+            font-size: $font-small;
+            margin-top: -4px;
+          }
+          .total-num {
+            color: $light-green1;
+          }
+        }
+      }
+    }
+    .right-card__background {
+      .btm-img {
+        position: absolute;
+        bottom: 16px;
+        right: -15px;
+        img {
+          max-width: 122px;
+        }
+      }
+    }
+  }
+}
+.dashboard-screen-doctor {
+  .gap-p-10 {
+    padding: 0;
+  }
+  .dentist-dashboard-wrapper {
+    padding: 0;
+  }
+  .appointment-wrapper {
+    padding: 0;
+  }
+}
+
+.revenue {
+  display: inline-block;
+  margin-left: 45px;
+  label {
+    margin-left: 05px;
+    text-transform: none;
+  }
+}
+
+.pie-chart {
+  padding-bottom: 20px;
+  padding-top: 20px;
+  background: $white-bg;
+  .graph-img {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+}
+
+.revenue-chart {
+  padding-top: 10px;
+  padding-left: 5px;
+  background: $white-bg;
+}
+
+.screenfreeze{
+  pointer-events: none;
+}
+
+// media query for mobile
+@media screen and (max-width: 767px) {
+  .welcome-card {
+    flex-direction: column;
+    height: auto;
+    margin-top: 30px;
+    .welcome-card-content {
+      padding: 30px 20px 10px 20px;
+    }
+    h3 {
+      font-size: 28px;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .right-card__background {
+    margin-top: 0;
+    img {
+      width: 180px;
+    }
+  }
+
+  .info-card {
+    width: 100%;
+    .info-inner-wrapper {
+      flex-wrap: wrap;
+    }
+  }
+
+  .revenue-chart {
+    padding-left: 0;
+  }
+  .pie-chart {
+    margin-bottom: 30px;
+  }
+}
