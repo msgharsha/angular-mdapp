@@ -1,0 +1,67 @@
+@import "../../../../../../assets/sass/variable";
+
+.label {
+  color: $light-gray4;
+  font-weight: $font-semi-bold;
+  font-size: $font-sms;
+  text-transform: none;
+}
+
+/* table css */
+table {
+  width: 100%;
+  min-width: 400px;
+  thead {
+    color: $white-color;
+    height: 40px;
+    tr {
+      background: $light-blue2;
+      th {
+        border-bottom: none;
+        font-weight: $font-bold;
+        &:first-child {
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+          padding-left: 26px;
+        }
+        &:last-child {
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+        }
+      }
+      & + tr {
+        background: transparent;
+      }
+    }
+  }
+  tbody {
+    tr {
+      &:nth-child(1) {
+        background: #e8f2d7;
+      }
+      &:nth-child(2) {
+        background: #d0e5af;
+      }
+      &:nth-child(3) {
+        background: #add073;
+      }
+      &:nth-child(4) {
+        background: #8abd38;
+      }
+      td {
+        border-top: none;
+        color: $deep-blue;
+        font-size: $font-body;
+        font-weight: 600;
+        &:first-child {
+          padding-left: 26px;
+        }
+      }
+      .table-info-td {
+        color: $light-gray4;
+        background-color: #f0f7fa;
+        text-align: center;
+      }
+    }
+  }
+}

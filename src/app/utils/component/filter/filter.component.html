@@ -1,0 +1,106 @@
+<div class="custom-filters">
+  <ng-container *ngFor="let item of list">
+    <div class="search custom-search-box" *ngIf="item.type == 'search'">
+      <input
+        type="search"
+        (input)="onSearch($event, item)"
+        placeholder="{{ item.label | translate }}"
+      />
+    </div>
+
+    <div *ngIf="item.type == 'select'">
+      <select
+        class="form-control"
+        (change)="item.select && item.select($event.target.value)"
+        [value]="item.value ? item.value : ''"
+      >
+        <option class="filter-font" [value]="''">
+          {{ item.label | translate }}
+        </option>
+        <ng-container *ngIf="!item.renderHTML">
+          <option
+            *ngFor="let option of item.data"
+            [value]="option"
+            [selected]="option == item.value"
+          >
+            {{ option }}
+          </option>
+        </ng-container>
+        <ng-container *ngIf="item.renderHTML">
+          <option
+            *ngFor="let option of item.data"
+            [value]="
+              item.renderValue
+                ? item.renderValue(option)
+                : item.renderHTML(option)
+            "
+            [innerHTML]="
+              item.renderHTML(translateOption(option, item.translate))
+            "
+            [selected]="
+              item.renderValue
+                ? item.renderValue(option) == item.selectedValue
+                : item.renderHTML(option) == item.selectedValue
+            "
+          ></option>
+        </ng-container>
+      </select>
+    </div>
+
+    <div *ngIf="item.type == 'date'">
+      <div [class.date-wrap]="item.showInfoIcon">
+        <span class="date-addon"></span>
+        <input
+          matInput
+          id="txtf_patient_dob"
+          (dateChange)="item.select && item.select($event.target.value)"
+          (focus)="picker.open()"
+          (click)="picker.open()"
+          [matDatepicker]="picker"
+          placeholder="{{ 'SELECT_HERE' | translate }}"
+          class="form-control"
+          [(value)]="item.selectedDate"
+        />
+        <span
+          *ngIf="item.showInfoIcon"
+          class="info"
+          #tooltip="matTooltip"
+          [matTooltip]="
+            item.toolTipContent | translate: item.translateParams || {}
+          "
+          matTooltipPosition="below"
+          matTooltipHideDelay="100000"
+          ><img src="../../../../assets/images/attention-info.png" />
+        </span>
+      </div>
+      <mat-datepicker #picker></mat-datepicker>
+    </div>
+
+    <div *ngIf="item.type == 'multiSelect'">
+      <ng-multiselect-dropdown
+        (onSelect)="item.select && item.select(multiSelect.selectedItems)"
+        (onDeSelect)="item.select && item.select(multiSelect.selectedItems)"
+        placeholder="{{ item.label | translate }}"
+        [settings]="dropDownSettings"
+        [data]="item.data"
+        #multiSelect
+      >
+      </ng-multiselect-dropdown>
+    </div>
+    <div *ngIf="item.type == 'selectSearch'">
+      <input
+        type="text"
+        placeholder="Search {{ item.label | translate }}"
+        aria-label="Select Here"
+        matInput
+        (keypress)="item.onSearch($event.target.value)"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of item.data" [value]="option.name">
+          {{ option.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+  </ng-container>
+</div>

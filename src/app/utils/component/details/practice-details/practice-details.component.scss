@@ -1,0 +1,187 @@
+@import "../../../../../assets/sass/variable";
+
+.form-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #012e40;
+}
+
+.grid-card {
+  border-radius: 4px;
+  border: solid 1px #f7f8f9;
+  background-color: #ffffff;
+  margin-bottom: 24px;
+  overflow: auto;
+  .grid-head {
+    font-size: 14px;
+    font-weight: 600;
+    color: #67818c;
+    font-style: italic;
+    padding: 10px 24px;
+    border-radius: 4px 4px 0 0;
+    background-color: #f7f8f9;
+    min-width: 500px;
+  }
+  .grid-content {
+    padding: 24px;
+    min-width: 500px;
+    .row {
+      & + .row {
+        margin-top: 24px;
+      }
+    }
+  }
+  .text-box {
+    font-size: 14px;
+    font-weight: 600;
+    color: #012e40;
+    padding: 10px 20px;
+    min-height: 40px;
+    border-radius: 4px;
+    background-color: #f7f8f9;
+  }
+}
+
+.text-label {
+  font-size: 12px;
+  font-weight: $font-semibold;
+  color: #345766;
+  margin-bottom: 5px;
+}
+.text-value {
+  font-size: 14px;
+  font-weight: $font-semibold;
+  color: #012e40;
+}
+
+.circle-check {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  cursor: pointer;
+  background: url("/assets/images/circle-check.svg") no-repeat center;
+  background-size: cover;
+}
+.edit-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: url("/assets/images/edit.svg") no-repeat center center;
+  cursor: pointer;
+}
+.delete-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: url("/assets/images/trash-icon.svg") no-repeat center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.action-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .action-icon {
+    & + .action-icon {
+      margin-left: 8px;
+    }
+  }
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #f7f8f9;
+  border-color: #f7f8f9;
+  opacity: 1;
+}
+
+.billing_chk_box {
+  font-size: 12px;
+  color: $deep-blue;
+  text-transform: none;
+}
+.form-check-input{
+  margin-top: 0.4rem !important;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+.info-wrap .bg_none [type=radio]:checked + label:before{
+  display: none;
+}
+
+.info-wrap .bg_none [type=radio]:checked + label:before, .info-wrap .bg_none [type=radio]:not(:checked) + label:before{
+  display: none;
+}
+
+.status-card {
+  text-align: center;
+  padding: 20px 0px;
+  margin: 10px 0px;
+  border-radius: 8px;
+  background-color: #fbd2cc;
+  &__content {
+    font-weight: 600;
+    font-size: 16px;
+  }
+}
+
+// media query for mobile
+@media screen and (max-width: 767px) {
+  .action-btn-wrap {
+    button {
+      width: 100%;
+      margin-left: 0;
+      margin-bottom: 16px;
+    }
+  }
+}
+
+.info-icon {
+  width: 20px;
+  height: 20px;
+  background: url("/assets/images/info-icon.svg") no-repeat center;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.eyedefault-icon{
+  width: 25px;
+  height: 25px;
+  display: block;
+  background-size: 500px;
+  background-image: url(/assets/images/signin-icons/sprite.png);
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  right: 10px;
+  top: 8px;
+}
+.password{
+  background-position: -91px -617px;
+  cursor: default;
+  opacity: 0.4;
+}
+.password-hide{
+  background-position: -91px -645px;;
+}
+.password-show{
+  background-position: -91px -617px;
+}
+.verification {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #0074a3;
+  position: absolute;
+  top: 70px;
+  right: 0;
+  text-decoration: underline;
+  padding-right: 15px;
+  cursor: pointer;
+  padding-bottom: 15px;
+  width: 46%;
+  text-align: right;
+}

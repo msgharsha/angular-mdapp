@@ -1,0 +1,132 @@
+<table>
+  <thead>
+    <tr>
+      <th *ngFor="let header of headers">{{ header["label"] | translate }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="no-data" *ngIf="data.length === 0">
+      <td colspan="4">{{ EmptyRecordsMsg | translate }}</td>
+  </tr>
+    <tr
+      *ngFor="
+        let row of data
+          | paginate
+            : {
+                itemsPerPage: itemsPerPage,
+                currentPage: currentPage,
+                totalItems: totalCount
+              };
+        let i = index
+      "
+    >
+      <ng-container *ngFor="let header of headers; let i = index">
+        <!-- (click)="header['click'] && header['click']({event: $event, row: row, key: header['key'], value: row[header['key']],index: i})" -->
+        <td
+          class="capitalize-text"
+          *ngIf="header.renderHTML; else viewMore"
+          [innerHTML]="
+            sanatizer.bypassSecurityTrustHtml(
+              header.renderHTML({
+                row: row,
+                key: header['key'],
+                value: row[header['key']],
+                index: i
+              })
+            )
+          "
+        ></td>
+
+        <ng-template #viewMore>
+          <td *ngIf="header.viewMore; else primaryAccountHolder">
+            <button
+              (click)="
+                header['click'] &&
+                  header['click']({
+                    event: $event,
+                    row: row,
+                    key: header['key'],
+                    value: row[header['key']],
+                    index: i
+                  })
+              "
+            >
+              {{ "VIEW_MORE" | translate }}
+            </button>
+          </td>
+        </ng-template>
+        <ng-template #primaryAccountHolder>
+          <td *ngIf="header.primaryAccountHolder; else editDeleteIcon">
+            <span
+              (click)="
+                header['click'] &&
+                  header['click']({
+                    event: $event,
+                    row: row,
+                    key: header['key'],
+                    value: row[header['key']],
+                    index: i
+                  })
+              "
+              class="text-blue-underline"
+            >
+              {{ row.pah_first_name + " " + row.pah_last_name }}
+              <!-- {{row[header['key']]}} -->
+            </span>
+            <!-- <button (click)="header['click'] && header['click']({event: $event, row: row, key: header['key'], value: row[header['key']],index: i})">View More</button> -->
+          </td>
+        </ng-template>
+
+        <ng-template #editDeleteIcon>
+          <td class="edit-col" *ngIf="header.editDeleteIcon; else editIcon">
+            <span class="edit" (click)="edit(row.id)"></span>
+            <span class="delete" (click)="delete(row.id)"></span>
+          </td>
+        </ng-template>
+        <ng-template #editIcon>
+          <td *ngIf="header.editIcon; else saveIcon">
+            <span class="edit" (click)="edit(row.id)"></span>
+          </td>
+        </ng-template>
+        <ng-template #saveIcon>
+          <td *ngIf="header.saveIcon; else printIcon">
+            <div *ngIf="row.isEdit; else elsePart">
+              <span class="save" (click)="save(row.id)"></span>
+            </div>
+            <ng-template #elsePart>
+              <span class="edit" (click)="edit(row.id)"></span>
+            </ng-template>
+          </td>
+        </ng-template>
+        <ng-template #printIcon>
+          <td *ngIf="header.printIcon; else defaultCase">
+            <span style="margin-left: 10%;" class="print" (click)="print(row.id)"></span>
+          </td>
+        </ng-template>
+        <ng-template #defaultCase>
+          <td *ngIf="header.isInput && row.isEdit; else inputType">
+            <input
+              (input)="header.changeEvent($event.target.value, row.id)"
+              [value]="row[header['key']]"
+            />
+          </td>
+          <ng-template #inputType>
+            <td class="capitalize-text">{{ row[header["key"]] }}</td>
+          </ng-template>
+        </ng-template>
+      </ng-container>
+    </tr>
+  </tbody>
+</table>
+
+<!-- pagination starts here -->
+<div class="pagination-wrapper" *ngIf="totalCount">
+  <pagination-controls
+    class="custom-pagination"
+    previousLabel="{{ 'PREVIOUS' | translate }}"
+    nextLabel="{{ 'NEXT' | translate }}"
+    (pageChange)="pageChangedEvent($event)"
+  >
+  </pagination-controls>
+</div>
+<!-- pagination ends here -->

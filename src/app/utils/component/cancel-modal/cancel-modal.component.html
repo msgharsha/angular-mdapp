@@ -1,0 +1,24 @@
+<div class="dialog-wrapper">
+  <div class="heading-wrapper">
+    <h1 mat-dialog-title class="dialog-title">
+      {{ "CONFIRMATION" | translate }}
+    </h1>
+    <span class="close-icon" (click)="cancel()"></span>
+  </div>
+  <div class="dialogue-content">
+    {{
+      (data.message | translate: params) || "All Unsaved Changes Will Be Lost"
+    }}
+  </div>
+
+  <div class="button-full-div">
+    <div class="btn-wrapper">
+      <button mat-button class="btn btn-ghost" (click)="confirm()">
+        {{ data.confirmLabel || "CONFIRM" | translate }}
+      </button>
+      <button mat-button class="btn btn-primary" (click)="cancel()">
+        {{ data.cancelLabel || "CANCEL" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

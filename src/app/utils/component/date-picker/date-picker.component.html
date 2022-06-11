@@ -1,0 +1,30 @@
+<div [formGroup]="datePickerForm">
+  <div class="form-group info-wrap">
+    <label [for]="formControlName">{{ label | translate }}<span *ngIf="!manadatory">*</span></label>
+    <div class="date-wrap">
+      <span class="date-addon"></span>
+      <input
+        readonly
+        matInput
+        [id]="formControlName"
+        [max]="maxDate"
+        [min]="minDate"
+        [formControlName]="formControlName"
+        class="form-control"
+        (focus)="picker.open()"
+        (click)="picker.open()"
+        [matDatepicker]="picker"
+        placeholder="{{ placeholder | translate }}{{
+          fieldsRequired ? '*' : ''
+        }}"
+        [disabled]="disabled"
+        (dateChange)="dateChange()"
+      />
+      <mat-icon *ngIf="clearIcon" matDatepickerToggleIcon style="right: 30px !important;" (click)="clearDate()">clear</mat-icon>
+      <div *ngIf="hasRequiredError(formControlName)" class="validation">
+        {{ validationMsg | translate }}
+      </div>
+    </div>
+    <mat-datepicker #picker></mat-datepicker>
+  </div>
+</div>

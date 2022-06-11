@@ -1,0 +1,23 @@
+<div class="dialog-wrapper">
+  <div class="heading-wrapper">
+    <h1 mat-dialog-title class="dialog-title">
+      {{ "CONFIRMATION" | translate }}
+    </h1>
+    <span class="close-icon" (click)="cancel()"></span>
+  </div>
+  <div class="dialogue-content">
+    {{ data.message1 | translate }}&nbsp;<strong>${{ data.amount }}</strong
+    >&nbsp;{{ data.message2 | translate }}
+  </div>
+
+  <div class="button-full-div">
+    <div class="btn-wrapper">
+      <button mat-button class="btn btn-ghost" (click)="confirm()">
+        {{ "CONFIRM" | translate }}
+      </button>
+      <button mat-button class="btn btn-primary" (click)="cancel()">
+        {{ "CANCEL" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

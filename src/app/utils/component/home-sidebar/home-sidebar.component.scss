@@ -1,0 +1,231 @@
+@import "../../../../assets/sass/variable";
+
+.sidenav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100%;
+  background-image: linear-gradient(3deg, #259de2 -27%, #00619b 107%);
+  background-color: #0074a3;
+  border-radius: 0 40px 40px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 3;
+  .sidenav-logo {
+    padding: 24px 15px;
+    text-align: center;
+    margin: 0 0 16px;
+  }
+
+  .user-info {
+    padding: 30px 15px;
+    text-align: center;
+    background-color: $white-color;
+    .user-img {
+      width: 56px;
+      height: 56px;
+      border: 1px solid #e5eaeb;
+      border-radius: 50%;
+    }
+    p {
+      font-size: 14px;
+      font-weight: 600;
+      color: $light-blue2;
+      margin: 8px 0 0 0;
+    }
+  }
+}
+
+.sidenav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 96px;
+  li {
+    a {
+      display: flex;
+      height: 84px;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.3s;
+      position: relative;
+      span {
+        width: 26px;
+        height: 26px;
+        display: block;
+        margin: 0 auto;
+        background-image: url("/assets/images/sprite.png");
+        background-size: 600px;
+        position: relative;
+        z-index: 1;
+        &.home {
+          background-position: -46px -9px;
+        }
+        &.heart {
+          background-position: -47px -44px;
+        }
+        &.calendar {
+          background-position: -47px -77px;
+        }
+        &.report {
+          background-position: -47px -77px;
+        }
+        &.medical-list {
+          background-position: -44px -145px;
+        }
+        &.settings {
+          background-position: -44px -178px;
+        }
+        &.repositary {
+          background-position: -44px -277px;
+        }
+        &.change-pass {
+          background-position: -44px -211px;
+        }
+        &.logout {
+          background-position: -44px -245px;
+        }
+        &.forms {
+          background-position: -44px -110px;
+        }
+      }
+      p {
+        // padding: 7px 12px;
+        // background-color:white;
+        // position: absolute;
+        // left: 64px;
+        // bottom: 0;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 1;
+        color: $white-color;
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        margin-top: 8px;
+        // white-space: nowrap;
+        // border-radius: 2px;
+        // box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.16);
+        // display: none;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: -16px;
+        width: 96px;
+        height: 118px;
+        background-image: url("/assets/images/hover-bg.svg");
+        background-position: 0 center;
+        opacity: 0;
+      }
+      // &:hover {
+      //     p {
+      //         display: block;
+      //     }
+      // }
+      &.active {
+        span {
+          background-position-x: -9px;
+          &.subscriptions {
+            background-position: -184px -54px;
+          }
+          &.manage-demo {
+            background-position: -184px -154px;
+          }
+          &.manage-acc {
+            background-position: -70px -360px;
+          }
+        }
+        p {
+          font-weight: 700;
+          color: $light-blue2;
+          display: block;
+        }
+        &:after {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.menu-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.6;
+  background-color: #000;
+  z-index: 9998;
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .show-sm {
+    display: none;
+  }
+}
+
+// media query for mobile
+@media screen and (max-width: 767px) {
+  .sidenav {
+    width: 240px;
+    border-radius: 0;
+    z-index: 99999;
+    display: none;
+  }
+  .sidenav-links {
+    padding: 15px;
+    margin-top: 0;
+    li {
+      margin-bottom: 10px;
+      a {
+        height: 46px;
+        padding: 10px;
+        justify-content: flex-start;
+        text-align: left;
+        border-radius: 4px;
+        > div {
+          display: flex;
+          align-items: center;
+        }
+        span {
+          margin-right: 10px;
+        }
+        p {
+          font-size: 14px;
+          color: #fff;
+          display: block;
+          margin-top: 4px;
+        }
+        &.active {
+          background: #f3f9fb;
+          p {
+            color: #0073a3;
+          }
+          &:after {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  .sidenav-active {
+    display: block !important;
+  }
+}
+
+.sideNavDisabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.sideNavEnable {
+  opacity: 1;
+  pointer-events: auto;
+}

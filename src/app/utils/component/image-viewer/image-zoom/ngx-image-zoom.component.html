@@ -1,0 +1,40 @@
+<div
+  #zoomContainer
+  class="ngxImageZoomContainer"
+  [style.width.px]="thumbWidth"
+  [style.height.px]="thumbHeight"
+>
+  <img
+    #imageThumbnail
+    class="ngxImageZoomThumbnail"
+    [src]="thumbImage"
+    (load)="onThumbImageLoaded()"
+    alt="zoom"
+  />
+
+  <div
+    [ngClass]="{
+      ngxImageZoomFullContainer: true,
+      ngxImageZoomLensEnabled: enableLens
+    }"
+    [style.display]="display"
+    [style.top.px]="lensTop"
+    [style.left.px]="lensLeft"
+    [style.width.px]="lensWidth"
+    [style.height.px]="lensHeight"
+    [style.border-radius.px]="lensBorderRadius"
+  >
+    <img
+      #fullSizeImage
+      class="ngxImageZoomFull"
+      [src]="fullImage"
+      (load)="onFullImageLoaded()"
+      [style.display]="display"
+      [style.top.px]="fullImageTop"
+      [style.left.px]="fullImageLeft"
+      [style.width.px]="magnifiedWidth"
+      [style.height.px]="magnifiedHeight"
+      alt="fullImage"
+    />
+  </div>
+</div>

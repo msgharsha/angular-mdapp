@@ -1,0 +1,133 @@
+<div class="file-upload-wrapper">
+  <div class="upload-file-input-wrapper">
+    <div *ngIf="pdfForm.get('url').value" class="inner-wrapper">
+      <div *ngIf="roundImage" [popover]="imagePopover" class="img-close-div clickable" popoverPlacement="bottom-right"
+        [popoverOnHover]="false" [popoverCloseOnClickOutside]="true" [popoverCloseOnMouseOutside]="false"
+        [popoverDisabled]="false" [popoverAnimation]="true">
+        <img src="/assets/images/edit-image.svg" class="close-icon" alt="icon" />
+      </div>
+      <popover-content #imagePopover [closeOnClickOutside]="true">
+        <div class="popover-list__items" (click)="onEdit('f-' + modalId + '-' + i); imagePopover.hide()">
+          {{ "EDIT" | translate }}
+        </div>
+        <div class="popover-list__items" (click)="removePdf(); imagePopover.hide()">
+          {{ "DELETE" | translate }}
+        </div>
+      </popover-content>
+
+      <app-image-viewer *ngIf="fileExt != '.pdf || .docx|| .doc' && roundImage" [src]="fileSrc" [height]="blockHeight"
+        [width]="blockWidth"></app-image-viewer>
+      <img *ngIf="fileExt === '.pdf || .docx|| .doc' && roundImage" [src]="fileSrc"
+        [ngStyle]="{ height: blockHeight + 'px', width: blockWidth + 'px' }" alt="img" />
+    </div>
+
+    <div *ngIf="roundImage" [style.display]="!pdfForm.get('url').value ? 'flex' : 'none'" class="inner-wrapper"
+      [ngStyle]="{
+        width: blockWidth + 'px',
+        height: blockHeight + 'px',
+        'border-radius': blockRadius + 'px'
+      }">
+      <div class="upload-text" [ngClass]="{ loader: showLoader }">
+        <loader [show]="showLoader"></loader>
+        <div class="text-center" *ngIf="!showLoader">
+          <img class="upload-img" src="/assets/images/download.svg" alt="upload" /><br />
+          <span class="uploaded-text">{{ "UPLOAD" | translate }}</span>
+        </div>
+      </div>
+      <div class="input-file-wrapper profile-upload-wrapper"
+        [ngStyle]="{ width: blockWidth + 'px', height: blockHeight + 'px' }">
+        <input type="file" name="myfile " class="input-file upload-file-input" [id]="'f-' + modalId + '-' + i"
+          (change)="fileUploaded($event, 'f-' + modalId + '-' + i)" [accept]="supportedExtension" />
+      </div>
+    </div>
+
+    <div *ngIf="!roundImage && !healthCardImage" [style.display]="!pdfForm.get('url').value ? 'flex' : 'none'"
+      class="upload-btn" [class.profile-page-form-control]="isProfilePage">
+      <div class="" [ngClass]="{ loader: showLoader }">
+        <loader [show]="showLoader"></loader>
+        <div class="" *ngIf="!showLoader">
+          <img class="" src="/assets/images/upload-icon.svg" alt="upload-icon" />
+          <span class="upload-btn-text">{{ imageTitle }}</span>
+        </div>
+      </div>
+      <div class="input-file-wrapper">
+        <input type="file" name="myfile " class="input-file upload-file-input" [id]="'f-' + modalId + '-' + i"
+          (change)="fileUploaded($event, 'f-' + modalId + '-' + i)" [accept]="supportedExtension" />
+      </div>
+    </div>
+
+    <div *ngIf="pdfForm.get('url').value && !roundImage && !healthCardImage" class="file-view-wrapper"
+      [class.profile-page-form-control]="isProfilePage">
+      <app-image-viewer *ngIf="fileExt != '.pdf || .docx|| .doc' && !roundImage" [src]="fileSrc" [height]="32"
+        [width]="48"></app-image-viewer>
+      <img *ngIf="fileExt === '.pdf ||.docx|| .doc' && !roundImage" [src]="fileSrc"
+        [ngStyle]="{ height: blockHeight + 'px', width: blockWidth + 'px' }" alt="img" />
+      <div class="name-div">
+        {{ fileName }}&nbsp;
+        <span *ngIf="imageTitle.toLowerCase().includes('front')">(Front Card)</span>
+        <span *ngIf="imageTitle.toLowerCase().includes('back')">(Back Card)</span>
+      </div>
+      <div *ngIf="!roundImage" [popover]="imagePopover" class="img-edit-div clickable" popoverPlacement="bottom-right"
+        [popoverOnHover]="false" [popoverCloseOnClickOutside]="true" [popoverCloseOnMouseOutside]="false"
+        [popoverDisabled]="false" [popoverAnimation]="true">
+        <img src="/assets/images/edit-img.svg" class="close-icon" alt="icon" />
+      </div>
+      <popover-content #imagePopover [closeOnClickOutside]="true" class="pop-body">
+        <div class="popover-list__items" (click)="onEdit('f-' + modalId + '-' + i); imagePopover.hide()" *ngIf="modalId != 'e_signature'">
+            {{"EDIT" | translate}} - {{"UPLOAD_SIGNATURE_FROM_LOCAL" | translate }}
+        </div>
+        <div class="popover-list__items" (click)="onImageEditFromDevice(modalId); imagePopover.hide()" *ngIf="modalId != 'e_signature' && modalId != 'requisition_modal'">
+          {{"EDIT" | translate}} - {{"UPLOAD_FROM_MOBILE" | translate }}
+         </div>
+        <div class="popover-list__items" (click)="onEditFromDevice(); imagePopover.hide()" *ngIf="modalId == 'e_signature'">
+          {{"EDIT" | translate}}
+        </div>
+        <div class="popover-list__items" (click)="removePdf(); imagePopover.hide()">
+          {{ "DELETE" | translate }}
+        </div>
+      </popover-content>
+
+    </div>
+    
+
+    <div *ngIf="healthUrl && !roundImage && healthCardImage" class="file-view-wrapper"
+      [class.profile-page-form-control]="isProfilePage">
+      <app-image-viewer *ngIf="fileExt != '.pdf || .docx|| .doc' && !roundImage" [src]="healthUrl" [height]="32"
+        [width]="48"></app-image-viewer>
+      <div class="name-div">
+        {{ fileName }}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<button class="" #openModal [attr.data-target]="'#' + modalId" data-toggle="modal" hidden type="button">
+  {{ "OPEN" | translate }}
+</button>
+
+<div class="modal fade image-crop-modal" tabindex="-1" role="dialog" [id]="modalId">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header custom-modal-header">
+        <h4 class="modal-title">{{ "IMAGE_UPLOAD" | translate }}</h4>
+        <button type="button" class="close close-icon" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="img-wrapper" [id]="'d' + modalId">
+          <img class="img-responsive" id="target" alt="img" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" data-dismiss="modal" #closeModal>
+          {{ "CLOSE" | translate }}
+        </button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

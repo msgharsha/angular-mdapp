@@ -1,0 +1,218 @@
+@import "../../../../styles.scss";
+.file-upload-wrapper {
+  display: block;
+  .image-main-wrapper {
+    padding: 10px;
+    position: relative;
+    .image-inner-border {
+      height: 100%;
+      div {
+        // height: 100%;
+        display: flex;
+        @include justify-content(center);
+        @include align-items(center);
+        @include flex-direction(column);
+        img {
+          width: inherit;
+          height: inherit;
+          max-width: 100%;
+          &.upload-icon {
+            width: 20px;
+            height: 20px;
+          }
+          &.close-icon {
+            width: 22px;
+            height: 10px;
+            margin-top: 13px;
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+  .popover-list__items {
+    padding: 5px;
+    color: $deep-blue;
+  }
+  .popover-list__items:hover {
+    background-color: $light-blue2;
+    color: $white-color;
+  }
+}
+
+.options-div {
+  .download-option {
+    float: right;
+    color: $theme-blue;
+    font-size: $font-sms;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: -16px;
+  }
+}
+.name-div {
+  font-size: 12px;
+  font-weight: $font-semi-bold;
+  max-width: 180px;
+  width: 180px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: $light-blue1;
+  margin-left: 6px;
+  span {
+    color: #99abb2;
+  }
+}
+
+.upload-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.upload-file-input-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  cursor: pointer;
+  border-radius: 50%;
+  color: $theme-lightgrey;
+  padding: 0;
+  font-size: 14px;
+  background-color: $white-color;
+  text-align: center;
+  position: relative;
+  .inner-wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 0;
+    position: relative;
+  }
+  .input-file-wrapper {
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    .input-file {
+      cursor: pointer;
+      width: 100%;
+      z-index: 9;
+      opacity: 0;
+      height: 100%;
+    }
+  }
+  .profile-upload-wrapper {
+    border: 1px dashed $theme-lightgrey;
+    border-radius: 50%;
+  }
+  .upload-text {
+    color: $dark-text;
+    font-size: $font-body;
+    @include flex-direction(column);
+    @include flexbox;
+    @include align-items(center);
+    @include justify-content(center);
+    .color-div {
+      color: $dark-text;
+      font-family: $font-family;
+      opacity: 0.6;
+    }
+  }
+  .upload-btn {
+    font-size: $font-sms;
+    font-weight: $font-semi-bold;
+    color: $light-blue1;
+    width: 100%;
+    height: 40px;
+    margin: 0 auto;
+    padding: 10px 16px 10px 24px;
+    background-color: $white-color;
+    border-radius: 5px;
+    border: solid 1px rgba(103, 129, 140, 0.2);
+    justify-content: center;
+    .upload-btn-text {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+  }
+  .file-view-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 4px 12px 4px 4px;
+    background-color: $white-color;
+    border-radius: 5px;
+    border: solid 1px rgba(103, 129, 140, 0.2);
+    box-shadow: none;
+  }
+  .img-edit-div {
+    margin-left: auto;
+  }
+}
+
+.upload-file-input {
+  width: 100%;
+  height: 60px;
+  display: inline-block;
+  cursor: pointer;
+  color: $theme-blue;
+  padding: 10px;
+  font-size: 14px;
+  background-color: $white-color;
+  text-align: center;
+  position: relative;
+}
+
+.upload-img {
+  margin-bottom: 2px;
+  border-radius: unset;
+  transform: rotate(180deg);
+}
+
+.uploaded-text {
+  color: $theme-lightgrey;
+}
+
+.img-close-div {
+  &.clickable {
+    position: absolute;
+    right: -2px;
+    bottom: 0;
+    cursor: pointer;
+    z-index: 1;
+  }
+}
+
+.loader {
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-dialog {
+  // max-width: 600px;
+  // margin: 30px auto;
+  .modal-content {
+    .modal-header {
+      display: flex;
+      padding: 15px;
+      border-bottom: 1px solid #dee2e6;
+      .h4,
+      h4 {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+.image-crop-modal-index {
+  z-index: 100000;
+}
+
+.image-crop-modal {
+  z-index: 10000;
+}

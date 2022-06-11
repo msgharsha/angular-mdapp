@@ -1,0 +1,133 @@
+<div id="sidenav" class="sidenav" *ngIf="sideBarDisplay">
+  <div class="user-info show-sm">
+    <img
+      [src]="userData?.profileImage || '../../assets/images/profile-img.svg'"
+      (error)="profile_image.src = '../../assets/images/profile-img.svg'"
+      class="user-img"
+      width=""
+      alt="profile_image"
+      #profile_image
+    />
+    <p>{{ userData?.firstName }} {{ userData?.lastName }}</p>
+
+    <app-translater *ngIf="+innerWidth < 768"></app-translater>
+  </div>
+
+  <ul class="sidenav-links" id="sidenav_links" (click)="toggleSidebar()" [ngClass]="isSideNavDisabled ? 'sideNavDisabled' : 'sideNavEnable'">
+    <div [ngClass]="{'sideNavDisabled': screenFreeze == true }">
+    <li>
+      <a (click)="onTabSelection(1)" [class.active]="selectedTab == 1">
+        <div>
+          <span class="home"></span>
+          <p>{{ "DASHBOARD" | translate }}</p>
+        </div>
+      </a>
+    </li>
+    <li id="calander_tour">
+      <a (click)="onTabSelection(2)" [class.active]="selectedTab == 2">
+        <div>
+          <span class="heart"></span>
+          <p>{{ "CALENDAR" | translate }}</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a (click)="onTabSelection(3)" [hidden]="checkPermission('MY_PAYMENTS')" [class.active]="selectedTab == 3">
+        <div>
+          <span class="report"></span>
+          <p>{{ "MY_PAYMENTS" | translate }}</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a (click)="onTabSelection(4)" [hidden]="checkPermission('PATIENTS')" [class.active]="selectedTab == 4">
+        <div>
+          <span class="medical-list"></span>
+          <p>{{ "PATIENTS" | translate }}</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a (click)="onTabSelection(8)" [hidden]="checkPermission('INVOICES')" [class.active]="selectedTab == 8">
+        <div>
+          <span class="forms"></span>
+          <p>{{ "INVOICES" | translate }}</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a (click)="onTabSelection(7)" [hidden]="checkPermission('MANAGE_AUTO_FORMS')" [class.active]="selectedTab == 7">
+        <div>
+          <span class="forms"></span>
+          <p>{{ "MANAGE_AUTO_FORMS" | translate }}</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a (click)="onTabSelection(5)" [class.active]="selectedTab == 5">
+        <div>
+          <span class="settings"></span>
+          <p>{{ "MY_ACCOUNT" | translate }}</p>
+        </div>
+      </a>
+    </li>
+
+    <li>
+      <a (click)="onTabSelection(6)" [hidden]="checkPermission('MY_PREFERENCES')" [class.active]="selectedTab == 6">
+        <div>
+          <span class="repositary"></span>
+          <p>{{ "MY_PREFERENCES" | translate }}</p>
+        </div>
+      </a>
+    </li>
+    <li *ngIf="userData && userData.subAccount">
+      <a (click)="onTabSelection(9)" [class.active]="selectedTab == 9">
+        <div>
+          <span class="repositary"></span>
+          <p>{{ "BOOK_APPOINTMENT" | translate }}</p>
+        </div>
+      </a>
+    </li>
+    <li *ngIf="userData && userData.subAccount">
+      <a (click)="onTabSelection(10)" [class.active]="selectedTab == 10">
+        <div>
+          <span class="medical-list"></span>
+          <p>{{ "PATIENT_REGISTRATION" | translate }}</p>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a (click)="onTabSelection(11)" [class.active]="selectedTab == 11">
+        <div>
+          <span class="repositary"></span>
+          <p>{{ "GENERATE_QR" | translate }}</p>
+        </div>
+      </a>
+    </li>
+
+    <li class="show-sm">
+      <a (click)="changePassword()">
+        <div>
+          <span class="change-pass"></span>
+          <p>{{ "CHANGE_PASSWORD" | translate }}</p>
+        </div>
+      </a>
+    </li>
+    <li class="show-sm">
+      <a (click)="logout()">
+        <div>
+          <span class="logout"></span>
+          <p>{{ "LOGOUT" | translate }}</p>
+        </div>
+      </a>
+    </li>
+  </div>
+  </ul>
+  
+</div>
+
+<div
+  id="sidenav-overlay"
+  class="menu-overlay show-sm"
+  (click)="toggleSidebar()"
+></div>

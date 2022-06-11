@@ -1,0 +1,104 @@
+@import "../../../../../assets/sass/variable";
+
+.form-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #012e40;
+}
+
+.info {
+  margin-top: 5px;
+  .form-group {
+    input {
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      width: 100%;
+      min-height: 44px;
+      padding-right: 30px;
+      border-bottom: 1px solid #dddddd !important;
+    }
+    .date {
+      background: url("/assets/images/calendar.svg") no-repeat;
+      background-position: right 1px center;
+      cursor: pointer;
+    }
+    input:focus {
+      outline: none;
+    }
+  }
+  ::ng-deep .phone {
+    input {
+      color: black;
+    }
+  }
+}
+
+.btn-wrapper {
+  margin-top: 75px;
+  .btn {
+    background-color: $theme-blue;
+    color: #217076;
+  }
+}
+
+.em {
+  background-color: #ebebe4;
+}
+
+.proImg {
+  height: 80px;
+}
+
+.form-group-landline {
+  padding-left: 0px;
+}
+
+.text-right-element {
+  .action-btn-wrap {
+    margin-top: 24px;
+  }
+}
+
+.separator {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.date-wrap {
+  .form-control {
+    background: $white-color;
+  }
+}
+
+.address-detail {
+  h3 {
+    margin-bottom: 24px;
+  }
+}
+
+// media query for mobile
+@media screen and (max-width: 767px) {
+  .action-btn-wrap {
+    button {
+      width: 100%;
+      margin-left: 0;
+      margin-bottom: 16px;
+    }
+  }
+}
+.verification {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #0074a3;
+  position: absolute;
+  top: 70px;
+  right: 0;
+  text-decoration: underline;
+  padding-right: 15px;
+  cursor: pointer;
+  padding-bottom: 15px;
+  width: 46%;
+  text-align: right;
+}

@@ -1,0 +1,47 @@
+<label class="label">{{ "FLEX_PLAN" | translate }}</label>
+<div class="table-responsive">
+  <table class="table" aria-describedby="table">
+    <thead>
+      <tr>
+        <th id="transaction" colspan="3" class="text-center">
+          {{ "TRANSACTION" | translate }}
+        </th>
+        <th id="month">$/{{ "MONTH" | translate }}</th>
+      </tr>
+      <tr>
+        <td colspan="4" style="height: 10px; padding: 0"></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ "DONT_USE" | translate }}</td>
+        <td>0</td>
+        <td></td>
+        <td>$0.00</td>
+      </tr>
+      <tr>
+        <td>{{ "TRY" | translate }}</td>
+        <td>1</td>
+        <td>50</td>
+        <td>$50.00</td>
+      </tr>
+      <tr>
+        <td>{{ "USE" | translate }}</td>
+        <td>51</td>
+        <td>100</td>
+        <td>$100.00</td>
+      </tr>
+      <tr>
+        <td>{{ "UNLIMITED" | translate }}</td>
+        <td>101</td>
+        <td>{{ "UNLIMITED" | translate }}</td>
+        <td>$200.00</td>
+      </tr>
+      <tr>
+        <td colspan="4" class="table-info-td">
+          {{ "AUTO_ADUSTABLE_MONTHLY_PLAN" | translate }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,66 @@
+.custom-filters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.custom-filters > div {
+  margin-left: 20px;
+}
+
+.custom-search-box {
+  border: solid 1px rgba(103, 129, 140, 0.2);
+  width: 240px;
+  height: 30px;
+  border-radius: 4px;
+  position: relative;
+  input {
+    font-size: 10px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    padding: 0 12px 0 30px;
+    border-radius: 4px;
+  }
+  &::before {
+    content: "";
+    background: url("../../../../assets/images/edit.svg");
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: calc(50% - 6px);
+    left: 12px;
+  }
+}
+
+.filter-font {
+  width: 29px;
+  height: 14px;
+  font-family: Nunito, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #0074a3;
+}
+
+.date-wrap {
+  display: flex;
+  align-items: flex-end;
+}
+
+.info {
+  margin-right: auto;
+  margin-left: 10px;
+}
+
+@media screen and (max-width: 767px) {
+  .custom-filters > div {
+    margin: 16px 20px 0 0;
+  }
+}

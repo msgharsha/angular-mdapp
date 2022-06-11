@@ -1,0 +1,150 @@
+<div class="modal">
+  <div class="OTP_modal-content">
+    <section class="auth-container default-error">
+      <div class="auth-card">
+        <div class="auth-wrapper">
+          <div (click)="backNavigate()" class="col-lg-12 start_text">
+            <img
+              src="assets/images/signin-icons/arrow-chevron-left.svg"
+              height="20px"
+              width="20px"
+              alt="back-arrow"
+            />
+            <span>{{ "BACK" | translate }}</span>
+          </div>
+          <div class="col-lg-12 page_title">
+            <h2>{{ "VERIFICATION_CODE" | translate }}</h2>
+          </div>
+          <br />
+
+          <form
+            [formGroup]="otpForm"
+            (ngSubmit)="saveForm()"
+            (keyup.enter)="saveForm()"
+          >
+            <div class="form-group">
+              <span class="message-span"
+                >{{ "OTP_MOBILE_MESSAGE" | translate }}.</span
+              >
+            </div>
+
+            <div class="otp-wrapper">
+              <!-- digit1 starts here -->
+              <div class="col-2 form-group">
+                <input
+                  type="text"
+                  maxlength="1"
+                  formControlName="digit1"
+                  class="form-control"
+                  id="txtf_patient_digit1"
+                  moveNextByMaxLength
+                />
+              </div>
+
+              <!-- digit2 starts here -->
+              <div class="col-2 form-group">
+                <input
+                  type="text"
+                  maxlength="1"
+                  formControlName="digit2"
+                  class="form-control"
+                  id="txtf_patient_digit2"
+                  moveNextByMaxLength
+                />
+              </div>
+
+              <!-- digit3 starts here -->
+              <div class="col-2 form-group">
+                <input
+                  type="text"
+                  maxlength="1"
+                  formControlName="digit3"
+                  class="form-control"
+                  id="txtf_patient_digit3"
+                  moveNextByMaxLength
+                />
+              </div>
+
+              <!-- digit4 starts here -->
+              <div class="col-2 form-group">
+                <input
+                  type="text"
+                  maxlength="1"
+                  formControlName="digit4"
+                  class="form-control"
+                  id="txtf_patient_digit4"
+                  moveNextByMaxLength
+                />
+              </div>
+
+              <!-- digit5 starts here -->
+              <div class="col-2 form-group">
+                <input
+                  type="text"
+                  maxlength="1"
+                  formControlName="digit5"
+                  class="form-control"
+                  id="txtf_patient_digit5"
+                  moveNextByMaxLength
+                />
+              </div>
+
+              <!-- digit6 starts here -->
+              <div class="col-2 form-group">
+                <input
+                  type="text"
+                  maxlength="1"
+                  formControlName="digit6"
+                  class="form-control"
+                  id="txtf_patient_digit6"
+                />
+              </div>
+            </div>
+            <div
+              class="timer-span text-right"
+              [class.hide-timer]="disableTimer"
+            >
+              <countdown
+                #tenMinuteCounter
+                (event)="handleTenMinuteTimer($event)"
+                [config]="tenMinuteTimer"
+              ></countdown>
+            </div>
+            <div class="hide-timer">
+              <countdown
+                #oneMinuteCounter
+                (event)="handleOneMinuteTimer($event)"
+                [config]="oneMinuteTimer"
+              ></countdown>
+            </div>
+            <div class="form-group">
+              <button
+                [disabled]="otpForm.invalid"
+                type="button"
+                id="btn_confirm_otp"
+                (click)="saveForm()"
+                class="btn btn-primary btn-block"
+              >
+                {{ "SUBMIT" | translate }}
+              </button>
+            </div>
+            <div class="form-group" *ngIf="!disableResend">
+              <button
+                id="btn_confirm_otp"
+                type="button"
+                (click)="
+                  resendOtp();
+                  tenMinuteCounter.restart();
+                  oneMinuteCounter.restart()
+                "
+                class="btn btn-primary btn-block"
+              >
+                {{ "RESEND" | translate }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

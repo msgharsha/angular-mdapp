@@ -1,0 +1,489 @@
+<div class="info-wrap">
+  <div class="form-wrap">
+    <h3 class="form-title">{{ "PRACTICE_DETAILS" | translate }}</h3>
+    <form [formGroup]="practiceDetailsForm" (ngSubmit)="saveForm()" autocomplete="off" (keyup.enter)="saveForm()">
+      <div class="row">
+        <!-- Specialty Type starts here -->
+        <div class="col-md-4">
+          <div class="form-group select-wrap">
+            <label for="">{{ "SPECIALITY_TYPE" | translate }}*</label>
+            <select id="slctf_specialty_type" formControlName="specialtyType" class="form-control">
+              <option value="" selected disabled>
+                {{ "SELECT_HERE" | translate }}
+              </option>
+              <option *ngFor="let specialty of specialtyType" value="{{ specialty?.id }}">
+                {{ specialty?.name }}
+              </option>
+            </select>
+            <div *ngIf="hasError('required', 'specialtyType')" class="validation">
+              {{ "REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+        <!-- Specialty type ends here -->
+
+        <!-- specialist starts here -->
+        <div class="col-md-4">
+          <div class="form-group select-wrap" *ngIf="practiceDetailsForm?.controls?.specialtyType?.value == '2'">
+            <label for="">{{ "SPECIALIST" | translate }}*</label>
+            <ng-multiselect-dropdown formControlName="specialist" placeholder="{{ 'SELECT_HERE' | translate }}"
+              [settings]="dropDownSettings" [data]="specialist">
+            </ng-multiselect-dropdown>
+            <div *ngIf="
+                formSubmitted &&
+                practiceDetailsForm.controls.specialtyType.value &&
+                practiceDetailsForm.controls.specialist.value &&
+                !practiceDetailsForm.controls.specialist.value.length
+              " class="validation">
+              {{ "REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- specialist ends here -->
+
+      <div class="row">
+        <!-- practice number starts here -->
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="email">{{ "LICENSE_NUMBER" | translate }}*</label>
+            <input id="practice_number" placeholder="{{ 'ENTER_LICENSE_NUMBER' | translate }}" type="text"
+              class="form-control" [mask]="'000000'" [showMaskTyped]="false" formControlName="practiceNumber" />
+            <div *ngIf="hasError('required', 'practiceNumber')" class="validation">
+              {{ "REQUIRED" | translate }}
+            </div>
+            <div *ngIf="hasError('minlength', 'practiceNumber')" class="validation">
+              {{ "PRACTICE_NUMBER_MUST_BE_OF" | translate }} 6
+              {{ "DIGITS" | translate }}.
+            </div>
+          </div>
+        </div>
+        <!-- practice number ends here -->
+        <div class="col-md-4">
+          <div class="form-group select-wrap mb-10">
+            <label for="">{{ "PROVINCE" | translate }}*</label>
+            <select id="province" class="form-control" formControlName="province">
+              <option value="" selected disabled>
+                {{ "SELECT_HERE" | translate }}
+              </option>
+              <option *ngFor="let province of provinceList" value="{{ province.id }}">
+                {{ province.name }}
+              </option>
+            </select>
+
+            <div *ngIf="hasError('required', 'province')" class="validation">
+              {{ "REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+
+        <!-- practice method type starts here -->
+        <div class="col-md-4">
+          <div class="form-group select-wrap mb-10">
+            <label for="">{{ "PRACTICE_METHOD_TYPE" | translate }}*</label>
+            <select id="slctf_practice_method" formControlName="practiceMethod" (change)="changePracticeMethod()" class="form-control">
+              <option value="" selected disabled>
+                {{ "SELECT_HERE" | translate }}
+              </option>
+              <option *ngFor="let practiceMethod of practiceMethods" value="{{ practiceMethod?.id }}">
+                {{ practiceMethod?.name }}
+              </option>
+            </select>
+          </div>
+          <div *ngIf="hasError('required', 'practiceMethod')" class="validation">
+            {{ "REQUIRED" | translate }}
+          </div>
+        </div>
+        <!-- practice method ends here -->
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-11">
+                <label for="agentId">{{ "AGENT_ID" | translate }}*</label>
+              </div>
+              <div class="col-1" style="text-align: end;">
+                <span class="info-icon" triggers="mouseenter:mouseleave" [ngbPopover]="popContent"></span>
+                <ng-template #popContent>{{"INFORMATION" | translate}}</ng-template>
+              </div>
+            </div>
+
+            <input id="agent_id" placeholder="{{ 'ENTER_AGENT_ID' | translate }}" type="text" class="form-control"
+              [mask]="'00000'" [showMaskTyped]="false" formControlName="agentId" />
+            <div *ngIf="hasError('required', 'agentId')" class="validation">
+              {{ "REQUIRED" | translate }}
+            </div>
+            <div *ngIf="hasError('minlength', 'practiceNumber')" class="validation">
+              {{ "PRACTICE_NUMBER_MUST_BE_OF" | translate }} 5
+              {{ "DIGITS" | translate }}.
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="agentPassword">{{ "AGENT_PASSWORD" | translate }}*</label>
+            <div class="position-relative" >
+              <input style="padding-right: 40px;" id="agent_password"
+                placeholder="{{ 'ENTER_AGENT_PASSWORD' | translate }}" [type]="passwordType" class="form-control"
+                formControlName="agentPassword" />
+              <span *ngIf="!practiceDetailsForm.controls.agentPassword.value" class="eyedefault-icon password"></span>
+              <span *ngIf="
+                  practiceDetailsForm.controls.agentPassword.value &&
+                  passwordType == 'text'
+                " class="eyedefault-icon password-hide" (click)="showHidePass('password')"></span>
+              <span *ngIf="
+                  practiceDetailsForm.controls.agentPassword.value &&
+                  passwordType == 'password'
+                " class="eyedefault-icon password-show" (click)="showHidePass('text')"></span>
+            </div>
+
+            <!-- <input *ngIf="isProvinceDisabled" id="agent_password" placeholder="{{ 'ENTER_AGENT_PASSWORD' | translate }}"
+              type="text" class="form-control" formControlName="agentPassword" /> -->
+            <div *ngIf="hasError('required', 'agentPassword')" class="validation">
+              {{ "REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="Relation">{{ "PATIENT_COUNT_NUMBER" | translate }}*</label>
+            <!-- <div class="gender-wrap">
+              <p class="female bg_none">
+                <input
+                  type="radio"
+                  id="lessthan"
+                  value="lessthan500"
+                  formControlName="patientCount"
+                />
+                <label for="lessthan">{{ "LESS_500" | translate }}</label>
+              </p>
+              <p class="male bg_none">
+                <input
+                  type="radio"
+                  id="greaterthan"
+                  value="greaterthan500"
+                  formControlName="patientCount"
+                />
+                <label for="greaterthan">{{ "GREATER_500" | translate }}</label>
+              </p>
+            </div> -->
+            <input id="patient_count" type="text" placeholder="{{ 'ENTER_PATIENT_COUNT_HERE' | translate }}"
+              class="form-control" (keypress)="numberOnly($event)" formControlName="patientCount" />
+
+            <div *ngIf="hasError('required', 'patientCount')" class="validation">
+              {{ "REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div *ngIf="language == 'en'">
+            <div><span>{{"NOTE" | translate }}</span></div>
+            <div>
+              <span>{{"TRANSMISSION_NUMBER" | translate }}</span>
+            </div>
+            <div class="mb-10">
+              <span>{{"TRANSMISSION_NUMBER_PWD" | translate }}</span>
+            </div>
+            <div class="mb-10">
+              <a class="print" style="text-decoration: underline;" target="_blank"
+                href="../../../../../assets/pdf/Guide_pour_medecins_omnipraticiens.pdf">{{
+                "INSTRUCTIONS_OMNI_PRACTTIONERS" | translate }}</a>
+            </div>
+            <div class="mb-10">
+              <a class="print" style="text-decoration: underline;" target="_blank"
+                href="../../../../../assets/pdf/Guide_pour_medecins_Specialistes.pdf">{{ "INSTRUCTIONS_SPECIALISTS" |
+                translate }}</a>
+            </div>
+          </div>
+          <div *ngIf="language == 'fr'">
+            <div>
+              <span>{{"TRANSMISSION_NUMBER" | translate }}</span>
+            </div>
+            <div class="mb-10">
+              <span>{{"TRANSMISSION_NUMBER_PWD" | translate }}</span>
+            </div>
+            <div class="mb-10">
+              <a class="print" style="text-decoration: underline;" target="_blank"
+                href="../../../../../assets/pdf/Guide_pour_medecins_omnipraticiens.pdf">{{
+                "INSTRUCTIONS_OMNI_PRACTTIONERS" | translate }}</a>
+            </div>
+            <div class="mb-10">
+              <a class="print" style="text-decoration: underline;" target="_blank"
+                href="../../../../../assets/pdf/Guide_pour_medecins_Specialistes.pdf">{{ "INSTRUCTIONS_SPECIALISTS" |
+                translate }}</a>
+            </div>
+          </div>
+          <div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <!--Image View url Start -->
+            <app-image-viewer *ngIf="imageView" [src]="fileSrc" [height]="50" [width]="70" [showLoader]="true"
+              [showIcon]="false" [openStatus]="true" (openImageStatus)="openImageStatus($event)">
+            </app-image-viewer>
+          <!--Image View url End -->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-6">
+                <label for="onlineRamqId">{{ "RAMQ_SERVICEID" | translate }}</label>
+              </div>
+            </div>
+            <input id="onlineRamqId" placeholder="{{ 'ENTER_RAMQ_ID' | translate }}" type="text" class="form-control"
+              formControlName="onlineRamqId" />
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="onlineRamqPassword">{{ "RAMQ_SERVICE_PASSWARD" | translate }}</label>
+            <div class="position-relative">
+              <input style="padding-right: 40px;" id="agent_password" placeholder="{{ 'ENTER_RAMQ_PWD' | translate }}"
+                [type]="ramQPasswordType" class="form-control" formControlName="onlineRamqPassword" />
+              <span *ngIf="!practiceDetailsForm.controls.onlineRamqPassword.value"
+                class="eyedefault-icon password"></span>
+              <span *ngIf="
+                  practiceDetailsForm.controls.onlineRamqPassword.value &&
+                  ramQPasswordType == 'text'
+                " class="eyedefault-icon password-hide" (click)="showHideRamqPass('password')"></span>
+              <span *ngIf="
+                  practiceDetailsForm.controls.onlineRamqPassword.value &&
+                  ramQPasswordType == 'password'
+                " class="eyedefault-icon password-show" (click)="showHideRamqPass('text')"></span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-4">
+          <div class="form-group" style="position: relative;">
+            <label for="profile_healthcard_front">{{
+              "HEALTHCARE_CARD_FRONT_IMAGE" | translate
+              }}*</label>
+            <div
+              *ngIf="practiceDetailsForm.controls.govtIdFrontImage.value && practiceDetailsForm.controls.govtIdFrontImage.value.url;else healthcard_front_content">
+              <app-file-upload id="profile_healthcard_front" formControlName="govtIdFrontImage" [isPdfSupported]="false"
+                [showImageOptions]="true" [blockWidth]="100" [blockHeight]="100" [roundImage]="false"
+                [modalId]="'govt_id_front_image'" [imageTitle]="'UPLOAD_FROM_LOCAL' | translate"
+                (viewLinkStatus)="viewLinkStatus($event)">
+              </app-file-upload>
+            </div>
+            <ng-template #healthcard_front_content>
+              <div class="row">
+                <div class="col-lg-6">
+                  <button
+                    style="color: #67818c; border: solid 1px rgba(103, 129, 140, 0.2);font-size: 12px; font-weight: 600;height: 41px;"
+                    type="button" class="btn btn-block mb-1 " (click)="uploadCardImage('govt_id_front_image','doctor')">
+                    <img src="../../../../../assets/images/upload-icon.svg">
+                    {{ "UPLOAD_FROM_MOBILE" | translate }}
+                  </button>
+                </div>
+                <div class="col-lg-6">
+                  <app-file-upload id="profile_healthcard_front" formControlName="govtIdFrontImage"
+                    [isPdfSupported]="false" [showImageOptions]="true" [blockWidth]="100" [blockHeight]="100"
+                    [roundImage]="false" [modalId]="'govt_id_front_image'"
+                    [imageTitle]="'UPLOAD_FROM_LOCAL' | translate" (viewLinkStatus)="viewLinkStatus($event)">
+                  </app-file-upload>
+                </div>
+              </div>
+
+            </ng-template>
+            <div *ngIf="hasError('required', 'govtIdFrontImage') || hasError('nullURL', 'govtIdFrontImage') " class="validation">
+              {{ "REQUIRED" | translate }}
+            </div>
+            <div *ngIf="govt_id_front_image_error" class="validation" style="position: inherit;bottom:5px">
+              {{ "PLZ_SUBMIT_IMAGE_FROM_EXISTED_LINK" | translate }}
+            </div>
+            <div *ngIf="view_govt_id_front_image" (click)="verifyImg('govt_id_front_image','doctor')"
+              class="verification">
+              {{ "VIEW_UPLOADED_IMAGE" | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="Relation">{{ "ACCOUNT_TYPE" | translate }}*</label>
+            <div class="gender-wrap">
+              <p class="female bg_none">
+                <input type="radio" id="personal" value="personal" (change)="changeAccType()"
+                  formControlName="accountType" />
+                <label for="personal">{{ "PERSONAL_ACCOUNT" | translate }}</label>
+              </p>
+              <p class="male bg_none">
+                <input type="radio" id="administrative" value="administrative" (change)="changeAccType()"
+                  formControlName="accountType" />
+                <label for="administrative">{{ "ADMIN_ACCOUNT" | translate }}</label>
+              </p>
+            </div>
+            <div *ngIf="hasError('required', 'accountType')" class="validation">
+              {{ "REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group select-wrap"
+            *ngIf="practiceDetailsForm?.controls?.accountType?.value == 'administrative'">
+            <label for="email">{{ "ADMIN_ACCOUNT_NUM" | translate }}*</label>
+            <input id="admin_no" placeholder="{{ 'ENTER_ACCOUNT_NUMBER_HERE' | translate }}" type="text"
+              class="form-control" (keypress)="numberOnly($event)" formControlName="adminAccNo" />
+            <div *ngIf="
+                formSubmitted &&
+                practiceDetailsForm.controls.accountType.value &&
+                !practiceDetailsForm.controls.adminAccNo.value 
+              " class="validation">
+              {{ "REQUIRED" | translate }}
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12" *ngIf="showUnApprovedDoctorMessage">
+          <div class="status-card">
+            <div class="status-card__content">
+              {{ "Doctor_APPROVE_VALIDATION_MSG" | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12" *ngIf="!showUnApprovedDoctorMessage">
+          <div>
+            <div>
+              {{ "MACHINEID_SUCCESS_MSG" | translate }} {{formatDate}}
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12" *ngIf="!showUnApprovedDoctorMessage">
+          <button type="button" style="margin: 20px 0px;" class="btn btn-primary min-width" (click)="ramqRenew()">
+            {{ "CLICK_HERE" | translate }}
+          </button>
+          {{ "MACHINEID_RENEW_MSG" | translate }}
+        </div>
+      </div>
+
+
+      <!-- private service starts here -->
+      <div class="form-group" *ngIf="practiceDetailsForm?.controls?.practiceMethod?.value != '2'">
+        <label for="">{{ "PRIVATE_SERVICES" | translate }}*</label>
+        <div class="grid-card">
+          <div class="grid-head">
+            <div class="row">
+              <div class="col-5">{{ "SERVICES" | translate }}</div>
+              <div class="col-4">{{ "CONSULTATION_FEE" | translate }} ($)</div>
+              <div class="col-2">{{ "TAX_ON_INVOICE" | translate }}</div>
+              <div class="col-1"></div>
+            </div>
+          </div>
+          <div class="grid-content">
+            <div class="row">
+              <div class="col-5">
+                <input type="text" class="form-control" placeholder="{{ 'ENTER_HERE' | translate }}" id="service_name"
+                  #selectedService />
+                <div *ngIf="duplicateService" class="validation">
+                  {{ "SERVICE_ALREADY_ADDED" | translate }}.
+                </div>
+              </div>
+              <div class="col-4">
+                <input type="text" class="form-control" placeholder="{{ 'ENTER_HERE' | translate }}"
+                  id="consultation_fee" [mask]="'0000'" [showMaskTyped]="false" #selectedConsultation />
+              </div>
+
+              <div class="col-2 action-col">
+                <input #includeTaxCheckBox id="includeTax" type="checkbox" [checked]="includeTaxValue"
+                  (change)="includeTaxChange($event)" />
+              </div>
+
+              <div class="col-1 action-col">
+                <button type="button" class="btn btn-primary"
+                  (click)="savePrivateService(selectedService, selectedConsultation)">
+                  <span *ngIf="!serviceid ">
+                    {{ "BILLING_MODULE.ADD" | translate }}
+                  </span>
+                  <span *ngIf="serviceid ">
+                    {{ "UPDATE" | translate }}
+                  </span>
+                </button>
+                <!-- <span
+                  (click)="
+                    savePrivateService(selectedService, selectedConsultation)
+                  "
+                  class="action-icon circle-check"
+                ></span> -->
+              </div>
+            </div>
+            <div *ngFor="let service of privateServices" class="row">
+              <div class="col-5">
+                <input type="text" class="form-control" [value]="service.serviceName"
+                  [id]="'service_name_' + service['tempId']" disabled />
+              </div>
+              <div class="col-4">
+                <input type="text" class="form-control" [value]="service.consultationFee"
+                  [id]="'consultation_' + service['tempId']" disabled />
+              </div>
+
+              <div class="col-2 action-col">
+                <input [id]="'includeTax_' + service['tempId']" type="checkbox" [checked]="service.includeTax"
+                  disabled />
+              </div>
+
+              <div class="col-1 action-col">
+                <span (click)="updatePrivateService(service['tempId'])" class="action-icon edit-icon"></span>
+                <span (click)="deletePrivateService(service['tempId'])" class="action-icon delete-icon"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="
+            formSubmitted &&
+            practiceDetailsForm.controls.practiceMethod.value &&
+            !privateServices.length
+          " class="validation">
+          {{ "REQUIRED" | translate }}
+        </div>
+      </div>
+      <!-- private services ends here -->
+
+      <!-- public service starts here -->
+      <div *ngIf="practiceDetailsForm?.controls?.practiceMethod?.value != '1'">
+        <app-fax-table></app-fax-table>
+      </div>
+      <!-- public services ends here -->
+
+      <!-- enable default billing starts here -->
+      <div class="form-check form-group" *ngIf="practiceDetailsForm?.controls?.practiceMethod?.value != 1">
+        <input class="form-check-input" type="checkbox" value="" id="default_billing"
+          formControlName="enableDefaultBilling" (change)="onBillingChecked($event)" />
+        <label class="form-check-label billing_chk_box" for="check1" style="font-size: 20px;">
+          {{ "CHOOSE_CACTUSMD_PLATFORM_FOR_BILLING" | translate }}.
+        </label>
+        <div *ngIf="hasError('required', 'enableDefaultBilling')" class="validation">
+          {{ "REQUIRED" | translate }}
+        </div>
+      </div>
+      <!-- enable default billing starts here -->
+    </form>
+  </div>
+</div>
+
+<div class="text-right-element">
+  <div class="action-btn-wrap">
+    <button type="button" class="btn btn-ghost min-width" (click)="onReset()">
+      {{ "CANCEL" | translate }}
+    </button>
+    <button type="button" class="btn btn-primary min-width" (click)="saveForm()">
+      {{ "SAVE" | translate }}
+    </button>
+  </div>
+</div>

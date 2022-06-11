@@ -1,0 +1,48 @@
+<img
+  *ngIf="!showIcon"
+  id="preview"
+  [src]="src"
+  [alt]="alt"
+  (click)="open()"
+  [ngStyle]="{
+    display: previewLoaded ? 'block' : 'none',
+    width: width ? width + 'px' : 'auto',
+    height: height ? height + 'px' : 'auto'
+  }"
+  (load)="previewLoaded = true"
+/>
+
+<div class="loader-wrapper" *ngIf="!showIcon && !previewLoaded">
+  <img class="loader" src="../../../../assets/images/loader.gif" alt="alt" />
+</div>
+
+<img
+  *ngIf="showIcon"
+  class="notification-box view-icon"
+  src="./../../../../assets/images/view.svg"
+  alt="previewicon"
+  (click)="open()"
+/>
+<!-- The Modal -->
+<div
+  id="zoomModal"
+  class="modal"
+  [ngStyle]="{ display: isOpen ? 'block' : 'none' }"
+>
+  <span class="close" (click)="close()">&times;</span>
+
+  <!-- need to remove loader code duplicacy-->
+  <div *ngIf="isOpen && !imageLoaded" class="loader-wrapper">
+    <img class="loader" src="../../../../assets/images/loader.gif" alt="alt" />
+  </div>
+
+  <lib-ngx-image-zoom
+    *ngIf="isOpen && src"
+    class="modal-content"
+    [thumbImage]="src"
+    [fullImage]="src"
+    [enableScrollZoom]="true"
+    [zoomMode]="'click'"
+    (onImageLoad)="onImageLoad($event)"
+  ></lib-ngx-image-zoom>
+</div>

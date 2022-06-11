@@ -1,0 +1,110 @@
+<div class="dialog-wrapper">
+  <div class="heading-wrapper">
+    <h1 mat-dialog-title class="dialog-title">
+      {{ "CONFIRMATION" | translate }}
+    </h1>
+    <span class="close-icon" tabindex="0" (click)="cancel()"></span>
+  </div>
+
+  <div class="dialogue-content">
+    <h5 class="heading-text">
+      {{ "TERMS_OF_USE_OF_CACTUSMD_PUBLIC_BILLING" | translate }}
+    </h5>
+    <p class="subheading-text mb-16">
+      1- {{ "THE_REGISTERED_USER_ON_CACTUSMD_PLATFORM_AGREES_TO" | translate }}
+    </p>
+    <div>
+      <app-fax-table></app-fax-table>
+    </div>
+    <div class="feature-list">
+      <p>{{ "UNLIMITED_USAGE_AFTER_101_TRANSACTION" | translate }}</p>
+      <p>{{ "FLEX_PLAN_AUTOMATICALLY_RESETS_TO" | translate }}</p>
+      <p>{{ "PAYMENT_IS_AUTOMATICALLY_DEDUCTED_ON" | translate }}</p>
+    </div>
+
+    <p class="subheading-text">
+      2- {{ "CACTUSMD_WILL_INVOICE_THE_USER_ON_A_MONTHLY_BASIS" | translate }}
+    </p>
+    <p class="subheading-text">
+      3-
+      {{
+        "THE_USER_HAS_SOLE_RESPONSIBILITY_OF_ENTERING_THE_BILLING_CODES_AND"
+          | translate
+      }}
+    </p>
+    <p class="subheading-text">
+      4-
+      {{
+        "CACTUSMD_WILL_BE_RESPONSIBLE_IN_PROVIDING_TO_THE_BEST_OF_KNOWLEDGE_AND"
+          | translate
+      }}
+    </p>
+    <p class="subheading-text">
+      5-
+      {{
+        "THE_USER_UNDERTAKES_THE_USAGE_OF_CACTUSMD_SOFTWARE_IN_ACCORDANCE_OF_THE_CANADIAN_PROVINCIAL_RULES"
+          | translate
+      }}
+    </p>
+    <p class="subheading-text">
+      6-
+      {{
+        "THE_USER_ACKNOWLEDGES_THAT_HE_DOES_NOT_HOLD_ANY_COPYRIGHT_IN_AND"
+          | translate
+      }}
+    </p>
+    <p class="subheading-text">
+      7-
+      {{
+        "THE_USER_UNDERTAKES_NOT_TO_MODIFY_IMPROVE_DECOMPILE_OR_OTHERWISE_ALTER"
+          | translate
+      }}
+    </p>
+    <p class="subheading-text">
+      8-
+      {{
+        "CACTUSMD_UNDERTAKES_TO_RESPECT_THE_CONFIDENTIALITY_OF_INVOICING_DATA_STATEMENTS_OF_ACCOUNT_AND"
+          | translate
+      }}
+    </p>
+    <p class="subheading-text">
+      9-
+      {{
+        "THE_USER_UNDERTAKES_TO_VERIFY_THE_INVOICING_THE_RECONCILIATION_OF_ACCOUNTS_AND"
+          | translate
+      }}
+    </p>
+    <p class="subheading-text">
+      10-
+      {{
+        "THE_USER_MAY_AT_ANY_TIME_TERMINATE_THE_USE_OF_THE_CACTUSMD_PUBLIC_BILLING_MODULE"
+          | translate
+      }}
+    </p>
+    <p class="subheading-text">
+      11-
+      {{
+        "ALL_DATA_ASSOCIATED_WITH_THE_USER39S_ACCOUNT_WILL_BE_KEPT_AND_SECURED_ACCORDING_TO_THE"
+          | translate
+      }}
+    </p>
+    <p class="subheading-text">
+      12-
+      {{
+        "THE_USER_WILL_BE_RESPONSIBLE_FOR_MAINTAINING_HIS_BILLING_INFORMATION_ON_CACTUSMD_USING_THE"
+          | translate
+      }}
+    </p>
+  </div>
+
+  <div class="button-full-div">
+    <div class="btn-wrapper">
+      <button mat-button class="btn btn-ghost" (click)="cancel()">
+        {{ "CANCEL" | translate }}
+      </button>
+      <button mat-button class="btn btn-secondary" (click)="acceptTerm()">
+        {{ "ACCEPT" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

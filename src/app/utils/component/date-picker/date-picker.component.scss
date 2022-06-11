@@ -1,0 +1,60 @@
+@import "../../../../styles.scss";
+
+span.icon {
+  width: 25px;
+  height: 25px;
+  display: block;
+  background-image: url("/assets/images/sprite.png");
+  background-size: 500px;
+  position: relative;
+  z-index: 1;
+  &.phone {
+    background-position: -4px -903px;
+  }
+  &.phone-selected {
+    background-position: -31px -903px;
+  }
+}
+
+.mat-icon {
+  position: relative;
+  float: right;
+  top: -26px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 14px;
+  right: 0px;
+}
+
+.verification {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #0074a3;
+  position: absolute;
+  top: 70px;
+  right: 0;
+  text-decoration: underline;
+  padding-right: 10px;
+  cursor: pointer;
+  width: 46%;
+  text-align: right;
+}
+
+.validation {
+  left: 8px;
+}
+
+.date-wrap {
+  .form-control {
+    background: $white-color;
+  }
+}
+
+.form-control {
+  cursor: pointer;
+}
+
+.disabled {
+  opacity: 0.5;
+}
