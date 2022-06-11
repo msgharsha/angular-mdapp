@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>9F0DA8EB-029F-411F-B2D4-1A93E070D532</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="24" height="24"></rect>
+    </defs>
+    <g id="Doctor-Designs" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Confirm-Appointment_confirm-appointment" transform="translate(-977.000000, -425.000000)">
+            <g id="Group-26" transform="translate(389.000000, 393.000000)">
+                <g id="basic-/-off_outline_close" transform="translate(586.000000, 30.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="basic-/-off_outline_close-(Background/Mask)"></g>
+                    <path d="M12,2 C6.46999979,2 2,6.46999979 2,12 C2,17.5300007 6.46999979,22 12,22 C17.5300007,22 22,17.5300007 22,12 C22,6.46999979 17.5300007,2 12,2 C8.31333319,2 8.31333319,2 12,2 Z M14.5900002,8 L12,10.5900002 L9.40999985,8 L8,9.40999985 L10.5900002,12 L8,14.5900002 L9.40999985,16 L12,13.4099998 L14.5900002,16 L16,14.5900002 L13.4099998,12 L16,9.40999985 L14.5900002,8 L14.5900002,8 Z M4,12 C4,16.4099998 7.59000015,20 12,20 C16.4099998,20 20,16.4099998 20,12 C20,7.59000015 16.4099998,4 12,4 C7.59000015,4 4,7.59000015 4,12 C4,14.9399999 4,14.9399999 4,12 Z" fill="#345766" mask="url(#mask-2)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
