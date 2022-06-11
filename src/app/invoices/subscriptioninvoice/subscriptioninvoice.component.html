@@ -1,0 +1,64 @@
+<div class="appointment-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="">
+        <h3 class="account-heading-main">{{ "SUBSCRIPTION_INVOICES" | translate }}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card-wrap">
+  <div class="pharmacy-wrap">
+    <!-- <div class="heading-wrap">
+      <h3>{{ "INVITED_PATIENTS" | translate }}</h3>
+    </div> -->
+    <div class="pharmacy-table">
+      <table class="table" aria-describedby="table">
+        <thead>
+          <tr>
+            <th id="amount">{{ "INVOICE_DATE" | translate }}</th>
+            <th id="planname">{{ "INVOICE_NO" | translate }}</th>
+            <th id="planname">{{ "PLAN_NAME" | translate }}</th>
+            <th id="amount">{{ "AMOUNT" | translate }}</th>
+            <th id="action"></th>
+          </tr>
+          <tr>
+            <td style="height: 10px"></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="
+              let subInvoice of subInvoiceList
+                | paginate
+                  : {
+                      itemsPerPage: itemsPerPage,
+                      currentPage: currentPage,
+                      totalItems: count
+                    }
+            ">
+            <td>{{ subInvoice.created_at | date: "dd:MM:yyyy HH:mm" }}</td>
+            <td>{{ subInvoice.passRef }}</td>
+            <td>{{ subInvoice.planName }}</td>
+            <td>{{ subInvoice.amount }}</td>
+            <td><button class="view-button" >
+              <a target="_blank"
+              class="print" style="padding-top: 15px;padding-left: 15px;"
+              [href]="subInvoice.pdfPreviewUrl"
+              ></a
+            >
+            </button></td>
+        </tbody>
+      </table>
+      <div *ngIf="!(subInvoiceList && subInvoiceList.length)" class="center-text-div">
+        {{ "NO_DATA_FOUND" | translate }}
+      </div>
+    </div>
+    <div class="row" *ngIf="subInvoiceList && subInvoiceList.length">
+      <div class="col-lg-12">
+        <div class="pagination-wrapper">
+          <pagination-controls class="pl-0" (pageChange)="patientPageChangedEvent($event)"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

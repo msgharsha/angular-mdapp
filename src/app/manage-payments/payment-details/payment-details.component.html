@@ -1,0 +1,84 @@
+
+<mat-tab-group
+#tab
+[(selectedIndex)]="selectedTab"
+(selectedTabChange)="onTabSelection($event)"
+mat-align-tabs="start"
+>
+<mat-tab label="{{ 'PAYMENTS' | translate }}" >
+  <ng-template matTabContent>
+    <section class="card-wrap">
+      <div class="info-wrap filter-with-label">
+        <label class="filter-label">{{ "PAYMENTS" | translate }}</label>
+        <div>
+          <span class="total-revenue"
+            >{{ "TOTAL_REVENUE" | translate }} : {{ totalRevenue }}</span
+          >
+        </div>
+        <div class="text-right flex-display" id="payment_step2">
+          <app-filter [list]="filterList"></app-filter>
+        </div>
+      </div>
+      <div class="pharmacy-wrap">
+        <div class="pharmacy-table">
+          <table class="table" aria-describedby="table">
+            <thead>
+              <tr>
+                <th id="date">{{ "INVOICE_DATE_TIME" | translate }}</th>
+                <th id="date">{{ "APPOINTMENT_DATE_TIME" | translate }}</th>
+                <th id="charge">{{ "CONSULTATION_CHARGE" | translate }}</th>
+                <th id="payment">{{ "PAYMENT_STATUS" | translate }}</th>
+                <th id="billing">{{ "BILLING_STATUS" | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let payment of paymentList
+                    | paginate
+                      : {
+                          itemsPerPage: itemsPerPage,
+                          currentPage: currentPage,
+                          totalItems: totalCount
+                        }
+                "
+              >
+                <td>
+                  {{ payment.date | date: "dd:MM:yyyy HH:mm" }}
+                </td>
+                <td>
+                  {{ payment.appointmentDateTime | date: "dd:MM:yyyy HH:mm" }}
+                </td>
+                <td>{{ payment.consultationCharge }}</td>
+                <td>{{ payment.patientPaymentStatus }}</td>
+                <td>{{ payment.consultationPaymentStatus }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="!(paymentList && paymentList.length)" class="center-text-div">
+            {{ "NO_DATA_FOUND" | translate }}
+          </div>
+        </div>
+        <div class="row" *ngIf="paymentList && paymentList.length">
+          <div class="col-lg-12">
+            <div class="pagination-wrapper">
+              <pagination-controls
+                [previousLabel]="'PREVIOUS' | translate"
+                [nextLabel]="'NEXT' | translate"
+                class="pl-0"
+                (pageChange)="pageChangedEvent($event)"
+              ></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </ng-template>
+</mat-tab>
+<mat-tab label="{{ 'CLAIMS' | translate }}">
+  <ng-template matTabContent>
+      <app-claim-details></app-claim-details>
+  </ng-template>
+</mat-tab>
+</mat-tab-group>
+

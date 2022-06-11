@@ -1,0 +1,83 @@
+<div class="prescription-detail-wrapper" *ngIf="prescriptionDetails">
+    <div class="row" *ngIf="prescriptionDetails != 'Requested Prescription not found'">
+
+        <div class="col-lg-12">
+            <div class="detail-content-wrapper">
+                <div class="row heading-row">
+                    <div class="col-lg-6">
+                        <h3>{{ "PRESCRIPTION_DETAILS" | translate }}</h3>
+                    </div>
+                    <div class="col-auto" *ngIf="prescriptionDetails.isPrescriptionSend">
+                        <a class="print" target="_blank" [href]="
+                  this.localStorageService.getItem('language') == 'en'
+                    ? prescriptionDetails?.downloadUrl
+                    : prescriptionDetails?.downloadUrlFr ||
+                      prescriptionDetails?.downloadUrl
+                " download="prescriptionDetails?.downloadUrl">{{ "DOWNLOAD_PRESCRIPTION" | translate }}</a>
+                    </div>
+                </div>
+
+                <p class="card-label">{{ "PRESCRIBED_MEDICATION" | translate }}</p>
+                <div class="grid-card">
+                    <div class="grid-head">
+                        <div class="row">
+                            <div class="col">{{ "TYPE" | translate }}</div>
+                            <div class="col">{{ "FREQUENCY_PRE" | translate }}</div>
+                            <div class="col">{{ "DOSAGE_PER_DAY" | translate }}</div>
+                            <div class="col">{{ "MINMG" | translate }}</div>
+                            <div class="col">{{ "MAXMG" | translate }}</div>
+                        </div>
+                    </div>
+                    <div class="grid-content">
+                        <div class="row" *ngFor="let medicine of prescriptionDetails.medicine">
+                            <div class="col-12">
+                                <p>{{ medicine?.medicineName }}</p>
+                            </div>
+                            <div class="col">
+                                <div class="text-box">{{ medicine?.medicineTypeName }}</div>
+                            </div>
+                            <div class="col">
+                                <div class="text-box">{{ medicine?.frequency }}</div>
+                            </div>
+                            <div class="col">
+                                <div class="text-box">{{ medicine?.dosageSchedule }}</div>
+                            </div>
+                            <div class="col">
+                                <div class="text-box">{{ medicine?.minMg }}</div>
+                            </div>
+                            <div class="col">
+                                <div class="text-box">{{ medicine?.maxMg }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-card">
+
+                    <div class="grid-content">
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <div>
+                                    <label class="text-label">{{ "REMARKS" | translate }}</label>
+                                    <p class="text-value m-0">
+                                        {{ prescriptionDetails?.testRemarks }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-button" style="text-align: right;" >
+                <button type="button" class="btn btn-width margin-left-10 btn-secondary" (click)="onSend()">
+                    {{ "SEND" | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="prescriptionDetails == 'Requested Prescription not found'">
+        Requested Prescription not found
+    </div>
+</div>

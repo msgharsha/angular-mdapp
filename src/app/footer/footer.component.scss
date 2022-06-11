@@ -1,0 +1,29 @@
+@import "../../styles.scss";
+footer {
+  background: $white-color;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  nav {
+    text-align: right;
+    ul {
+      list-style: none;
+      li {
+        margin-left: 20px;
+        display: inline;
+        a {
+          color: $secondary-grey;
+          font-size: $font-sm;
+        }
+      }
+    }
+  }
+  .footer-row {
+    padding-top: 35px;
+    .footer-copyright {
+      color: $secondary-grey;
+      font-size: $font-sm;
+    }
+  }
+}

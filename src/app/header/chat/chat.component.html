@@ -1,0 +1,197 @@
+<!---header-->
+<div class="left-panel-header padding-class">
+  <div class="header-title">
+    <div class="receiver">
+      <span class="name">{{ receiver?.name }}</span>
+      <div *ngIf="typing; else presenceView" class="typing">typing...</div>
+      <div *ngIf="receiver?.expertType" class="expertType">
+        {{ receiver.expertType }}
+      </div>
+
+      <ng-template #presenceView>
+        <div
+          *ngIf="presence"
+          [class]="'presence ' + (presence ? presence.status : '')"
+        >
+          <p *ngIf="presence.status == presenceEvents.join">
+            {{ "ONLINE" | translate }}
+          </p>
+          <p *ngIf="presence.status != presenceEvents.join">
+            {{ "OFFLINE" | translate }}
+          </p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <div class="close-icon" (click)="closeChat()"></div>
+</div>
+
+<!--connection status window-->
+<div
+  *ngIf="connection"
+  class="connection"
+  [@toggleConnectionMessage]="connection ? 'visible' : 'void'"
+>
+  <loader
+    *ngIf="connection.connecting; else Connectionmessage"
+    [show]="true"
+  ></loader>
+  <ng-template #Connectionmessage
+    ><span
+      [ngClass]="{
+        success: connection.isConnected,
+        error: !connection.isConnected
+      }"
+      >{{ connection.message }}</span
+    >
+  </ng-template>
+</div>
+
+<div
+  class="left-panel-container padding-class"
+  #chatMessages
+  scrollUp
+  (load)="loadHistory()"
+  [ngStyle]="{
+    height:
+      showLoader || (file && file.url)
+        ? 'calc(100% - 284px)'
+        : 'calc(100% - 129px)'
+  }"
+>
+  <div *ngFor="let msg of messageList">
+    <!--receiver-->
+    <div class="receiver" *ngIf="msg.userId != uuid">
+      <div class="profile-pic">
+        <img
+          [src]="
+            receiver?.profileImage || '../../../assets/images/profileImg.png'
+          "
+          alt=""
+        />
+      </div>
+      <div class="message-time">
+        <div class="message">
+          <div *ngIf="msg.file" [ngClass]="{ 'mb-5': msg.message }">
+            <app-image-viewer
+              *ngIf="msg.file.type == messageTypes.IMG"
+              [src]="msg.file.url"
+              [alt]="msg.file.originalFileName"
+            ></app-image-viewer>
+            <div class="file-details" *ngIf="msg.file.type == messageTypes.DOC">
+              <div class="file-name">
+                {{ msg.file.originalFileName || msg.file.url }}
+              </div>
+              <a class="file-download" [href]="msg.file.url"
+                ><img
+                  src="../../../../../assets/images/chat_download.svg"
+                  alt=""
+              /></a>
+            </div>
+          </div>
+          <span>{{ msg.message }}</span>
+        </div>
+        <div class="time" *ngIf="msg.time">
+          {{ +msg.time / 10000 | date: "hh:mm a" }}
+        </div>
+      </div>
+    </div>
+
+    <!--sender-->
+    <div class="sender" *ngIf="msg.userId == uuid">
+      <div class="message-time">
+        <div class="message">
+          <div *ngIf="msg.file" [ngClass]="{ 'mb-5': msg.message }">
+            <app-image-viewer
+              *ngIf="msg.file.type == messageTypes.IMG"
+              [src]="msg.file.url"
+              [alt]="msg.file.originalFileName"
+            ></app-image-viewer>
+            <div class="file-details" *ngIf="msg.file.type == messageTypes.DOC">
+              <div class="file-name">
+                {{ msg.file.originalFileName || msg.file.url }}
+              </div>
+              <a class="file-download" [href]="msg.file.url"
+                ><img
+                  src="../../../../../assets/images/chat_download.svg"
+                  alt=""
+              /></a>
+            </div>
+          </div>
+          <span>{{ msg.message }}</span>
+        </div>
+        <div class="time" *ngIf="msg.time; else error">
+          <span>{{ msg.read ? "Seen." : msg.sent ? "Received." : "" }}</span>
+          {{ +msg.time / 10000 | date: "hh:mm a" }}
+        </div>
+        <ng-template #error>
+          <div class="time">{{ "FAILED" | translate }}</div>
+        </ng-template>
+      </div>
+      <div class="profile-pic">
+        <img
+          [src]="
+            sender?.profileImage ||
+            '../../../../../assets/images/profileImg.png'
+          "
+          alt="image"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="left-panel-footer">
+  <!-- upload file on footer -->
+  <div class="upload-chat-file" *ngIf="showLoader || (file && file.url)">
+    <div class="upload-file-to" [class.doc-upload]="file.url.includes('.pdf')">
+      <img
+        *ngIf="file && file.url && !file.url.includes('.pdf')"
+        [src]="file.url"
+        alt="image loading..."
+      />
+      <div
+        class="file-details"
+        *ngIf="file && file.url && file.url.includes('.pdf')"
+      >
+        <img src="../../../../../assets/images/pdf-file.png" alt="pdf-file" />
+        <div class="file-name">{{ file.originalFileName }}</div>
+      </div>
+      <div class="close-upload" *ngIf="file && file.url">
+        <img
+          src="../../../../../assets/images/close.svg"
+          alt=""
+          (click)="clearFileData(fileUploader)"
+        />
+      </div>
+      <div class="loader">
+        <loader *ngIf="showLoader" [show]="true"></loader>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="send-text padding-class">
+    <div class="type-text">
+      <input
+        autofocus
+        type="text"
+        placeholder="{{ 'TYPE_HERE' | translate }}"
+        [(ngModel)]="message"
+        (keydown)="onChatInputTyped($event)"
+        typing
+        (onTyping)="onTyping($event)"
+      />
+    </div>
+    <attachment
+      [modalId]="'fileUpload'"
+      [(ngModel)]="file"
+      (disableButton)="uploadingStart($event)"
+      #fileUploader
+    ></attachment>
+    <button
+      class="send-button"
+      [ngClass]="{ disabled: showLoader }"
+      (click)="sendMessage()"
+    ></button>
+  </div> -->
+</div>

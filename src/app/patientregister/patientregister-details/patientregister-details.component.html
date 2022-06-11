@@ -1,0 +1,259 @@
+<div class="container-fluid">
+  <div class="main-row">
+    <h3 class="account-heading__main">{{ "PATIENT_REGISTRATION" | translate }}</h3>
+    <div class="backgroundstyle">
+      <div class="info-wrap">
+        <div class="form-wrap">
+          <form [formGroup]="basicProfileForm" (ngSubmit)="saveForm()" (keyup.enter)="saveForm()">
+            <div class="user-profile-wrap">
+              <div class="user-image">
+                <div class="user-img-wrap">
+                  <app-file-upload id="profileImage" formControlName="profileImage" [isPdfSupported]="false"
+                    [showImageOptions]="true" [blockWidth]="84" [blockHeight]="84"
+                    (disableButton)="uploadingStart($event)" [editMessage]="updateMessage"
+                    [deleteMessage]="removedMessage" [addMessage]="addMessage">
+                  </app-file-upload>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 col-lg-4 p-r-8">
+                <div class="form-group">
+                  <label for="profile_first_name">{{ "FIRST_NAME" | translate }}*</label>
+                  <input id="profile_first_name" formControlName="firstName" type="text" class="form-control" (ngModelChange)="nameChange()"
+                    placeholder="{{ 'ENTER_FIRST_NAME' | translate }}" />
+                  <div *ngIf="tempMailError || hasError('required', 'firstName')" class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                  <div *ngIf="hasError('maxlength', 'firstName')" class="validation">
+                    {{ "MAXIMUM_CHARACTERS_LIMIT_EXCEEDED" | translate }}(20)
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 p-lr-8">
+                <div class="form-group">
+                  <label for="profile_middle_name">{{
+                    "MIDDLE_NAME" | translate
+                    }}</label>
+                  <input id="profile_middle_name" formControlName="middleName" type="text" class="form-control"
+                    placeholder="{{ 'ENTER_MIDDLE_NAME' | translate }}" />
+                  <div *ngIf="hasError('maxlength', 'middleName')" class="validation">
+                    {{ "MAXIMUM_CHARACTERS_LIMIT_EXCEEDED" | translate }}(10)
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 p-l-8">
+                <div class="form-group">
+                  <label for="profile_last_name">{{ "LAST_NAME" | translate }}*</label>
+                  <input id="profile_last_name" formControlName="lastName" type="text" class="form-control"
+                    placeholder="{{ 'ENTER_LAST_NAME' | translate }}" />
+                  <div *ngIf="hasError('required', 'lastName')" class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                  <div *ngIf="hasError('maxlength', 'lastName')" class="validation">
+                    {{ "MAXIMUM_CHARACTERS_LIMIT_EXCEEDED" | translate }}(20)
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 p-r-8">
+                <div class="form-group">
+                  <label for="profile_Email">{{ "EMAIL" | translate }}*</label>
+                  <input id="profile_email" formControlName="email" type="email" class="form-control"
+                    placeholder="Enter Email" />
+                  <div *ngIf="hasError('required', 'email')" class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                  <div *ngIf="hasError('pattern', 'email')" class="validation">
+                    {{ "EMAIL_IS_NOT_VALID" | translate }}
+                  </div>
+                  <div class="verification" (click)="generateTempEmail()" *ngIf="!isQrcodeScanPage">
+                    {{ "GENERATE_TEMP_EMAIL" | translate }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 p-r-8 p-l-8">
+                <div class="form-group">
+                  <label for="profile_phone">{{ "PHONE_NUMBER" | translate }}*</label>
+                  <input id="profile_phone" placeholder="{{ 'ENTER_CELL_PHONE_NUMBER' | translate }}" type="text"
+                    class="form-control" [mask]="'000 000 0000'" [showMaskTyped]="false"
+                    formControlName="phoneNumber" />
+                  <div *ngIf="hasError('required', 'phoneNumber')" class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                  <div *ngIf="hasError('minlength', 'phoneNumber')" class="validation">
+                    {{ "CELL_PHONE_NUMBER_SHOULD_BE_OF_10_DIGIT" | translate }}.
+                  </div>
+                  <div class="verification" (click)="generateTempPhoneNumber()" *ngIf="!isQrcodeScanPage">
+                    {{ "GENERATE_TEMP_PHONE_NUMBER" | translate }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 p-l-8">
+                <div class="form-group">
+                  <label>{{ "HOME_NUMBER" | translate }}</label>
+                  <input type="text" class="form-control" formControlName="homeNumber"
+                    placeholder="{{ 'ENTER_HOME_NUMBER' | translate }}" />
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 p-lr-8">
+                <app-date-picker [label]="'DATE_OF_BIRTH'" [fieldsRequired]="true" [formSubmitted]="formSubmitted"
+                  [formControlName]="'dob'" [minDate]="minDate" [maxDate]="maxDate"
+                  [validationMsg]="'PLEASE_ENTER_DATE_OF_BIRTH'" [placeholder]="'DATE_OF_BIRTH'"></app-date-picker>
+                  <div *ngIf="hasError('required', 'dob')" class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+              </div>
+              <div class="col-md-6 col-lg-4 p-lr-8">
+                <div class="form-group select-wrap">
+                  <label for="Birth">{{ "PROVINCE" | translate }}*</label>
+                  <select style="width: 100%;" class="form-control" id="provinceId" formControlName="provinceId">
+                    <option value="" selected disabled>
+                      {{ "SELECT" | translate }}
+                    </option>
+                    <option *ngFor="let province of provinces" value="{{ province?.id }}">
+                      {{ province?.name }}
+                    </option>
+                  </select>
+
+                  <div *ngIf="hasError('required', 'provinceId')" class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 p-l-8">
+                <div class="form-group">
+                  <label for="Relation">{{ "GENDER" | translate }}*</label>
+                  <div class="gender-wrap">
+                    <p class="female">
+                      <input type="radio" id="female" value="female" formControlName="gender" />
+                      <label for="female">{{ "FEMALE" | translate }}</label>
+                    </p>
+                    <p class="male">
+                      <input type="radio" id="male" value="male" formControlName="gender" />
+                      <label for="male">{{ "MALE" | translate }}</label>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 p-r-8">
+                <div class="form-group">
+                  <label for="med_height"> {{ "HEIGHT" | translate }}* </label>
+                  <input id="med_height" type="text" class="form-control" formControlName="height"
+                    placeholder="{{ 'ENTER_HERE' | translate }}" (keypress)="isFloat($event)" />
+                  <div *ngIf="hasError('required', 'height')" class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                </div>
+              </div>
+              <!-- Height ends here -->
+
+              <!-- Height unit starts here -->
+              <div class="col-md-6 col-lg-4 p-r-8">
+                <div class="form-group">
+                  <label for="med_height_unit">{{ "HEIGHT_UNITS" | translate }}*</label>
+                  <select id="med_height_unit" class="form-control height-unit-margin" formControlName="heightUnit"
+                    >
+                    <option value="" selected disabled>
+                      {{ "SELECT" | translate }}
+                    </option>
+                    <option *ngFor="
+                        let unit of measuringUnit
+                      " value="{{ unit.id }}">
+                      {{ unit.name }}
+                    </option>
+                  </select>
+                  <div *ngIf="hasError('required', 'heightUnit')" class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                </div>
+              </div>
+              <!-- Height unit ends here -->
+
+              <!-- Weight starts ere -->
+              <div class="col-md-6 col-lg-4 p-r-8">
+                <div class="form-group">
+                  <label for="med_weight">
+                    {{ "WEIGHT" | translate }}(lbs)*
+                  </label>
+                  <input id="med_weight" type="text" class="form-control" formControlName="weight"
+                    placeholder="{{ 'ENTER_HERE' | translate }}" (keypress)="isFloat($event)" />
+                  <div *ngIf="hasError('required', 'weight')" class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4 p-lr-8">
+                <div class="form-group select-wrap">
+                  <label for="Language">{{ "PREFERRED_LANGUAGE" | translate }}*</label>
+                  <select style="width: 100%;" class="form-control" id="pref_lang" formControlName="preferredLanguage">
+                    <option value="" selected disabled>
+                      {{ "SELECT" | translate }}
+                    </option>
+                    <option *ngFor="let language of languages" value="{{ language?.id }}">
+                      {{ language?.name | translate }}
+                    </option>
+                  </select>
+                  <div *ngIf="hasError('required', 'preferredLanguage')" class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 p-r-8 p-l-8">
+                <div class="form-group">
+                  <label for="profile_phone">{{ "HEALTH_CARD_NUMBER" | translate }}*</label>
+                    <input
+                      #cardNumber
+                      id="profile_healthcare_number"
+                      type="text"
+                      formControlName="healthCareNumber"
+                      class="form-control"
+                      placeholder="{{ 'ENTER_HERE' | translate }}"
+                      [mask]="'SSSS 0000 0000'"
+                      [showMaskTyped]="false"
+                    />
+                    <div
+                    *ngIf="hasError('minlength', 'healthCareNumber')"
+                    class="validation"
+                  >
+                    {{ "INVALID_HEALTH_CARD_NUMBER" | translate }}
+                  </div>
+                  <div *ngIf="hasError('required', 'healthCareNumber')" class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="fixed-width-size">
+              <div class="row"> -->
+                <!-- Height starts here -->
+                
+              <!-- </div>
+            </div> -->
+            
+            <div class="separator mb-30"></div>
+
+            <h3>{{ "ADDRESS_DETAILS" | translate }}</h3>
+            <autocomplete [formSubmitted]="formSubmitted" [i]="0" fieldsRequired="true" [isEditable]="true"
+              formControlName="address" [onProfilePage]="true" [onAddressPage]="true"
+              [savedAddress]="basicProfileForm?.controls?.address || {}">
+            </autocomplete>
+
+            
+          </form>
+        </div>
+      </div>
+
+      <div class="text-right-element">
+        <div class="action-btn-wrap">
+          <!-- <button type="button" (click)="onReset()" class="btn btn-ghost min-width">
+            {{ "CANCEL" | translate }}
+          </button> -->
+          <button type="button" (click)="saveForm()" class="btn btn-primary min-width">
+            {{ "REGISTER" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

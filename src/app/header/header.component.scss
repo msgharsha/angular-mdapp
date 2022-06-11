@@ -1,0 +1,203 @@
+@import "../../styles.scss";
+.header-bg {
+  background-color: $white-color;
+  top: 0;
+  position: fixed;
+  width: calc(100% - 100px);
+  z-index: 999;
+  .navbar-default {
+    background: $white-color;
+    margin-bottom: 0;
+    border-bottom: 0;
+    border: none;
+    @include border-radius(0);
+    .navbar-header {
+      .navbar-brand {
+        padding: 12px 15px;
+        height: auto;
+        .image {
+          height: 41px;
+        }
+      }
+    }
+    .navbar-nav {
+      li {
+        padding-top: 0;
+        padding-bottom: 0;
+        &.for-dentist {
+          margin-right: 15px;
+          a {
+            &:hover {
+              background-color: $white-color;
+            }
+          }
+        }
+        a {
+          color: $light-blue1;
+          font-weight: $font-semi-bold;
+          padding-top: 8px;
+          padding-bottom: 8px;
+          text-decoration: none;
+          &.npd-l-f {
+            padding-left: 0px;
+            padding-right: 0px;
+          }
+        }
+        &.line-seperator {
+          padding-top: 21px;
+        }
+      }
+    }
+  }
+  .btn-primary-sm {
+    @include btn-common($theme-blue, $white-color);
+    padding: 10px 33px;
+    @include border-radius(45px);
+  }
+
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    flex-direction: row;
+  }
+
+  .notification-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #f7f8f9 url("/assets/images/basic-mail.png") no-repeat center;
+    display: block;
+    position: relative;
+    margin-right: 40px;
+  }
+  .user-dropdown {
+    text-align: right;
+    margin-right: 40px;
+    .dropdown-toggle {
+      font-size: 18px;
+      color: $light-blue1;
+      padding-right: 30px;
+      position: relative;
+      img {
+        width: 48px;
+        height: 48px;
+        margin-right: 12px;
+        border-radius: 50%;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 17px;
+        width: 0;
+        height: 0;
+        border: 5px solid transparent;
+        border-top: 5px solid $light-blue1;
+      }
+    }
+
+    .dropdown-menu {
+      padding: 0;
+      border: 0;
+      min-width: 200px;
+      box-shadow: 0 6px 10px 2px rgba(96, 97, 112, 0.1),
+        0 -1px 0 0 rgba(40, 41, 61, 0.04);
+      margin-top: 10px;
+      position: absolute;
+    }
+    .dropdown-item {
+      font-size: $font-ml;
+      font-weight: $font-semi-bold;
+      padding: 0.75rem 1.5rem;
+      display: block;
+      img {
+        margin-right: 10px;
+      }
+      span {
+        vertical-align: middle;
+      }
+      &:active {
+        color: $dark-grey;
+        background-color: #f8f9fa;
+      }
+    }
+  }
+  &.full-width {
+    width: 100%;
+  }
+}
+
+.remove-header {
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
+}
+.doctor-search {
+  flex: 1;
+  max-width: 1000px;
+  margin-right: 40px;
+}
+
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+  background-color: transparent;
+}
+
+.notification-alert {
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  background: red;
+  color: #fff;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  border-radius: 50%;
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .show-sm {
+    display: none;
+  }
+}
+
+// media query for mobile
+@media screen and (max-width: 767px) {
+  .header-bg {
+    width: 100%;
+    left: 0;
+    .navbar-brand {
+      img {
+        width: 160px;
+        height: auto;
+      }
+    }
+    .notification-icon {
+      margin-right: 20px;
+    }
+    .user-dropdown {
+      display: none;
+    }
+    .hidden-sm {
+      display: none;
+    }
+    .navbar-nav {
+      flex-direction: row;
+    }
+  }
+}
+
+.user-name {
+  max-width: 200px;
+  overflow: hidden;
+  display: table-cell;
+  text-overflow: ellipsis;
+}
+
+.screenfreeze{
+  pointer-events: none;
+}

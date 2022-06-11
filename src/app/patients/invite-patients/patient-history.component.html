@@ -1,0 +1,49 @@
+<div class="appointment-wrapper" >
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="">
+          <h3 class="account-heading-main">{{ "CONSULTATION_DETAILS" | translate }} {{patientName}} On {{ consultDate | date:'MM-dd-yyyy' }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="page-container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card-default">
+                    <!-- this will be navbar -->
+                    <ul class="tabs-menu">
+                        <li (click)="onTabSelection(1)" [class.active]="selectedTab == 1" class="clickable-hover">
+                            {{ "MEDICAL_HISTORY" | translate }}
+                        </li>
+                        <li (click)="onTabSelection(2)" [class.active]="selectedTab == 2" class="clickable-hover">
+                            {{ "NOTES" | translate }}
+                        </li>
+                        <li (click)="onTabSelection(3)" [class.active]="selectedTab == 3" class="clickable-hover">
+                            {{ "PRESCRIPTION" | translate }}
+                        </li>
+                        <li (click)="onTabSelection(4)" [class.active]="selectedTab == 4" class="clickable-hover">
+                            {{ "REQUISITION" | translate }}
+                        </li>
+                        <li (click)="onTabSelection(5)" [class.active]="selectedTab == 5" class="clickable-hover">
+                            {{ "INVOICE" | translate }}
+                        </li>
+                        <!-- <li (click)="onTabSelection(6)" [class.active]="selectedTab == 6" class="clickable-hover">
+                            {{ "BILLING_HISTORY" | translate }}
+                        </li> -->
+                    </ul>
+                    <app-medical-history *ngIf="selectedTab === 1" [patientId]="patientId" [patientName]="patientName"
+                        [bookingId]="bookingId" [invitePatientStatus]="invitePatientStatus"></app-medical-history>
+                    <app-notes [isFromPending]="isFromPending" *ngIf="selectedTab === 2" [bookingId]="bookingId">
+                    </app-notes>
+                    <app-prescriptions [bookingId]="bookingId" *ngIf="selectedTab === 3"></app-prescriptions>
+                    <app-requisition [isFromPending]="isFromPending" *ngIf="selectedTab === 4"></app-requisition>
+                    <app-invoices *ngIf="selectedTab === 5" [invitePatientStatus]="invitePatientStatus"></app-invoices>
+                    <!-- <app-create-claim *ngIf="selectedTab ===6" [patientId]="patientId" [patientName]="patientName"
+                        [bookingId]="bookingId" modelView=false></app-create-claim> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

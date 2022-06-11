@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <h1 class="account-heading-main">{{ "MANAGE_AUTO_FORMS" | translate }}</h1>
+  <div class="row">
+    <div class="col-lg-12">
+      <section class="basic-container">
+        <div class="app-table-wrap">
+          <app-common-table
+            [headers]="tableHeaders"
+            [data]="formDetails"
+            [totalCount]="totalCount"
+            (pageChange)="onPageChange($event)"
+            [totalCount]="totalCount"
+            EmptyRecordsMsg="NO_FORMS_FOUND"
+            (printSelected)="printInfo($event)"
+          >
+          </app-common-table>
+        </div>
+      </section>
+      
+    </div>
+  </div>
+</div>

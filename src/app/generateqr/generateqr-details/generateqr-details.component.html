@@ -1,0 +1,80 @@
+<div class="container-fluid" style="overflow: visible;" *ngIf="clinicName">
+    <div class="" >
+        <div class="row">
+            <div class="col-lg-8">
+                <h3 class="account-heading__main">{{ "GENERATE_QR" | translate }}</h3>
+            </div>
+            <div class="col-lg-4 text-right" >
+                <!-- <button (click)="downloadPDF()">download</button> -->
+                <a class="print" style="margin: 25px;" target="_blank" (click)="downloadPDF()">{{ "DOWNLOAD_QRCODE" | translate }}</a>
+            </div>
+        </div>
+        <div class="account-setting-wrap bg-white d-block p-4 ">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div *ngIf="showRegenerateButton">
+                        <h5  style="color: red;font-size: 18px;">{{'REGENERATEQRMSG' | translate}}<button type="button" class="btn btn-primary min-width" style="margin-left: 10px;" 
+                            (click)="generateQrCode(1)"> {{ "REGENERATEQRCODE" | translate }} </button></h5>
+                    </div>
+                    <div>
+                        <h5 *ngIf="userData">{{'DOCTOR_NAME' | translate}}:<span class="clinic_details_size"> Dr. {{ doctorName }}</span></h5>
+                    </div>
+                    <div>
+                        <h5 *ngIf="clinicName">{{'CLINIC_DETAILS' | translate}}: <span class="clinic_details_size">{{clinicName.clinicName}}, {{clinicName.addressLine1}}, {{clinicName.city}}, {{clinicName.province}}, {{clinicName.postalCode}}</span></h5>
+                    </div>
+                </div>
+                <div class="col-lg-4" style="text-align: end;">
+                    
+                </div>
+            </div>
+            
+            <div id="content" #content >
+                <div class="clinicName text-center">
+                    <h2 class="text-danger fontWeight_600">{{clinicName.clinicName}}</h2>
+                    <h5 class="impmsg">Important message for our patients</h5>
+                    <h6 class="msgcontent">On your arrival, please register at the reception or by using this QR code with your mobile phone.</h6>
+        
+                    <div class="qrcode text-center">
+                        <ngx-qrcode [elementType]="elementType" [errorCorrectionLevel]="correctionLevel" [value]="value"
+                            alt="Demo QR Code" cssClass="bshadow qrimg-width">
+                        </ngx-qrcode>
+                    </div>
+        
+                    <h5 class="msgcontent">You will need to identify yourself and then confirm your appointment with your doctor. Thanks for your help.</h5>
+        
+                    <div class="pic1 text">
+                        <img src="../../../assets/images/qrpdfdoctor.png" alt="">
+                    </div>
+                    <div class="pic2">
+                        <h6><i>This clinic is a member of the CactusMD network</i></h6>
+                        <img src="../../../assets/images/FooterLogo.png" alt="">
+                    </div>
+                </div>
+                <div class="clinicName text-center mt-5" style="margin-top: 3.5rem !important;">
+                    <h2 class="text-danger fontWeight_600">{{clinicName.clinicName}}</h2>
+                    <h5 class="impmsg">MESSAGE IMPORTANT POUR NOS PATIENTS</h5>
+                    <h5 class="msgcontent">A votre arrivée, veuillez-vous inscrire à l’accueil ou en utilisant
+                        ce code QR avec votre téléphone.</h5>
+
+                    <div class="qrcode text-center">
+                        <ngx-qrcode [elementType]="elementType" [errorCorrectionLevel]="correctionLevel" [value]="value"
+                            alt="Demo QR Code" cssClass="bshadow qrimg-width">
+                        </ngx-qrcode>
+                    </div>
+
+                    <h5 class="msgcontent">Vous devrez vous identifier, puis confirmer votre rendez-vous avec votre médecin. Merci pour
+                        votre collaboration</h5>
+
+                    <div class="pic1 text">
+                        <img src="../../../assets/images/qrpdfdoctor.png" alt="">
+                    </div>
+                    <div class="pic2">
+                        <h6><i>Cette clinique est membre du réseau CactusMD</i></h6>
+                        <img src="../../../assets/images/FooterLogo.png" alt="">
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

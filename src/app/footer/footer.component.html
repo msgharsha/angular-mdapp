@@ -1,0 +1,26 @@
+<footer *ngIf="isShowFooter">
+  <div class="container">
+    <div class="row footer-row">
+      <div class="col-lg-6">
+        <div class="footer-copyright">
+          © 2021 {{ "XYZ" | translate }}{{ "ALL_RIGHT_RESERVED" | translate }}.
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <nav>
+          <ul>
+            <li>
+              <a href="#">{{ "PRIVACY" | translate }}</a>
+            </li>
+            <li>
+              <a href="#">{{ "TERMS" | translate }}</a>
+            </li>
+            <li>
+              <a href="#">{{ "FAQ" | translate }}</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</footer>
