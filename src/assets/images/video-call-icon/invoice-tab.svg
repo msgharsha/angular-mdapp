@@ -1,0 +1,353 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="736" height="1220" viewBox="0 0 736 1220">
+    <defs>
+        <linearGradient id="y9b0tujine" x1="6.422%" x2="58.863%" y1="91.231%" y2="52.261%">
+            <stop offset="0%" stop-color="#259DE2"/>
+            <stop offset="100%" stop-color="#00619B"/>
+        </linearGradient>
+        <linearGradient id="wigowcnh1f" x1="20.493%" x2="67.833%" y1="67.63%" y2="37.039%">
+            <stop offset="0%" stop-color="#259DE2"/>
+            <stop offset="100%" stop-color="#00619B"/>
+        </linearGradient>
+        <linearGradient id="fh921o2cbg" x1="21.755%" x2="60.14%" y1="64.193%" y2="44.835%">
+            <stop offset="0%" stop-color="#3D9B3B"/>
+            <stop offset="100%" stop-color="#8ABD38"/>
+        </linearGradient>
+        <path id="fwnqkqtiwa" d="M0 0H20V20H0z"/>
+        <path id="9gn5asvd9c" d="M0 0H20V20H0z"/>
+        <path id="od1dmbhvzh" d="M0 0H20V20H0z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <g>
+                        <g>
+                            <path fill="#FFF" stroke="#E5EAEB" stroke-dasharray="0 0" d="M0 0h728c3.314 0 6 2.686 6 6v1074c0 3.314-2.686 6-6 6H6c-3.314 0-6-2.686-6-6V0h0z" transform="translate(-571 -162) translate(572 163)"/>
+                            <g>
+                                <g transform="translate(-571 -162) translate(572 163) translate(29 626)">
+                                    <mask id="nuyglq5zbb" fill="#fff">
+                                        <use xlink:href="#fwnqkqtiwa"/>
+                                    </mask>
+                                    <path fill="#0074A3" d="M10 1.667C5.4 1.667 1.667 5.4 1.667 10S5.4 18.333 10 18.333 18.333 14.6 18.333 10 14.6 1.667 10 1.667c-3.067 0-3.067 0 0 0zm-.833 4.166v3.334H5.833v1.666h3.334v3.334h1.666v-3.334h3.334V9.167h-3.334V5.833H9.167zM3.333 10c0 3.675 2.992 6.667 6.667 6.667s6.667-2.992 6.667-6.667S13.675 3.333 10 3.333 3.333 6.325 3.333 10c0 2.45 0 2.45 0 0z" mask="url(#nuyglq5zbb)"/>
+                                </g>
+                                <text fill="#0074A3" font-family="Nunito-Bold, Nunito" font-size="12" font-weight="bold" transform="translate(-571 -162) translate(572 163) translate(29 626)">
+                                    <tspan x="24" y="14">Add Line</tspan>
+                                </text>
+                            </g>
+                            <path stroke="#F7F8F9" d="M29 512H163V542H29zM497 512H566V542H497zM571 512H704V542H571zM167 512H492V542H167z" transform="translate(-571 -162) translate(572 163)"/>
+                            <path fill="#F7F8F9" stroke="#F7F8F9" d="M29 546H163V576H29zM29 580H163V610H29zM496 546H566V576H496zM496 580H566V610H496zM570 546H672V576H570zM570 580H672V610H570z" transform="translate(-571 -162) translate(572 163)"/>
+                            <g transform="translate(-571 -162) translate(572 163) translate(684 585)">
+                                <mask id="x1miic2cwd" fill="#fff">
+                                    <use xlink:href="#9gn5asvd9c"/>
+                                </mask>
+                                <path fill="#99ABB2" d="M7.5 1.667c-.92 0-1.667.747-1.667 1.666v.834H2.5v1.666h1.667v10.834c0 .919.747 1.666 1.666 1.666h8.334c.919 0 1.666-.747 1.666-1.666V5.833H17.5V4.167h-3.333v-.834c0-.919-.748-1.666-1.667-1.666h-5zm5 1.666v.834h-5v-.834h5zM5.833 16.667V5.833h8.334v10.834H5.833z" mask="url(#x1miic2cwd)"/>
+                            </g>
+                            <path fill="#F7F8F9" stroke="#F7F8F9" d="M167 546H492V576H167zM167 580H492V610H167z" transform="translate(-571 -162) translate(572 163)"/>
+                            <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="39" y="565">9851</tspan>
+                            </text>
+                            <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="39" y="599">7423</tspan>
+                            </text>
+                            <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="507" y="565">1</tspan>
+                            </text>
+                            <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="507" y="599">1</tspan>
+                            </text>
+                            <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="616" y="565"> $ 85.00</tspan>
+                            </text>
+                            <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="616" y="599"> $ 45.00</tspan>
+                            </text>
+                            <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="177" y="565">General Consultation</tspan>
+                            </text>
+                            <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="177" y="599">Telemedicine</tspan>
+                            </text>
+                            <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="39" y="531">Code</tspan>
+                            </text>
+                            <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="507" y="531">Unit</tspan>
+                            </text>
+                            <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="580" y="531">Honoraires/Fees</tspan>
+                            </text>
+                            <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="177" y="531">Description Des Services/Service Description</tspan>
+                            </text>
+                            <path fill="#F7F8F9" stroke="#F7F8F9" d="M30 442H704V496H30zM30 700H704V754H30z" transform="translate(-571 -162) translate(572 163)"/>
+                            <text fill="#012E40" font-family="Nunito-Regular, Nunito" font-size="16" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="46" y="474">Doctor Name and CCMF # (Practice Number)</tspan>
+                            </text>
+                            <text fill="#012E40" font-family="Nunito-Regular, Nunito" font-size="16" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="46" y="732">Doctor Name and CCMF # (Practice Number)</tspan>
+                            </text>
+                            <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="30" y="430">Professionel/Professional</tspan>
+                            </text>
+                            <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163)">
+                                <tspan x="30" y="688">Professionel/Professional</tspan>
+                            </text>
+                            <g fill-rule="nonzero">
+                                <g>
+                                    <g>
+                                        <g fill="url(#y9b0tujine)" transform="translate(-571 -162) translate(572 163) translate(29 37) matrix(1 0 0 -1 0 46.507) translate(26.645 19.563) translate(3.37)">
+                                            <path d="M5.789 11.379H.025C3.569 4.498 12.842.03 12.842.03V.03s5.628 2.711 9.792 7.163c1.16 1.242 2.209 2.62 2.988 4.113h-4.173l-1.312 2.423-1.59-2.35h-4.31l-3.674-7.29-3.593 9.957-1.181-2.667z"/>
+                                        </g>
+                                        <g fill="url(#wigowcnh1f)" transform="translate(-571 -162) translate(572 163) translate(29 37) matrix(1 0 0 -1 0 46.507) translate(26.645 19.563) translate(2.005 11.093)">
+                                            <path d="M14.208 8.928C9.713 17.697-1.687 12.887.25 3.45c.026-.126.054-.252.085-.376h5.002l3.26 7.37L12.354.036l1.53 3.038h4.546l3.335 4.932 2.71-5.004h3.587c.038.148.073.298.104.448 1.225 5.97-2.887 10.087-7.212 10.087-2.511 0-5.095-1.389-6.746-4.61"/>
+                                        </g>
+                                        <g fill="url(#fh921o2cbg)" transform="translate(-571 -162) translate(572 163) translate(29 37) matrix(1 0 0 -1 0 46.507) translate(26.645 19.563) translate(0 5.333)">
+                                            <path d="M7.665 8.341L0 8.341 0 6.539 8.838 6.539 10.386 10.038 14.009 0.003 17.304 6.539 21.655 6.539 23.553 9.346 25.113 6.466 32.426 6.466 32.426 8.269 26.187 8.269 23.725 12.817 20.698 8.342 16.193 8.341 14.284 4.552 10.556 14.879z"/>
+                                        </g>
+                                    </g>
+                                    <g>
+                                        <g>
+                                            <g fill="#5DAF41">
+                                                <path d="M8.917.555C8.16.195 7.233.016 6.14.016c-1.152 0-2.195.274-3.13.82-.935.548-1.67 1.292-2.206 2.232C.267 4.01 0 5.044 0 6.172v.034C0 7.335.265 8.372.795 9.32c.53.946 1.27 1.695 2.223 2.248.952.553 2.026.83 3.223.83 1.06 0 1.96-.157 2.702-.47.741-.314 1.413-.773 2.018-1.377L9.285 8.617c-.49.445-.98.781-1.47 1.01-.49.227-1.02.341-1.591.341-.661 0-1.257-.168-1.787-.504-.53-.337-.943-.787-1.24-1.351-.296-.564-.444-1.189-.444-1.873v-.034c0-.684.148-1.314.444-1.89.297-.575.707-1.031 1.232-1.367.524-.336 1.122-.505 1.795-.505.638 0 1.191.114 1.659.342.467.228.963.582 1.487 1.06l1.676-1.692c-.66-.707-1.37-1.24-2.129-1.6" transform="translate(-571 -162) translate(572 163) translate(29 37) matrix(1 0 0 -1 0 46.507) translate(.064 .256) translate(.085) translate(.005 .151)"/>
+                                            </g>
+                                            <g fill="#5DAF41">
+                                                <path d="M4.31 4.267c-.56 0-.998-.109-1.317-.325-.32-.217-.48-.53-.48-.94v-.035c0-.342.132-.613.394-.812.262-.2.604-.3 1.026-.3.604 0 1.094.152 1.47.454.377.302.565.687.565 1.154v.462c-.49.228-1.043.342-1.659.342m1.608-3.044C5.22.448 4.297.06 3.147.06c-.901 0-1.65.248-2.25.744C.3 1.3 0 1.987 0 2.864V2.9c0 .968.334 1.698 1 2.189.667.49 1.565.735 2.694.735.763 0 1.51-.126 2.24-.376V5.6c0 .548-.166.964-.496 1.249-.33.285-.82.427-1.47.427-.468 0-.893-.04-1.275-.12-.382-.08-.8-.205-1.256-.376l-.65 1.984c.558.25 1.108.436 1.65.556.541.12 1.177.18 1.907.18 1.39 0 2.419-.34 3.086-1.018.667-.678 1-1.656 1-2.933V.231H5.918v.992z" transform="translate(-571 -162) translate(572 163) translate(29 37) matrix(1 0 0 -1 0 46.507) translate(.064 .256) translate(.085) translate(12.334 .141)"/>
+                                            </g>
+                                            <g fill="#5DAF41">
+                                                <path d="M6.997.512C6.427.227 5.715.085 4.86.085c-.9 0-1.713.21-2.437.632-.724.422-1.294.995-1.71 1.719C.297 3.16.089 3.955.089 4.82v.034c0 .867.205 1.665.616 2.395.41.729.983 1.308 1.718 1.735.735.428 1.559.641 2.471.641.832 0 1.536-.13 2.112-.393.575-.262 1.091-.644 1.547-1.146l-1.59-1.71c-.32.342-.638.596-.958.761-.319.166-.695.248-1.128.248-.422 0-.801-.114-1.137-.342-.337-.228-.602-.533-.795-.915-.194-.382-.291-.795-.291-1.24v-.034c0-.718.214-1.319.641-1.803.428-.485.99-.727 1.685-.727.41 0 .777.08 1.102.24.325.159.659.404 1 .734L8.606 1.76C8.103 1.213 7.567.797 6.997.512" transform="translate(-571 -162) translate(572 163) translate(29 37) matrix(1 0 0 -1 0 46.507) translate(.064 .256) translate(.085) translate(22.47 .083)"/>
+                                            </g>
+                                            <g fill="#5DAF41">
+                                                <path d="M3.797 0c-.855 0-1.513.208-1.975.624-.461.416-.692 1.126-.692 2.13v4.343H.035V9.32H1.13v2.342h2.6V9.32h2.154V7.097H3.729V3.18c0-.297.068-.52.205-.667.137-.149.348-.222.633-.222.456 0 .883.108 1.282.324V.53C5.257.177 4.572 0 3.797 0" transform="translate(-571 -162) translate(572 163) translate(29 37) matrix(1 0 0 -1 0 46.507) translate(.064 .256) translate(.085) translate(32.066 .218)"/>
+                                            </g>
+                                            <g fill="#5DAF41">
+                                                <path d="M5.803 1.536C5.449 1.08 5.065.721 4.648.459 4.232.196 3.722.065 3.118.065c-.98 0-1.744.302-2.291.907-.548.604-.821 1.436-.821 2.496v5.934h2.6V4.289c0-.604.136-1.066.41-1.385.273-.32.66-.479 1.162-.479.502 0 .898.16 1.189.48.29.318.436.78.436 1.384v5.113h2.599V.236h-2.6v1.3z" transform="translate(-571 -162) translate(572 163) translate(29 37) matrix(1 0 0 -1 0 46.507) translate(.064 .256) translate(.085) translate(39.79 .136)"/>
+                                            </g>
+                                            <g fill="#5DAF41">
+                                                <path d="M6.485.853C5.841.358 4.995.11 3.946.11c-.673 0-1.35.114-2.035.342C1.227.679.594 1.027.013 1.495l1.112 1.71c.49-.354.985-.625 1.487-.813.502-.188.969-.282 1.402-.282.365 0 .639.06.821.18.182.12.274.288.274.504v.034c0 .217-.123.39-.368.522-.245.13-.641.276-1.188.436l-.342.103c-.833.239-1.497.558-1.992.957-.496.4-.744.998-.744 1.796v.034c0 .604.148 1.126.444 1.565.297.438.699.772 1.206 1 .507.228 1.074.342 1.701.342.582 0 1.172-.094 1.77-.282.599-.188 1.149-.448 1.65-.778l-.992-1.796c-.456.274-.9.485-1.333.633-.434.148-.815.222-1.146.222-.308 0-.544-.06-.71-.18-.165-.119-.248-.27-.248-.452v-.035c0-.16.08-.299.24-.419.16-.12.39-.236.692-.35.302-.114.613-.223.932-.325.844-.285 1.516-.624 2.018-1.018.502-.393.752-.96.752-1.701v-.034c0-.98-.322-1.719-.966-2.215" transform="translate(-571 -162) translate(572 163) translate(29 37) matrix(1 0 0 -1 0 46.507) translate(.064 .256) translate(.085) translate(49.787 .092)"/>
+                                            </g>
+                                            <g fill="#0074A3">
+                                                <path d="M9.387 7.851L6.018 2.738 5.95 2.738 2.615 7.799 2.615 0.036 0.033 0.036 0.033 12.006 2.872 12.006 6.018 6.944 9.164 12.006 12.003 12.006 12.003 0.036 9.387 0.036z" transform="translate(-571 -162) translate(572 163) translate(29 37) matrix(1 0 0 -1 0 46.507) translate(.064 .256) translate(.085) translate(59.343 .336)"/>
+                                            </g>
+                                            <g fill="#0074A3">
+                                                <path d="M7.85 7.85c-.302.548-.726.975-1.273 1.283-.548.308-1.175.462-1.881.462H2.66V2.379h2.035c.706 0 1.333.15 1.88.453.548.302.972.724 1.275 1.265.302.542.453 1.16.453 1.856v.034c0 .695-.151 1.317-.453 1.864m2.394-4.908C9.703 2.031 8.95 1.313 7.988.788 7.024.264 5.928.002 4.696.002H.027v11.97h4.669c1.231 0 2.328-.26 3.292-.778.963-.52 1.715-1.231 2.257-2.138.541-.906.812-1.918.812-3.035v-.034c0-1.118-.271-2.132-.812-3.044" transform="translate(-571 -162) translate(572 163) translate(29 37) matrix(1 0 0 -1 0 46.507) translate(.064 .256) translate(.085) translate(74.191 .37)"/>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                            <g>
+                                <path stroke="#F7F8F9" d="M0 0H136V30H0z" transform="translate(-571 -162) translate(572 163) translate(396 30)"/>
+                                <path fill="#F7F8F9" stroke="#F7F8F9" d="M140 0H308V30H140z" transform="translate(-571 -162) translate(572 163) translate(396 30)"/>
+                                <path stroke="#F7F8F9" d="M0 30H136V60H0z" transform="translate(-571 -162) translate(572 163) translate(396 30)"/>
+                                <path fill="#F7F8F9" stroke="#F7F8F9" d="M140 30H308V60H140z" transform="translate(-571 -162) translate(572 163) translate(396 30)"/>
+                                <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163) translate(396 30)">
+                                    <tspan x="148" y="20">850423</tspan>
+                                </text>
+                                <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163) translate(396 30)">
+                                    <tspan x="148" y="50">January 1st, 2021</tspan>
+                                </text>
+                                <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163) translate(396 30)">
+                                    <tspan x="8" y="50">Date</tspan>
+                                </text>
+                                <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163) translate(396 30)">
+                                    <tspan x="8" y="20">Facture/Invoice #</tspan>
+                                </text>
+                            </g>
+                            <g>
+                                <g>
+                                    <path stroke="#F7F8F9" d="M0 0H136V54H0z" transform="translate(-571 -162) translate(572 163) translate(396 130)"/>
+                                    <path fill="#F7F8F9" stroke="#F7F8F9" d="M140 0H308V54H140z" transform="translate(-571 -162) translate(572 163) translate(396 130)"/>
+                                    <path stroke="#F7F8F9" d="M0 54H136V108H0z" transform="translate(-571 -162) translate(572 163) translate(396 130)"/>
+                                    <path fill="#F7F8F9" stroke="#F7F8F9" d="M140 54H308V108H140z" transform="translate(-571 -162) translate(572 163) translate(396 130)"/>
+                                    <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163) translate(396 130)">
+                                        <tspan x="150" y="23">Praxis Clinique de </tspan> <tspan x="150" y="39">Sante familial</tspan>
+                                    </text>
+                                    <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163) translate(396 130)">
+                                        <tspan x="150" y="77">1650 Chemin St-</tspan> <tspan x="150" y="93">Jean, Bureau 101</tspan>
+                                    </text>
+                                    <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163) translate(396 130)">
+                                        <tspan x="10" y="85">Doctor Office Adress</tspan>
+                                    </text>
+                                    <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163) translate(396 130)">
+                                        <tspan x="10" y="31">Doctor Office Name</tspan>
+                                    </text>
+                                </g>
+                                <g>
+                                    <path stroke="#F7F8F9" d="M0 0H136V30H0z" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 108)"/>
+                                    <path fill="#F7F8F9" stroke="#F7F8F9" d="M140 0H308V30H140z" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 108)"/>
+                                    <path stroke="#F7F8F9" d="M0 30H136V60H0z" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 108)"/>
+                                    <path fill="#F7F8F9" stroke="#F7F8F9" d="M140 30H308V60H140z" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 108)"/>
+                                    <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 108)">
+                                        <tspan x="150" y="20">La Prairie, Quebec</tspan>
+                                    </text>
+                                    <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 108)">
+                                        <tspan x="150" y="50">J5R 0J1</tspan>
+                                    </text>
+                                    <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 108)">
+                                        <tspan x="10" y="50">Postal Code</tspan>
+                                    </text>
+                                    <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 108)">
+                                        <tspan x="10" y="20">City, Province</tspan>
+                                    </text>
+                                </g>
+                                <g>
+                                    <path stroke="#F7F8F9" d="M0 0H136V30H0z" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 168)"/>
+                                    <path fill="#F7F8F9" stroke="#F7F8F9" d="M140 0H308V30H140z" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 168)"/>
+                                    <path stroke="#F7F8F9" d="M0 30H136V84H0z" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 168)"/>
+                                    <path fill="#F7F8F9" stroke="#F7F8F9" d="M140 30H308V84H140z" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 168)"/>
+                                    <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 168)">
+                                        <tspan x="150" y="20">1-833-312-5050</tspan>
+                                    </text>
+                                    <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 168)">
+                                        <tspan x="150" y="53">Test123456@hotmai</tspan> <tspan x="150" y="69">l.com</tspan>
+                                    </text>
+                                    <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 168)">
+                                        <tspan x="10" y="61">Email:</tspan>
+                                    </text>
+                                    <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163) translate(396 130) translate(0 168)">
+                                        <tspan x="10" y="20">Phone Number</tspan>
+                                    </text>
+                                </g>
+                            </g>
+                            <g>
+                                <g>
+                                    <path stroke="#F7F8F9" d="M0 0H135V30H0z" transform="translate(-571 -162) translate(572 163) translate(30 130)"/>
+                                    <path fill="#F7F8F9" stroke="#F7F8F9" d="M139 0H307V30H139z" transform="translate(-571 -162) translate(572 163) translate(30 130)"/>
+                                    <path stroke="#F7F8F9" d="M0 30H135V60H0z" transform="translate(-571 -162) translate(572 163) translate(30 130)"/>
+                                    <path fill="#F7F8F9" stroke="#F7F8F9" d="M139 30H307V60H139z" transform="translate(-571 -162) translate(572 163) translate(30 130)"/>
+                                    <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163) translate(30 130)">
+                                        <tspan x="149" y="19">John Smith</tspan>
+                                    </text>
+                                    <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163) translate(30 130)">
+                                        <tspan x="149" y="49">1501 Montreal Stree Unit 1</tspan>
+                                    </text>
+                                    <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163) translate(30 130)">
+                                        <tspan x="10" y="49">Address</tspan>
+                                    </text>
+                                    <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163) translate(30 130)">
+                                        <tspan x="10" y="19">Patient Name</tspan>
+                                    </text>
+                                </g>
+                                <g>
+                                    <path stroke="#F7F8F9" d="M0 0H135V54H0z" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 60)"/>
+                                    <path fill="#F7F8F9" stroke="#F7F8F9" d="M139 0H307V54H139z" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 60)"/>
+                                    <path stroke="#F7F8F9" d="M0 54H135V84H0z" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 60)"/>
+                                    <path fill="#F7F8F9" stroke="#F7F8F9" d="M139 129H307V159H139z" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 60)"/>
+                                    <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 60)">
+                                        <tspan x="149" y="23">Montreal, </tspan> <tspan x="149" y="39">QuebecMontreal, Quebec</tspan>
+                                    </text>
+                                    <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 60)">
+                                        <tspan x="10" y="72">Postal Code</tspan>
+                                    </text>
+                                    <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 60)">
+                                        <tspan x="10" y="31">City, Province</tspan>
+                                    </text>
+                                </g>
+                                <g>
+                                    <path stroke="#F7F8F9" d="M0 31H135V61H0z" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 113)"/>
+                                    <path fill="#F7F8F9" stroke="#F7F8F9" d="M139 31H307V61H139zM139 0H307V30H139z" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 113)"/>
+                                    <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 113)">
+                                        <tspan x="149" y="19">H3B1S6</tspan>
+                                    </text>
+                                    <path stroke="#F7F8F9" d="M0 61H135V91H0zM0 91H135V145H0z" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 113)"/>
+                                    <path fill="#F7F8F9" stroke="#F7F8F9" d="M139 61H307V91H139zM139 91H307V145H139z" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 113)"/>
+                                    <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 113)">
+                                        <tspan x="149" y="50">514-555-5555</tspan>
+                                    </text>
+                                    <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 113)">
+                                        <tspan x="149" y="80">test123456@hotmail.com</tspan>
+                                    </text>
+                                    <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 113)">
+                                        <tspan x="149" y="114">SMIJ 1107 1819 </tspan> <tspan x="149" y="130">Exp: 2030/ 01</tspan>
+                                    </text>
+                                    <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 113)">
+                                        <tspan x="10" y="80">Email</tspan>
+                                    </text>
+                                    <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 113)">
+                                        <tspan x="10" y="122">RAMQ</tspan>
+                                    </text>
+                                    <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163) translate(30 130) translate(0 113)">
+                                        <tspan x="10" y="50">Phone Number</tspan>
+                                    </text>
+                                </g>
+                            </g>
+                        </g>
+                        <g transform="translate(-571 -162) translate(572 163) translate(684 551)">
+                            <mask id="mye4mwreoi" fill="#fff">
+                                <use xlink:href="#od1dmbhvzh"/>
+                            </mask>
+                            <path fill="#99ABB2" d="M7.5 1.667c-.92 0-1.667.747-1.667 1.666v.834H2.5v1.666h1.667v10.834c0 .919.747 1.666 1.666 1.666h8.334c.919 0 1.666-.747 1.666-1.666V5.833H17.5V4.167h-3.333v-.834c0-.919-.748-1.666-1.667-1.666h-5zm5 1.666v.834h-5v-.834h5zM5.833 16.667V5.833h8.334v10.834H5.833z" mask="url(#mye4mwreoi)"/>
+                        </g>
+                        <path stroke="#F7F8F9" d="M431 770H567V800H431z" transform="translate(-571 -162) translate(572 163)"/>
+                        <path fill="#F7F8F9" stroke="#F7F8F9" d="M571 770H704V800H571z" transform="translate(-571 -162) translate(572 163)"/>
+                        <path stroke="#F7F8F9" d="M431 800H567V830H431zM30 800H204V830H30zM431 860H567V890H431zM30 860H204V890H30z" transform="translate(-571 -162) translate(572 163)"/>
+                        <path fill="#F7F8F9" stroke="#F7F8F9" d="M571 800H704V830H571zM208 800H341V830H208zM571 860H704V890H571z" transform="translate(-571 -162) translate(572 163)"/>
+                        <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163)">
+                            <tspan x="581" y="790">$220.00</tspan>
+                        </text>
+                        <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163)">
+                            <tspan x="581" y="820">$0.00</tspan>
+                        </text>
+                        <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163)">
+                            <tspan x="581" y="880">$220.00</tspan>
+                        </text>
+                        <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163)">
+                            <tspan x="441" y="820">T.P.S. / G.S.T.</tspan>
+                        </text>
+                        <text fill="#345766" font-family="Nunito-Bold, Nunito" font-size="12" font-weight="bold" transform="translate(-571 -162) translate(572 163)">
+                            <tspan x="40" y="820">Payé / Paid</tspan>
+                        </text>
+                        <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163)">
+                            <tspan x="441" y="880">Total </tspan>
+                        </text>
+                        <text fill="#345766" font-family="Nunito-Bold, Nunito" font-size="12" font-weight="bold" transform="translate(-571 -162) translate(572 163)">
+                            <tspan x="40" y="880">Numéro TPS / GST Number</tspan>
+                        </text>
+                        <text fill="#345766" font-family="Nunito-Bold, Nunito" font-size="12" font-weight="bold" transform="translate(-571 -162) translate(572 163)">
+                            <tspan x="40" y="909">Numéro TVQ / QST Number</tspan>
+                        </text>
+                        <text fill="#345766" font-family="Nunito-Bold, Nunito" font-size="12" font-weight="bold" transform="translate(-571 -162) translate(572 163)">
+                            <tspan x="324" y="1012">Merci/ Thank You</tspan>
+                        </text>
+                        <text fill="#345766" font-family="Nunito-Bold, Nunito" font-size="12" font-weight="bold" transform="translate(-571 -162) translate(572 163)">
+                            <tspan x="65.574" y="1036">Ce document est confidentiel et ne peut etre consulté que par l&apos;utilisateur qui y est mentioné / This document is </tspan> <tspan x="232.974" y="1052">confidential and intended for the named user only.</tspan>
+                        </text>
+                        <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163)">
+                            <tspan x="441" y="790">Sous-Total / Subtotal</tspan>
+                        </text>
+                        <path stroke="#F7F8F9" d="M431 830H567V860H431zM431 890H567V920H431zM30 890H204V920H30z" transform="translate(-571 -162) translate(572 163)"/>
+                        <path fill="#F7F8F9" stroke="#F7F8F9" d="M571 830H704V860H571zM571 890H704V920H571z" transform="translate(-571 -162) translate(572 163)"/>
+                        <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163)">
+                            <tspan x="581" y="850">$0.00</tspan>
+                        </text>
+                        <text fill="#012E40" font-family="Nunito-SemiBold, Nunito" font-size="12" font-weight="500" transform="translate(-571 -162) translate(572 163)">
+                            <tspan x="581" y="910">$220.00</tspan>
+                        </text>
+                        <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163)">
+                            <tspan x="441" y="850">T.V.Q. / Q.S.T</tspan>
+                        </text>
+                        <text fill="#345766" font-family="Nunito-Regular, Nunito" font-size="12" transform="translate(-571 -162) translate(572 163)">
+                            <tspan x="441" y="910">Balance</tspan>
+                        </text>
+                    </g>
+                    <g transform="translate(-571 -162) translate(572 163) translate(542 1106)">
+                        <rect width="192" height="40" fill="#8ABD38" fill-rule="nonzero" rx="6"/>
+                        <text fill="#FFF" font-family="Nunito-Bold, Nunito" font-size="16" font-weight="bold">
+                            <tspan x="16" y="25">Send to Public Health</tspan>
+                        </text>
+                    </g>
+                </g>
+                <g transform="translate(-571 -162) translate(572 163) translate(393 1166)">
+                    <path fill="#FFF" stroke="#67818C" stroke-dasharray="0 0" d="M4 0h333c2.21 0 4 1.79 4 4v44c0 2.21-1.79 4-4 4H4c-2.21 0-4-1.79-4-4V4c0-2.21 1.79-4 4-4z" opacity=".2"/>
+                    <text fill="#CCD5D9" font-family="Nunito-Regular, Nunito" font-size="14">
+                        <tspan x="24" y="31">Email</tspan>
+                    </text>
+                    <rect width="134" height="40" x="201" y="6" fill="#0074A3" fill-rule="nonzero" rx="6"/>
+                    <text fill="#FFF" font-family="Nunito-Bold, Nunito" font-size="16" font-weight="bold">
+                        <tspan x="217" y="31">Send to Email</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

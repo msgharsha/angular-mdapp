@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="60" viewBox="0 0 60 60">
+    <defs>
+        <path id="gzoemdcoba" d="M36 28c.553 0 1 .448 1 1 0 3.52-2.613 6.432-6 6.92V38h2.105c.493 0 .895.402.895.895v.21c0 .493-.402.895-.895.895h-6.21c-.493 0-.895-.402-.895-.895v-.21c0-.493.402-.895.895-.895H29v-2.08c-3.387-.488-6-3.4-6-6.92 0-.552.447-1 1-1 .553 0 1 .448 1 1 0 2.757 2.243 5 5 5s5-2.243 5-5c0-.552.447-1 1-1zm-6-8c2.206 0 4 1.794 4 4v5c0 2.206-1.794 4-4 4s-4-1.794-4-4v-5c0-2.206 1.794-4 4-4z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <g transform="translate(-101 -103) translate(101 103)">
+                        <path fill="#FFF" fill-rule="nonzero" d="M51.21 8.784C39.493-2.93 20.498-2.928 8.784 8.79-2.93 20.508-2.928 39.502 8.79 51.216c11.718 11.714 30.713 11.712 42.426-.006 5.626-5.627 8.786-13.26 8.784-21.216-.002-7.956-3.163-15.586-8.79-21.21z"/>
+                        <use fill="#99ABB2" xlink:href="#gzoemdcoba"/>
+                    </g>
+                    <path stroke="#DC4437" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M23 20L36.575 39.309" transform="translate(-101 -103) translate(101 103)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

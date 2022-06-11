@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="736" height="449" viewBox="0 0 736 449">
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <path fill="#FFF" stroke="#E5EAEB" stroke-dasharray="0 0" d="M0 0h728c3.314 0 6 2.686 6 6v435c0 3.314-2.686 6-6 6H6c-3.314 0-6-2.686-6-6V0h0z" transform="translate(-571 -162) translate(542 94) translate(30 69)"/>
+                    <g transform="translate(-571 -162) translate(542 94) translate(30 69) translate(558 391)">
+                        <rect width="160" height="40" fill="#8ABD38" fill-rule="nonzero" rx="6"/>
+                        <text fill="#FFF" font-family="Nunito, sans-serif" font-size="16" font-weight="bold">
+                            <tspan x="50" y="25">Proceed</tspan>
+                        </text>
+                    </g>
+                    <g>
+                        <text fill="#345766" font-family="Nunito, sans-serif" font-size="12" font-weight="500" transform="translate(-571 -162) translate(542 94) translate(30 69) translate(16 60)">
+                            <tspan x="0" y="12">Present </tspan> <tspan x="45.012" y="12">Complaint</tspan>
+                        </text>
+                        <g>
+                            <path fill="#FFF" stroke="#67818C" stroke-dasharray="0 0" d="M4 0h335c2.21 0 4 1.79 4 4v114c0 2.21-1.79 4-4 4H4c-2.21 0-4-1.79-4-4V4c0-2.21 1.79-4 4-4z" opacity=".2" transform="translate(-571 -162) translate(542 94) translate(30 69) translate(16 60) translate(0 24)"/>
+                            <text fill="#CCD5D9" font-family="Nunito, sans-serif" font-size="14" transform="translate(-571 -162) translate(542 94) translate(30 69) translate(16 60) translate(0 24)">
+                                <tspan x="24" y="26">Enter Here</tspan>
+                            </text>
+                        </g>
+                    </g>
+                    <g>
+                        <text fill="#345766" font-family="Nunito, sans-serif" font-size="12" font-weight="500" transform="translate(-571 -162) translate(542 94) translate(30 69) translate(16 222)">
+                            <tspan x="0" y="12">Diagnosis</tspan>
+                        </text>
+                        <g>
+                            <path fill="#FFF" stroke="#67818C" stroke-dasharray="0 0" d="M4 0h335c2.21 0 4 1.79 4 4v114c0 2.21-1.79 4-4 4H4c-2.21 0-4-1.79-4-4V4c0-2.21 1.79-4 4-4z" opacity=".2" transform="translate(-571 -162) translate(542 94) translate(30 69) translate(16 222) translate(0 24)"/>
+                            <text fill="#CCD5D9" font-family="Nunito, sans-serif" font-size="14" transform="translate(-571 -162) translate(542 94) translate(30 69) translate(16 222) translate(0 24)">
+                                <tspan x="24" y="26">Enter Here</tspan>
+                            </text>
+                        </g>
+                    </g>
+                    <text fill="#012E40" font-family="Nunito, sans-serif" font-size="14" font-weight="500" transform="translate(-571 -162) translate(542 94) translate(30 69)">
+                        <tspan x="16" y="39">Complaint and Diagnosis</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

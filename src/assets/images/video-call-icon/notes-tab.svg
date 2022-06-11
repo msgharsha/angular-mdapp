@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="736" height="667" viewBox="0 0 736 667">
+    <defs>
+        <path id="zyn73qzt3a" d="M0 0H25V24H0z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <path fill="#FFF" stroke="#E5EAEB" stroke-dasharray="0 0" d="M0 0h728c3.314 0 6 2.686 6 6v653c0 3.314-2.686 6-6 6H6c-3.314 0-6-2.686-6-6V0h0z" transform="translate(-571 -164) translate(572 165)"/>
+                <g>
+                    <path fill="#FFF" stroke="#67818C" stroke-dasharray="0 0" d="M4 24h327c2.21 0 4 1.79 4 4v32c0 2.21-1.79 4-4 4H4c-2.21 0-4-1.79-4-4V28c0-2.21 1.79-4 4-4z" opacity=".2" transform="translate(-571 -164) translate(572 165) translate(16 24)"/>
+                    <g transform="translate(-571 -164) translate(572 165) translate(16 24) translate(294 32)">
+                        <mask id="ny0a1v0ayb" fill="#fff">
+                            <use xlink:href="#zyn73qzt3a"/>
+                        </mask>
+                        <path fill="#67818C" fill-rule="nonzero" d="M10 12l5 5.208V6.792L10 12z" mask="url(#ny0a1v0ayb)" transform="rotate(-90 12.5 12)"/>
+                    </g>
+                    <text fill="#012E40" font-family="Nunito, sans-serif" font-size="14" font-weight="500" transform="translate(-571 -164) translate(572 165) translate(16 24)">
+                        <tspan x="24" y="49">template 1</tspan>
+                    </text>
+                    <text fill="#345766" font-family="Nunito, sans-serif" font-size="12" font-weight="500" transform="translate(-571 -164) translate(572 165) translate(16 24)">
+                        <tspan x="0" y="12">Select Template</tspan>
+                    </text>
+                </g>
+                <g>
+                    <g>
+                        <g>
+                            <path fill="#FFF" stroke="#67818C" stroke-dasharray="0 0" d="M4 24h694c2.21 0 4 1.79 4 4v432c0 2.21-1.79 4-4 4H4c-2.21 0-4-1.79-4-4V28c0-2.21 1.79-4 4-4z" opacity=".2" transform="translate(-571 -164) translate(572 165) translate(16 112) translate(0 .956) translate(0 1)"/>
+                            <text fill="#012E40" font-family="Nunito, sans-serif" font-size="16" font-weight="bold" transform="translate(-571 -164) translate(572 165) translate(16 112) translate(0 .956) translate(0 1)">
+                                <tspan x="30" y="70">Lorem ipsum is placeholder text commonly used in the graphic, print, and </tspan> <tspan x="30" y="92">publishing industries for previewing layouts and visual mockups</tspan>
+                            </text>
+                            <text fill="#012E40" font-family="Nunito, sans-serif" font-size="14" transform="translate(-571 -164) translate(572 165) translate(16 112) translate(0 .956) translate(0 1)">
+                                <tspan x="30" y="142">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut </tspan> <tspan x="30" y="161">labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris </tspan> <tspan x="30" y="180">nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit </tspan> <tspan x="30" y="199">esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in </tspan> <tspan x="30" y="218">culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur </tspan> <tspan x="30" y="237">adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad </tspan> <tspan x="30" y="256">minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </tspan> <tspan x="30" y="275">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </tspan> <tspan x="30" y="294">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est </tspan> <tspan x="30" y="313">laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </tspan> <tspan x="30" y="332">ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco </tspan> <tspan x="30" y="351">laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate </tspan> <tspan x="30" y="370">velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, </tspan> <tspan x="30" y="389">sunt in culpa qui officia deserunt mollit anim id est laborum.</tspan>
+                            </text>
+                            <g transform="translate(-571 -164) translate(572 165) translate(16 112) translate(0 .956) translate(0 1) translate(0 424)">
+                                <path fill="#F7F8F9" d="M0 0h702v36c0 2.21-1.79 4-4 4H4c-2.21 0-4-1.79-4-4V0z"/>
+                                <rect width="24" height="24" x="12" y="8" fill="#0074A3" rx="2"/>
+                                <rect width="24" height="24" x="46" y="8" fill="#FFF" rx="2"/>
+                                <rect width="24" height="24" x="662" y="8" fill="#FFF" rx="2"/>
+                                <rect width="10" height="3" x="672" y="16" stroke="#656566" rx="1"/>
+                                <rect width="10" height="3" x="672" y="22.044" stroke="#656566" rx="1"/>
+                                <circle cx="667.5" cy="17.5" r="1.5" stroke="#656566"/>
+                                <circle cx="667.5" cy="23.544" r="1.5" stroke="#656566"/>
+                                <rect width="24" height="24" x="80" y="8" fill="#FFF" rx="2"/>
+                                <rect width="24" height="24" x="594" y="8" fill="#FFF" rx="2"/>
+                                <rect width="24" height="24" x="628" y="8" fill="#FFF" rx="2"/>
+                                <rect width="10" height="3" x="638" y="16" stroke="#656566" rx="1"/>
+                                <rect width="10" height="3" x="638" y="22.044" stroke="#656566" rx="1"/>
+                                <text fill="#FFF" font-family="DMSans-Bold, DM Sans, sans-serif" font-size="14" font-weight="bold">
+                                    <tspan x="20" y="25">B</tspan>
+                                </text>
+                                <text fill="#656566" font-family="DMSans-Regular, DM Sans, sans-serif" font-size="14">
+                                    <tspan x="54" y="25">R</tspan>
+                                </text>
+                                <text fill="#656566" font-family="DMSans-Bold, DM Sans, sans-serif" font-size="6" font-weight="bold">
+                                    <tspan x="633" y="19">1</tspan>
+                                </text>
+                                <text fill="#656566" font-family="DMSans-Bold, DM Sans, sans-serif" font-size="6" font-weight="bold">
+                                    <tspan x="633" y="26">2</tspan>
+                                </text>
+                                <text fill="#656566" font-family="DMSans-Italic, DM Sans, sans-serif" font-size="14" font-style="italic">
+                                    <tspan x="90" y="25">I</tspan>
+                                </text>
+                                <path fill="#656566" fill-rule="nonzero" d="M608.397 23.354c.264 0 .516-.052.755-.154.24-.103.45-.242.63-.418s.327-.38.44-.615c.111-.234.168-.483.168-.747 0-.322-.088-.59-.264-.806-.176-.215-.444-.322-.806-.322-.195 0-.38.03-.556.088-.176.058-.298.112-.367.161-.01-.059-.014-.115-.014-.168v-.154c0-.39.08-.742.242-1.055.16-.312.375-.6.644-.864s.581-.51.938-.74c.356-.23.734-.461 1.135-.696l-.513-.864c-.508.254-.998.525-1.472.813-.474.288-.903.62-1.29.996-.385.376-.714.813-.988 1.311-.273.498-.469 1.084-.586 1.758-.03.146-.044.298-.044.454 0 .254.037.5.11.74.073.239.188.454.344.644.157.19.357.345.6.462.245.117.543.176.894.176zm-5.449 0c.264 0 .515-.052.755-.154.239-.103.449-.242.63-.418.18-.176.327-.38.439-.615.112-.234.168-.483.168-.747 0-.322-.087-.59-.263-.806-.176-.215-.445-.322-.806-.322-.195 0-.38.03-.557.088-.175.058-.297.112-.366.161-.01-.059-.014-.115-.014-.168v-.154c0-.39.08-.742.241-1.055.161-.312.376-.6.645-.864.268-.264.58-.51.937-.74.357-.23.735-.461 1.136-.696L605.38 16c-.508.254-.999.525-1.472.813-.474.288-.904.62-1.29.996-.385.376-.715.813-.988 1.311-.274.498-.469 1.084-.586 1.758-.03.146-.044.298-.044.454 0 .254.037.5.11.74.073.239.188.454.344.644.156.19.357.345.6.462.245.117.543.176.894.176z"/>
+                            </g>
+                            <text fill="#345766" font-family="Nunito, sans-serif" font-size="12" font-weight="500" transform="translate(-571 -164) translate(572 165) translate(16 112) translate(0 .956) translate(0 1)">
+                                <tspan x="0" y="12.846">Selected Template</tspan>
+                            </text>
+                        </g>
+                        <path d="M2 0v57.147c-1.105 0-2-.895-2-2V2C0 .895.895 0 2 0z" transform="translate(-571 -164) translate(572 165) translate(16 112) translate(0 .956)"/>
+                    </g>
+                </g>
+                <g transform="translate(-571 -164) translate(572 165) translate(558 609)">
+                    <rect width="160" height="40" fill="#8ABD38" fill-rule="nonzero" rx="6"/>
+                    <text fill="#FFF" font-family="Nunito, sans-serif" font-size="16" font-weight="bold">
+                        <tspan x="50" y="25">Proceed</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
