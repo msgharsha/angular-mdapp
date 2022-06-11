@@ -1,0 +1,122 @@
+<div class="dialog-wrapper" style="margin: 40px;">
+  <div class="heading-wrapper">
+    <h1 mat-dialog-title class="dialog-title">
+      {{ "ADDRESS_DETAILS" | translate }}
+    </h1>
+    <!-- <span class="close-icon" (click)="cancel()"></span> -->
+  </div>
+  <div class="dialogue-content">
+    <div class="info-wrap">
+      <div class="form-wrap">
+        <form [formGroup]="personalDetailsForm" (ngSubmit)="saveForm()" autocomplete="off" (keyup.enter)="saveForm()">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="lab_name">{{ "NAME_OF_LAB" | translate }}*</label>
+                <input id="lab_name" formControlName="labName" type="text" class="form-control"
+                  placeholder="{{ 'ENTER_LAB_NAME' | translate }}" />
+                <div *ngIf="hasError('required', 'labName')" class="validation">
+                  {{ "REQUIRED" | translate }}
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="contact_person">{{ "CONTACT_PERSON" | translate }}*</label>
+                <input id="contact_person" formControlName="contactPerson" type="text" class="form-control"
+                  placeholder="{{ 'ENTER_CONTACT_PERSON' | translate }}" />
+                <div *ngIf="hasError('required', 'contactPerson')" class="validation">
+                  {{ "REQUIRED" | translate }}
+                </div>
+                <div *ngIf="hasError('maxlength', 'contactPerson')" class="validation">
+                  {{ "MAXIMUM_CHARACTERS_LIMIT_EXCEEDED" | translate }}(20)
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="email">{{ "PHONE_NUMBER" | translate }}*</label>
+                <input id="phone_Number" placeholder="{{ 'ENTER_PHONE_NUMBER' | translate }}" type="text"
+                  class="form-control" [mask]="'000 000 0000'" [showMaskTyped]="false" formControlName="phoneNumber" />
+                <div *ngIf="hasError('required', 'phoneNumber')" class="validation">
+                  {{ "REQUIRED" | translate }}
+                </div>
+                <div *ngIf="hasError('minlength', 'phoneNumber')" class="validation">
+                  {{ "PHONE_NUMBER_SHOULD_BE_OF_10_DIGIT" | translate }}.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="Relation">{{ "DEFAULT_COMMUNICATION" | translate }}*</label>
+                <div class="gender-wrap">
+                  <p class="female bg_none">
+                    <input type="radio" id="emailValue" value="email" (change)="changeDefaultCom()"
+                      formControlName="defaultCommunication" />
+                    <label for="emailValue">{{ "EMAIL_ID" | translate }}</label>
+                  </p>
+                  <p class="male bg_none">
+                    <input type="radio" id="faxNo" value="fax" (change)="changeDefaultCom()"
+                      formControlName="defaultCommunication" />
+                    <label for="faxNo">{{ "FAX" | translate }}</label>
+                  </p>
+                </div>
+                <div *ngIf="hasError('required', 'defaultCommunication')" class="validation">
+                  {{ "REQUIRED" | translate }}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="email">{{ "EMAIL_ID" | translate }}<span
+                    *ngIf="this.personalDetailsForm.get('defaultCommunication').value == 'email'">*</span></label>
+                <input id="email" formControlName="email" type="email" class="form-control"
+                  placeholder="{{ 'ENTER_EMAIL' | translate }}" />
+              </div>
+              <div *ngIf="hasError('required', 'email')" class="validation">
+                {{ "REQUIRED" | translate }}
+              </div>
+              <div *ngIf="hasError('pattern', 'email')" class="validation">
+                {{ "PLEASE_ENTER_VALID_EMAIL" | translate }}
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="fax">{{ "FAX" | translate }}<span
+                    *ngIf="this.personalDetailsForm.get('defaultCommunication').value == 'fax'">*</span></label>
+                <input id="fax" formControlName="fax" [mask]="'000-000-0000'" type="text" class="form-control"
+                  placeholder="{{ 'ENTER_FAX' | translate }}" />
+              </div>
+              <div *ngIf="hasError('required', 'fax')" class="validation">
+                {{ "REQUIRED" | translate }}
+              </div>
+              <div *ngIf="hasError('minlength', 'fax')" class="validation">
+                {{ "FAX_SHOULD_BE_OF_10_DIGIT" | translate }}
+              </div>
+            </div>
+          </div>
+
+
+
+          <autocomplete [formSubmitted]="formSubmitted" [i]="0" fieldsRequired="true" [isEditable]="true"
+            formControlName="address" [onProfilePage]="true" [onAddressPage]="true"
+            [savedAddress]="personalDetailsForm?.controls?.address || {}">
+          </autocomplete>
+        </form>
+      </div>
+    </div>
+    <div class="text-right-element">
+      <div class="action-btn-wrap">
+        <button type="button" class="btn btn-ghost min-width" (click)="onReset()">
+          {{ "CANCEL" | translate }}
+        </button>
+        <button type="button" class="btn btn-primary min-width" (click)="saveForm()">
+          {{ "SAVE" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>

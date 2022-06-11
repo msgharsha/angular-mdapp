@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="main-row">
+    <h3 class="account-heading__main">{{ "MY_PREFERENCES" | translate }}</h3>
+    <div class="account-setting-wrap">
+      <div class="account-left-menu">
+        <div class="account-wrapper">
+          <div class="box-wrapper">
+            <div class="box-container">
+              <div class="left-nav-section">
+                <div class="side-menu">
+                  <div class="menu cursor-hand" [ngClass]="{ active: type.includes('notes') }">
+                    <img src="./../../assets/images/file-blank.svg" alt="" />
+                    <div (click)="navigateTo('notes')" class="sprite-img" id="href_navigate_notes">
+                      {{ "MY_NOTES_TEMPLATE" | translate }}
+                    </div>
+                  </div>
+                  <div class="menu cursor-hand" [ngClass]="{ active: type.includes('addressbook') }">
+                    <img src="./../../assets/images/user-id-card.svg" alt="" />
+                    <div (click)="navigateTo('addressbook')" class="sprite-img" id="href_navigate_addressbook">
+                      {{ "MY_ADDRESSBOOK" | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="account-right-content">
+        <div class="account-right-area">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+@import "../../styles.scss";
+.terms-and-condition-container {
+  padding: 40px 0;
+  .terms-and-condition-wrapper {
+    max-width: 523px;
+    margin: 0 auto;
+    background: $white-color;
+    padding: 32px 40px;
+    @include border-radius(4px);
+    h5 {
+      font-weight: $font-bold;
+      margin-top: 0;
+      margin-bottom: 32px;
+      &.heading {
+        text-align: center;
+        text-transform: uppercase;
+      }
+    }
+  }
+}

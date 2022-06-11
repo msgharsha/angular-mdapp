@@ -1,0 +1,14 @@
+<div class="text-right">
+  <p class="add-notes" (click)="addNote()" id="notes_step1">{{ "ADD_NOTE" | translate }}</p>
+</div>
+<app-table
+  [headers]="['TEMPLATE_NAME', 'Content']"
+  [isNote]="true"
+  [headersBind]="['templateName', 'content']"
+  [data]="notesList"
+  (editNoteId)="editMyNote($event)"
+  (deleteNoteId)="deleteMyNote($event)"
+></app-table>
+<div>
+  <p style="font-weight: bold;">{{ "NOTE_DESCRIPTON" | translate }}</p>
+</div>

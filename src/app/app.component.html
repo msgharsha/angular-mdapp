@@ -1,0 +1,34 @@
+<div class="homepage-wrapper">
+  <div class="section-wrapper">
+    <div class="sidebar-section" [hidden]="!sideBar">
+      <app-home-sidebar></app-home-sidebar>
+    </div>
+    <div
+      [ngClass]="{
+        'section-2': headerDisplay == true,
+        'section-2-login': headerDisplay == false
+      }"
+    >
+      <div [hidden]="!headerDisplay">
+        <header-component></header-component>
+      </div>
+
+      <router-outlet>
+        <div [hidden]="!showLoader" class="loader-container">
+          <div class="spinner"></div>
+          <div class="loader-image-container">
+            <img
+              class="loaderImage"
+              src="../assets/images/loader.gif"
+              alt="loader"
+            />
+          </div>
+        </div>
+      </router-outlet>
+    </div>
+  </div>
+</div>
+
+<!--File upload modal, as it's required for this html, not to be in any container with position property.
+ else modal-backdrop will displlay over the modal-content-->
+<image-crop-modal></image-crop-modal>
