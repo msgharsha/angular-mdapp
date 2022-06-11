@@ -1,0 +1,169 @@
+@import "../../../../styles.scss";
+
+.container-fluid {
+  overflow: hidden;
+  background-color: transparent;
+}
+
+
+
+.cursor-hand {
+  cursor: pointer;
+}
+
+/* account css */
+
+.account-heading__main {
+  font-size: $font-24;
+  font-weight: $font-bold;
+  color: $deep-blue;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  padding-left: 15px;
+}
+
+.account-wrapper {
+  // display: -webkit-flex;
+  .box-wrapper {
+    width: 100%;
+    .box-container {
+      .heading-div {
+        color: $secondary-grey;
+        div {
+          padding-left: 3px;
+        }
+      }
+    }
+  }
+  .account-right-area {
+    width: calc(100% - 249px);
+    margin-left: 249px;
+  }
+}
+
+.main-row {
+  margin: 10px 0px 30px;
+}
+.account-setting-wrap {
+  @include flexbox();
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  .account-left-menu {
+    min-width: 247px;
+    background: $white-color;
+    position: relative;
+    border-top-left-radius: 8px;
+    overflow: hidden;
+    &:before {
+      content: "";
+      background: #99abb2;
+      height: calc(100% - 30px);
+      width: 1px;
+      position: absolute;
+      right: 0;
+      opacity: 0.2;
+    }
+  }
+  .account-right-content {
+    width: calc(100% - 247px);
+    background: $white-color;
+    @include border-radius(4px);
+    padding: 30px;
+  }
+}
+
+
+.info {
+    margin-top: 5px;
+    // .sub-heading {
+    //     font-size: 20px;
+    //     font-weight: bold;
+    //     margin-bottom: 24px;
+    //     margin-top: 35px
+    // }
+    .form-group {
+      input {
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        width: 100%;
+        min-height: 44px;
+        padding-right: 30px;
+        border-bottom: 1px solid #dddddd !important;
+      }
+      .date {
+        background: url("/assets/images/calendar.svg") no-repeat;
+        background-position: right 1px center;
+        cursor: pointer;
+      }
+      input:focus {
+        outline: none;
+      }
+    }
+    ::ng-deep .phone {
+      input {
+        color: black;
+      }
+    }
+  }
+  
+  .btn-wrapper {
+    margin-top: 75px;
+    .btn {
+      background-color: $theme-blue;
+      color: #217076;
+    }
+  }
+  
+  .em {
+    background-color: #ebebe4;
+  }
+  
+  .proImg {
+    height: 80px;
+  }
+  
+  .form-group-landline {
+    padding-left: 0px;
+  }
+  
+  .text-right-element {
+    .action-btn-wrap {
+      margin-top: 24px;
+    }
+  }
+  
+  .address-detail {
+    h3 {
+      margin-top: 30px;
+      margin-bottom: 24px;
+    }
+  }
+  
+  .date-wrap {
+    .form-control {
+      background: $white-color;
+    }
+  }
+  
+  .user-profile-wrap .user-image .user-img-wrap {
+    overflow: visible;
+  }
+  
+  .verification {
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #0074a3;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-decoration: underline;
+    padding-right: 10px;
+    cursor: pointer;
+  }
+
+  .backgroundstyle{
+    background: #ffffff; padding: 30px; box-shadow: 0 0 10px 2px rgb(0 0 0 / 8%); border-radius: 8px;
+  }

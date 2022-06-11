@@ -1,0 +1,164 @@
+<div class="auth-section">
+  <div class="container-fluid">
+    <div class="Translater_Dropdown">
+      <app-translater></app-translater>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div>
+          <a href="#" class="logo"
+            ><img src="assets/images/logo.svg" alt="CactusMD"
+          /></a>
+        </div>
+        <img
+          src="assets/images/signin-icons/signin-image.svg"
+          class="auth-img"
+          alt="signup image"
+        />
+      </div>
+      <div class="col-lg-6">
+        <section class="auth-container">
+          <div class="auth-card">
+            <div
+              class="col-lg-12 start_text no-pointer"
+              (click)="initializeConditions()"
+            >
+              {{ "SIGN_IN" | translate }}
+            </div>
+            <div class="col-lg-12 page_title">
+              <h2>{{ "WELCOME_BACK" | translate }}!</h2>
+            </div>
+            <div class="auth-wrapper">
+              <form
+                *ngIf="!showEmailResend"
+                [formGroup]="loginForm"
+                (ngSubmit)="login()"
+                (keyup.enter)="login()"
+              >
+                <div class="form-group">
+                  <div class="form-control">
+                    <input
+                      type="email"
+                      formControlName="email"
+                      id="txtf_email_patient"
+                      placeholder="{{ 'YOUR_EMAIL_@_WEBSITE_COM' | translate }}"
+                    />
+                    <span
+                      *ngIf="!loginForm.controls.email.value"
+                      class="icon email"
+                    ></span>
+                    <span
+                      *ngIf="loginForm.controls.email.value"
+                      class="icon email-selected"
+                    ></span>
+                  </div>
+                  <div *ngIf="hasError('required', 'email')" class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                  <div
+                    *ngIf="
+                      hasError('pattern', 'email') &&
+                      !hasError('required', 'email')
+                    "
+                    class="validation"
+                  >
+                    {{ "PLEASE_ENTER_VALID_EMAIL" | translate }}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-control">
+                    <input
+                      [type]="passwordType"
+                      formControlName="password"
+                      id="txtf_password_patient"
+                    />
+                    <span
+                      *ngIf="!loginForm.controls.password.value"
+                      class="icon password"
+                    ></span>
+                    <span
+                      *ngIf="
+                        loginForm.controls.password.value &&
+                        passwordType == 'text'
+                      "
+                      class="icon password-hide"
+                      (click)="showHidePass('password')"
+                    ></span>
+                    <span
+                      *ngIf="
+                        loginForm.controls.password.value &&
+                        passwordType == 'password'
+                      "
+                      class="icon password-selected"
+                      (click)="showHidePass('text')"
+                    ></span>
+                  </div>
+                  <div
+                    *ngIf="hasError('required', 'password')"
+                    class="validation"
+                  >
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                </div>
+
+                <div class="forgot-password">
+                  <span
+                    class="forgot-password clickable-hover"
+                    (click)="forgotPassword()"
+                    id="btn_forgot_password"
+                  >
+                    {{ "FORGOT_PASSWORD" | translate }}?</span
+                  >
+                </div>
+
+                <div class="form-group">
+                  <button
+                    type="button"
+                    id="btn_login_patient"
+                    (click)="login()"
+                    class="btn btn-primary btn-block"
+                  >
+                    {{ "SIGN_IN" | translate }}
+                  </button>
+                </div>
+
+                <div class="auth-here text-center">
+                  {{ "DO_NOT_HAVE_AN_ACCOUNT" | translate }}?
+                  <span
+                    routerLink="/auth/register/essential-signup"
+                    class="auth-up"
+                    id="href_patient_signup"
+                    >{{ "SIGN_UP" | translate }}</span
+                  >
+                </div>
+              </form>
+              <div class="form-group" *ngIf="showEmailResend">
+                <div class="resend-text">
+                  {{ emailResendText | translate }}
+                  <span id="btn_send_email" *ngIf = "showLinkResend"
+                    >{{
+                      "CLICK_THE_BUTTON_TO_RESEND_VERIFICATION_EMAIL"
+                        | translate
+                    }}.</span
+                  >
+                </div>
+              </div>
+
+              <div class="form-group" *ngIf="showEmailResend && showLinkResend">
+                <button
+                  type="button"
+                  id="btn_login_patient"
+                  (click)="resendVerification()"
+                  class="btn btn-primary btn-block"
+                >
+                  {{ "RESEND" | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

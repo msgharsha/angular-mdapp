@@ -1,0 +1,28 @@
+<div class="onboard-tabs">
+  <ul>
+    <li
+      [class.completed]="currentOnboardStep > 1"
+      [class.active]="selectedTab == 1"
+      (click)="setSelectedTab(1)"
+    >
+      <span class="step-num">1</span>
+      <span>{{ "PERSONAL_DETAILS" | translate }}</span>
+    </li>
+    <li
+      [class.completed]="currentOnboardStep > 2"
+      [class.active]="selectedTab == 2"
+      (click)="setSelectedTab(2)"
+    >
+      <span class="step-num">2</span>
+      <span>{{ "PRACTICE_DETAILS" | translate }}</span>
+    </li>
+    <li
+      [class.completed]="currentOnboardStep > 3"
+      [class.active]="selectedTab == 3"
+      (click)="setSelectedTab(3)"
+    >
+      <span class="step-num">3</span>
+      <span>{{ "SUBSCRIPTION_DETAILS" | translate }}</span>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,157 @@
+<div class="dcp-right-wrapper">
+  <!-- heading -->
+  <div class="dcp-heading-wrapper">
+    <div class="dcp-heading mb0">
+      {{ "BOOK_APPOINTMENT" | translate }}
+    </div>
+  </div>
+
+  <!-- body-write-here -->
+  <div class="dcp-body-wrapper border-bottom">
+    <form id="appointment-form-scroll" [formGroup]="bookAppointmentForm">
+      <!-- Reason -->
+      <div id="reason_div" class="form-group reason">
+        <label for="reason">{{ "REASON" | translate }}</label>
+        <auto-populate
+          emitChange="true"
+          placeholder="{{ 'SELECT_A_REASON' | translate }}"
+          class="txt-blk"
+          id="select_reason"
+          type="reason"
+          formControlName="reason"
+          [design]="1"
+          inputId="reason-filter"
+          [masterData]="procedureData"
+          keyName="procedure"
+          (valueChanged)="updateSlots()"
+        ></auto-populate>
+        <div *ngIf="onSubmit && reason.value == null" class="validation">
+          *{{ "PLEASE_SELECT_A_REASON" | translate }}
+        </div>
+      </div>
+
+      <!-- Date -->
+      <div id="date_div" class="form-group date">
+        <app-date-picker
+          [label]="'DATE'"
+          [fieldsRequired]="true"
+          [formSubmitted]="this.onSubmit"
+          [formControlName]="'date'"
+          [minDate]="minDate"
+          [placeholder]="'DATE'"
+          [validationMsg]="'PLEASE_SELECT_A_VALID_DATE'"
+        ></app-date-picker>
+      </div>
+
+      <!-- Time Slot -->
+      <div class="form-group time">
+        <label for="">{{ "TIME" | translate }}</label>
+        <div
+          *ngIf="!contentSpecificLoader"
+          id="time-container"
+          [ngClass]="{ 'no-scroll': !slots?.length }"
+          class="time-container"
+        >
+          <span
+            *ngFor="let slot of slots; let i = index"
+            [id]="'time_slot' + i"
+            class="time-tag"
+            [ngClass]="{ 'slot-active': selectedSlot.value?.time == slot.time }"
+            (click)="onSlotSelect(slot)"
+            >{{ slot.time | date: "h:mm a" }}</span
+          >
+          <span
+            class="unavailable"
+            *ngIf="!slots?.length && !nextAvailableDate"
+            >{{ "NO_SLOT_AVAILABLE" | translate }}</span
+          >
+          <span *ngIf="!slots?.length && nextAvailableDate"
+            >{{
+              "SORRY_DOCTOR_IS_AVAILABLE_HOWEVER_NEXT_AVAILABLE_ON" | translate
+            }}
+            <span class="bold">{{
+              nextAvailableDate | date: "EEEE, MMMM d y"
+            }}</span>
+            {{
+              "AFTER_THE SELECTED_DATE_PLEASE_SELECT_A_DATE_IN_THE_CALENDER_TO_VIEW_TIME_SLOT"
+                | translate
+            }}
+            .</span
+          >
+        </div>
+        <div
+          *ngIf="slots?.length && !nextAvailableDate && errorMsg"
+          class="validation"
+        >
+          {{ errorMsg }}
+        </div>
+        <div *ngIf="contentSpecificLoader" class="time-container">
+          <div class="loader-wrapper">
+            <img
+              class="loader"
+              src="../../../../assets/images/loader.gif"
+              alt="loader"
+            />
+          </div>
+        </div>
+        <div *ngIf="onSubmit && selectedSlot.value == null" class="validation">
+          *{{ "PLEASE_SELECT_A_TIME_SLOT" | translate }}
+        </div>
+      </div>
+
+      <!-- patient -->
+      <div id="patient_div" class="form-group patient">
+        <label for="patient">{{ "PATIENT" | translate }}</label>
+        <auto-populate
+          emitChange="true"
+          placeholder="{{ 'PLEASE_SELECT_A_PATIENT' | translate }}"
+          class="txt-blk"
+          id="select_patient"
+          type="patient"
+          formControlName="patient"
+          inputId="patient-filter"
+          [design]="1"
+          [masterData]="patientFamily"
+          keyName="name"
+        ></auto-populate>
+        <div class="validation" *ngIf="onSubmit && patient.value == null">
+          *{{ "PLEASE_SELECT_A_PATIENT" | translate }}
+        </div>
+      </div>
+      <div class="form-group insurance-holder mt40">
+        <label>{{ "IS_THE_PATIENTS_FIRST_VISIT" | translate }}?</label>
+        <div class="row">
+          <radio-btn
+            formControlName="isFirstVisit"
+            [labelArr]="[OPTION.YES.LABEL, OPTION.NO.LABEL]"
+          ></radio-btn>
+        </div>
+      </div>
+      <!-- first visit -->
+      <div class="form-group insurance-holder mt40">
+        <label
+          >{{
+            "WILL_THE_PATIENT_PREMEDIATE_FOR_APPOINTMENT" | translate
+          }}?</label
+        >
+        <div class="row">
+          <radio-btn
+            formControlName="isPreMedication"
+            [labelArr]="[OPTION.YES.LABEL, OPTION.NO.LABEL]"
+          ></radio-btn>
+        </div>
+      </div>
+      <div class="btn-wrapper">
+        <button
+          type="button"
+          id="book_appointment_btn"
+          (click)="onBookAppointment()"
+          class="btn btn-secondary btn-block"
+        >
+          {{ "BOOK_APPOINTMENT" | translate }}
+        </button>
+      </div>
+    </form>
+    <scroll-top [uniqueId]="'appointment-form-scroll'"></scroll-top>
+  </div>
+</div>

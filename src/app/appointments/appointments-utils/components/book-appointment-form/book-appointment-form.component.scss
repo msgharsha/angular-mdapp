@@ -1,0 +1,74 @@
+@import "../../../../../styles.scss";
+.btn-wrapper {
+  margin-top: 56px;
+}
+.cancel-btn {
+  color: #8b8ba1;
+  background: none;
+  border: none;
+  margin-top: 24px;
+}
+
+.date {
+  input {
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    width: 100%;
+    min-height: 44px;
+    padding-right: 40px;
+    background: url("/assets/images/calendar.svg") no-repeat;
+    background-position: right 1px center;
+    cursor: pointer;
+    border-bottom: 2px solid #dddddd;
+  }
+}
+
+::ng-deep.txt-blk {
+  .main-div input {
+    color: black;
+    background: url("/assets/images/down-carat.svg") no-repeat;
+    background-position: right 1px center;
+    cursor: pointer;
+  }
+}
+
+.mt40 {
+  margin-top: 40px;
+}
+
+.loader-wrapper {
+  height: 50px;
+  width: 66px;
+  float: left;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.loader {
+  height: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.mt10 {
+  margin-top: 10px;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.no-scroll {
+  overflow: visible;
+  white-space: normal !important;
+}
+
+.unavailable {
+  padding-left: 140px;
+  font-weight: 500;
+  font-size: 16px;
+}

@@ -1,0 +1,112 @@
+@import "../../../../assets/sass/variable";
+
+.onboard-tabs {
+  background-color: #0074a3;
+  background-image: linear-gradient(10deg, #259de2 -24%, #00619b 104%);
+  width: 303px;
+  height: 100%;
+  margin: 0;
+  border-radius: 10px 0 0 10px;
+  cursor: pointer;
+  overflow: hidden;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    li {
+      font-size: 18px;
+      font-weight: normal;
+      color: #fff;
+      padding: 26px 32px;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 100%;
+        border-right: 1px dashed #004469;
+        left: 46px;
+        top: 40px;
+        z-index: 1;
+      }
+      &:last-child {
+        &:after {
+          display: none;
+        }
+      }
+      .step-num {
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 28px;
+        color: #ffffff;
+        text-align: center;
+        width: 30px;
+        height: 30px;
+        background: #006d99;
+        border: 1px solid #0074a3;
+        box-shadow: 0 0 0 1px #004469;
+        border-radius: 50%;
+        margin-right: 18px;
+        position: relative;
+        z-index: 2;
+      }
+      &.active {
+        font-weight: bold;
+        background-color: #035c8f;
+        .step-num {
+          background-color: #004469;
+          border: 1px solid #0074a3;
+          box-shadow: 0 0 0 1px #004469;
+        }
+      }
+      &.completed {
+        .step-num {
+          color: #8abd38;
+          background-color: #8abd38;
+          border: 1px solid #0074a3;
+          box-shadow: 0 0 0 1px #8abd38;
+          &:after {
+            content: "";
+            position: absolute;
+            width: 12px;
+            height: 10px;
+            background: url("/assets/images/check.svg") no-repeat;
+            left: 8px;
+            top: 9px;
+          }
+        }
+        &:after {
+          border-right-style: solid;
+        }
+      }
+    }
+    .step-num {
+      font-size: 16px;
+      font-weight: bold;
+      line-height: 28px;
+      color: #ffffff;
+      text-align: center;
+      width: 30px;
+      height: 30px;
+      background-color: #004469;
+      border: 1px solid #0074a3;
+      box-shadow: 0 0 0 1px #004469;
+      border-radius: 50%;
+      margin-right: 18px;
+      position: relative;
+      z-index: 2;
+    }
+  }
+}
+
+// media query for mobile
+@media screen and (max-width: 767px) {
+  .onboard-tabs {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+  }
+}

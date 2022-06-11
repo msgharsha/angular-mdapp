@@ -1,0 +1,33 @@
+<div class="add-notes-modal" >
+	<div class="info-wrap" >
+		<div class="form-wrap">
+			<!-- <h3 class="form-title">{{ "CLINIC_NAME" | translate }} : {{clinicDetails.clinicName}}</h3> -->
+			<h3 class="form-title">{{ "SELECT_DOCTOR" | translate }}</h3>
+			<div class="row" style="margin-top: 40px;" *ngIf="availableDoctors.length > 0">
+				<div class="col-md-12  medication-col">
+				  <div class="form-group select-wrap">
+					<!-- <label for="profileManager">{{ "AVAILABLE_DOCTORS" | translate }}*</label> -->
+					<select style="width: 100%;" class="form-control"
+					[(ngModel)]="selectedOption">
+					  <option value="" selected disabled>
+						{{ "SELECT" | translate }}
+					  </option>
+					  <option *ngFor="let doctor of availableDoctors" value="{{ doctor?.doctorId }}">
+						{{ doctor?.doctorName | translate }}
+					  </option>
+					</select>
+				  </div>
+				</div>
+			  </div>
+			
+		</div>
+	</div>
+
+	<div class="text-right-element">
+		<div class="action-btn-wrap">
+			<button  type="button" class="btn btn-primary min-width" (click)="selectedDoctor()">
+				{{ "OK" | translate }}
+			</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,60 @@
+<div class="auth-section" style="height: 800px;">
+    <div class="container-fluid">
+        <!-- <div class="Translater_Dropdown">
+            <app-translater></app-translater>
+        </div> -->
+        <div class="row">
+            <div class="col-lg-6">
+                <div>
+                    <a href="#" class="logo"><img src="assets/images/logo.svg" alt="CactusMD" /></a>
+                </div>
+            </div>
+        </div>
+        <h3 class="form-title" *ngIf="clinicData" style="margin-top: 30px; font-weight: bold;">{{ "WELCOME_TO" | translate }} {{clinicData.clinicName}}</h3>
+        <div class="pharmacy-wrap" *ngIf="patientList && patientList.length" style="margin: 35px;padding: 30px;">
+            <div class="row">
+                <div class="col-md-6 col-lg-4 p-r-8">
+                    <p><span style="font-weight: bold;">{{ "NAME" | translate }} </span>: {{ patientName }}</p>
+                </div>
+                <div class="col-md-6 col-lg-4 p-r-8">
+                    <p><span style="font-weight: bold;">{{ "EMAIL" | translate }} </span>: {{ patientList[0].email }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 p-r-8">
+                    <p><span style="font-weight: bold;">{{ "HEALTH_CARD_NUMBER" | translate }} </span> : {{ patientList[0].healthcare_number }}</p>
+                </div>
+                <div class="col-md-6 col-lg-4 p-r-8">
+                    <p><span style="font-weight: bold;">{{ "PHONE_NUMBER" | translate }} </span>: {{ patientList[0].phone }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 p-r-8">
+                    <p><span style="font-weight: bold;">{{ "TYPE" | translate }} </span>: {{ patientList[0].type | translate}}</p>
+                </div>
+            </div>
+
+            <p *ngIf="appointments && appointments.length > 0" style="font-weight: bold;color: #0074a3;font-size: 18px;">{{ "HELLO" | translate }} {{patientName}}, {{
+                "EARLY_APPOINTMENT" | translate }}{{doctorName}} {{"ON" | translate}} {{
+                appointments[0].bookingDetail.startTime | date: 'MMM d, y' }} {{"AT" | translate}} {{
+                appointments[0].bookingDetail.startTime | date: 'h:mm a' }}</p>
+
+                <div class="action-btn-wrap" *ngIf="appointments && appointments.length > 0">
+                    <button type="button" class="btn btn-primary min-width" (click)="startChat()" [disabled]=proceedButtonHide>
+                        {{ "CONFIRM_PRESENCE" | translate }}
+                    </button><span *ngIf="proceedButtonHide" style="padding-left: 10px;">({{"CONFIRM_PRESENCE_MSG1" | translate}})</span>
+                </div>
+                <hr>
+                <p style="font-size: 16px;">{{ "PROCEED_FURTHER" | translate }} <a style="color: blue;text-decoration: underline;" (click)="bookAppointment(patientList[0])">{{"CLICK_HERE" | translate}}</a> </p>
+            <!-- <p *ngIf="appointments && appointments.length > 0" style="font-weight: bold;font-size: 16px;">{{ "PROCEED_FURTHER" | translate }} <a style="color: blue;text-decoration: underline;" (click)="bookAppointment(patientList[0])">{{"CLICK_HERE" | translate}}</a> </p>
+            <div class="text-right-element">
+                <div class="action-btn-wrap" *ngIf="appointments && appointments.length == 0">
+                    <button type="button" class="btn btn-primary min-width" (click)="bookAppointment(patientList[0])" >
+                        {{ "BOOK_APPOINTMENT" | translate }}
+                    </button>
+                </div>
+            </div> -->
+        </div>
+
+    </div>
+</div>

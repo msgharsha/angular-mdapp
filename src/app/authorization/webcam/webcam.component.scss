@@ -1,0 +1,39 @@
+@import "../../../styles.scss";
+@import "../../../assets/sass/auth";
+
+.actionBtn {
+  margin-top: 5px;
+  margin-bottom: 2px;
+  font-size: 1.2em;
+}
+
+.snapshot {
+  text-align: center;
+  img {
+    max-width: 800px;
+    max-height: 800px;
+  }
+}
+
+ul.links {
+  padding-bottom: 20px;
+}
+
+.Translater_Dropdown {
+  float: right;
+  position: absolute;
+  right: 30px;
+  z-index: 9;
+  margin-top: 20px;
+  #navbarlanguage {
+    button {
+      color: $light-blue1;
+      font-size: $font-body;
+      font-weight: $font-semi-bold;
+    }
+  }
+}
+
+.auth-container .auth-card .no-pointer {
+  cursor: auto;
+}

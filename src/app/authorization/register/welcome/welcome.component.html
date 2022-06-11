@@ -1,0 +1,74 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <section class="welcome-container">
+        <div class="welcome-wrapper">
+          <div class="heading-wrapper">
+            <div class="text-center">
+              <span class="custom-message-1">{{
+                "THANK_YOU" | translate
+              }}</span>
+              <span class="custom-message-2">
+                {{ "FOR_SIGNING_UP" | translate }}!</span
+              >
+            </div>
+
+            <div class="text-center">
+              <span class="custom-message-2">
+                {{ "WELCOME" | translate }}! {{ "TO" | translate }}
+              </span>
+              <span class="logo-text">{{ "XYZ" | translate }}</span>
+            </div>
+          </div>
+
+          <!-- Container div starts -->
+          <div class="pd-t-40">
+            <!-- Row div starts -->
+            <div class="">
+              <div class="">
+                <div class="box-wrapper">
+                  <!-- Image div starts -->
+                  <div class="img-div">
+                    <!-- Wrapper div starts -->
+
+                    <!-- Wrapper div ends -->
+                  </div>
+                  <!-- Image div ends -->
+
+                  <!-- Heading div starts -->
+                  <div class="heading-div">
+                    {{ "EMAIL_VERIFICATION_PENDING" | translate }}
+                  </div>
+                  <!-- Heading div ends -->
+
+                  <div class="content-div">
+                    {{
+                      "VERIFCATION_LINK_SENT_OR_CONTINUE_AS_GUEST" | translate
+                    }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Row div ends -->
+
+            <div class="guest-div-wrapper pd-t-40">
+              <div class="row">
+                <div class="guest-button-wrapper">
+                  <button
+                    id="btn_continue_guest"
+                    class="btn btn-primary"
+                    routerLink="/home/"
+                  >
+                    <span>{{ "CONTINUE_AS_GUEST_USER" | translate }}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Container div ends -->
+    </div>
+  </div>
+</div>

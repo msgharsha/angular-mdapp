@@ -1,0 +1,38 @@
+
+  <div class="auth-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+                <div>
+                    <a href="#" class="logo"><img src="assets/images/logo.svg" alt="CactusMD" /></a>
+                </div>
+            </div>
+        </div>
+        <!-- style="min-height: calc(100vh - 76px);align-items: center;" -->
+        <div class="row mt-5" >
+            <div class="col-lg-12">
+                <div style="text-align:center" >
+                    <div>
+                        <form [formGroup]="form" (submit)="submit()">
+                            <div class="sig-container" #sigContainer1>
+                              <div fxLayout="row">
+                                <signature-field formControlName="signatureField1"></signature-field>
+                              </div>
+                            </div>
+                            <div style="font-weight: bold;">{{ "PLEASE_SIGN_WITHIN_BOX" | translate}}</div>
+                            <div fxLayout="row" *ngIf="!submitsuccess">
+                                <button type="button" (click)="clear()" [disabled]="!form.controls.signatureField1.valid" class="btn btn-primary mr-3">{{ "CLEAR" | translate }}</button>
+                                <button type="submit" [disabled]="!form.valid" class="btn btn-primary">{{ "SUBMIT" | translate }}</button>
+                            </div>
+                            <p style="text-align: center;font-weight: bold;" *ngIf="submitsuccess">
+                                {{ "SUBMIT_TEXT" | translate }}
+                            </p>
+                          </form>
+                    </div>
+                  
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

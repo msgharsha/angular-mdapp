@@ -1,0 +1,83 @@
+<div class="dcp-left-wrapper dcp-right-wrapper">
+  <div *ngIf="expert" class="dcp-heading-wrapper mb0">
+    <div class="dcp-heading mb0">
+      {{ "DOCTOR_DETAILS" | translate }}
+      <a
+        class="mb0 view-profile-link"
+        id="href_dentist_profile"
+        (click)="navigateToDentist(expert.id, procedureId)"
+      >
+        {{ "VIEW_PROFILE" | translate }}</a
+      >
+    </div>
+  </div>
+  <div
+    *ngIf="expert"
+    class="dcp-left-heading"
+    [ngStyle]="{
+      'background-image':
+        'url(' +
+        (expert.coverImage
+          ? expert.coverImage[0]
+          : '/assets/images/profile-img.png') +
+        ')'
+    }"
+  >
+    <div class="dcp-avtar-text-wrapper">
+      <div class="dcp-avtar">
+        <img
+          [src]="expert.profileImage"
+          #img
+          (error)="img.src = '/assets/images/profileImg.png'"
+          class="img-responsive no-pointer"
+          alt=""
+          id="dentist_profile_image"
+        />
+      </div>
+      <div class="dcp-text">
+        <p class="dcp-subHeading">{{ expert.salutation }} {{ expert.name }}</p>
+        <p class="dcp-subText">
+          <span class="text">{{ expert.speciality }}</span>
+        </p>
+      </div>
+    </div>
+    <div class="avtar-overlay"></div>
+  </div>
+  <div class="dcp-left-body">
+    <div class="map-area" id="map_area"></div>
+
+    <div class="address-area">
+      <div *ngIf="address" class="row mb-24 ml-0">
+        <div class="list-heading">{{ "ADDRESS" | translate }}</div>
+        <div class="cl-text">
+          {{ address?.address?.addressDetail?.streetAddress }}
+        </div>
+        <div class="cl-text">
+          {{ address?.address?.addressDetail?.city }}
+          {{ address?.address?.addressDetail?.country }}
+          {{ address?.address?.addressDetail?.zipcode }}
+        </div>
+        <div class="parking-available">
+          {{
+            address?.isParkingAvailable
+              ? "Parking Available"
+              : "Parking Not Available"
+          }}
+        </div>
+      </div>
+      <div *ngIf="expert" class="row ml-0">
+        <div class="list-heading">{{ "PHONE" | translate }}</div>
+        <div class="cl-text">{{ expert.phone }}</div>
+      </div>
+    </div>
+    <div *ngIf="showButton">
+      <button
+        (click)="navigateToDentist(expert.id, procedureId)"
+        id="book_appointment_btn"
+        class="btn btn-secondary btn-block"
+      >
+        {{ "BOOK_ANOTHER_APPOINTMENT" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

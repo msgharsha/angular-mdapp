@@ -1,0 +1,236 @@
+<div class="auth-section">
+  <div class="container-fluid">
+    <div class="Translater_Dropdown">
+      <app-translater></app-translater>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div>
+          <a href="#" class="logo"
+            ><img src="assets/images/logo.svg" alt="CactusMD"
+          /></a>
+        </div>
+        <img
+          src="assets/images/signin-icons/signup-image.svg"
+          class="auth-img signup-img"
+          alt="signup image"
+        />
+      </div>
+      <div class="col-lg-6">
+        <section class="auth-container">
+          <div class="auth-card">
+            <div
+              *ngIf="showLinkSentMessage"
+              (click)="backNavigate()"
+              class="col-lg-12 start_text"
+            >
+              <img
+                src="assets/images/signin-icons/arrow-chevron-left.svg"
+                height="20px"
+                width="20px"
+                alt="back-arrow"
+              />
+              <span>{{ "BACK" | translate }}</span>
+            </div>
+            <div
+              *ngIf="!showLinkSentMessage"
+              class="col-lg-12 start_text no-pointer"
+            >
+              {{ "SIGN_UP" | translate }}
+            </div>
+            <div class="col-lg-12 page_title">
+              <h2>{{ "WELCOME_TO_CACTUSMD" | translate }}</h2>
+            </div>
+            <div class="auth-wrapper">
+              <form
+                [formGroup]="registerForm"
+                (ngSubmit)="saveForm()"
+                (keyup.enter)="saveForm()"
+                *ngIf="!showLinkSentMessage; else linkShowMessage"
+              >
+                <div class="form-group">
+                  <div class="form-control">
+                    <input
+                      type="email"
+                      formControlName="email"
+                      id="txtf_email_patient"
+                      placeholder="{{ 'EMAIL' | translate }}*"
+                    />
+                    <span
+                      *ngIf="!registerForm.controls.email.value"
+                      class="icon email"
+                    ></span>
+                    <span
+                      *ngIf="registerForm.controls.email.value"
+                      class="icon email-selected"
+                    ></span>
+                  </div>
+                  <div *ngIf="hasError('required', 'email')" class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                  <div
+                    *ngIf="
+                      hasError('pattern', 'email') &&
+                      !hasError('required', 'email')
+                    "
+                    class="validation"
+                  >
+                    {{ "INVALID_EMAIL" | translate }}
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-control">
+                    <input
+                      [type]="passwordType"
+                      formControlName="password"
+                      id="txtf_password_patient"
+                      placeholder="{{ 'PASSWORD' | translate }}*"
+                    />
+                    <span
+                      *ngIf="!registerForm.controls.password.value"
+                      class="icon password"
+                    ></span>
+                    <span
+                      *ngIf="
+                        registerForm.controls.password.value &&
+                        passwordType == 'text'
+                      "
+                      class="icon password-hide"
+                      (click)="showHidePass('password')"
+                    ></span>
+                    <span
+                      *ngIf="
+                        registerForm.controls.password.value &&
+                        passwordType == 'password'
+                      "
+                      class="icon password-selected"
+                      (click)="showHidePass('text')"
+                    ></span>
+                  </div>
+                  <div
+                    *ngIf="hasError('required', 'password')"
+                    class="validation"
+                  >
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                  <div
+                    *ngIf="
+                      !hasError('required', 'password') &&
+                      (hasError('pattern', 'password') ||
+                        hasError('minlength', 'password'))
+                    "
+                    class="validation"
+                  >
+                    {{ "INVALID_PASSWORD" | translate }}
+                  </div>
+                  <div
+                    *ngIf="
+                      registerForm.hasError('required', 'password') ||
+                      registerForm.hasError('pattern', 'password') ||
+                      registerForm.hasError('minlength', 'password')
+                    "
+                    class="password-rules"
+                  >
+                    <div>
+                      <small>
+                        {{ "PASSWORD_SHOULD_CONSIST_OF" | translate }}:-
+                      </small>
+                    </div>
+                    <ol>
+                      <small [ngClass]="{ completed: checkLength }">
+                        <li>{{ "MINIMUM_OF_8_CHARACTERS" | translate }}.</li>
+                      </small>
+                      <small [ngClass]="{ completed: check1SpecialChar }">
+                        <li>{{ "ATLEAST_1_SPECIAL_LETTER" | translate }}</li>
+                      </small>
+                      <small [ngClass]="{ completed: check1Upper }">
+                        <li>{{ "ATLEAST_1_CAPITAL_LETTER" | translate }}</li>
+                      </small>
+                      <small [ngClass]="{ completed: check1Num }">
+                        <li>{{ "ATLEAST_1_NUMBER" | translate }}</li>
+                      </small>
+                    </ol>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="form-control">
+                    <input
+                      [type]="passwordTypeConfirm"
+                      formControlName="confirmPassword"
+                      id="txtf_password_patient"
+                      placeholder="{{ 'CONFIRM_PASSWORD' | translate }}*"
+                    />
+                    <span
+                      *ngIf="!registerForm.controls.confirmPassword.value"
+                      class="icon password"
+                    ></span>
+                    <span
+                      *ngIf="
+                        registerForm.controls.confirmPassword.value &&
+                        passwordTypeConfirm == 'text'
+                      "
+                      class="icon password-hide"
+                      (click)="showHidePassConfirm('password')"
+                    ></span>
+                    <span
+                      *ngIf="
+                        registerForm.controls.confirmPassword.value &&
+                        passwordTypeConfirm == 'password'
+                      "
+                      class="icon password-selected"
+                      (click)="showHidePassConfirm('text')"
+                    ></span>
+                  </div>
+                  <div
+                    *ngIf="hasError('required', 'confirmPassword')"
+                    class="validation"
+                  >
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                  <div
+                    class="validation"
+                    *ngIf="
+                      formSubmitted &&
+                      !hasError('required', 'confirmPassword') &&
+                        registerForm.errors?.match
+                    "
+                  >
+                    {{ "PASSWORDS_DO_NOT_MATCH" | translate }}
+                  </div>
+                </div>
+
+                <div class="form-group mt-40">
+                  <button
+                    type="button"
+                    id="btn_login_patient"
+                    (click)="saveForm()"
+                    class="btn btn-primary btn-block"
+                  >
+                    {{ "SIGN_UP" | translate }}
+                  </button>
+                </div>
+
+                <div class="auth-here text-center">
+                  {{ "ALREADY_HAVE_AN_ACCOUNT" | translate }}?
+                  <span
+                    routerLink="/auth/login"
+                    class="auth-up"
+                    id="href_patient_signup"
+                    >{{ "SIGN_IN" | translate }}
+                  </span>
+                </div>
+              </form>
+              <ng-template #linkShowMessage>
+                <div>
+                  {{ linkSentMessage | translate }}
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

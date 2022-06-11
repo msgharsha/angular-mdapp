@@ -1,0 +1,205 @@
+@import "../../../../assets/sass/variable";
+
+.form-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #012e40;
+}
+
+.grid-card {
+  border-radius: 4px;
+  border: solid 1px #f7f8f9;
+  background-color: #ffffff;
+  margin-bottom: 24px;
+  overflow: auto;
+  .grid-head {
+    font-size: 14px;
+    font-weight: 600;
+    color: #67818c;
+    font-style: italic;
+    padding: 10px 24px;
+    border-radius: 4px 4px 0 0;
+    background-color: #f7f8f9;
+    min-width: 500px;
+  }
+  .grid-content {
+    padding: 24px;
+    min-width: 500px;
+    .row {
+      & + .row {
+        margin-top: 24px;
+      }
+    }
+  }
+  .text-box {
+    font-size: 14px;
+    font-weight: 600;
+    color: #012e40;
+    padding: 10px 20px;
+    min-height: 40px;
+    border-radius: 4px;
+    background-color: #f7f8f9;
+  }
+}
+
+.text-label {
+  font-size: 12px;
+  font-weight: $font-semibold;
+  color: #345766;
+  margin-bottom: 5px;
+}
+.text-value {
+  font-size: 14px;
+  font-weight: $font-semibold;
+  color: #012e40;
+}
+
+.circle-check {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  cursor: pointer;
+  background: url("/assets/images/circle-check.svg") no-repeat center;
+  background-size: cover;
+}
+.edit-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: url("/assets/images/edit.svg") no-repeat center center;
+  cursor: pointer;
+}
+.delete-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: url("/assets/images/trash-icon.svg") no-repeat center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.action-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .action-icon {
+    & + .action-icon {
+      margin-left: 8px;
+    }
+  }
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #f7f8f9;
+  border-color: #f7f8f9;
+  opacity: 1;
+}
+
+.billing_chk_box {
+  font-size: 12px;
+  color: $deep-blue;
+  text-transform: none;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.add-notes-modal {
+  padding: 24px;
+}
+
+// media query for mobile
+@media screen and (max-width: 767px) {
+  .action-btn-wrap {
+    button {
+      width: 100%;
+      margin-left: 0;
+      margin-bottom: 16px;
+    }
+  }
+  .add-notes-modal {
+    width: 100%;
+    padding: 24px;
+  }
+}
+
+
+table {
+  thead {
+    color: $white-color;
+    height: 40px;
+    tr {
+      background: $light-blue2;
+      th {
+        border-bottom: none;
+        font-weight: $font-bold;
+        &:first-child {
+          border-top-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+          padding-left: 26px;
+        }
+        &:last-child {
+          border-top-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+        }
+      }
+      & + tr {
+        background: transparent;
+      }
+    }
+  }
+  tbody {
+    tr {
+      &:nth-child(odd) {
+        background: rgba(247, 247, 247, 0.6);
+      }
+      &:nth-child(even) {
+        background: $white-bg;
+      }
+      td {
+        border-top: none !important;
+        color: $light-gray4;
+        font-size: $font-body;
+        word-break: break-word;
+        vertical-align: middle;
+        &:first-child {
+          padding-left: 26px;
+        }
+        .edit {
+          background: url("/assets/images/edit-edit.png");
+          width: 20px;
+          height: 20px;
+          display: inline-block;
+          margin-right: 6px;
+          cursor: pointer;
+        }
+        .delete {
+          background: url("/assets/images/basic-trash-empty.png");
+          width: 20px;
+          height: 20px;
+          display: inline-block;
+          cursor: pointer;
+        }
+        .view-btn {
+          font-size: 12px;
+          font-weight: 600;
+          color: $light-blue2;
+          padding: 4px 12px;
+          background-color: $white-bg;
+          border: 1px solid $light-blue2;
+          border-radius: 2px;
+        }
+      }
+    }
+  }
+}
+.my_class{
+  pointer-events: none;
+  opacity: 0.7;
+}
+.disable_class{
+  pointer-events: none;
+  opacity: 0.8;
+}

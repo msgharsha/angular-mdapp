@@ -1,0 +1,115 @@
+@import "../../../../styles.scss";
+@mixin responsive-row-content-wrapper($width) {
+  padding-top: 40px;
+  .row {
+    text-align: center;
+    .row-content-wrapper {
+      width: $width;
+      color: $secondary-grey;
+      display: inline-block;
+    }
+  }
+}
+
+.last-content-wrapper {
+  @include responsive-row-content-wrapper(613px);
+}
+
+@media screen and (max-width: 768px) {
+  .last-content-wrapper {
+    @include responsive-row-content-wrapper(inherit);
+  }
+}
+
+.text-center {
+  font-size: $font-xl;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: $secondary-grey;
+  .custom-message-2 {
+    font-weight: $font-light;
+  }
+  .logo-text {
+    color: $primary-green;
+    font-weight: bold;
+  }
+}
+
+.box-wrapper {
+  border-radius: 2px;
+  padding: 10px 19px 30px 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  text-align: center;
+  letter-spacing: normal;
+  .img-div {
+    text-align: center;
+    min-height: 75px;
+    background-image: url("/assets/images/email-pending.png");
+    background-repeat: no-repeat;
+    background-position: 50%;
+  }
+  .content-div {
+    font-size: $font-body;
+    color: $secondary-grey;
+  }
+  .heading-div {
+    padding-top: 30px;
+    font-weight: bold;
+    font-size: 18px;
+    color: $secondary-grey;
+  }
+  .img-wrapper {
+    display: inline-block;
+    .img-bg {
+      background-image: url("/assets/images/Sprite.png");
+      width: 56px;
+      height: 56px;
+      &.image-1 {
+        background-position: -67px -259px;
+      }
+      &.image-2 {
+        background-position: -79px -323px;
+      }
+      &.image-3 {
+        background-position: -79px -382px;
+      }
+    }
+  }
+}
+
+.pd-t-40 {
+  padding-top: 40px;
+}
+
+.welcome-container {
+  padding: 40px 0;
+  .welcome-wrapper {
+    max-width: 523px;
+    margin: 0 auto;
+    background: $white-color;
+    padding: 32px 40px;
+    @include border-radius(4px);
+    .heading-wrapper {
+      padding-top: 20px;
+    }
+    h5 {
+      font-weight: $font-bold;
+      margin-top: 0;
+      margin-bottom: 32px;
+    }
+    .guest-div-wrapper {
+      text-align: center;
+      padding-bottom: 45px;
+      button {
+        width: 370px;
+      }
+    }
+  }
+}

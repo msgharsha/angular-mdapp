@@ -1,0 +1,24 @@
+@import "../../../../styles.scss";
+@import "../../../../assets/sass/auth";
+.Translater_Dropdown {
+  float: right;
+  position: absolute;
+  right: 30px;
+  z-index: 9;
+  margin-top: 20px;
+  #navbarlanguage {
+    button {
+      color: $light-blue1;
+      font-size: $font-body;
+      font-weight: $font-semi-bold;
+    }
+  }
+}
+
+.auth-container .auth-card .no-pointer {
+  cursor: auto;
+}
+
+.completed {
+  color: green;
+}

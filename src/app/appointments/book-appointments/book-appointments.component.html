@@ -1,0 +1,311 @@
+<div class="showSlots" *ngIf="slotPopupOpen === true && availableSlot">
+  <div class="modal">
+    <div class="slot_modal-content">
+      <div
+        class="time-container"
+        [ngClass]="{ 'no-scroll': !availableSlot?.length }"
+      >
+        <span
+          *ngFor="let slot of availableSlot; let i = index"
+          [id]="'time_slot' + i"
+          class="time-tag"
+          [ngClass]="{
+            'slot-active': appointmentReviewForm.consulationTime == slot.time
+          }"
+          (click)="selectSlot(slot)"
+        >
+          {{ slot.time | date: "h:mm a" }}
+        </span>
+        <div
+          class="slot_modal-content-wrap"
+          *ngIf="!availableSlot?.length && nextAvailableDate"
+        >
+          {{ "DOCTOR_NEXT_AVAILABLE_DATE" | translate }}
+          <b>{{ nextAvailableDate | date: "d/MM/y" }}</b>
+        </div>
+        <div *ngIf="!availableSlot?.length && !nextAvailableDate">
+          {{ "NO_SLOTS_ARE_AVAILABE_FOR_THE_DOCTOR" | translate }}
+        </div>
+      </div>
+      <div class="p-3">
+        <button (click)="closePopup()" class="btn btn-ghost">
+          {{ "CANCEL" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="book-appt-container" *ngIf="appointmentDetail">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="doctor-profile">
+          <img
+            class="doctor-profile-image"
+            [src]="
+              appointmentDetail.doctorInfo?.profileImage ||
+              '/assets/images/profileImg.svg'
+            "
+            alt="doctor_image"
+            #img
+            (error)="img.src = '/assets/images/profileImg.png'"
+          />
+          <h4 class="doctor-profile-title">
+            Dr.{{ appointmentDetail.doctorInfo?.firstName }}
+            {{ appointmentDetail.doctorInfo?.lastName }}
+          </h4>
+          <p class="form-control-static">
+            {{ appointmentDetail["doctorInfo"]?.practiceMethod }}
+          </p>
+          <div class="doctor-profile-procedures">
+            <span
+              class="doctor-profile-procedures"
+              *ngFor="let specialty of doctorSpecialities; let i = index"
+              class="text"
+              >{{ specialty.specialityName }}
+              <span *ngIf="i != doctorSpecialities.length - 1">| </span>
+            </span>
+          </div>
+          <div class="doctor-profile-location">
+            <img
+              class="location-image"
+              src="../../../assets/images/basic-location.svg"
+              alt="location"
+            />
+            <div>
+              <span
+                >{{ appointmentDetail.doctorInfo?.addressLine1 }},
+                {{ appointmentDetail.doctorInfo?.city }},
+                {{ appointmentDetail.doctorInfo?.province }}</span
+              >
+            </div>
+          </div>
+          <div class="location-map">
+            <img src="assets/images/address-map.png" alt="map" />
+          </div>
+          <div class="map-wrapper">
+            <img
+              src="../assets/images/map.png"
+              alt=""
+              *ngIf="!appointmentDetail.doctorInfo?.lat; else map"
+            />
+            <ng-template #map>
+              <app-map [dentistList]="[appointmentDetail.doctorInfo]"></app-map>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8 info-wrap">
+        <div class="book-appt-form" [formGroup]="appointmentReviewForm">
+          <div>
+            <h3 class="form-title">{{ "REVIEW_AND_BOOK" | translate }}</h3>
+          </div>
+
+          <span *ngIf="!isBookingConditionsHold" class="validationMsg">
+            {{ notBookingMsg | translate }}
+          </span>
+
+          <div class="form-group">
+            <label for=""
+              >{{ "WHO_WILL_BE_SEEING_THE_DOCTOR" | translate }}?*</label
+            >
+            <select class="form-control" formControlName="appointmentIsFor" (change)="familyMemberChange()">
+              <option
+                *ngFor="let member of familyDetail"
+                value="{{
+                  member?.memberId ? member.memberId : member.patientId
+                }}"
+              >
+                {{ member?.patientName }}
+              </option>
+            </select>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <app-date-picker
+                  [label]="'CONSULTATION_DATE'"
+                  [fieldsRequired]="true"
+                  [formSubmitted]="this.onSubmit"
+                  [formControlName]="'consulationDate'"
+                  [minDate]="minDate"
+                  [placeholder]="'DATE'"
+                ></app-date-picker>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="">{{ "CONSULTATION_TIME" | translate }}*</label>
+                <!-- <input id="" type="text" class="form-control time-input"  ControlName="consolidationTime" (click)="showSlots()"  placeholder="{{ 'ENTER_HERE' | translate }}"> -->
+                <div
+                  class="form-control time-input" style="border: solid 1px rgba(103, 129, 140, 0.2);"
+                  ControlName="consulationTime"
+                  (click)="showSlots()"
+                >
+                  <div *ngIf="timeSlotState == 1">
+                    {{ selectedSlot?.time | date: "h:mm a" }}
+                  </div>
+                  <div *ngIf="timeSlotState == 0">
+                    {{ selectedSlot | date: "h:mm a" }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="">{{ "REASON_FOR_VISIT" | translate }}*</label>
+            <input
+              id=""
+              type="text"
+              class="form-control"
+              formControlName="reasonToVisit"
+              placeholder="{{ 'ENTER_HERE' | translate }}"
+            />
+            <div
+              *ngIf="hasError('required', 'reasonToVisit')"
+              class="validationMsg"
+            >
+              {{ "REQUIRED" | translate }}*
+            </div>
+          </div>
+
+        <div class="form-group">
+          <label for="">{{ "APPOINTMENT_TYPE" | translate }}</label>
+          <p class="form-control-static" *ngIf = "appointmentDetail.appointmentType == 1">
+            {{ "VIRTUAL" | translate }}
+          </p>
+          <p class="form-control-static" *ngIf = "appointmentDetail.appointmentType == 2">
+            {{ "INOFFICE" | translate }}
+          </p>
+        </div>
+          <div class="form-group" *ngIf="familyDetail && !familyDetail[0].guest">
+            <label for="">{{ "CONSULTATION_TYPE" | translate }}</label>
+            <p class="form-control-static" *ngIf = "radioConsType != 'Private/Public'">
+              {{ appointmentDetail?.consultation?.toUpperCase() | translate }}
+            </p>
+            <p class="form-control-static" *ngIf = "radioConsType == 'Private/Public'">
+              {{ radioConsType?.toUpperCase() | translate }}
+            </p>
+          </div>
+          <div class="form-group" *ngIf="familyDetail && familyDetail[0].guest">
+            <label for="">{{ "CONSULTATION_TYPE" | translate }}</label>
+            <p class="form-control-static">
+              {{ "PUBLIC" | translate }}
+            </p>
+            
+          </div>
+
+          <div class="form-group radiobutton-option" *ngIf = "radioConsType == 'Private/Public' || radioConsType == 'privé/public'">
+            <radio-btn *ngIf="familyDetail && !familyDetail[0].guest"
+              [checked]="appointmentReviewForm.get('consType').value"
+              [labelArr]="[CONSTYPE.YES.LABEL, CONSTYPE.NO.LABEL]"
+              (click)="handleChange(appointmentReviewForm.get('consType').value)"
+              formControlName="consType"
+            ></radio-btn>
+            <radio-btn *ngIf="familyDetail && familyDetail[0].guest"
+              [checked]="appointmentReviewForm.get('consType').value"
+              [labelArr]="[CONSTYPE.YES.LABEL]"
+              (click)="handleChange(appointmentReviewForm.get('consType').value)"
+              formControlName="consType"
+            ></radio-btn>
+            <div
+              *ngIf="hasError('required', 'consType')"
+              class="validationMsg"
+            >
+              {{ "REQUIRED" | translate }}*
+            </div>
+          </div>
+
+          <div
+            class="form-group"
+            *ngIf="
+              appointmentDetail.consultation == 'Private' ||
+              appointmentDetail.consultation == 'Privé'
+            "
+          >
+            <label for="">{{ "SELECT_SERVICE_TYPE" | translate }}*</label>
+            <ng-multiselect-dropdown
+              class="form-control-multiselect"
+              formControlName="serviceType"
+              [placeholder]="'SELECT_HERE' | translate"
+              [settings]="dropdownSettings"
+              [data]="this.appointmentDetail.services"
+              [(ngModel)]="services"
+            >
+            </ng-multiselect-dropdown>
+            <div
+              *ngIf="hasError('required', 'serviceType')"
+              class="validationMsg"
+            >
+              {{ "REQUIRED" | translate }}*
+            </div>
+          </div>
+
+          <div class="form-group radiobutton-option">
+            <label for=""
+              >{{ "HAVE_YOU_SEEN" | translate }} Dr.
+              {{ appointmentDetail.doctorInfo?.firstName }}
+              {{ appointmentDetail.doctorInfo?.lastName }}
+              {{ "BEFORE" | translate }}?*</label
+            >
+            <radio-btn
+              [checked]="appointmentReviewForm.get('seenBefore').value"
+              [labelArr]="[OPTION.YES.LABEL, OPTION.NO.LABEL]"
+              formControlName="seenBefore"
+            ></radio-btn>
+          </div>
+
+          <div class="form-group">
+            <label for="">{{ "NOTES_FOR_THE_DOCTOR" | translate }}</label>
+            <textarea
+              id=""
+              class="form-control"
+              formControlName="officeNotes"
+              placeholder="{{ 'TYPE_HERE' | translate }}"
+              rows="4"
+            ></textarea>
+          </div>
+          <div class="form-group custom__body">
+            <label class="custom-checkbox">
+              <input type="checkbox" formControlName="termsAndConditions" />
+              <span class="checkmark"></span>
+            </label>
+            <span class="policy_text">
+              {{ "I_HAVE_READ_AND_ACCEPT_CACTUSMD" | translate }}
+              <a class="text-blue" (click)="getTermsCondition()">
+                {{ "CANCELLATION_POLICY" | translate }}.
+              </a>
+            </span>
+            <div
+              *ngIf="hasError('required', 'termsAndConditions')"
+              class="validationMsg"
+            >
+              {{ "REQUIRED" | translate }}*
+            </div>
+          </div>
+
+          <div class="form-btn">
+            <button
+              type="submit"
+              class="btn btn-primary btn-block"
+              (click)="saveForm()"
+              [disabled]="
+                !appointmentReviewForm.get('termsAndConditions').value
+              "
+            >
+              {{ "BOOK_AN_APPOINTMENT" | translate }}
+            </button>
+          </div>
+          <div class="text-center secure-booking">
+            <img src="assets/images/secure-booking.png" width="20" alt="map" />
+            <span>{{ "SECURE_BOOKING" | translate }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

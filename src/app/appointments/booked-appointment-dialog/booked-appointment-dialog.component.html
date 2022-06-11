@@ -1,0 +1,36 @@
+<div class="dialog-wrapper">
+  <!-- img would be shouwn -->
+  <div class="dialogue-content">
+    <div class="book-modal-content">
+      <div>
+        <img
+          src="./assets/images/booked_appointment.png"
+          alt="booked appointment"
+          width="320"
+        />
+      </div>
+      <div class="book-modal-text">
+        <div class="close-btn">
+          <span (click)="confirm()"
+            ><img src="./assets/images/off_outline_close.svg" alt="close"
+          /></span>
+        </div>
+        <h4>
+          {{ details.patient.patientName }} {{ "You_are_Booked" | translate }}
+        </h4>
+
+        <p>
+          {{ "You_are_Schdeuled_with" | translate }}
+          <span class="blue"
+            >Dr. {{ details.doctor.firstName }}
+            {{ details.doctor.lastName }}</span
+          >
+          <span> {{ "ON" | translate }} </span>
+          <span class="blue">{{
+            getDate(details.bookingDetail.startTime)
+          }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
