@@ -1,0 +1,185 @@
+<section class="card-wrap">
+  <!-- <div class="info-wrap filter-with-label">
+    <label class="filter-label">{{ "CLAIMS" | translate }}</label>
+  </div> -->
+  <div style="color: red; font-weight: bold;padding-bottom: 10px;">{{ "MISSING_CLAIMS_MSG" | translate }}</div>
+
+  <div class="row" id="payment_step3">
+     <div class="col-10">
+      <div class="mb-2">
+        <button type="button" (click)="filterHealthCards('all')" [ngClass]="activeItem === 'all' ? '' : 'disabled'"  class="btn btn-primary mr-2">{{ 'BILLING_MODULE.ALL' | translate }}</button>
+        <button type="button" (click)="filterHealthCards('draft')" [ngClass]="activeItem === 'draft' ? '' : 'disabled'" class="btn btn-primary mr-2">{{ 'BILLING_MODULE.DRAFT' | translate }}</button>
+        <button type="button" (click)="filterHealthCards('returned')" [ngClass]="activeItem === 'returned' ? '' : 'disabled'" class="btn btn-primary mr-2">{{ 'BILLING_MODULE.RETURNED' | translate }}</button>
+        <button type="button" (click)="filterHealthCards('submitted')" [ngClass]="activeItem === 'submitted' ? '' : 'disabled'" class="btn btn-primary mr-2">{{ 'BILLING_MODULE.SUBMITTED' | translate }}</button>
+        <button type="button" (click)="filterHealthCards('re-submitted')" [ngClass]="activeItem === 're-submitted' ? '' : 'disabled'" class="btn btn-primary mr-2">{{ 'BILLING_MODULE.RE-SUBMITTED' | translate }}</button>
+        <button type="button" (click)="filterHealthCards('cancelled')" [ngClass]="activeItem === 'cancelled' ? '' : 'disabled'" class="btn btn-primary">{{ 'BILLING_MODULE.CANCEL' | translate }}</button>
+      </div>
+     </div>
+     
+  </div>
+  <div class="row justify-content-between">
+    <!-- first name starts here -->
+    <div class="col-md-3">
+      <div class="form-group mb-1">
+          <label for="date">Search</label>
+        <input
+          id="patient_name"
+          type="text"
+          class="form-control search-border"
+          (keyup)="doFilter($event.target.value)"
+          placeholder="Enter Search"
+        />
+      </div>
+    </div>
+    <div class="col-4" id="payment_step4">
+        <label for="date">Select Date</label>
+
+        <div class="input-group " daterangepicker [options]="picker1" (selected)="selectedDate($event, chosenDate)"
+          (applyDaterangepicker)="applyDatepicker($event)" (showDaterangepicker)="calendarEventsHandler($event)">
+          <span class="form-control search-border uneditable-input" name="daterange">
+            {{ chosenDate.startDate | date:'mediumDate' }} - {{ chosenDate.endDate| date:'mediumDate' }}
+          </span>
+          <span class="input-group-btn">
+            <a type="button" class="btn btn-default"><fa-icon [icon]="fontIcons[7]" style="color: #a0a0a0;"></fa-icon></a>
+          </span>
+        </div>
+     </div>
+    </div>
+    <div class="text-right" >
+        <button class="btn bg-white" style="color: #1a8ccd;" (click)="downLoadClaimsCSVFile()" id="payment_step5">
+            <fa-icon [icon]="fontIcons[6]"></fa-icon>
+          </button>
+    </div>
+  <table mat-table 
+  [dataSource]="dataSource" multiTemplateDataRows
+  class="mat-elevation-z8 claim-details-table">
+
+<ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+<ng-container *ngIf="column !== 'expandaction'; else action">
+  <ng-container *ngIf="column === 'healthcardNumber'">
+    <th mat-header-cell *matHeaderCellDef> {{ 'HEALTH_CARD_NUMBER' | translate }} </th>
+    <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+  </ng-container>
+  <ng-container *ngIf="column === 'claimNumber'">
+    <th mat-header-cell *matHeaderCellDef> {{ 'BILLING_MODULE.CLAIM_NUMBER' | translate }} </th>
+    <td mat-cell *matCellDef="let element"> {{element?.claim_info?.claimObject?.no_fact_ramq}} </td>
+  </ng-container>
+  <ng-container *ngIf="column === 'patientName'">
+    <th mat-header-cell *matHeaderCellDef> {{ 'PATIENT_NAME' | translate }} </th>
+    <td mat-cell *matCellDef="let element"> {{element[column] | titlecase}} </td>
+  </ng-container>
+  <ng-container *ngIf="column === 'user_type'">
+    <th mat-header-cell *matHeaderCellDef> {{ 'SPECIALITY_TYPE' | translate }} </th>
+    <td mat-cell *matCellDef="let element"> <span *ngIf="element[column] === 'general'">Family Physician</span>
+      <span *ngIf="element[column] === 'speciality'">Specialist</span>
+    </td>
+  </ng-container>
+  <ng-container *ngIf="column === 'createdAt'">
+    <th mat-header-cell *matHeaderCellDef> {{ 'CREATE_DATE' | translate }} </th>
+    <td mat-cell *matCellDef="let element"> {{element[column] | date: 'dd-MM-yyyy hh:mm a'}} </td>
+  </ng-container>
+  <ng-container *ngIf="column === 'updatedAt'">
+    <th mat-header-cell *matHeaderCellDef> {{ 'UPDATE_DATE' | translate}} </th>
+    <td mat-cell *matCellDef="let element"> {{element[column] | date: 'dd-MM-yyyy hh:mm a'}} </td>
+  </ng-container>
+  <ng-container *ngIf="column === 'status'">
+    <th mat-header-cell *matHeaderCellDef> {{ 'BILLING_MODULE.STATUS' | translate }} </th>
+    <td mat-cell *matCellDef="let element">  
+      <span style="color: #e53935;" *ngIf="element[column] === 'cancelled'">{{element[column] | titlecase}}</span>
+      <span style="color:green;" *ngIf="element[column] === 'submitted'">{{element[column] | titlecase}}</span>
+      <span style="color:green;" *ngIf="element[column] === 're-submitted'">{{element[column] | titlecase}}</span>
+      <span style="color:#8abd38;" *ngIf="element[column] === 'returned'">{{element[column] | titlecase}}</span>
+      <span style="color:#1a8ccd;" *ngIf="element[column] === 'draft'">{{element[column] | titlecase}}</span>
+    </td>
+  </ng-container>
+  <ng-container *ngIf="column === 'actions'">
+    <th mat-header-cell *matHeaderCellDef> {{ 'BILLING_MODULE.ACTIONS' | translate }} </th>
+    <td mat-cell *matCellDef="let element"> 
+        <button class="btn bg-white" style="color: #1a8ccd;" *ngIf="element.status !== 'draft'" (click)="downLoadClaim(element)" >
+          <fa-icon [icon]="fontIcons[5]"></fa-icon>
+        </button>
+        <button class="btn bg-white" style="color: #8abd38;" *ngIf="element.status !== 'cancelled'" (click)="editClaimInfo(element)" >
+          <fa-icon [icon]="fontIcons[3]"></fa-icon>
+        </button>
+        <button class="btn bg-white" style="color: #e53935;" *ngIf="element.status ==='submitted'" (click)="cancelClaimInfo(element)" >
+          <fa-icon [icon]="fontIcons[4]"></fa-icon>
+        </button>
+    </td>
+  </ng-container>
+</ng-container>
+<ng-template #action>
+ <th mat-header-cell *matHeaderCellDef>  </th>
+ <td mat-cell *matCellDef="let element">
+   <mat-icon
+   (click)="expandedElement = expandedElement === element ? null : element">{{expandedElement === element ? 'expand_less' : 'expand_more'}}</mat-icon>
+ </td>
+</ng-template>
+</ng-container>
+
+<!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+<ng-container matColumnDef="expandedDetail">
+<td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+ <div class="example-element-detail"
+      [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+      <div class="tableFixHead">
+        <div class="pharmacy-wrap">
+            <div class="pharmacy-table">
+              <table class="table table-bordered" aria-describedby="table">
+                <thead>
+                  <tr>
+                    <th id="no">No</th>
+                    <th id="code">Code</th>
+                    <th id="date">Date</th>
+                    <th id="stat_time">{{ 'START_TIME' | translate }}</th>
+                    <th id="end_time">{{ 'END_TIME' | translate }}</th>
+                    <th id="balance">{{ 'BALANCE' | translate }}</th>
+                    <th id="status">{{ 'BILLING_MODULE.STATUS' | translate }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let row of element.claimsInfo; let i = index">
+                    <td>{{i + 1}}</td>
+                    <td>{{row.id_elm_fact}}</td>
+                    <td>{{row.dat_serv_elm_fact | date: 'dd-MM-yyyy'}}</td>
+                    <td>{{row.dhd_elm_fact}}</td>
+                    <td>{{row.dhf_elm_fact}}</td>
+                    <td>{{row.mnt_prel ? '$'+row.mnt_prel : ''}}</td>
+                    <td>
+                      <button class="btn" *ngIf="row.status === undefined">
+                        <fa-icon [ngStyle]="{'color':'#1a8ccd'}" [icon]="fontIcons[0]"></fa-icon>
+                      </button>
+                      <button class="btn" placement="top" ngbTooltip="{{row.successMsg}}"
+                        *ngIf="row.status === 'submitted'">
+                        <fa-icon [ngStyle]="{'color':'green'}" [icon]="fontIcons[1]"></fa-icon>
+                      </button>
+                      <button class="btn" placement="top" ngbTooltip="{{row.errMsg}}"
+                        *ngIf="row.status === 'rejected'">
+                        <fa-icon [ngStyle]="{'color':'red'}" [icon]="fontIcons[2]"></fa-icon>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+     </div>
+  </div>
+  </div>
+ </div>
+</td>
+</ng-container>
+
+<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+<tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+ class="example-element-row"
+ [class.example-expanded-row]="expandedElement === element">
+</tr>
+<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+<table style="margin-top: 25px;">
+  <tr *ngIf="dataSource?.data && !dataSource?.data.length">
+    <td style="text-align: center;" [attr.colspan]="columnsToDisplay.length">
+      {{ 'NO_RECORDS_FOUND' | translate }}
+    </td>
+  </tr>
+</table>
+<mat-paginator [pageSizeOptions]="[ 10, 20]" showFirstLastButtons></mat-paginator>
+</section>

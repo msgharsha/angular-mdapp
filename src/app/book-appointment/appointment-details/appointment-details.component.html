@@ -1,0 +1,70 @@
+<div class="appointment-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="">
+        <h3 class="account-heading-main" style="padding-left: 0px;">{{ "SEARCH_FOR_PATIENT" | translate }}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-wrap">
+  <div class="info-wrap filter-with-label">
+    <!-- <label class="filter-label"></label> -->
+    <div>
+      <span class="total-revenue" style="font-weight: bold;">Note : Guest patients are allowed to book only public consultations.</span>
+    </div>
+    <div class="text-right flex-display">
+      <app-filter [list]="filterList"></app-filter>
+    </div>
+  </div>
+<div class="pharmacy-wrap" >
+  <!-- <div class="heading-wrap">
+    <h3>{{ "INVITED_PATIENTS" | translate }}</h3>
+  </div> -->
+  <div class="pharmacy-table">
+    <table class="table" aria-describedby="table">
+      <thead>
+        <tr>
+          <th id="name">{{ "NAME" | translate }}</th>
+          <th id="email">{{ "EMAIL" | translate }}</th>
+          <th id="healthcard">{{ "HEALTH_CARD_NUMBER" | translate }}</th>
+          <th id="phone">{{ "PHONE_NUMBER" | translate }}</th>
+          <th id="phone">{{ "TYPE" | translate }}</th>
+          <th id="invite"></th>
+        </tr>
+        <tr>
+          <td style="height: 10px"></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let patient of patientList | paginate : { itemsPerPage: itemsPerPage,
+                        currentPage: currentPage,
+                        totalItems: patientListCount }" >
+          <td>{{ patient.first_name }}</td>
+          <td >{{ patient.email }}</td>
+          <td >{{ patient.healthcare_number }}</td>
+          <td >{{ patient.phone }}</td>
+          <td >{{ patient.type | translate }}</td>
+          <td><button class="view-button"  (click)="bookAppointment(patient)">
+            {{ "BOOK_APPOINTMENT" | translate }}
+          </button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="!(patientList && patientList.length)" style="padding: 0px 0px 15px 15px;" >
+      {{ "NO_DATA_FOUND" | translate }}
+    </div>
+  </div>
+  <div class="row" *ngIf="patientList && patientList.length">
+    <div class="col-lg-12">
+      <div class="pagination-wrapper">
+        <pagination-controls
+          class="pl-0"
+          (pageChange)="patientPageChangedEvent($event)"
+        ></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

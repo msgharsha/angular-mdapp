@@ -1,0 +1,39 @@
+<div class="Latest-Prescription-div">
+  <div class="Latest-Prescription">
+    {{ "ADD_NEW_DOCUMENT" | translate }}
+    <span class="action-icon" (click)="discardCrntPrescriptionMethod()">{{
+      "DISCARD" | translate
+    }}</span>
+  </div>
+</div>
+<form [formGroup]="prescriptionForm">
+  <div class="title-div">
+    <label for="title" class="title">{{ "TITLE" | translate }}</label>
+    <br />
+    <input type="text" id="title" formControlName="prescriptionTitle" />
+    <div [hidden]="!hasError('required', 'prescriptionTitle')">
+      <span class="validation">*{{ "REQUIRED" | translate }}</span>
+    </div>
+  </div>
+
+  <div class="upload-prescription">
+    <div class="" [hidden]="!hasError('required', 'prescriptionUrl')">
+      <span class="validation">*{{ "REQUIRED" | translate }}</span>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <div>{{ "SUPPORTED_FILE_FORMAT" | translate }}</div>
+    <div>{{ "MAXIMUM_FILE_SIZE_ALLOWED_10_MB" | translate }}</div>
+  </div>
+
+  <div class="status-div">
+    <button
+      class="proceed-btn"
+      [disabled]="isDisableSave"
+      (click)="proceedFurther()"
+    >
+      {{ "PROCEED" | translate }}
+    </button>
+  </div>
+</form>

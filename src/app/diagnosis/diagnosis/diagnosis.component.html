@@ -1,0 +1,32 @@
+<div class="tab-content-card" *ngIf="!isProceed; else prescribeMedicines">
+  <div class="row">
+    <div class="col-lg-6">
+      <p class="card-title">{{ "COMPLAINT_AND_DIAGNOSIS" | translate }}</p>
+      <div class="form-group">
+        <label class="text-label">{{ "PRESENT_COMPLAINTS" | translate }}</label>
+        <textarea
+          class="form-control"
+          rows="4"
+          placeholder="{{ 'ENTER_HERE' | translate }}"
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label class="text-label">{{ "DIAGNOSIS" | translate }}</label>
+        <textarea
+          class="form-control"
+          rows="4"
+          placeholder="{{ 'ENTER_HERE' | translate }}"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="card-button">
+    <button type="button" (click)="save()" class="btn btn-secondary">
+      {{ "PROCEED" | translate }}
+    </button>
+  </div>
+</div>
+
+<ng-template #prescribeMedicines>
+  <prescribe-medicines></prescribe-medicines>
+</ng-template>

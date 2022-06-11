@@ -1,0 +1,540 @@
+<div class="tab-content-card">
+  <div class="profile-info">
+    <div class="profile-heading">
+      <h6 style="color: #345766;
+        font-weight: 600; font-size: 13px;">{{ "BILLING_MODULE.CLAIM_NUMBER" | translate }} : <span
+          style="color: green;">{{claimObject.no_fact_ramq}}</span></h6>
+    </div>
+  </div>
+  <ng-container>
+    <div class="info-wrap">
+      <div class="form-wrap">
+        <form [formGroup]="billingObjectForm">
+        <div class="row">
+          <div class="col-lg-8">
+              <div class="row">
+                <div class="col-md-6 col-lg-4 p-r-8">
+                  <div class="form-group">
+                    <div class="form-group select-wrap">
+                      <label for="">{{ "BILLING_MODULE.LOCATION" | translate }} <fa-icon style="margin-left: 4px;" placement="right" ngbTooltip="{{ 'BILLING_MODULE.DIAGNOSTIC_SEARCH_TEXT' | translate }}" [icon]="fontIcons[6]"></fa-icon></label>
+                      <ng-select placeholder="" formControlName="location_name" (change)="changeLocationInfoType(true);enableUpdateButton();" (search)="getLocationsInfo($event);enableUpdateButton();"
+                        [clearable]="false" labelForId="id">
+                        <ng-option *ngFor="let option of locationsOptions" [value]="option.id">
+                          <div [title]="option.title">
+                            {{option.type === 'geo' ? 'G-' : 'PH-'}}
+                            {{option.nom_local ? option.nom_local : option.nom_etab}} ({{option.cod_local}})
+                          </div>
+                        </ng-option>
+                      </ng-select>
+                      <div
+                      *ngIf="!billingObjectForm.controls['location_name'].valid && billingObjectForm.controls['location_name'].touched"
+                      class="validation">
+                      {{ "REQUIRED" | translate }}
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4 p-r-8">
+                  <div class="form-group">
+                    <div class="form-group select-wrap">
+                      <label for="">{{ "BILLING_MODULE.SECTOR" | translate }} <span *ngIf="optional">({{ 'OPTIONAL' | translate }})</span><span *ngIf="!optional">({{ 'REQUIRED' | translate }})</span></label>
+                      <ng-select placeholder="" (change)="enableUpdateButton();" formControlName="no_sect_activ" [clearable]="true"
+                        labelForId="no_sect_activ">
+                        <ng-option *ngFor="let option of sectorOptions" [value]="option.no_sect_activ">
+                          <div [title]="option.title"> {{option.des_sect_activ}}({{option.no_sect_activ}})</div>
+                        </ng-option>
+                      </ng-select>
+                      <div
+                      *ngIf="billingObjectForm.get('no_sect_activ').invalid && 
+                      billingObjectForm.get('no_sect_activ').errors && 
+                      (billingObjectForm.get('no_sect_activ').dirty || billingObjectForm.get('no_sect_activ').touched)"
+                      class="validation">
+                      {{ "REQUIRED" | translate }}
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4 p-r-8">
+                  <div class="form-group">
+                    <div class="form-group select-wrap">
+                      <label for="">{{ "BILLING_MODULE.VULNERABILITY_TYPE" | translate }}</label>
+                      <ng-select appearance="outline" (change)="changeVulnerabilityType();enableUpdateButton();" [searchable]="false" [clearable]="false" labelForId="heroId"
+                        formControlName="vulnerability_type">
+                        <ng-option value="Non vulnérable">
+                          Non vulnérable
+                        </ng-option>
+                        <ng-option value="Vulnérable">
+                          Vulnérable
+                        </ng-option>
+                      </ng-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 col-lg-4 p-r-8">
+                  <div class="form-group">
+                    <label for="email">{{ "BILLING_MODULE.MEDICAL_NO" | translate }}</label>
+                    <input id="practice_number" placeholder="" (change)="validateHealthCard();enableUpdateButton();" type="text" class="form-control"
+                      formControlName="health_card_num" />
+                    <div
+                      *ngIf="!billingObjectForm.controls['health_card_num'].valid && billingObjectForm.controls['health_card_num'].touched"
+                      class="validation">
+                      {{getErrorMessage()}}
+                    </div>
+                    <div class="validation" style="font-size: 12px;" *ngIf="healthCardErrorRamq">
+                      {{ "NOTE_DR" | translate }} {{userData.firstName}} {{userData.lastName}} {{"RAMQ_ERR_MSG1" | translate}} <a style="color: blue; text-decoration: underline;" (click) = "sendToPractice()">{{"LINK" | translate}}</a> {{"RAMQ_ERR_MSG2" | translate}}
+                    </div>
+                    <span *ngIf="healthCardInfo.length !== 0" style="margin-top: 6px;
+                        float: left;
+                        margin-left: 5px;
+                        margin-bottom: 30px;
+                        /* font-size: 14px; */
+                        color: green;
+                        font-weight: 500;">{{healthCardInfo[0].nom[0]}} {{healthCardInfo[0].pre[0]}}
+                      ({{healthCardInfo[0].dat_naiss[0] | date: 'dd-MMM-yyyy'}}), Verify Date:
+                      {{healthCardInfo[0].dat_verif_admis[0] | date: 'dd-MMM-yyyy'}}</span>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-8 p-r-8">
+                  <div class="form-group">
+                    <label for="email">{{ "BILLING_MODULE.DIAGNOSTIC" | translate }} <fa-icon style="margin-left: 4px;" ngbTooltip="{{ 'BILLING_MODULE.DIAGNOSTIC_SEARCH_TEXT' | translate }}" [icon]="fontIcons[6]"></fa-icon></label>
+                    <div class="d-flex align-items-center">
+                      <div class="pr-2" style="width: calc(100% - 8px);">
+                        <ng-select [multiple]="true" (search)="getDiagnosisInfo($event);enableUpdateButton();"
+                          (add)="getSelectedDiagnosCode($event);enableUpdateButton();" (remove)="removeDiagnoseCode($event, false);enableUpdateButton();"
+                          (clear)="removeDiagnoseCode($event, true);enableUpdateButton();" [loading]="isDiagnoseLoading" [clearable]="true"
+                          labelForId="id" formControlName="diagnosis_code">
+                          <ng-option *ngFor="let option of diagnosCodesInfo" [value]="option.id">
+                          <div [title]="option.des_abr_diagn_mdcal">{{option.cod_diagn_mdcal}} | {{option.des_abr_diagn_mdcal}}</div>
+                          </ng-option>
+                        </ng-select>
+                      </div>
+                      <div class="">
+                        <button class="btn bg-white" style="color: #1a8ccd;" (click)="downLoadDignosticCodeCSVFile()" >
+                          <fa-icon [icon]="fontIcons[5]"></fa-icon>
+                        </button>
+                    </div>
+                      </div>
+                    <div *ngIf="!billingObjectForm.controls['diagnosis_code'].valid && billingObjectForm.controls['diagnosis_code'].touched"
+                      class="validation">
+                      {{ "REQUIRED" | translate }}
+                    </div>
+                    
+                  </div>
+                </div>
+                
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 col-lg-3 p-r-8">
+                  <div class="form-group">
+                    <label for="email">{{ "BILLING_MODULE.EVENT_TYPE" | translate}} ({{ 'OPTIONAL' | translate }})</label>
+                    <ng-select appearance="outline" (change)="enableUpdateButton();changeEventType()" [searchable]="false" [clearable]="true" labelForId="value"
+                    formControlName="typ_evene_pers">
+                    <ng-option *ngFor="let option of eventTypeOptions" [value]="option.id">
+                      <div [title]="option.value">{{option.value}}</div>
+                    </ng-option>
+                  </ng-select>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-3 p-r-8">
+                  <div class="form-group">
+                    <app-date-picker id="btn_date_picker" [clearIcon]=true disabled="{{billingObjectForm.controls.dat_evene_pers.status === 'DISABLED' ? true : false }}" [label]="'BILLING_MODULE.EVENT_DATE'" [formControlName]="'dat_evene_pers'"
+                       [placeholder]="'MM/DD/YYYY'" manadatory=true (changeEvent)="enableUpdateButton()"></app-date-picker>
+                      <div
+                      *ngIf="billingObjectForm.get('dat_evene_pers').invalid && 
+                      billingObjectForm.get('dat_evene_pers').errors && 
+                      (billingObjectForm.get('dat_evene_pers').dirty || billingObjectForm.get('dat_evene_pers').touched)"
+                      class="validation">
+                      {{ "REQUIRED" | translate }}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 p-r-8">
+                  <div class="form-group">
+                    <app-date-picker id="btn_date_picker" [clearIcon]=true [label]="'BILLING_MODULE.PATIENT_IN_DATE'" [formControlName]="'dat_entre_pers_lieu'"
+                       [placeholder]="'MM/DD/YYYY'" manadatory=true (changeEvent)="enableUpdateButton()"></app-date-picker>
+                      <div *ngIf="billingObjectForm.get('dat_entre_pers_lieu').invalid && 
+                      billingObjectForm.get('dat_entre_pers_lieu').errors && 
+                      (billingObjectForm.get('dat_entre_pers_lieu').dirty || billingObjectForm.get('dat_entre_pers_lieu').touched)"
+                      class="validation">
+                      {{ "REQUIRED" | translate }}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 p-r-8">
+                  <div class="form-group">
+                    <app-date-picker id="btn_date_picker" [clearIcon]=true disabled="{{billingObjectForm.value.dat_entre_pers_lieu ? (billingObjectForm.value.dat_entre_pers_lieu === '' ? true: false ) : true }}" [label]="'BILLING_MODULE.PATIENT_OUT_DATE'" [formControlName]="'dat_sorti_pers_lieu'"
+                     [placeholder]="'MM/DD/YYYY'" manadatory=true (changeEvent)="enableUpdateButton()"></app-date-picker>
+                  </div>
+                </div>
+
+              </div>
+
+              <hr style="margin-top: 2rem; margin-bottom: 2rem;"/>
+
+              <div class="row">
+                <div class="col-md-12 col-lg-12 p-r-8">
+                  <div class="form-group">
+                    <label for="email">{{ "BILLING_MODULE.CODE" | translate }}</label>
+                    <div class="d-flex align-items-center">
+                        <div class="pr-2" style="width: calc(100% - 8px);">
+                            <ng-select class="auto-grow" [multiple]="false" bindLabel="cod_fact" (search)="getCodeFactsInfo($event)"
+                            [clearable]="true" labelForId="cod_fact" (change)="getAllMeasures()"
+                            formControlName="id_elm_fact">
+                            <ng-option *ngFor="let option of factCodesInfo" [value]="option.cod_fact">
+                                <div [title]="option.des_cod_fact">{{option.cod_fact}} | {{option.des_cod_fact}}</div>
+                            </ng-option>
+                          </ng-select>
+                        </div>
+                      <div class="">
+                          <button class="btn bg-white p-0" style="color: #1a8ccd;" (click)="downLoadCodeFactsCSVFile()" >
+                              <fa-icon [icon]="fontIcons[5]"></fa-icon>
+                            </button>
+                      </div>
+                    </div>
+                    
+                    <div
+                    *ngIf="!billingObjectForm.controls['id_elm_fact'].valid"
+                    class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 col-lg-3 p-r-8 pt-0" [class.disabled]="true">
+                  <div class="form-group">
+                    <app-date-picker id="btn_date_picker" [label]="'BILLING_MODULE.DATE'" [formControlName]="'dat_serv_elm_fact'"
+                      [maxDate]="todayDate" [placeholder]="'MM/DD/YYYY'"
+                      (changeEvent)="updateDateInfo()"></app-date-picker>
+                  </div>
+                </div>
+
+                <!-- <div class="col-md-6 col-lg-3 p-r-8">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label for="">{{ "BILLING_MODULE.CONSULTATION_TIME" | translate }}</label>
+                      <select class="form-control time-select" (change)="timeSlotChangeHandler()" formControlName="timeSlot">
+                        <option value="null" disabled="true">
+                          {{ "SELECT_HERE" | translate }}
+                        </option>
+                        <option *ngFor="let item of timeSlots" [value]="item.id">
+                          {{ item.name }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div> -->
+
+                <div class="col-md-6 col-lg-3 p-r-8">
+                  <div class="form-group">
+                    <label for="">{{ "BILLING_MODULE.START_TIME" | translate }}</label>
+                    <!-- <select class="form-control time-select" (change)="timeSlotChangeHandler()" formControlName="dhd_elm_fact">
+                      <option value="null" disabled="true">
+                        {{ "SELECT_HERE" | translate }}
+                      </option>
+                      <option *ngFor="let item of startTimeSlots" [value]="item.id">
+                        {{ item.name }}
+                      </option>
+                    </select> -->
+                    <div class="position-relative">
+                      <input [ngxMatTimepicker]="startPicker" class="form-control" formControlName="dhd_elm_fact" >
+                      <ngx-mat-timepicker #startPicker></ngx-mat-timepicker>
+                      <mat-icon matSuffix (click)="openFromIcon(startPicker)" class="datepicker-time-icon">schedule</mat-icon>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 p-r-8 pt-0" [class.disabled]="!enabledStatus.enableEndTime">
+                  <div class="form-group">
+                    <label for="">{{ "BILLING_MODULE.END_TIME" | translate }}</label>
+                    <!-- <select id="endTime" class="form-control time-select" formControlName="dhf_elm_fact">
+                      <option selected value="null">
+                        {{ "SELECT_HERE" | translate }}
+                      </option>
+                      <option *ngFor="let item of endTimeSlots" [value]="item.id">
+                        {{ item.name }}
+                      </option>
+                    </select> -->
+                    <div class="position-relative">
+                      <input [ngxMatTimepicker]="picker" class="form-control" formControlName="dhf_elm_fact" >
+                    <ngx-mat-timepicker #picker></ngx-mat-timepicker>
+                    <mat-icon matSuffix (click)="openFromIcon(picker)" class="datepicker-time-icon">schedule</mat-icon>
+                    </div>
+                  </div>
+                 
+                </div>
+                
+
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-lg-12 p-r-8">
+                  <div class="form-group">
+                    <label for="email">{{ "BILLING_MODULE.CONTEXT" | translate }}</label>
+                    <ng-select [multiple]="true" [clearable]="true" labelForId="id" formControlName="cod_elm_contx">
+                      <ng-option *ngFor="let option of filteredOptions" [value]="option.id">
+                        <div [title]="option.txt_elm_contx">{{option.cod_elm_contx}} | {{option.txt_elm_contx}}</div>
+                      </ng-option>
+                    </ng-select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 col-lg-4 p-r-8">
+                  <div class="form-group">
+                    <label for="email">{{ "BILLING_MODULE.MEASURE" | translate }}</label>
+                    <ng-select [multiple]="false" [clearable]="true" labelForId="id" (change)="updateMeasureCode()" formControlName="cod_elm_mesur">
+                      <ng-option *ngFor="let option of measureOptionCodes" [value]="option.cod_elm_mesur">
+                        <div [title]="option.nom_elm_mesur">{{option.cod_elm_mesur}} | {{option.nom_elm_mesur}}</div>
+                      </ng-option>
+                    </ng-select>
+                    <div *ngIf="(measureOptionCodes.length !== 0 && !billingObjectForm.value.cod_elm_mesur)"
+                    class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 p-r-8">
+                  <div class="form-group">
+                    <label for="val_mes">{{ "BILLING_MODULE.UNIT_MEASURE" | translate }} <span *ngIf="unitMeasureName !== ''">({{unitMeasureName}})</span></label>
+                    <input id="val_mes" placeholder="" type="text" class="form-control"
+                    formControlName="val_mes" />
+                    <div *ngIf="!billingObjectForm.controls['val_mes'].valid && billingObjectForm.controls.val_mes.status !== 'DISABLED'"
+                    class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 p-r-8">
+                  <div class="form-group">
+                    <label for="email">{{ "BILLING_MODULE.REFERENCE" | translate }}</label>
+                    <input id="reference_number" placeholder="" type="text" class="form-control"
+                      formControlName="refre_connu_id_prof" numbersOnly/>
+                  </div>
+                </div>
+
+              </div>
+
+            
+
+              <button type="button" *ngIf="!updateRecordId" style="float: right;margin-bottom:20px;" class="btn btn-secondary min-width"
+                id="btn_reset_patient" (click)="AddCodeInfo()">
+                {{ "BILLING_MODULE.ADD" | translate }}
+              </button>
+              <div class="row" *ngIf="updateRecordId">
+                <div class="col-8">
+                </div>
+                <div class="col-2">
+                  <button type="button" *ngIf="updateRecordId" class="btn btn-ghost min-width"
+                  id="btn_reset_patient" (click)="cancelCodeInfo()">
+                    {{ "CANCEL" | translate }}
+                  </button>
+                </div>
+                <div class="col-2">
+                  <button type="button" *ngIf="updateRecordId" style="float: right;margin-bottom:20px;" class="btn btn-secondary min-width"
+                  id="btn_reset_patient" (click)="AddCodeInfo()">
+                    {{ "UPDATE" | translate }}
+                  </button>
+                </div>
+              </div>
+          </div>
+
+          <div class="col-lg-4">
+
+              <div class="rightside-radiobtn radio-btn-sec" *ngIf="userType === 'general' ">
+                <div class="form-check">
+                  <label class="form-check-label" for="radio1">
+                    Cabinet-CLSC-GMFU
+                  </label>
+                  <input type="radio" formControlName="categoryType" (change)="selectCategorySec($event.target)" class="form-check-input" id="radio1" name="categoryType" value="Cabinet-CLSC-GMFU">
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label" for="radio2">
+                    Établissements publics
+                  </label>
+                  <input type="radio" formControlName="categoryType" (change)="selectCategorySec($event.target)" class="form-check-input" id="radio2" name="categoryType" value="Établissements publics">
+                </div>
+              </div>
+
+              <div class="rightside-radiobtn radio-btn-sec" *ngIf="userType !== 'general' ">
+                <div class="form-check">
+                  <label class="form-check-label" for="radio1">
+                    CH- Hospitalisation
+                  </label>
+                  <input type="radio" formControlName="categoryType" (change)="selectCategorySec($event.target)" class="form-check-input" id="radio1" name="categoryType" value="CH- Hospitalisation">
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label" for="radio2">
+                    Cabinet
+                  </label>
+                  <input type="radio" formControlName="categoryType" (change)="selectCategorySec($event.target)" class="form-check-input" id="radio2" name="categoryType" value="Cabinet">
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label" for="radio3">
+                    Externe
+                  </label>
+                  <input type="radio" formControlName="categoryType" (change)="selectCategorySec($event.target)" class="form-check-input" id="radio3" name="categoryType" value="Externe">
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label" for="radio4">
+                    Longue Durée
+                  </label>
+                  <input type="radio" formControlName="categoryType" (change)="selectCategorySec($event.target)" class="form-check-input" id="radio4" name="categoryType" value="Longue Durée">
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label" for="radio4">
+                    Soins Intensif
+                  </label>
+                  <input type="radio" formControlName="categoryType" (change)="selectCategorySec($event.target)" class="form-check-input" id="radio4" name="categoryType" value="Soins Intensif">
+                </div>
+                <div class="form-check">
+                  <label class="form-check-label" for="radio5">
+                    Urgence
+                  </label>
+                  <input type="radio" formControlName="categoryType" (change)="selectCategorySec($event.target)" class="form-check-input" id="radio5" name="categoryType" value="Urgence">
+                </div>
+              </div>
+
+              <div class="">
+                <div class="rightside-radiobtn radio-btn-sec" *ngIf="specialityOptions.length !== 0">
+                  <div class="form-check" *ngFor="let option of specialityOptions;let i=index">
+                    <label class="form-check-label" for="{{ 'specialityType' + i}}">
+                      {{option}}
+                    </label>
+                    <input type="radio" formControlName="specialityType" (change)="selectSpecialityType({value: option})" class="form-check-input" id="{{ 'specialityType' + i}}" name="specialityType" [value]="option">
+                  </div>
+                </div>
+              </div>
+
+              <div class="">
+                <div class="rightside-radiobtn radio-btn-sec" *ngIf="subSpecialityOptions.length !== 0">
+                  <div class="form-check" *ngFor="let option of subSpecialityOptions">
+                    <label class="form-check-label" for="{{ 'subSpecialityType' + i}}">
+                      {{option}}
+                    </label>
+                    <input type="radio" formControlName="subSpecialityType" (change)="selectSubSpecialityType({value: option})" class="form-check-input" id="{{ 'subSpecialityType' + i}}" name="subSpecialityType" [value]="option">
+                  </div>
+                </div>
+              </div>
+
+              <div class="">
+                <div class="rightside-radiobtn radio-btn-sec" *ngIf="ageFactorOptions.length !== 0">
+                  <div class="form-check" style="margin-bottom: 10px;" *ngFor="let option of ageFactorOptions">
+                        <button type="button"  class="btn btn-primary mr-2 bg-btn border-radius" placement="top" ngbTooltip="{{option.text}} ({{option.code}})" (click)="addCodeOption(option)">{{option.text | slice:0:15}}..({{option.code}})</button>
+                    </div>
+                  </div>
+              </div>  
+            </div>
+
+        </div>
+      </form>
+
+        <div class="row" style="margin-bottom: 20px;">
+          <div *ngIf="mainObjectErrMsg.length !== 0" class="validation" style="font-size: 12px;">
+            <ng-container *ngFor="let option of mainObjectErrMsg txt_msg_expl_recev">
+              <span style="color: red;">{{option.txt_msg_expl_recev[0]}} </span><br>
+            </ng-container>
+            <button style="margin-top: 5px;" *ngIf="mainObjectErrMsg[0].rspCode === 'ERR_CR_API_XSD'" class="btn bg-white p-0" style="color: #e53935;" (click)="downLoadXSDErrorFile()" >
+              <fa-icon [icon]="fontIcons[5]"></fa-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="pharmacy-wrap">
+          <div class="pharmacy-table">
+            <table class="table" aria-describedby="table">
+              <thead>
+                <tr>
+                  <th id="no">No</th>
+                  <th id="code">Code</th>
+                  <th id="context">Context</th>
+                  <th id="date">Date</th>
+                  <th id="start_time">{{ "START_TIME" | translate }}</th>
+                  <th id="end_time">{{ "END_TIME" | translate }}</th>
+                  <th id="id_balance">{{ "BILLING_MODULE.BALANCE" | translate }}</th>
+                  <th id="status">{{ "BILLING_MODULE.STATUS" | translate }}</th>
+                  <th id="action">{{ "BILLING_MODULE.ACTIONS" | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let objectInfo of dataSource; index as i">
+                  <td>{{objectInfo.id}}</td>
+                  <td><button class="btn" placement="top" ngbTooltip="{{objectInfo.code_elm_desc}}">{{objectInfo.id_elm_fact}}</button></td>
+                  <td>
+                    <ng-container *ngFor="let code_context of objectInfo.cod_elm_contx; index as i">
+                      <div *ngIf="i % 3 == 0">
+                        <p class="btn" style="margin: 0px;padding: 0px;" placement="top" ngbTooltip="{{code_context.txt_elm_contx}}">{{code_context.cod_elm_contx}} <span *ngIf="(objectInfo.cod_elm_contx.length-1) !== i">,</span></p>
+                        <p class="btn" *ngIf="i + 1 < objectInfo.cod_elm_contx.length" style="margin: 0px;padding: 0px;" placement="top" ngbTooltip="{{objectInfo.cod_elm_contx[i + 1].txt_elm_contx}}">{{objectInfo.cod_elm_contx[i + 1].cod_elm_contx}} <span *ngIf="(objectInfo.cod_elm_contx.length-1) !== i + 1">,</span></p>
+                        <p class="btn" *ngIf="i + 2 < objectInfo.cod_elm_contx.length" style="margin: 0px;padding: 0px;" placement="top" ngbTooltip="{{objectInfo.cod_elm_contx[i + 2].txt_elm_contx}}">{{objectInfo.cod_elm_contx[i + 2].cod_elm_contx}} <span *ngIf="(objectInfo.cod_elm_contx.length-1) !== i + 2">,</span></p>
+                      </div>
+                  </ng-container>
+                  </td>
+                  <td>
+                    {{ objectInfo.dat_serv_elm_fact | date: "dd-MMM-yyyy" }}
+                  </td>
+                  <td>{{ objectInfo.dhd_elm_fact }}</td>
+                  <td>{{ objectInfo.dhf_elm_fact }}</td>
+                  <td><span *ngIf="objectInfo.mnt_prel">$</span>{{ objectInfo.mnt_prel}}</td>
+                  <td>
+                    <button class="btn" *ngIf="objectInfo.status === undefined">
+                      <fa-icon [ngStyle]="{'color':'#1a8ccd'}" [icon]="fontIcons[0]"></fa-icon>
+                    </button>
+                    <button class="btn" placement="top" ngbTooltip="{{objectInfo.successMsg}}"
+                      *ngIf="objectInfo.status === 'submitted'">
+                      <fa-icon [ngStyle]="{'color':'green'}" [icon]="fontIcons[1]"></fa-icon>
+                    </button>
+                    <button class="btn" placement="top" ngbTooltip="{{objectInfo.errMsg}}"
+                      *ngIf="objectInfo.status === 'rejected'">
+                      <fa-icon [ngStyle]="{'color':'red'}" [icon]="fontIcons[2]"></fa-icon>
+                    </button>
+                  </td>
+                  <td>
+                    <button (click)="editCodeRowInfo(objectInfo)" class="btn bg-white" style="color: #8abd38;">
+                      <fa-icon [icon]="fontIcons[3]"></fa-icon>
+                    </button>
+                    <button (click)="removeCodeInfo(objectInfo)" class="btn bg-white" style="color: #e53935;">
+                      <fa-icon [icon]="fontIcons[4]"></fa-icon>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                  </td>
+                  <td *ngIf="dataSource.length !== 0"></td>
+                  <td *ngIf="dataSource.length !== 0"></td>
+                  <td *ngIf="dataSource.length !== 0"></td>
+                  <td *ngIf="dataSource.length !== 0"></td>
+                  <td *ngIf="dataSource.length !== 0"></td>
+                  <td *ngIf="dataSource.length !== 0">${{getTotalamount()}}</td>
+                  <td *ngIf="dataSource.length !== 0"></td>
+                  <td *ngIf="dataSource.length !== 0"></td>
+                </tr>
+              </tbody>
+            </table>
+            <div *ngIf="!(dataSource && dataSource.length)" class="center-text-div">
+              {{ "NO_DATA_FOUND" | translate }}
+            </div>
+          </div>
+        </div>
+
+
+        <div class="bottom-email-btn" style="float: right;">
+          <button type="button" *ngIf="modelView === 'false'" class="btn btn-secondary mt-20 mb-20" (click)="saveAsDraftInfo()">{{ "BILLING_MODULE.SAVE_AS_DRAFT" | translate}}</button>&nbsp;
+          <button *ngIf="!claimObject.no_fact_ramq" type="button" class="btn btn-secondary mt-20 mb-20" (click)="submitRamqBill()">{{ "SUBMIT" | translate }}</button>&nbsp;
+          <button *ngIf="claimObject.no_fact_ramq" [disabled]="!updateButton" type="button" class="btn btn-secondary mt-20 mb-20" [ngClass]="{'update-btn': updateButton === false}" (click)="submitRamqBill()">Update</button>&nbsp;
+
+        </div>
+
+      </div>
+    </div>
+  </ng-container>
+</div>

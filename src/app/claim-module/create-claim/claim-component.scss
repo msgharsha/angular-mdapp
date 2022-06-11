@@ -1,0 +1,75 @@
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+.radio-btn-sec{
+  
+    border: 1px solid #dee2e6;
+    /* display: flex; */
+    justify-content: space-between;
+    text-align: center;
+    padding: 1rem 0.25rem;
+    /* flex-wrap: wrap; */
+  }
+  .radio-btn-sec .radioGroup{
+    display: flex;
+      flex-wrap: wrap;
+      
+  }
+  .radio-btn-sec .custom-control-label {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .radio-btn-sec .mat-radio-container{
+    order: 2;
+  }
+  .radio-btn-sec .mat-radio-label-content {
+    padding-left: 0 !important;
+    flex: 0 0 100%;
+    padding-bottom: 4px;
+  }
+
+  .rightside-radiobtn {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.rightside-radiobtn .form-check label {
+    display: block;
+    color: #99abb2;
+}
+
+.rightside-radiobtn .form-check {
+    padding-left: 0;
+    text-align: center;
+    padding-right: 10px;
+}
+
+.rightside-radiobtn .form-check-input {
+  position: initial !important;
+  zoom: 1.4;
+  margin-left: 0 !important;
+}
+
+.ng-select.auto-grow {
+  display: grid;
+
+  .ng-select-container {
+    min-width: 100px;
+    width: auto;
+  }
+
+  .ng-dropdown-panel {
+    width: auto;
+  }
+}
+
+.bottom-email-btn .update-btn{background-color: #6c757d !important;}
+.mat-dialog-content,.mat-dialog-actions{margin: 0 !important;}
+.datepicker-time-icon{
+  position: absolute;
+  right: 12px;
+    top: 7px;
+    color: #99abb2;
+    z-index: 0;
+}

@@ -1,0 +1,268 @@
+.dentist-common-profile-wrapper {
+  background-color: $light-gray2;
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
+.dcp-heading {
+  color: $light-gray4;
+  font-size: $font-ml;
+  line-height: 30px;
+  font-weight: $font-bold;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}
+
+.dcp-left-wrapper {
+  color: $light-blue1;
+  background: $white-color;
+  @include border-radius(8px);
+  padding: 20px;
+  .dcp-left-heading {
+    position: relative;
+    min-height: 80px;
+    .combine-shape {
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 9;
+      cursor: pointer;
+    }
+    // padding: 25px 25px 25px 40px;
+    // background: url('/assets/images/profile-img.png') no-repeat;
+    // background-size: cover;
+    .dcp-avtar-text-wrapper {
+      @include flexbox;
+      @include align-items(center);
+      position: relative;
+      z-index: 9;
+      .dcp-avtar {
+        width: 80px;
+        min-width: 80px;
+        height: 80px;
+        border-radius: 6px;
+        border: 2px solid $light-gray3;
+        img {
+          cursor: pointer;
+          border-radius: 6px;
+          height: 100%;
+          width: 100%;
+        }
+      }
+      .dcp-text {
+        margin-left: 20px;
+        max-width: 500px;
+        .dcp-subHeading {
+          font-size: $font-mlx;
+          font-weight: $font-bold;
+          line-height: 24px;
+          color: $light-blue2;
+          margin-bottom: 5px;
+        }
+        .dcp-subText {
+          color: $light-blue1;
+          font-size: $font-body;
+          font-weight: $font-semi-bold;
+          font-style: italic;
+          line-height: 19px;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+  .dcp-left-body {
+    padding: 0;
+    .galler-images-wrapper {
+      @include flexbox;
+      margin-bottom: 30px;
+      .gallery-images-container {
+        width: 110px;
+        height: 60px;
+        border: 0;
+        margin-right: 12px;
+        border-radius: 4px;
+        background-color: #d8d8d8;
+        img {
+          height: 100%;
+          width: 100%;
+          border-radius: 4px;
+        }
+      }
+    }
+    .dcp-about-wrapper {
+      margin-bottom: 30px;
+      .dcp-about-text {
+        color: $light-blue1;
+        line-height: 1.4;
+        font-size: $font-sms;
+        margin-bottom: 6px;
+      }
+    }
+  }
+}
+
+.dcp-right-wrapper {
+  // background: $white-color;
+  // @include border-radius(4px);
+  // padding: 30px;
+  .sub-heading {
+    margin-bottom: 26px;
+    font-size: $font-xl;
+    font-weight: $font-bold;
+  }
+  .dcp-heading-wrapper {
+    padding: 20px 40px 20px;
+  }
+  .dcp-body-wrapper {
+    padding: 0px 40px 20px;
+    .reason {
+      margin-bottom: 40px;
+    }
+    .date {
+      margin-bottom: 40px;
+      .form-control {
+        background: url("/assets/images/calendar.svg") no-repeat;
+        background-position: right 15px center;
+        padding-right: 40px;
+        color: #383838;
+        font-size: $font-ml;
+      }
+    }
+    .time {
+      margin-bottom: 20px;
+      .time-container {
+        white-space: nowrap;
+        overflow-x: auto;
+        padding: 20px 0px 10px 12px;
+        background: rgba($light-green3, 0.3);
+        @include border-radius(8px);
+        .time-tag {
+          background: rgba($light-blue2, 0.08);
+          @include border-radius(4px);
+          min-width: 60px;
+          height: 30px;
+          font-size: $font-sms;
+          font-weight: $font-semi-bold;
+          color: $light-blue2;
+          line-height: 19px;
+          display: inline-block;
+          padding: 5px 0;
+          text-align: center;
+          margin-right: 12px;
+          cursor: pointer;
+        }
+        .slot-active {
+          background-color: $theme-blue;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.practise-belog {
+  margin-bottom: 40px;
+  .list-heading {
+    margin-bottom: 18px;
+  }
+  .practice-bg {
+    background: $bg-grey;
+    padding: 24px;
+    @include border-radius(4px);
+    .practice-white-bg {
+      cursor: default;
+      background: $white-color;
+      @include border-radius(4px);
+      @include box-shadow(0 2px 4px 0 rgba(50, 50, 64, 0.2));
+      padding: 18px 24px;
+      @include flexbox;
+      @include align-items(center);
+      .practise-logo {
+        width: 60px;
+        height: 60px;
+        img {
+          height: 100%;
+          width: 100%;
+        }
+      }
+      .practise-text {
+        margin-left: 24px;
+        .practise-heading {
+          font-size: $font-ml;
+          font-weight: $font-bold;
+          color: $teal-grey;
+          line-height: 24px;
+          margin-bottom: 4px;
+        }
+        .practise-subtext {
+          font-size: $font-ml;
+          color: $teal-grey;
+          font-weight: $font-light;
+          line-height: 24px;
+          margin-bottom: 0;
+        }
+      }
+      .pr-cehvron {
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+// map area starts here
+.map-area {
+  margin-bottom: 40px;
+  .map-wrapper {
+    height: 205px;
+    max-width: 494px;
+    width: 100%;
+  }
+}
+
+// address area starts here
+.address-area {
+  margin-bottom: 40px;
+  .list-heading {
+    margin-bottom: 10px;
+  }
+}
+
+//hours section starts here
+.hours-section {
+  .list-heading {
+    margin-bottom: 10px;
+  }
+  ul {
+    padding-left: 0;
+    li {
+      list-style: none;
+      span {
+        &:first-child {
+          width: 110px;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+.cl-text {
+  font-size: 16px;
+  line-height: 24px;
+  color: $teal-grey;
+  margin-bottom: 5px;
+}
+
+.parking-available {
+  color: $secondary-grey;
+  font-size: $font-sm;
+  line-height: 19px;
+}
+
+.list-heading {
+  text-transform: uppercase;
+  font-size: $font-body;
+  color: $secondary-grey;
+  line-height: 19px;
+  letter-spacing: 1px;
+}

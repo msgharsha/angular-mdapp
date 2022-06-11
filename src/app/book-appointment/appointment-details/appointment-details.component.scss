@@ -1,0 +1,123 @@
+@import "../../../styles.scss";
+
+.card-wrap {
+    padding: 0px 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    min-height: 300px;
+    margin-bottom: 40px;
+  }
+  .account-heading-main {
+    font-size: 24px;
+    font-weight: 700;
+    color: #012e40;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    padding-left: 15px;
+  }
+  .pharmacy-wrap {
+    background: $white-bg;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.08);
+    .pharmacy-table {
+      overflow-x: auto;
+    }
+    .heading-wrap {
+      @include flexbox();
+      @include justify-content(space-between);
+      @include align-items(center);
+      margin-bottom: 24px;
+      h3 {
+        font-size: 14px;
+        font-weight: 600;
+        color: $deep-blue;
+        margin: 0;
+      }
+    }
+    .pagination-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+  }
+
+.appointment-wrapper {
+    padding: 10px 30px;
+    .heading-main {
+      font-size: $font-24;
+      font-weight: $font-bold;
+      color: $deep-blue;
+      margin-bottom: 0;
+      margin-top: 20px;
+    }
+    .navbar {
+      margin-top: 0;
+      justify-content: flex-start;
+      padding: 15px 0 0;
+      margin-bottom: 24px;
+    }
+  }
+
+  /* table css */
+table {
+    thead {
+      color: $white-color;
+      height: 40px;
+      tr {
+        background: $light-blue2;
+        th {
+          border-bottom: none;
+          font-weight: $font-bold;
+          &:first-child {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            padding-left: 26px;
+          }
+          &:last-child {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+          }
+        }
+        & + tr {
+          background: transparent;
+        }
+      }
+    }
+    tbody {
+      tr {
+        &:nth-child(odd) {
+          background: rgba(247, 247, 247, 0.6);
+        }
+        td {
+          border-top: none;
+          color: $light-gray4;
+          font-size: $font-body;
+          &:first-child {
+            padding-left: 26px;
+          }
+        }
+      }
+    }
+  }
+
+  .page-container {
+    padding: 20px 15px;
+  }
+  .card-default {
+    padding: 30px;
+    background-color: $white-color;
+    border-radius: 10px;
+    box-shadow: 0 0 22px 0 rgba(46, 51, 138, 0.13);
+    margin-bottom: 0;
+    height: calc(100vh - 105px);
+    max-height: calc(100vh - 105px);
+    overflow: auto;
+  }
+  
+  .view-button{
+    border: 1px solid #0074a3;
+    border-radius: 2px;
+    height: 28px;
+    color: #0074a3;
+    background: transparent;
+    font-weight: 400;
+  }

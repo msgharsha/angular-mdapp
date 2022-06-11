@@ -1,0 +1,269 @@
+@import "../../../styles.scss";
+@import "../../../assets/sass/mixins";
+@import "../../../assets/sass/variable";
+
+.mb0 {
+  margin-bottom: 0 !important;
+}
+
+.dcp-heading {
+  margin: auto;
+}
+
+.practice-white-bg {
+  cursor: pointer;
+}
+
+.gallery-img {
+  cursor: pointer;
+}
+hr {
+  border-top: 2px dashed;
+  color: $light-gray3;
+}
+.quote-icon {
+  width: 20px;
+  margin-bottom: 12px;
+}
+.booking-img {
+  max-width: 100%;
+  height: auto;
+}
+// .avtar-overlay {
+//     width: 100%;
+//     height: 100%;
+//     background-image: linear-gradient(125deg, rgba(49, 96, 158, 0.83) 10%, rgba(49, 96, 158, 0.87) 57%, rgba(49, 96, 158, 0.63) 115%);
+//     position: absolute;
+//     left: 0px;
+//     top: 0px;
+// }
+
+.time-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 170px;
+}
+
+.time-tag {
+  margin-bottom: 10px;
+}
+
+.date {
+  input {
+    // border-left: none;
+    // border-right: none;
+    // border-top: none;
+    width: 100%;
+    min-height: 44px;
+    padding-right: 40px;
+    background: url("/assets/images/calendar.svg") no-repeat;
+    background-position: right 15px center;
+    cursor: pointer;
+    // border-bottom: 2px solid #dddddd;
+  }
+}
+
+.reason {
+  ::ng-deep.txt-blk {
+    .main-div input {
+      color: black;
+      background: url("/assets/images/down-carat.svg") no-repeat;
+      background-position: right 1px center;
+      cursor: pointer;
+    }
+  }
+}
+
+.no-scroll {
+  overflow: visible;
+  white-space: normal !important;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.unavailable {
+  padding-left: 105px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.address {
+  line-height: 2;
+}
+
+.dcp-left-wrapper {
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+.map-wrapper {
+  width: 100%;
+  border: 0;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  img {
+    width: 100%;
+  }
+  ::ng-deep .map-area {
+    width: 100%;
+    height: 55vh;
+    margin-bottom: 0;
+  }
+}
+// address area starts here
+.address-area {
+  margin-bottom: 40px;
+  .list-heading {
+    margin-bottom: 10px;
+  }
+}
+.cl-text {
+  font-size: 16px;
+  line-height: 24px;
+  color: $teal-grey;
+  margin-bottom: 5px;
+  .heading {
+    font-weight: 600;
+  }
+}
+
+.form-control {
+  height: 40px;
+  padding: 6px 20px;
+  border: 1px solid rgba(103, 129, 140, 0.2);
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.dcp-right-wrapper {
+  color: #67818c;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.02);
+  .dcp-body-wrapper {
+    padding: 0px 20px 20px;
+  }
+}
+
+.map-area-container {
+  margin-top: 20px;
+  border-radius: 8px;
+  background: $white-color;
+  padding: 20px;
+  box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.02);
+  .map-wrapper {
+    margin-bottom: 0;
+    max-width: 337px;
+  }
+}
+
+.quote-text {
+  font-size: $font-sms;
+  font-style: italic;
+  color: $light-blue1;
+
+  p {
+    max-height: 35px;
+    overflow: hidden;
+  }
+}
+.read-more {
+  font-size: $font-sms;
+  color: $light-blue2;
+  font-style: italic;
+  font-weight: $font-semi-bold;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.dentist-common-profile-wrapper {
+  padding: 15px;
+  .dcp-right-wrapper .dcp-body-wrapper .date {
+    padding: 0px 0px 20px;
+  }
+  .dcp-right-wrapper .dcp-heading-wrapper {
+    padding: 20px 20px 20px;
+  }
+}
+
+#reason_div {
+  margin-bottom: 17px;
+  .reason_div-section {
+    margin-bottom: 24px;
+    & + div {
+      label {
+        color: $light-gray4;
+        font-size: $font-sms;
+        font-weight: $font-semi-bold;
+        text-transform: initial;
+      }
+    }
+  }
+  & + div {
+    label {
+      color: $light-gray4;
+      font-size: $font-sms;
+      font-weight: $font-semi-bold;
+      text-transform: initial;
+    }
+  }
+}
+.form-group.time {
+  label {
+    font-style: $light-gray4;
+    font-size: $font-sms;
+    font-weight: $font-semi-bold;
+    text-transform: capitalize;
+  }
+}
+#date_div {
+  label {
+    color: $light-gray4;
+    font-size: $font-sms;
+    font-weight: $font-semi-bold;
+    text-transform: capitalize;
+  }
+}
+
+input:checked ~ span {
+  font-weight: bold;
+}
+.mb-40 {
+  margin-bottom: 40px;
+}
+
+.validationMsg {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #eb2000;
+  bottom: 0;
+}
+
+.office-address {
+  span {
+    vertical-align: middle;
+  }
+}
+
+.language-selected {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  max-height: 240px;
+  max-width: 600px;
+}
+
+@media screen and (max-width: 767px) {
+  .dcp-right-wrapper {
+    margin-top: 20px;
+  }
+}
+
+.radio_label{
+  text-transform: initial;color: #345766;font-weight: 600;font-size: 12px;
+}

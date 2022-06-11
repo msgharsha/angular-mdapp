@@ -1,0 +1,229 @@
+@import "../../../../../styles.scss";
+.dentist-no-result-section {
+  @include flexbox();
+  text-align: center;
+  @include align-items(center);
+  @include justify-content(center);
+  .no-result-wrapper {
+    font-size: $font-xl;
+    color: $secondary-grey;
+  }
+}
+
+.dentist-listing-left-section {
+  .result-showing-container {
+    margin-bottom: 30px;
+    margin-top: 40px;
+    h5 {
+      margin-top: 0;
+    }
+    .refine-result {
+      color: $teal-grey;
+      cursor: pointer;
+      &::before {
+        content: "";
+        background: url("/assets/images/sprite.png");
+        width: 30px;
+        height: 20px;
+        display: inline-block;
+        background-position: -39px -55px;
+        vertical-align: middle;
+        margin-right: 4px;
+      }
+      &.close-icon {
+        &::before {
+          content: "";
+          background: url("/assets/images/close.svg");
+          width: 30px;
+          height: 20px;
+          display: inline-block;
+          background-position: -29px -6px;
+        }
+      }
+      &.filter-set-icon {
+        &::before {
+          content: "";
+          background: url("/assets/images/filter-applied.png");
+          width: 20px;
+          height: 10px;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+.info-card {
+  background: $white-color;
+  @include border-radius(4px);
+  @include box-shadow(0 1px 4px 0 rgba(50, 50, 64, 0.2));
+  margin-bottom: 25px;
+  .info-inner-wrapper {
+    @include flexbox;
+    cursor: pointer;
+    min-height: 180px;
+    .left-avtar-section {
+      width: 245px;
+      background: url("/assets/images/avtar-bg.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      @include flexbox;
+      @include align-items(center);
+      @include justify-content(center);
+      .avtar-section {
+        width: 72px;
+        height: 72px;
+        border: 2px solid $white-color;
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        @include border-radius(50%);
+        img {
+          width: 100%;
+          @include border-radius(50%);
+          height: 100%;
+        }
+      }
+      .avtar-overlay {
+        width: 100%;
+        height: 100%;
+        background: rgba(101, 101, 130, 0.7);
+        background-image: linear-gradient(
+          125deg,
+          rgba(49, 96, 158, 0.83) 10%,
+          rgba(49, 96, 158, 0.87) 57%,
+          rgba(49, 96, 158, 0.63) 115%
+        );
+      }
+      position: relative;
+      .combination-icon {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        cursor: pointer;
+      }
+    }
+    .right-info-section {
+      @include flex-grow(2); // padding: 18px 30px 30px 30px;
+      .ris-med-text {
+        font-size: $font-ml;
+        color: $teal-grey;
+        font-weight: $font-light;
+        line-height: 24px;
+        margin-bottom: 5px;
+      }
+      .ris-btm-text {
+        font-size: $font-body;
+        color: $teal-grey;
+        font-weight: $font-light;
+        line-height: 24px;
+        margin-bottom: 5px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .ris-small-text {
+        font-size: $font-body;
+        color: $text-grey;
+        line-height: 19px;
+        margin-bottom: 0;
+      }
+      .info-post {
+        margin-bottom: 24px;
+        color: $teal-grey;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .dentist-info-div {
+        display: inline-block;
+        padding: 18px 0px 0px 30px;
+        max-width: 300px;
+        &.xl-width {
+          max-width: 500px;
+        }
+        h5 {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          width: 90%;
+        }
+      }
+      .dentist-timing-div {
+        float: right;
+        min-width: 106px;
+        background-color: rgba(250, 250, 250, 0);
+        @include box-shadow((-1px 0 0 0 $primary-grey));
+        height: 100%;
+        padding: 12px 25px;
+        .emergency-div {
+          height: 100%;
+          @include flexbox();
+          @include align-items(center);
+          .emergency-button-wrapper {
+            .btn-emergency {
+              background-color: $emergency-button;
+              color: white;
+              border: 1px solid $emergency-button;
+              box-shadow: -1px 0 0 0 $primary-grey;
+              width: 130px;
+              .btn-text {
+                font-weight: $font-bold;
+                a {
+                  color: white;
+                  text-decoration: none;
+                  display: block;
+                  .link-text-2 {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .time-slot-wrapper {
+          background-color: $primary-grey;
+          margin-bottom: 12px;
+          padding: 6px;
+          @include border-radius(4px);
+          text-align: center;
+          font-size: $font-sm;
+          color: $secondary-grey;
+          &:last-child {
+            margin-bottom: 0px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.search-wrapper {
+  padding: 25px 32px;
+  background: $dark-grey;
+  .form-control {
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 58px;
+  }
+}
+
+.map-wrapper {
+  width: 100%;
+  border: 3px solid rgba(101, 101, 130, 0.1);
+  margin-top: 44px;
+  ::ng-deep .map-area {
+    width: 100%;
+    height: 55vh;
+    margin-bottom: 0;
+  }
+}
+
+.redo-wrapper {
+  margin-top: 15px;
+}

@@ -1,0 +1,18 @@
+@import "../../../../../styles.scss";
+.location-wrapper {
+  position: absolute;
+  background: url("/assets/images/gps.svg") no-repeat;
+  width: 24px;
+  height: 24px;
+  top: 9px;
+  cursor: pointer;
+  &.gps-on {
+    background: url("/assets/images/gps-selected.svg") no-repeat;
+  }
+  &.right {
+    right: 16px;
+  }
+  &.left {
+    left: 16px;
+  }
+}

@@ -1,0 +1,68 @@
+@import "../../../styles.scss";
+@import "../../../assets/sass/variable";
+@import "../../../assets/sass/mixins";
+
+// my code start from here
+
+.prescribe-medicine-wrap {
+  @include flexbox();
+  .left-wrapper {
+    flex: 1;
+    -webkit-flex: 1;
+    padding-right: 15px;
+    &.doted-line {
+      position: relative;
+      &::before {
+        content: "";
+        width: 1px;
+        height: 100%;
+        background: url("../../../assets/images/vertical-path.png");
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: rotate(0deg);
+      }
+    }
+    .search-box-list {
+      margin-bottom: 16px;
+      height: 40vh;
+      overflow: auto;
+    }
+    .search-container {
+      margin-bottom: 16px;
+    }
+  }
+  .right-wrapper {
+    flex: 1;
+    -webkit-flex: 1;
+    padding-left: 15px;
+    padding-bottom: 44px;
+    button {
+      position: absolute;
+      bottom: 0;
+      right: 16px;
+      min-width: 160px;
+    }
+  }
+  textarea {
+    height: 122px;
+    resize: none;
+  }
+}
+
+.test-table-wrapper {
+  border: 1px solid rgba(103, 129, 140, 0.2);
+  border-radius: 4px;
+  .thead {
+    background: $light-gray2;
+    @include flexbox();
+    @include justify-content(space-between);
+    padding: 10px 16px;
+  }
+}
+
+.table-label {
+  color: $deep-blue;
+  font-size: $font-sms;
+  font-weight: $font-semi-bold;
+}

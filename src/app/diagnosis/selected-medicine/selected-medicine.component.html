@@ -1,0 +1,210 @@
+<div [formGroup]="form" class="relative">
+  <div class="form-group pharmacy-dropdown" *ngIf="selectedMedicine.length !=0">
+    <label class="text-label">{{ "SELECT_PHARMACY" | translate }}</label>
+    <select class="form-control form-select" formControlName="pharmacy">
+      <option [value]="''">--{{ "SELECT_PHARMACY" | translate }}--</option>
+      <option *ngFor="let pharmacy of pharmacyList" [value]="pharmacy.id">
+        {{ pharmacy.pharmacyName }}
+      </option>
+    </select>
+  </div>
+  <div class="tab-content-card" *ngIf="!isProceed">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="prescribe-medicine-wrap" *ngIf="selectedMedicine.length !=0">
+          <div class="left-wrapper doted-line">
+            <div class="medicine-table-wrap">
+              <ng-container>
+                <div class="select-medicine-wrap">
+
+
+                  <table formArrayName="medicine" aria-describedby="meditation" class="dosage">
+                    <thead>
+                      <th id="name" style="width: 15%;">{{ "MEDICINE_NAME" | translate }}</th>
+                      <th id="type" style="width: 10%;">{{ "FORMAT" | translate }}</th>
+                      <th id="dosage" style="width: 12%;">{{ "DOSAGE" | translate }}</th>
+                      <th id="frequency" style="width: 15%;">{{ "FREQUENCY" | translate }}</th>
+                      <th id="minMg" style="width: 15%;">{{ "DURATION" | translate }}</th>
+                      <th id="maxMg" style="width: 13%;">{{ "USAGETYPE" | translate }}({{ "OPTIONAL" | translate }})</th>
+                      <th id="usageFormat" style="width: 20%;">{{ "USAGE_FORMAT" | translate }}({{ "OPTIONAL" | translate }})</th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let medicine of form.get('medicine').controls" [formGroup]="medicine">
+                        <td>{{ medicine.get("medicineName").value }}</td>
+                        <td>
+                          <div class="form-group">
+                            <select class="form-control form-select" formControlName="medicineTypeId">
+                              <option *ngFor="let medicineType of medicineTypeList" [value]="medicineType.id">
+                                {{ medicineType.medicineType }}
+                              </option>
+                            </select>
+                          </div>
+                          <div *ngIf="formSubmitted && medicine.controls.medicineTypeId.errors?.required"
+                            class="validation">
+                            {{ "REQUIRED" | translate }}
+                          </div>
+                        </td>
+                        <td>
+                          <div class="row">
+                            <div class="per-week">
+                              <input type="text" formControlName="dosageSchedule" />
+                              <div *ngIf="formSubmitted && medicine.controls.dosageSchedule.errors?.required"
+                                class="validation">
+                                {{ "REQUIRED" | translate }}
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <select class="form-control form-select" formControlName="dosageId">
+                                <option *ngFor="let dosageType of dosageTypeList" [value]="dosageType.id">
+                                  {{ dosageType.medicineType }}
+                                </option>
+                              </select>
+                              <div *ngIf="formSubmitted && medicine.controls.dosageId.errors?.required"
+                                class="validation">
+                                {{ "REQUIRED" | translate }}
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="per-week">
+                            <!-- <input type="text" formControlName="frequency" /> -->
+                            <div class="form-group">
+                              <select class="form-control form-select" formControlName="frequencyId">
+                                <option *ngFor="let frequencyType of frequencyTypeList" [value]="frequencyType.id">
+                                  {{ frequencyType.medicineType }}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                          <div *ngIf="formSubmitted && medicine.controls.frequencyId.errors?.required" class="validation">
+                            {{ "REQUIRED" | translate }}
+                          </div>
+                        </td>
+                        <td>
+                          <div class="row">
+                            <div class="per-week">
+                              <input type="text" formControlName="durationSchedule" />
+                              <div *ngIf="formSubmitted && medicine.controls.durationSchedule.errors?.required"
+                                class="validation">
+                                {{ "REQUIRED" | translate }}
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <select class="form-control form-select" formControlName="durationId">
+                                <option *ngFor="let durationType of durationTypeList" [value]="durationType.id">
+                                  {{ durationType.medicineType }}
+                                </option>
+                              </select>
+                              <div *ngIf="formSubmitted && medicine.controls.durationId.errors?.required"
+                                class="validation">
+                                {{ "REQUIRED" | translate }}
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="form-group">
+                            <select class="form-control form-select" formControlName="usageTypeId">
+                              <option value="" selected >
+                                {{ "SELECT" | translate }}
+                              </option>
+                              <option *ngFor="let usageType of usageTypeList" [value]="usageType.id">
+                                {{ usageType.medicineType }}
+                              </option>
+                            </select>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="row">
+                            <div class="per-week">
+                              <input type="text" formControlName="usageSchedule" />
+                            </div>
+                            <div class="form-group">
+                              <select class="form-control form-select" formControlName="usageFormatId">
+                                <option value="" selected >
+                                  {{ "SELECT" | translate }}
+                                </option>
+                                <option *ngFor="let usageFormat of usageFormatList" [value]="usageFormat.id">
+                                  {{ usageFormat.medicineType }}
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="text-label">{{ "COMMENTS" | translate }}</label>
+          <textarea placeholder="{{ 'TYPE_HERE' | translate }}..." formControlName="comments"></textarea>
+        </div>
+        <!-- <div class="card-button"> -->
+          <div class="row">
+            <div class="col-8">
+              <p style="margin-bottom: 1px;">{{ "NOTE" | translate }}:</p>
+              <ol>
+                <li>{{ "PRESCRIPTION_NOTE1" | translate }}</li>
+                <li>{{ "PRESCRIPTION_NOTE2" | translate }}</li>
+                <li>{{ "PRESCRIPTION_NOTE3" | translate }}</li>
+              </ol> 
+            </div>
+            <div class="col-4 card-button">
+              <div class="row">
+                <div class="col-6">
+                  <button *ngIf="!isFromPending" type="button" class="btn btn-width btn-secondary" style="width: 220px;" (click)="onSave()">
+                    {{ "SAVE" | translate }}
+                  </button>
+                </div>
+                <div class="col-6">
+                  <button type="button" class="btn btn-width margin-left-10 btn-secondary" style="width: 220px;" (click)="onSend('sendToPatient')">
+                    {{ "SEND_PATIENT" | translate }}
+                  </button>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 10px;">
+                <div class="col-6">
+                  <button type="button" class="btn btn-width  btn-secondary" style="width: 220px;" (click)="onSend('sendToPharmacy')">
+                    {{ "SEND_PHARMACY" | translate }}
+                  </button>
+                </div>
+                <div class="col-6">
+                  <button type="button" class="btn btn-width margin-left-10 btn-secondary" style="width: 220px;" (click)="sendToExternal()">
+                    {{ "SEND_EXTERNAL" | translate }}
+                  </button>
+                </div>
+              </div>
+              
+              
+              
+              
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-2">
+              <input type="checkbox" [checked]="saveStatus" disabled/><span style="padding-left: 10px;">{{ "SAVE" | translate }}</span>
+            </div>
+            <div class="col-2">
+              <input type="checkbox" [checked]="sendPatientStatus"  disabled/><span style="padding-left: 10px;">{{ "SEND_PATIENT" | translate }}</span>
+            </div>
+
+            <div class="col-2">
+              <input type="checkbox" [checked]="sendPharmacyStatus"  disabled/><span style="padding-left: 10px;">{{ "SEND_PHARMACY" | translate }}</span>
+            </div>
+            <div class="col-2">
+              <input type="checkbox" [checked]="sendExternalStatus"  disabled/><span style="padding-left: 10px;">{{ "SEND_EXTERNAL" | translate }}</span>
+            </div>
+          </div>
+          
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</div>

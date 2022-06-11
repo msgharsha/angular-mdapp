@@ -1,0 +1,78 @@
+<div class="dialog-wrapper">
+  <div class="heading-wrapper">
+    <h1 *ngIf="!data" mat-dialog-title class="dialog-title">
+      {{ "ADD_DRUG" | translate }}
+    </h1>
+    <h1 *ngIf="data" mat-dialog-title class="dialog-title">
+      {{ "EDIT_DRUG" | translate }}
+    </h1>
+    <span class="close-icon" (click)="cancel()"></span>
+  </div>
+  <div class="dialogue-content">
+    <div class="info-wrap">
+      <div class="form-wrap">
+        <form [formGroup]="drugForm">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="drug-eng">{{ "DRUG_ENG" | translate }}</label>
+                <input
+                  id="drug-eng"
+                  formControlName="drugEng"
+                  type="text"
+                  class="form-control"
+                  placeholder="{{ 'ENTER_HERE' | translate }}"
+                />
+                <div *ngIf="hasError('required', 'drugEng')" class="validation">
+                  {{ "REQUIRED" | translate }}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="drug-fr">{{ "DRUG_FRENCH" | translate }}</label>
+                <input
+                  id="drug-fr"
+                  formControlName="drugFrench"
+                  type="text"
+                  class="form-control"
+                  placeholder="{{ 'ENTER_HERE' | translate }}"
+                />
+                <div
+                  *ngIf="hasError('required', 'drugFrench')"
+                  class="validation"
+                >
+                  {{ "REQUIRED" | translate }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-full-div">
+    <div class="btn-wrapper">
+      <button mat-button class="btn btn-ghost min-width" (click)="cancel()">
+        {{ "CANCEL" | translate }}
+      </button>
+      <button
+        *ngIf="data"
+        mat-button
+        class="btn btn-secondary min-width"
+        (click)="drugAdd()"
+      >
+        {{ "UPDATE" | translate }}
+      </button>
+      <button
+        *ngIf="!data"
+        mat-button
+        class="btn btn-secondary min-width"
+        (click)="drugAdd()"
+      >
+        {{ "ADD" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

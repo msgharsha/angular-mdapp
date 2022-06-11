@@ -1,0 +1,122 @@
+@import "../../../../styles.scss";
+
+.Latest-Prescription-div {
+  width: 100%;
+  background-color: #fbfbfb;
+  padding: 7px 20px;
+}
+
+.Latest-Prescription {
+  height: 22px;
+  font-size: 16px;
+  color: $text-color;
+  .action-icon {
+    color: $summer-sky;
+    cursor: pointer;
+    font-family: $font-family;
+    font-size: 14px;
+    font-weight: $font-semibold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: right;
+    display: inline-block;
+    float: right;
+  }
+}
+
+.title-div {
+  padding: 20px;
+}
+
+.title {
+  text-transform: capitalize;
+  font-size: 12px;
+  color: $border-color;
+}
+
+.title-div input[type="text"] {
+  border: none;
+  border-bottom: solid 1px #e7e9ec;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
+}
+
+.upload-prescription {
+  padding-left: 20px;
+  padding-right: 20px;
+  position: relative;
+}
+
+.upload-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.upload-file-input {
+  width: 100%;
+  height: 60px;
+}
+
+.upload-file-input::before {
+  text-align: center;
+  content: "Upload File";
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  cursor: pointer;
+  border: dashed 1px $summer-sky;
+  color: $summer-sky;
+  padding: 20px 40px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.upload-prescription > img {
+  position: absolute;
+  top: 23px;
+  left: 120px;
+  border-radius: unset;
+  transform: rotate(180deg);
+}
+
+.instructions {
+  padding: 0px 20px;
+  color: $text-color;
+  font-size: 10px;
+  padding-top: 10px;
+}
+
+.position-relative {
+  position: relative;
+  overflow: hidden;
+}
+
+.status-div {
+  padding: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+}
+
+.status-div > div {
+  font-size: 14px;
+  color: #8792a3;
+}
+
+.proceed-btn {
+  height: 100%;
+  background-color: $summer-sky;
+  padding: 10px 40px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  border: unset;
+}

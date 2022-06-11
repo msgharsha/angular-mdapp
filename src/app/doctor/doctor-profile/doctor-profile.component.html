@@ -1,0 +1,280 @@
+<section class="dentist-common-profile-wrapper">
+  <div class="container-fluid" *ngIf="profileData">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="dcp-left-wrapper">
+          <div class="dcp-left-heading">
+            <div class="dcp-avtar-text-wrapper">
+              <div class="dcp-avtar">
+                <img
+                  [src]="
+                    profileData?.profileImage || '/assets/images/profileImg.svg'
+                  "
+                  #img
+                  (error)="img.src = '/assets/images/profileImg.png'"
+                  class="img-responsive"
+                  alt=""
+                  id="dentist_profile_image"
+                />
+              </div>
+              <div class="dcp-text">
+                <p class="dcp-subHeading">
+                  Dr. {{ profileData?.firstName }} {{ profileData?.lastName }}
+                </p>
+                <p class="dcp-subText">
+                  <span class="text">{{ profileData?.practiceMethod }}</span>
+                  <br />
+                  <span
+                    *ngFor="
+                      let specialty of profileData?.specialities;
+                      let i = index
+                    "
+                    class="text"
+                    >{{ specialty.specialityName }}
+                    <span *ngIf="i != profileData?.specialities.length - 1"
+                      >|
+                    </span>
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            <div class="combine-shape">
+              <app-favorate-doctor
+                [doctorId]="doctorId"
+                [favourite]="profileData?.isFavourite"
+              ></app-favorate-doctor>
+            </div>
+
+            <div class="avtar-overlay"></div>
+          </div>
+          <div>
+            <hr />
+          </div>
+          <div>
+            <img
+              class="quote-icon"
+              src="../../../assets/images/quote-icon-2.png"
+              alt="icon"
+            />
+          </div>
+          <div class="quote-text">
+            <p
+              [innerHTML]="profileData?.bio"
+              class="mb-0 quote-text"
+              #quoteText
+            ></p>
+            <a
+              *ngIf="quoteText.innerText.length > 299"
+              class="link"
+              (click)="
+                quoteText.style.maxHeight = 'initial';
+                readMore.style.display = 'none'
+              "
+              #readMore
+              >... Read More</a
+            >
+          </div>
+          <div class="dcp-left-body">
+            <div class="galler-images-wrapper">
+              <div
+                *ngFor="let images of profileData.coverImage; let i = index"
+                class="gallery-images-container"
+              >
+                <img
+                  [src]="images"
+                  alt=""
+                  [id]="'profile_cover_' + i"
+                  class="img-responsive gallery-img"
+                  (click)="openGallery(profileData.profileImage ? i + 1 : i)"
+                />
+              </div>
+            </div>
+            <div
+              class="dcp-about-wrapper"
+              *ngIf="profileData?.services && profileData?.services.length"
+            >
+            <span *ngIf="familyDetail && !familyDetail[0].guest"> 
+              <div class="dcp-heading">{{ "SERVICES" | translate }}</div>
+              <p
+                *ngFor="let service of profileData?.services"
+                class="dcp-about-text"
+              >
+                {{ service.name }} : <strong> ${{ service.fee }}</strong>
+              </p>
+            </span>
+            </div>
+            <div class="dcp-about-wrapper m-0">
+              <div class="dcp-heading">{{ "LANGUAGES" | translate }}</div>
+              <div class="language-selected">
+                <p
+                  *ngFor="let language of profileData?.languages"
+                  class="dcp-about-text"
+                >
+                  {{ language }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="map-area-container">
+          <div class="sticky-map-wrapper">
+            <div class="dcp-heading">{{ "OFFICE_LOCATION" | translate }}</div>
+            <div class="office-address">
+              <img src="../assets/images/location.svg" alt="" />
+              <span
+                >{{ profileData?.address }}, {{ profileData?.city }},
+                {{ profileData?.province }}</span
+              >
+            </div>
+            <div class="map-wrapper">
+              <img
+                src="../assets/images/map.png"
+                alt=""
+                *ngIf="!profileData?.address; else map"
+              />
+              <ng-template #map>
+                <app-map [dentistList]="[profileData]"></app-map>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- col ends here-->
+      <div class="col-lg-4">
+        <div class="dcp-right-wrapper">
+          <div class="dcp-heading-wrapper">
+            <div class="dcp-heading">
+              {{ "BOOK_AN_APPOINTMENT" | translate }}
+            </div>
+          </div>
+          <div class="dcp-body-wrapper">
+            <form [formGroup]="bookingForm">
+              <div id="reason_div" class="form-group reason">
+                <div class="reason_div-section">
+                  <img
+                    class="booking-img"
+                    src="../../../assets/images/book-appt-img.svg"
+                    alt="booking-img"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="usr">{{ "REASON_FOR_VISIT" | translate }}*</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="reasonToVisit"
+                    placeholder="{{ 'TYPE_HERE' | translate }}"
+                  />
+                  <div
+                    *ngIf="hasError('required', 'reasonToVisit')"
+                    class="validationMsg"
+                  >
+                    *{{ "REQUIRED" | translate }}
+                  </div>
+                </div>
+              </div>
+              <div>
+                <label>
+                  {{ "HAVE_YOU_SEEN" | translate }} Dr.
+                  {{ profileData?.firstName }} {{ profileData?.lastName }}
+                  {{ "BEFORE" | translate }}?*</label
+                >
+                <radio-btn
+                  [labelArr]="[OPTION.YES.LABEL, OPTION.NO.LABEL]"
+                  formControlName="isFirstVisit"
+                ></radio-btn>
+                <div
+                  *ngIf="hasError('required', 'isFirstVisit')"
+                  class="validationMsg"
+                >
+                  *{{ "REQUIRED" | translate }}
+                </div>
+              </div>
+              <hr />
+
+              <div id="date_div" class="form-group">
+                <app-date-picker
+                  id="btn_date_picker"
+                  [label]="'SELECT_DATE'"
+                  [fieldsRequired]="true"
+                  [formControlName]="'date'"
+                  [minDate]="minDate"
+                  [placeholder]="'DD_MM_YY'"
+                  (changeEvent)="getDentistSlots()"
+                ></app-date-picker>
+              </div>
+
+              <div style="padding: 0px 0px 20px 0px;">
+                <label class="radio_label">
+                  {{ "APPOINTMENT_TYPE" | translate }} </label>
+
+                  <radio-btn *ngIf="familyDetail && !familyDetail[0].guest"
+                    [labelArr]="[visitingType.VIRTUAL.LABEL, visitingType.INOFFICE.LABEL]"
+                    [checked]="bookingForm.get('visitingType').value"
+                    formControlName="visitingType"
+                    (click)="radioHandleChange()"
+                  ></radio-btn> 
+                  <radio-btn *ngIf="familyDetail && familyDetail[0].guest"
+                    [labelArr]="[visitingType.INOFFICE.LABEL]"
+                    [checked]="bookingForm.get('visitingType').value"
+                    formControlName="visitingType"
+                    (click)="radioHandleChange()"
+                  ></radio-btn>  
+                  <div
+                  *ngIf="hasError('required', 'visitingType')"
+                  class="validationMsg"
+                >
+                  *{{ "REQUIRED" | translate }}
+                </div>               
+              </div>
+
+              <div class="form-group time">
+                <label *ngIf="slots?.length" for=""
+                  >{{ "SELECT_TIME_SLOT" | translate }}*</label
+                >
+                <div
+                  class="time-container"
+                  [ngClass]="{ 'no-scroll': !slots?.length }"
+                >
+                  <span
+                    *ngFor="let slot of slots; let i = index"
+                    [id]="'time_slot' + i"
+                    class="time-tag"
+                    [ngClass]="{ 'slot-active': selectedSlot == slot.time }"
+                    (click)="slotSelected(slot.time)"
+                  >
+                    {{ slot.time | date: "h:mm a" }}
+                  </span>
+                  <div *ngIf="!slotAvailability && nextAvailableDate">
+                    {{ "DOCTOR_NEXT_AVAILABLE_DATE" | translate }}
+                    <b>{{ nextAvailableDate | date: "M/d/y" }}</b>
+                  </div>
+                  <div *ngIf="!slotAvailability && !nextAvailableDate">
+                    {{ "NO_SLOTS_ARE_AVAILABE_FOR_THE_DOCTOR" | translate }}
+                  </div>
+                </div>
+                <div *ngIf="slots?.length && errorMsg" class="validationMsg">
+                  {{ errorMsg | translate }}
+                </div>
+              </div>
+              <div>
+                <button
+                  id="book_appointment_btn"
+                  (click)="bookAppointment()"
+                  class="btn btn-primary btn-block"
+                >
+                  {{ "BOOK_AN_APPOINTMENT" | translate }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- col ends here-->
+    </div>
+    <!-- row ends here-->
+  </div>
+  <!-- container ends here-->
+</section>
+<!-- section ends here-->

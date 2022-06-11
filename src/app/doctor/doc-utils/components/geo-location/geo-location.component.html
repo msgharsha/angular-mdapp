@@ -1,0 +1,9 @@
+<div
+  class="location-wrapper"
+  [ngClass]="{
+    'gps-on': locationFetched,
+    right: showIconOnRight,
+    left: !showIconOnRight
+  }"
+  (click)="requestLocation()"
+></div>

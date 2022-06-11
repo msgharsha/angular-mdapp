@@ -1,0 +1,28 @@
+@import "../../../assets/sass/variable";
+
+.card-title {
+  font-size: 14px;
+  font-weight: $font-semibold;
+  color: $deep-blue;
+  margin-bottom: 10px;
+}
+.tab-content-card {
+  padding: 17px;
+  border: 1px solid #e5eaeb;
+  border-radius: 6px;
+}
+.text-label {
+  font-size: 12px;
+  font-weight: $font-semibold;
+  color: #345766;
+  margin-bottom: 5px;
+}
+textarea {
+  height: 122px;
+}
+.card-button {
+  text-align: right;
+  .btn {
+    min-width: 160px;
+  }
+}

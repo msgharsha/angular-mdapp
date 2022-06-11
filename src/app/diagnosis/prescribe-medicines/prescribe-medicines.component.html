@@ -1,0 +1,112 @@
+<div class="row heading-row" >
+  <div class="col-12" style="text-align: right;padding: 15px;">
+    <button type="button" class="btn btn-secondary" (click)="addPrescription()" style="margin-left: 20px;">
+      {{ "ADD_PRESCRIPTION" | translate }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="detailedPrescriptions()" style="margin-left: 20px;">
+      {{ "DETAILED_PRESCRIPTION" | translate }}
+    </button>
+  </div>
+</div>
+<div class="pharmacy-table">
+  <table class="table" aria-describedby="table" *ngIf="allPrescriptionData && allPrescriptionData.length && !isProceed">
+    <thead>
+      <tr>
+        <th id="amount">{{ "PRESCRIPTION_ID" | translate }}</th>
+        <th id="planname">{{ "COMMENTS_ANY" | translate }}</th>
+        <th id="action">{{"DOWNLOAD" | translate}}</th>
+        <th id="action1">{{"VIEW" | translate}}/{{"EDIT" | translate}}</th>
+      </tr>
+      <tr>
+        <td style="height: 10px"></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prescription of allPrescriptionData let i= index">
+        <td>{{ i+1 }}</td>
+        <td>{{ prescription.comments }}</td>
+        <td><button class="view-button">
+            <a target="_blank" class="print" style="padding-top: 15px;padding-left: 15px;"
+              [href]="prescription.downloadUrl"></a>
+          </button></td>
+        <td><button class="view-button">
+            <a target="_blank" class="view-icon" (click)="viewPrescription(prescription.prescriptionId)"></a>
+          </button></td>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="prescriptionFound">
+  <div class="tab-content-card" *ngIf="!isProceed; else selectedPrescriptions">
+    <div class="row">
+      <!-- <div class="col-5">
+        <b>
+          Note : You can always add new drug or medicine, if you don’t find them on system
+        </b>
+        </div> -->
+      <div class="col-12">
+        <span>
+          <b>
+            {{ "ADD_DRUG_NOTE" | translate }}
+          </b>
+          <p class="add-icon-button btn-icon-margin" (click)="addDrug()">{{ "ADD_DRUG" | translate }}</p>
+        </span>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="prescribe-medicine-wrap">
+          <div class="left-wrapper doted-line">
+            <div class="search-container">
+              <input type="text" placeholder="{{ 'SEARCH_MEDICINE' | translate }}" name="search"
+                (input)="onSearch($event)" />
+              <button type="submit" class="search-icon"></button>
+            </div>
+            <div class="search-box-list">
+              <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+                [infiniteScrollContainer]="'.search-box-list'" (scrolled)="onScroll($event)" [fromRoot]="true">
+                <label class="custom-checkbox" *ngFor="let medicine of medicineList">
+                  <input type="checkbox" [checked]="selectedMedicineIDs[medicine.id]"
+                    (change)="onMedicineSelect(medicine)" />
+                  <span>{{ medicine.medicineName }}</span>
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="right-wrapper">
+            <div class="form-group">
+              <label class="text-label text-lable-title">{{
+                "SELECTED_MEDICINES" | translate
+                }}</label>
+              <div class="selected-medicine" *ngFor="let medicine of selectedMedicine">
+                <span>{{ transform(medicine.medicineName) }}</span>
+                <img src="./../../../assets/images/close-icon.svg" (click)="onMedicineSelect(medicine)"
+                  alt="close-icon" />
+              </div>
+              <div *ngIf="!selectedMedicine.length">
+                <p class="no-selected">
+                  {{ "NO_MEDICINE_SELECTED" | translate }}
+                </p>
+              </div>
+            </div>
+            <div class="card-button">
+              <button type="button" (click)="save()" class="btn btn-secondary">
+                {{ "PROCEED" | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #selectedPrescriptions>
+  <p class="card-title back-title" *ngIf="backButton" (click)="isProceed = !isProceed">
+    {{ "SELECTED_MEDICINES" | translate }}
+  </p>
+  <app-selected-medicine [selectedMedicine]="selectedMedicine" [prescriptionData]="prescriptionData"
+    (onSuccess)="backButton = false" (onSaveFromList)="getPrescriptionData(true)"></app-selected-medicine>
+</ng-template>
