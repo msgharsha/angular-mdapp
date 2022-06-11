@@ -1,0 +1,32 @@
+@import "../../../../styles.scss";
+.input-stacked-label {
+  .form-control[readonly] {
+    border: none;
+    &:focus {
+      border: none;
+    }
+  }
+}
+
+.input-stacked-label .all-tab input.empty[readonly]:focus + label {
+  transition: none;
+  transform: none;
+  font-size: $font-body;
+  font-weight: $font-regular;
+}
+
+span.icon {
+  width: 25px;
+  height: 25px;
+  display: block;
+  background-image: url("/assets/images/sprite.png");
+  background-size: 650px;
+  position: relative;
+  z-index: 1;
+  &.location {
+    background-position: -10px -1257px;
+  }
+  &.location-selected {
+    background-position: -45px -1257px;
+  }
+}

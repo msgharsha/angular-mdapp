@@ -1,0 +1,590 @@
+<!--  Address Autocomplete Starts -->
+<div *ngIf="!onProfilePage" [formGroup]="addressForm" class="default-error">
+  <div class="row d-flex">
+    <div class="col-lg-12 left-column">
+      <div class="form-group m-btm30">
+        <div class="input-stacked-label">
+          <div class="all-tab">
+            <div class="email-input">
+              <div class="form-control">
+                <input
+                  [id]="'officeAddress' + i"
+                  name="address_autocomplete"
+                  [ngClass]="{
+                    'not-empty': addressForm.get('addressLine1').value?.length,
+                    empty: !addressForm.get('addressLine1').value?.length
+                  }"
+                  (input)="addressChanged($event)"
+                  formControlName="addressLine1"
+                  placeholder="{{ 'ADDRESS_LINE' | translate }} 1*"
+                />
+                <span
+                  *ngIf="!addressForm.controls.addressLine1.value"
+                  class="icon location"
+                ></span>
+                <span
+                  *ngIf="addressForm.controls.addressLine1.value"
+                  class="icon location-selected"
+                ></span>
+              </div>
+              <div
+                *ngIf="
+                  hasRequiredError('addressLine1') ||
+                  hasRequiredError('lat') ||
+                  hasRequiredError('lng')
+                "
+                class="validation"
+              >
+                *{{ "PLEASE_ENTER_VALID_LOCATION" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Address Autocomplete Ends -->
+
+  <div class="row d-flex">
+    <div class="col-lg-12 left-column">
+      <div class="form-group m-btm30">
+        <div class="input-stacked-label">
+          <div class="all-tab">
+            <div class="email-input">
+              <div class="form-control">
+                <input
+                  name="addressLine2"
+                  (keyup)="updateChange()"
+                  [ngClass]="{
+                    'not-empty': addressForm.get('addressLine2').value?.length,
+                    empty: !addressForm.get('addressLine2').value?.length
+                  }"
+                  id="addressLine2"
+                  formControlName="addressLine2"
+                  placeholder="{{ 'ADDRESS_LINE' | translate }} 2"
+                />
+                <span
+                  *ngIf="!addressForm.controls.addressLine2.value"
+                  class="icon location"
+                ></span>
+                <span
+                  *ngIf="addressForm.controls.addressLine2.value"
+                  class="icon location-selected"
+                ></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row d-flex">
+    <div class="col-lg-6 left-column">
+      <div class="form-group">
+        <div class="input-stacked-label">
+          <div class="all-tab">
+            <div class="email-input qantity">
+              <div class="form-control">
+                <input
+                  type="text"
+                  (keyup)="updateChange()"
+                  [ngClass]="{
+                    'not-empty': addressForm.get('city').value?.length,
+                    empty: !addressForm.get('city').value?.length
+                  }"
+                  formControlName="city"
+                  id="city"
+                  [readonly]="
+                    isEditable
+                      ? false
+                      : true ||
+                        (fieldsRequired
+                          ? !placeSelected || placeSelected.city
+                          : true)
+                  "
+                  placeholder="City*"
+                />
+                <span
+                  *ngIf="!addressForm.controls.city.value"
+                  class="icon location"
+                ></span>
+                <span
+                  *ngIf="addressForm.controls.city.value"
+                  class="icon location-selected"
+                ></span>
+              </div>
+              <div
+                *ngIf="formSubmitted && hasRequiredError('city')"
+                class="validation"
+              >
+                *{{ "REQUIRED" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 right-column">
+      <div class="form-group">
+        <div class="input-stacked-label">
+          <div class="all-tab">
+            <div class="email-input qantity">
+              <div class="form-control">
+                <input
+                  id="province"
+                  type="text"
+                  (keyup)="updateChange()"
+                  [ngClass]="{
+                    'not-empty': addressForm.get('province').value?.length,
+                    empty: !addressForm.get('province').value?.length
+                  }"
+                  formControlName="province"
+                  [readonly]="
+                    isEditable
+                      ? false
+                      : true ||
+                        (fieldsRequired
+                          ? !placeSelected || placeSelected.province
+                          : true)
+                  "
+                  placeholder="Province*"
+                />
+                <span
+                  *ngIf="!addressForm.controls.province.value"
+                  class="icon location"
+                ></span>
+                <span
+                  *ngIf="addressForm.controls.province.value"
+                  class="icon location-selected"
+                ></span>
+              </div>
+              <div
+                *ngIf="formSubmitted && hasRequiredError('province')"
+                class="validation"
+              >
+                *{{ "REQUIRED" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row d-flex">
+    <div class="col-lg-12 left-column">
+      <div class="form-group">
+        <div class="input-stacked-label">
+          <div class="all-tab">
+            <div class="email-input qantity">
+              <div class="form-control">
+                <input
+                  type="text"
+                  (keyup)="updateChange()"
+                  [ngClass]="{
+                    'not-empty': addressForm.get('postalCode').value?.length,
+                    empty: !addressForm.get('postalCode').value?.length
+                  }"
+                  formControlName="postalCode"
+                  id="postalCode"
+                  [readonly]="
+                    isEditable
+                      ? false
+                      : true ||
+                        (fieldsRequired
+                          ? !placeSelected ||
+                            placeSelected.postalCode ||
+                            placeSelected.postalCode
+                          : true)
+                  "
+                  placeholder="Postal Code*"
+                />
+                <span
+                  *ngIf="!addressForm.controls.postalCode.value"
+                  class="icon location"
+                ></span>
+                <span
+                  *ngIf="addressForm.controls.postalCode.value"
+                  class="icon location-selected"
+                ></span>
+              </div>
+              <div
+                *ngIf="formSubmitted && hasRequiredError('postalCode')"
+                class="validation"
+              >
+                *{{ "REQUIRED" | translate }}
+              </div>
+              <div
+                *ngIf="
+                  formSubmitted &&
+                  (hasError('maxlength', 'postalCode') ||
+                    hasError('minlength', 'postalCode') ||
+                    hasError('pattern', 'postalCode'))
+                "
+                class="validation"
+              >
+                *{{ "INVALID_ZIP_CODE" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="info-wrap">
+  <div class="form-wrap">
+    <div *ngIf="onProfilePage && !onAddressPage" [formGroup]="addressForm">
+      <div class="address-detail">
+        <h3>{{ "CLINIC_ADDRESS" | translate }}</h3>
+        <div class="row">
+          
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="clinicName">{{ "CLINIC_NAME" | translate }}*</label>
+              <input id="clinicName" (keyup)="updateChange()" formControlName="clinicName" type="text" class="form-control"
+                placeholder="{{ 'ENTER_CLINIC_NAME' | translate }}" />
+                <div *ngIf="formSubmitted && hasRequiredError('clinicName')" class="validation">
+                *{{ "REQUIRED" | translate }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 p-r-8">
+            <div class="form-group">
+              <label for="email">{{ "ADDRESS_LINE" | translate }} 1*</label>
+              <input
+                [id]="'officeAddress' + i"
+                name="address_autocomplete"
+                [ngClass]="{
+                  'not-empty': addressForm.get('addressLine1').value?.length,
+                  empty: !addressForm.get('addressLine1').value?.length
+                }"
+                (input)="addressChanged($event)"
+                formControlName="addressLine1"
+                placeholder="{{ 'ENTER_ADDRESS_LINE' | translate }} 1"
+                class="form-control"
+              />
+              <div
+                *ngIf="
+                  hasRequiredError('addressLine1') ||
+                  hasRequiredError('lat') ||
+                  hasRequiredError('lng')
+                "
+                class="validation"
+              >
+                *{{ "PLEASE_ENTER_VALID_LOCATION" | translate }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 p-lr-8">
+            <div class="form-group">
+              <label for="email">{{ "ADDRESS_LINE" | translate }} 2</label>
+              <input
+                name="addressLine2"
+                (keyup)="updateChange()"
+                [ngClass]="{
+                  'not-empty': addressForm.get('addressLine2').value?.length,
+                  empty: !addressForm.get('addressLine2').value?.length
+                }"
+                id="addressLine2"
+                formControlName="addressLine2"
+                placeholder="{{ 'ENTER_ADDRESS_LINE' | translate }} 2"
+                class="form-control"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-4 p-l-8">
+            <div class="form-group">
+              <label for="email">{{ "CITY" | translate }}*</label>
+              <input
+                type="text"
+                (keyup)="updateChange()"
+                [ngClass]="{
+                  'not-empty': addressForm.get('city').value?.length,
+                  empty: !addressForm.get('city').value?.length
+                }"
+                formControlName="city"
+                id="city"
+                [readonly]="
+                  isEditable
+                    ? false
+                    : true ||
+                      (fieldsRequired
+                        ? !placeSelected || placeSelected.city
+                        : true)
+                "
+                placeholder="{{ 'ENTER_CITY' | translate }}"
+                class="form-control"
+              />
+              <div
+                *ngIf="formSubmitted && hasRequiredError('city')"
+                class="validation"
+              >
+                *{{ "REQUIRED" | translate }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 p-r-8">
+            <div class="form-group select-wrap">
+              <label for="Birth">{{ "PROVINCE" | translate }}*</label>
+              <input
+                id="province"
+                type="text"
+                (keyup)="updateChange()"
+                [ngClass]="{
+                  'not-empty': addressForm.get('province').value?.length,
+                  empty: !addressForm.get('province').value?.length
+                }"
+                formControlName="province"
+                [readonly]="
+                  isEditable
+                    ? false
+                    : true ||
+                      (fieldsRequired
+                        ? !placeSelected || placeSelected.province
+                        : true)
+                "
+                placeholder="{{ 'ENTER_PROVINCE' | translate }}"
+                class="form-control"
+              />
+              <div
+                *ngIf="formSubmitted && hasRequiredError('province')"
+                class="validation"
+              >
+                *{{ "REQUIRED" | translate }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 p-lr-8">
+            <div class="form-group">
+              <label for="email">{{ "POSTAL_CODE" | translate }}*</label>
+              <input
+                type="text"
+                (keyup)="updateChange()"
+                [ngClass]="{
+                  'not-empty': addressForm.get('postalCode').value?.length,
+                  empty: !addressForm.get('postalCode').value?.length
+                }"
+                formControlName="postalCode"
+                id="postalCode"
+                [readonly]="
+                  isEditable
+                    ? false
+                    : true ||
+                      (fieldsRequired
+                        ? !placeSelected ||
+                          placeSelected.postalCode ||
+                          placeSelected.postalCode
+                        : true)
+                "
+                placeholder="{{ 'ENTER_POSTALCODE' | translate }}"
+                class="form-control"
+                maxlength="7"
+              />
+              <div
+                *ngIf="formSubmitted && hasRequiredError('postalCode')"
+                class="validation"
+              >
+                *{{ "REQUIRED" | translate }}
+              </div>
+              <div
+                *ngIf="
+                  formSubmitted &&
+                  (hasError('maxlength', 'postalCode') ||
+                    hasError('minlength', 'postalCode') ||
+                    hasError('pattern', 'postalCode'))
+                "
+                class="validation"
+              >
+                *Invalid Zip Code
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="clinicFax">{{ "FAX" | translate }}</label>
+              <input id="clinicFax" (keyup)="updateChange()" formControlName="clinicFax" [mask]="'000-000-0000'" type="text" class="form-control"
+                placeholder="{{ 'ENTER_FAX' | translate }}" />
+            </div>
+          </div>
+
+          
+
+
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="onAddressPage" [formGroup]="addressForm">
+      <div class="address-detail">
+        <div class="row">
+          <div class="col-md-4 p-r-8">
+            <div class="form-group">
+              <label for="email">{{ "ADDRESS_LINE" | translate }} 1*</label>
+              <input
+                [id]="'officeAddress' + i"
+                name="address_autocomplete"
+                [ngClass]="{
+                  'not-empty': addressForm.get('addressLine1').value?.length,
+                  empty: !addressForm.get('addressLine1').value?.length
+                }"
+                (input)="addressChanged($event)"
+                formControlName="addressLine1"
+                placeholder="{{ 'ENTER_ADDRESS_LINE' | translate }} 1"
+                class="form-control"
+              />
+              <div
+                *ngIf="
+                  hasRequiredError('addressLine1') ||
+                  hasRequiredError('lat') ||
+                  hasRequiredError('lng')
+                "
+                class="validation"
+              >
+                *{{ "PLEASE_ENTER_VALID_LOCATION" | translate }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 p-lr-8">
+            <div class="form-group">
+              <label for="email">{{ "ADDRESS_LINE" | translate }} 2</label>
+              <input
+                name="addressLine2"
+                (keyup)="updateChange()"
+                [ngClass]="{
+                  'not-empty': addressForm.get('addressLine2').value?.length,
+                  empty: !addressForm.get('addressLine2').value?.length
+                }"
+                id="addressLine2"
+                formControlName="addressLine2"
+                placeholder="{{ 'ENTER_ADDRESS_LINE' | translate }} 2"
+                class="form-control"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-4 p-l-8">
+            <div class="form-group">
+              <label for="email">{{ "CITY" | translate }}*</label>
+              <input
+                type="text"
+                (keyup)="updateChange()"
+                [ngClass]="{
+                  'not-empty': addressForm.get('city').value?.length,
+                  empty: !addressForm.get('city').value?.length
+                }"
+                formControlName="city"
+                id="city"
+                [readonly]="
+                  isEditable
+                    ? false
+                    : true ||
+                      (fieldsRequired
+                        ? !placeSelected || placeSelected.city
+                        : true)
+                "
+                placeholder="{{ 'ENTER_CITY' | translate }}"
+                class="form-control"
+              />
+              <div
+                *ngIf="formSubmitted && hasRequiredError('city')"
+                class="validation"
+              >
+                *{{ "REQUIRED" | translate }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 p-r-8">
+            <div class="form-group select-wrap">
+              <label for="Birth">{{ "PROVINCE" | translate }}*</label>
+              <input
+                id="province"
+                type="text"
+                (keyup)="updateChange()"
+                [ngClass]="{
+                  'not-empty': addressForm.get('province').value?.length,
+                  empty: !addressForm.get('province').value?.length
+                }"
+                formControlName="province"
+                [readonly]="
+                  isEditable
+                    ? false
+                    : true ||
+                      (fieldsRequired
+                        ? !placeSelected || placeSelected.province
+                        : true)
+                "
+                placeholder="{{ 'ENTER_PROVINCE' | translate }}"
+                class="form-control"
+              />
+              <div
+                *ngIf="formSubmitted && hasRequiredError('province')"
+                class="validation"
+              >
+                *{{ "REQUIRED" | translate }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 p-lr-8">
+            <div class="form-group">
+              <label for="email">{{ "POSTAL_CODE" | translate }}*</label>
+              <input
+                type="text"
+                (keyup)="updateChange()"
+                [ngClass]="{
+                  'not-empty': addressForm.get('postalCode').value?.length,
+                  empty: !addressForm.get('postalCode').value?.length
+                }"
+                formControlName="postalCode"
+                id="postalCode"
+                [readonly]="
+                  isEditable
+                    ? false
+                    : true ||
+                      (fieldsRequired
+                        ? !placeSelected ||
+                          placeSelected.postalCode ||
+                          placeSelected.postalCode
+                        : true)
+                "
+                placeholder="{{ 'ENTER_POSTALCODE' | translate }}"
+                class="form-control"
+                maxlength="7"
+              />
+              <div
+                *ngIf="formSubmitted && hasRequiredError('postalCode')"
+                class="validation"
+              >
+                *{{ "REQUIRED" | translate }}
+              </div>
+              <div
+                *ngIf="
+                  formSubmitted &&
+                  (hasError('maxlength', 'postalCode') ||
+                    hasError('minlength', 'postalCode') ||
+                    hasError('pattern', 'postalCode'))
+                "
+                class="validation"
+              >
+                *Invalid Zip Code
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
