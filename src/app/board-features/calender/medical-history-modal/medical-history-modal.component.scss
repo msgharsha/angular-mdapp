@@ -1,0 +1,40 @@
+@import "../../../../assets/sass/variable";
+
+// Modal css
+
+.dialog-wrapper {
+  box-shadow: 0 0 22px 0 rgba(46, 51, 138, 0.13);
+  background-color: $white-color;
+  border-radius: 10px;
+  overflow: auto;
+  padding: 30px;
+  border: none;
+
+  width: 100%;
+  max-height: 90vh;
+  .heading-wrapper {
+    display: flex;
+    justify-content: space-between;
+    h1 {
+      margin: 0;
+      font-size: $font-xl;
+      color: $light-gray4;
+      font-weight: $font-semi-bold;
+      margin-bottom: 20px;
+    }
+    .close-icon {
+      background: url("/assets/images/modal-close.png");
+      width: 24px;
+      height: 24px;
+      background-size: cover;
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .dialog-wrapper {
+    width: 100%;
+    padding: 20px;
+  }
+}

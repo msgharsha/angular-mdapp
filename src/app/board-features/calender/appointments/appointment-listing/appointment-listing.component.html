@@ -1,0 +1,126 @@
+<div class="container-fluid">
+  <div class="row appointment-wrapper gap-p-10">
+    <div
+      class="appointment-wrapper__cards"
+      *ngIf="appointmentList && appointmentList.length"
+    >
+      <div
+        class="info-card"
+        *ngFor="
+          let booking of appointmentList
+            | paginate
+              : {
+                  itemsPerPage: itemsPerPage,
+                  currentPage: currentPage,
+                  totalItems: count
+                }
+        "
+      >
+        <div class="info-inner-wrapper" id="href_dentist_profile" [ngStyle]="{'background-color':(booking.appointmentType == 1) ? '#b9deef' : '#c9fdc9' }" >
+          <div class="left-avatar-part">
+            <div class="left-avtar-section">
+              <div
+                *ngIf="isMultiSelectedAllowed && type === 'upcoming'"
+                class="list-checkbox"
+              >
+                <input
+                  type="checkbox"
+                  [checked]="checked"
+                  id="{{ booking.id }}"
+                  class=""
+                  (click)="checkboxEvent($event, booking.id)"
+                />
+              </div>
+              <div class="avtar-section">
+                <img
+                  [src]="booking.profileImage"
+                  #img
+                  (error)="img.src = '/assets/images/profile-img.svg'"
+                  class="img-responsive"
+                  alt="profile_image"
+                />
+              </div>
+            </div>
+            <div class="right-info-section">
+              <div class="patient-info-div">
+                <div class="heading-wrapper">
+                  <h5 *ngIf="booking?.name">
+                    <a
+                      href="javascript:void(0);"
+                      (click)="
+                        openMedicalHistory(booking?.id, booking?.patientUserId)
+                      "
+                      >{{ booking?.name }}</a
+                    >
+                  </h5>
+                  <span>
+                    <img
+                      class="info-legend-image"
+                      *ngIf="booking.practiceMethod?.toLowerCase() == 'public'"
+                      src="/../../assets/images/stethoscope-red.svg"
+                      alt="method"
+                    />
+                    <img
+                      class="info-legend-image"
+                      *ngIf="booking.practiceMethod?.toLowerCase() == 'private'"
+                      src="/../../assets/images/stethoscope.svg"
+                      alt="method"
+                    />
+                    <small
+                      class="info-legend"
+                      [class.info-legend-red]="
+                        booking.practiceMethod?.toLowerCase() == 'public'
+                      "
+                      >{{ getPracticeMethod(booking.practiceMethod) }}</small
+                    >
+                  </span><span><small>({{(booking.isGuest ? "GUEST_PATIENT" : "SUBSCRIBED_PATIENT") | translate}})</small></span>
+                </div>
+                <p class="ris-med-text info-post">
+                  {{ booking?.gender?.toUpperCase() | translate }},&nbsp;{{
+                    booking?.age
+                  }}{{ "YRS" | translate }}
+                </p>
+                <span>{{getAppointmentType(booking.appointmentType) | translate}}</span>
+                <p class="ris-btm-text">
+                  {{ setStartDateAndTime("date", booking?.appointmentDate) }} |
+                  {{ setStartDateAndTime("time", booking?.appointmentDate) }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="combination-icon" [hidden]="type =='pending' && userData.subAccount == true" >
+            <button
+              (click)="goToAppointment(booking?.id)"
+              class="btn btn-secondary"
+            >
+              {{ "VIEW_APPOINTMENTS" | translate }}
+            </button>
+            <div>{{ booking?.reason }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="!(appointmentList && appointmentList.length)"
+      class="center-text-div"
+    >
+      {{ "NO_DATA_FOUND" | translate }}
+    </div>
+  </div>
+
+  <div
+    class="row"
+    *ngIf="type !== 'pending' && appointmentList && appointmentList.length"
+  >
+    <div class="col-lg-12">
+      <div class="pagination-wrapper">
+        <pagination-controls
+          class="pl-0"
+          (pageChange)="pageChangedEvent($event)"
+          previousLabel="{{ 'PREVIOUS' | translate }}"
+          nextLabel="{{ 'NEXT' | translate }}"
+        ></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

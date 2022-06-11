@@ -1,0 +1,188 @@
+<div class="content-area">
+  <app-calendar-header [fullDivRef]="printRef"></app-calendar-header>
+
+  <div id="print-section" class="calendar-container form-card" #fullscreen>
+    <!--- Calendar Header section --------->
+    <div class="row justify-content-between cal-controls">
+      <div class="col-md-auto d-flex align-items-center mr-auto">
+        <div class="btn-group">
+          <div
+            class="btn calendar-btn prev"
+            mwlCalendarPreviousView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+          ></div>
+          <div
+            class="btn calendar-btn next"
+            mwlCalendarNextView
+            [view]="view"
+            [(viewDate)]="viewDate"
+            (viewDateChange)="closeOpenMonthViewDay()"
+          ></div>
+        </div>
+        <div class="col-md-auto">
+          <h5>
+            {{
+              viewDate
+                | calendarDate
+                  : view + "ViewTitle"
+                  : this.localStorageService.getItem("language")
+            }}
+          </h5>
+        </div>
+      </div>
+      <div class="col-md-auto">
+        <ul class="cal-legends">
+          <li>
+            <span class="legend-box virtual"></span>
+            <span>{{ "VIRTUAL" | translate }}</span>
+          </li>
+          <li>
+            <span class="legend-box inoffice"></span>
+            <span>{{ "INOFFICE" | translate }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-3"></div>
+      <div class="col-md-auto">
+        <button type="button" (click)="confirmDeleteAllSlot()" class="btn btn-ghost" >{{ "DELETE_ALL" | translate }}</button>
+      </div>
+      <div class="col-md-auto">
+        <select (change)="setView($event)" class="form-control">
+          <option value="MONTH">{{ "MONTHLY" | translate }}</option>
+          <option value="WEEK">{{ "WEEKLY" | translate }}</option>
+          <option value="DAY">{{ "DAILY" | translate }}</option>
+        </select>
+      </div>
+    </div>
+
+    <form *ngIf="isPracticeAdmin" [formGroup]="filterForm" novalidate>
+      <div class="row justify-content-end cal-controls">
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+      </div>
+    </form>
+
+    <!-- ------calendar events---------- -->
+    <ng-template #customCellTemplate let-day="day" let-locale="locale">
+      <!-- ------- Popover for Provider -------- -->
+      <app-appointment-provider-date-template
+        [day]="day"
+        [locale]="locale"
+        (fetchEvents)="fetchEvents()"
+      >
+      </app-appointment-provider-date-template>
+
+      <!--------- Popover for Practice Admin --------->
+    </ng-template>
+
+    <!---------- Calendar compoents Monthly, Weekly and day view --------->
+    <div
+      *ngIf="appointmentService.getAppointmentToggleView()"
+      [ngSwitch]="view"
+    >
+      <mwl-calendar-month-view
+        *ngSwitchCase="CalendarView.Month"
+        [viewDate]="viewDate"
+        [events]="events"
+        [locale]="this.localStorageService.getItem('language')"
+        [refresh]="refresh"
+        [cellTemplate]="customCellTemplate"
+        (beforeViewRender)="beforeMonthViewRender($event)"
+      >
+      </mwl-calendar-month-view>
+      <mwl-calendar-week-view
+        *ngSwitchCase="CalendarView.Week"
+        [viewDate]="viewDate"
+        [events]="events"
+        [locale]="this.localStorageService.getItem('language')"
+        [refresh]="refresh"
+        (beforeViewRender)="beforeWeekViewRender($event)"
+        [cellTemplate]="customCcustomCellTemplateellTemplate"
+      >
+      </mwl-calendar-week-view>
+      <mwl-calendar-day-view
+        *ngSwitchCase="CalendarView.Day"
+        [viewDate]="viewDate"
+        [events]="events"
+        [refresh]="refresh"
+        (beforeViewRender)="beforeDayViewRender($event)"
+        (eventClicked)="eventClicked($event.event)"
+      >
+      </mwl-calendar-day-view>
+    </div>
+
+    <div
+      *ngIf="appointmentService.getAppointmentToggleView()"
+      [ngSwitch]="view"
+    ></div>
+
+    <div
+      *ngIf="!appointmentService.getAppointmentToggleView()"
+      class="relative-tab"
+    >
+      <mat-tab-group
+        #tab
+        [selectedIndex]="tabIndex"
+        (selectedTabChange)="tabClick($event)"
+        mat-align-tabs="start"
+      >
+        <mat-tab label="{{ 'UPCOMING' | translate }}">
+          <ng-template matTabContent>
+            <app-appointment-listing
+              [fromCalendarView]="true"
+              [view]="view"
+              [viewDate]="viewDate"
+              type="upcoming"
+              #upcomingAppointment
+            >
+            </app-appointment-listing>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="{{ 'PAST' | translate }}">
+          <ng-template matTabContent>
+            <app-appointment-listing
+              [fromCalendarView]="true"
+              [view]="view"
+              [viewDate]="viewDate"
+              type="past"
+            >
+            </app-appointment-listing>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="{{ 'CANCELLED' | translate }}">
+          <ng-template matTabContent>
+            <app-appointment-listing
+              [fromCalendarView]="true"
+              [view]="view"
+              [viewDate]="viewDate"
+              type="cancelled"
+            >
+            </app-appointment-listing>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="{{ 'PENDING' | translate }}">
+          <ng-template matTabContent>
+            <app-appointment-listing
+              [fromCalendarView]="true"
+              [view]="view"
+              [viewDate]="viewDate"
+              type="pending"
+            >
+            </app-appointment-listing>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+      <div *ngIf="tab.selectedIndex == 0" class="del-appt-btn">
+        <button
+          [disabled]="deleteAppointments.length < 1"
+          class="btn btn-primary"
+          (click)="onDelete()"
+        >
+          {{ "DELETE_SELECTED" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<div class="sidebar">
+  <div class="rectangle">
+    <div class="Medical-History">{{ "MEDICAL_HISTORY" | translate }}</div>
+    <div class="path" (click)="cancelDetails()"></div>
+  </div>
+
+  <div class="Latest-Prescription-div">
+    <div class="Latest-Prescription">
+      {{ "LATEST_PRESCRIPTION" | translate }}
+    </div>
+  </div>
+
+  <div class="profile">
+    <div class="profile-1">
+      <img
+        class="display-picture"
+        [src]="
+          presDetails.expert.profileImageUrl
+            ? presDetails.expert.profileImageUrl
+            : '/assets/images/profile-avtar.png'
+        "
+        alt=""
+      />
+    </div>
+    <div class="profile-2">
+      <div class="profile-name">
+        {{ presDetails.expert.salutation }} {{ presDetails.expert.name }}
+      </div>
+      <div class="profile-designation">{{ presDetails.expert.expertType }}</div>
+    </div>
+  </div>
+
+  <div class="finding-and-diagnosis-div">
+    <div class="finding-and-diagnosis">
+      {{ "FINDING_AND_DIAGNOSIS" | translate }}
+    </div>
+
+    <div class="Present-Complaints">
+      <h6 class="Present-Complaints-heading">
+        {{ "PRESENT_COMPLAINTS" | translate }}
+      </h6>
+      <div class="Present-Complaints-desc">
+        {{ presDetails.presentComplaints }}
+      </div>
+    </div>
+
+    <div class="Present-Complaints">
+      <h6 class="Present-Complaints-heading">{{ "FINDING" | translate }}</h6>
+      <div class="Present-Complaints-desc">
+        {{ presDetails.findings }}
+      </div>
+    </div>
+
+    <div class="Present-Complaints">
+      <h6 class="Present-Complaints-heading">{{ "DIAGNOSIS" | translate }}</h6>
+      <div class="Present-Complaints-desc">
+        {{ presDetails.diagnosis }}
+      </div>
+    </div>
+  </div>
+
+  <div class="medicines-and-tests-div">
+    <h3 class="medicines-and-tests-heading">
+      {{ "MEDICINES_AND_TESTS" | translate }}
+    </h3>
+
+    <div
+      class="doctor-prescription download-icon"
+      *ngIf="presDetails.prescriptionUrl"
+    >
+      <a [href]="presDetails.prescriptionUrl" target="_blank" download>
+        <img src="../../../../../assets/images/download-2.svg" alt="" />
+        {{ "DOWNLOAD" | translate }}
+      </a>
+    </div>
+    <div *ngIf="!presDetails.prescriptionUrl">
+      <div
+        class="medicines"
+        *ngFor="let presItem of presDetails.prescriptionItem"
+      >
+        <div class="medicine-name">{{ presItem.name }}</div>
+        <div class="medicine-prescription">{{ presItem.notes }}</div>
+      </div>
+    </div>
+  </div>
+</div>

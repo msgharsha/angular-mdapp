@@ -1,0 +1,306 @@
+@import "../../../../../../assets/sass/variable";
+@import "../../../../../../assets/sass/mixins";
+
+.tab-content-card {
+  border-radius: 6px;
+  padding: 38px 30px 30px;
+  border: 1px solid #e5eaeb;
+  .invoice-header {
+    @include flexbox;
+    @include justify-content(space-between);
+    .logo {
+      width: 89px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.invoice-table {
+  @include flexbox;
+  .invoice-inner-section {
+    .tr {
+      @include flexbox;
+      .td {
+        border: 1px solid $light-gray2;
+        border-bottom: none;
+        padding: 8px 8px 6px;
+        color: $light-gray4;
+        font-size: $font-sms;
+        line-height: 1;
+        min-width: 136px;
+        width: 45%;
+        @include flexbox;
+        @include align-items(center);
+        & + .td {
+          background: $light-gray2;
+          margin-left: 4px;
+          width: 158px;
+          color: $deep-blue;
+          font-weight: $font-semi-bold;
+          line-height: 1.33;
+          word-break: break-word;
+        }
+      }
+      &:last-child {
+        .td {
+          border-bottom: 1px solid $light-gray2;
+        }
+      }
+    }
+  }
+}
+
+.invoice-table-wrap {
+  margin-top: 40px;
+  @include flexbox;
+  @include justify-content(space-between);
+}
+
+.title-bg {
+  margin-top: 30px;
+  label {
+    color: $light-gray4;
+    font-size: $font-sms;
+    margin-bottom: 8px;
+    text-transform: none;
+  }
+  .bg {
+    background: $light-gray2;
+    padding: 16px;
+    color: $deep-blue;
+    font-size: $font-ml;
+  }
+}
+
+.separate-invoice-table {
+  margin: 0 -4px;
+  margin-top: 12px;
+  th {
+    border: 1px solid $light-gray2;
+    padding: 4px 10px 3px;
+    color: $light-gray4;
+    font-weight: $font-regular;
+  }
+  td {
+    border: none;
+    background: $light-gray2;
+    padding: 0;
+    color: $deep-blue;
+    font-weight: $font-semibold;
+    &.right-align {
+      text-align: right;
+      padding-right: 10px;
+      min-width: 108px;
+    }
+  }
+  table {
+    border-spacing: 4px;
+    border-collapse: separate;
+    tr {
+      td {
+        &:last-child {
+          background: transparent;
+          padding-left: 0;
+          padding-right: 0;
+          text-align: right;
+          min-width: 50px;
+        }
+      }
+    }
+  }
+  .dlt-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-size: cover;
+    cursor: pointer;
+    position: relative;
+    &:before {
+      content: "";
+      background: url("../../../../../../assets/images/outline-delete.png");
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-size: cover;
+      left: 0;
+    }
+  }
+  .action-icon {
+    vertical-align: middle;
+    & + .action-icon {
+      margin-left: 8px;
+    }
+  }
+  .service-col {
+    width: 60%;
+  }
+  .service-input {
+    font-size: 12px;
+    font-weight: 600;
+    color: $deep-blue;
+    height: 30px;
+    padding: 5px 10px;
+    border: 1px solid rgba($light-blue2, 0.5);
+    box-shadow: none;
+    &:disabled {
+      background-color: $light-gray2;
+      border-color: $light-gray2;
+    }
+  }
+}
+
+.add-line {
+  position: relative;
+  padding-left: 24px;
+  margin-top: 12px;
+  cursor: pointer;
+  p {
+    color: $light-blue2;
+    font-size: $font-sms;
+    font-weight: $font-bold;
+  }
+  &:before {
+    content: "";
+    // background: url("../../../../../../assets/images/edit-plus.png");
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-size: cover;
+    left: 0;
+  }
+}
+.invoice-table-btm-wrap {
+  margin-top: 16px;
+  @include flexbox;
+  @include justify-content(space-between);
+}
+
+.thankyou-area {
+  margin-top: 80px;
+  text-align: center;
+  p {
+    color: $light-gray4;
+    font-weight: $font-bold;
+    margin-bottom: 10px;
+    & + p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.email-btn {
+  .input-group {
+    width: 340px;
+    height: 52px;
+    position: relative;
+    button {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      z-index: 9;
+    }
+    input {
+      height: 52px;
+      padding-right: 144px;
+    }
+  }
+}
+
+.bottom-email-btn {
+  text-align: right;
+  .email-btn {
+    @include flexbox;
+    @include justify-content(flex-end);
+  }
+  .btn-secondary {
+    min-width: 160px;
+  }
+}
+
+.btn:disabled {
+  color: $white-color;
+  background-color: #6c757d;
+  border-color: #6c757d;
+  cursor: pointer;
+}
+
+.grid-card {
+  border-radius: 4px;
+  border: solid 1px #f7f8f9;
+  background-color: #ffffff;
+  margin-bottom: 24px;
+  overflow: auto;
+  .grid-head {
+    font-size: 14px;
+    font-weight: 600;
+    color: #67818c;
+    font-style: italic;
+    padding: 10px 24px;
+    border-radius: 4px 4px 0 0;
+    background-color: #f7f8f9;
+    min-width: 500px;
+  }
+  .grid-content {
+    padding: 24px;
+    min-width: 500px;
+    .row {
+      & + .row {
+        margin-top: 24px;
+      }
+    }
+  }
+  .text-box {
+    font-size: 14px;
+    font-weight: 600;
+    color: #012e40;
+    padding: 10px 20px;
+    min-height: 40px;
+    border-radius: 4px;
+    background-color: #f7f8f9;
+  }
+}
+
+.circle-check {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  cursor: pointer;
+  background: url("/assets/images/circle-check.svg") no-repeat center;
+  background-size: cover;
+}
+.edit-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: url("/assets/images/edit.svg") no-repeat center center;
+  cursor: pointer;
+}
+.delete-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: url("/assets/images/trash-icon.svg") no-repeat center;
+  background-size: cover;
+  cursor: pointer;
+}
+.print {
+  font-size: $font-sms;
+  font-weight: $font-semi-bold;
+  color: $light-blue2;
+  position: relative;
+  padding-left: 24px;
+  display: inline-block;
+  cursor: pointer;
+  &:before {
+    content: "";
+    background: url("/assets/images/download-icon-blue.svg");
+    background-size: 16px;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    left: 0;
+    top: 1px;
+  }
+}

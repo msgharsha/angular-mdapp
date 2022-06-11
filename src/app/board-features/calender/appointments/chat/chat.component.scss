@@ -1,0 +1,308 @@
+// ************* left panel chat box css ***********************
+@import "../../../../../assets/sass/variable";
+@import "../../../../../assets/sass/mixins";
+
+.padding-class {
+  padding-left: 20px;
+  padding-right: 24px;
+  padding-bottom: 21px;
+  padding-top: 21px;
+}
+
+.file-details {
+  display: flex;
+  justify-content: space-between;
+  .file-name {
+    color: $cyprus;
+    margin-right: 10px;
+    word-break: break-word;
+    word-wrap: break-word;
+  }
+  .file-download {
+    cursor: pointer;
+    img {
+      width: 30px;
+      height: auto;
+    }
+  }
+}
+
+.left-panel-header {
+  width: 100%;
+  height: 65px;
+  box-shadow: inset 0 -1px 0 0 #e7e9ec;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .header-title {
+    height: 22px;
+    font-size: 14px;
+    font-weight: 600;
+    color: $cyprus;
+    align-items: center;
+    display: flex;
+    width: inherit;
+    .receiver {
+      font-weight: $font-regular;
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      .name {
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-right: 12px;
+      }
+      .typing,
+      .presence,
+      .expertType {
+        font-weight: $font-regular;
+        font-size: $font-sms;
+      }
+    }
+    .typing {
+      display: inline-block;
+      color: green;
+    }
+    .presence {
+      display: inline-block;
+      color: red;
+      &.join {
+        color: green;
+      }
+    }
+  }
+  .close-icon {
+    width: 12px;
+    height: 12px;
+    background: url("/../../../assets/images/close-icon.svg") no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    display: none;
+  }
+}
+
+.connection {
+  padding: 5px;
+  text-align: center;
+  z-index: 99;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.13);
+  .success {
+    color: $dark-blue;
+  }
+  .error {
+    color: $error-red;
+  }
+}
+
+.left-panel-container {
+  height: calc(100% - 129px);
+  width: 100%;
+  overflow-y: auto;
+
+  .receiver {
+    .profile-pic {
+      margin-right: 12px;
+    }
+    .message-time {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      .message {
+        background-color: $light-gray2;
+        border-radius: 0px 16px 16px 16px;
+        color: $light-gray4;
+        padding: 10px 12px;
+        font-size: 12px;
+        word-break: break-word;
+        word-wrap: break-word;
+        .file-details {
+          width: 200px;
+          .file-name {
+            color: $cyprus;
+          }
+        }
+      }
+      .time {
+        text-align: left;
+      }
+    }
+  }
+
+  .sender {
+    justify-content: flex-end;
+    .profile-pic {
+      margin-left: 12px;
+    }
+    .message-time {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      .message {
+        background-color: $light-blue2;
+        border-radius: 16px 0 16px 16px;
+        font-weight: 600;
+        color: $white-color;
+        padding: 10px 12px;
+        font-size: 12px;
+        word-break: break-word;
+        word-wrap: break-word;
+        max-width: 100%;
+        position: relative;
+        .img-loader-div {
+          height: 56px;
+          width: 56px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+          border-top: 2px solid white;
+          border-left: 2px solid white;
+          border-right: 2px solid $theme-blue;
+          border-bottom: 2px solid $theme-blue;
+        }
+
+        .file-details {
+          width: 200px;
+          .file-name {
+            color: $white-color;
+          }
+        }
+      }
+      .time {
+        text-align: right;
+      }
+    }
+  }
+
+  .receiver,
+  .sender {
+    display: flex;
+    margin-bottom: 20px;
+    .profile-pic {
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid $chat-img-border;
+      }
+    }
+    .message-time {
+      .time {
+        font-size: 10px;
+        color: $text-grey;
+        padding-right: 12px;
+        padding-top: 4px;
+        padding-left: 12px;
+      }
+      .message {
+        .message-img {
+          height: auto;
+          width: 100%;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+}
+
+.left-panel-footer {
+  width: 100%;
+  // height: 85px;
+  position: absolute;
+  bottom: 0;
+
+  .upload-chat-file {
+    width: 100%;
+    height: 155px;
+    border-radius: 24px;
+    background-color: $light-gray;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    .upload-file-to {
+      position: relative;
+      height: 135px;
+      width: fit-content;
+
+      img {
+        height: 100%;
+        width: auto;
+        max-width: 100%;
+      }
+      &.doc-upload {
+        height: auto;
+      }
+      .close-upload {
+        img {
+          width: 16px;
+          height: 16px;
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          cursor: pointer;
+          background: #fff;
+          border-radius: 50%;
+          border: 1px solid #b5b5b9;
+        }
+      }
+    }
+    .loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .send-text {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $light-gray;
+    height: 64px;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .type-text {
+    width: calc(100% - 60px);
+    height: 40px;
+    margin-right: 5px;
+    input {
+      font-family: Nunito, Montserrat, sans-serif;
+      font-size: 14px;
+      background: transparent;
+      border-radius: 20px;
+      border: none;
+      width: 100%;
+      height: 100%;
+      padding: 0 10px;
+    }
+    input:focus {
+      outline: none;
+      border: 1px solid $dark-gray;
+    }
+  }
+
+  .send-button {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    background: url("/../../../assets/images/video-call-icon/send.svg")
+      no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    border: none;
+    margin-left: 5px;
+    &.disabled {
+      background: url("/../../../assets/images/video-call-icon/send-inactive.svg")
+        no-repeat;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+}

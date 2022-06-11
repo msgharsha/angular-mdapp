@@ -1,0 +1,253 @@
+@import "../../../../../../styles.scss";
+@import "../../../../../../assets/sass/variable";
+@import "../../../../../../assets/sass/mixins";
+
+// my code start from here
+
+.prescribe-medicine-wrap {
+  @include flexbox();
+  flex-direction: column;
+  .left-wrapper {
+    margin-bottom: 24px;
+    flex: 1;
+    -webkit-flex: 1;
+    // padding-right: 15px;
+    &.doted-line {
+      position: relative;
+      &::before {
+        content: "";
+        width: 1px;
+        height: 100%;
+        background: url("../../../../../../assets/images/vertical-path.png");
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: rotate(0deg);
+      }
+    }
+    .search-box-list {
+      margin-bottom: 16px;
+      height: 40vh;
+      overflow: auto;
+    }
+    .search-container {
+      margin-bottom: 16px;
+    }
+  }
+  .right-wrapper {
+    flex: 1;
+    -webkit-flex: 1;
+    // padding-left: 15px;
+    padding-bottom: 44px;
+    .card-button {
+      position: absolute;
+      bottom: 0;
+      right: 16px;
+      min-width: 160px;
+    }
+    button {
+      min-width: 160px;
+      margin-left: 16px;
+    }
+  }
+  textarea {
+    height: 122px;
+    resize: none;
+  }
+}
+
+.test-table-wrapper {
+  border: 1px solid rgba(103, 129, 140, 0.2);
+  border-radius: 4px;
+  .thead {
+    font-size: 14px;
+    font-weight: 600;
+    font-style: italic;
+    color: $light-blue1;
+    background: $light-gray2;
+    @include flexbox();
+    @include justify-content(space-between);
+    padding: 10px 20px;
+  }
+  .tbody {
+    padding: 0px 5px 20px 5px;
+    .tr {
+      display: flex;
+      align-items: center;
+      margin-top: 24px;
+      .form-control {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+    }
+  }
+  .col-5,
+  .col-4,
+  .col-3 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.table-label {
+  color: $deep-blue;
+  font-size: $font-sms;
+  font-weight: $font-semi-bold;
+  text-transform: initial;
+}
+
+.action-col {
+  position: relative;
+  z-index: 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .action-icon {
+    & + .action-icon {
+      margin-left: 8px;
+    }
+  }
+}
+
+.edit-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: url("/assets/images/edit.svg") no-repeat center center;
+  cursor: pointer;
+}
+.delete-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: url("/assets/images/trash-icon.svg") no-repeat center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+.circle-check {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  cursor: pointer;
+  background: url("/assets/images/circle-check.svg") no-repeat center;
+  background-size: cover;
+}
+
+.form-control {
+  border: solid 1px rgba(103, 129, 140, 0.2);
+  box-shadow: none;
+  border-radius: 4px;
+  padding-left: 25px;
+  padding-right: 16px;
+  color: $deep-blue;
+  font-size: $font-body;
+  height: 40px;
+  font-weight: $font-semi-bold;
+  @include placeholder() {
+    font-weight: $font-regular;
+    color: $light-gray5;
+  }
+  &:disabled {
+    background-color: $light-gray2;
+    border-color: $light-gray2;
+  }
+}
+textarea.form-control {
+  height: auto;
+}
+.validation {
+  white-space: nowrap;
+}
+
+.file-upload-box {
+  max-width: 100%;
+  ::ng-deep .upload-file-input-wrapper {
+    .upload-btn {
+      box-shadow: none !important;
+      border: 1px dashed rgba(103, 129, 140, 0.2);
+    }
+    .file-view-wrapper {
+      height: 40px;
+    }
+  }
+}
+
+.card-title {
+  color: #012e40;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+// media query for mobile
+@media screen and (max-width: 767px) {
+  .prescribe-medicine-wrap {
+    display: block;
+    .left-wrapper {
+      padding-right: 0;
+      margin-bottom: 24px;
+      &.doted-line {
+        &::before {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.view-icon {
+  width: 20px;
+  height: 20px;
+  background: url("/assets/images/view-icon.svg") no-repeat center;
+  display: inline-block;
+  cursor: pointer;
+  margin: 8px 8px 0 0;
+}
+.download-icon {
+  width: 20px;
+  height: 20px;
+  background: url("/assets/images/download-icon.svg") no-repeat center;
+  display: inline-block;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  margin: 8px 0 0 0;
+}
+
+// Modal css
+
+.dialog-wrapper {
+  box-shadow: 0 0 22px 0 rgba(46, 51, 138, 0.13);
+  background-color: $white-color;
+  border-radius: 10px;
+  overflow: auto;
+  padding: 30px;
+  border: none;
+
+  width: 100%;
+  max-height: 90vh;
+  .heading-wrapper {
+    display: flex;
+    justify-content: space-between;
+    h1 {
+      margin: 0;
+      font-size: $font-xl;
+      color: $light-gray4;
+      font-weight: $font-semi-bold;
+      margin-bottom: 20px;
+    }
+    .close-icon {
+      background: url("/assets/images/modal-close.png");
+      width: 24px;
+      height: 24px;
+      background-size: cover;
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .dialog-wrapper {
+    width: 100%;
+    padding: 20px;
+  }
+}

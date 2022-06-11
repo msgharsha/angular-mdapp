@@ -1,0 +1,76 @@
+.medium-screen {
+  width: 75% !important;
+}
+
+.section-wrapper {
+  position: relative;
+}
+
+#appointment-prescription {
+  position: absolute;
+  top: 64px;
+  right: 0;
+  bottom: 0;
+}
+
+.show {
+  display: block !important;
+}
+
+.text-block {
+  text-align: center;
+  font-size: 24px;
+  margin-top: 100px;
+}
+
+.diagnose-and-history-btn-div {
+  position: absolute;
+  width: 345px;
+  text-align: right;
+  bottom: 40px;
+  right: 40px;
+  z-index: 2;
+  max-width: 500px;
+}
+
+.report-btn-div {
+  position: absolute;
+  text-align: left;
+  bottom: 40px;
+  left: 90px;
+  z-index: 2;
+  max-width: 500px;
+}
+
+.diagnose-btn {
+  margin-right: 16px;
+}
+
+.diagnose-btn,
+.history-btn,
+.report-btn {
+  width: 150px;
+  height: 40px;
+  border-radius: 4px;
+  border: solid 1px #ffffff;
+  background-color: transparent;
+  color: white;
+}
+
+.diagnose-btn:hover,
+.history-btn:hover,
+.report-btn:hover {
+  transition-duration: 0.4s;
+  opacity: 70%;
+}
+
+.btn-small {
+  width: 120px;
+}
+
+@media only screen and (max-width: 768px) {
+  .diagnose-and-history-btn-div,
+  .report-btn-div {
+    display: none;
+  }
+}

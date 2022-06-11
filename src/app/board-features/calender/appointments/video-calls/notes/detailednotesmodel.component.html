@@ -1,0 +1,31 @@
+<div class="dialog-wrapper" style="max-height: initial;">
+  <div class="heading-wrapper">
+    <h1 mat-dialog-title class="dialog-title">
+      {{ "DETAILED_NOTES" | translate }}
+    </h1>
+    <span class="close-icon" (click)="close()"></span>
+  </div>
+  <div class="dialogue-content">
+    <div class="pharmacy-table" *ngFor = "let item of notesHistoryData.notesData">
+      <!-- <div
+        *ngIf="!(invitedPatientList && invitedPatientList.length)"
+        class="center-text-div"
+      >
+        {{ "NO_DATA_FOUND" | translate }}
+      </div> -->
+      <div class="row">
+        <div class="col-2 font-weight-bold">{{"CONSULTATION_DATE" | translate}}:</div>
+        <div class="col-10">{{item.created_at | date: "dd MMM, yyyy"}}</div>
+      </div>
+      <div class="row">
+        <div class="col-2 font-weight-bold">{{"NOTES_NAME" | translate}}:</div>
+        <div class="col-10">{{item.templateName}}</div>
+      </div>
+      <div class="row">
+        <div class="col-2 font-weight-bold">{{"NOTES_CONTENT" | translate}}:</div>
+        <div class="col-10" innerHtml="{{item.templateContent}}"></div>
+      </div>
+      <hr>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+@import "../../../../../../assets/sass/variable";
+.input-file-wrapper {
+  position: relative;
+}
+.upload-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.upload-file-input::-ms-browse {
+  visibility: hidden;
+}
+.upload-file-input {
+  width: 100%;
+  height: 40px;
+  display: inline-block;
+  cursor: pointer;
+  color: $theme-blue;
+  font-size: 14px;
+  text-align: center;
+  position: relative;
+  border-radius: 50%;
+  background-image: url("../../../../../../assets/images/video-call-icon/attachment-active.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  &.position-abs {
+    position: absolute;
+  }
+  &.disabled {
+    cursor: not-allowed;
+    background-image: url("../../../../../../assets/images/video-call-icon/attachment-inactive.svg");
+  }
+  &.loading {
+    cursor: progress;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.input-file {
+  cursor: pointer;
+  width: 40px;
+  z-index: 9;
+  height: 40px;
+  opacity: 0;
+}

@@ -1,0 +1,252 @@
+<div class="page-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div *ngIf="!isPendingAppointment && !isConsultationStatus && appointmentType != 2" class="col-lg-4 psm0">
+        <!-- Video Call container -->
+
+        <div
+          class="video-call-container"
+          [class.video-full-screen]="isFullScreen"
+          id="videos"
+        >
+          <div
+            id="subscriber"
+            [ngStyle]="{
+              display:
+                (sessionManager.$screenSubscribed | async) ? 'none' : 'block'
+            }"
+          ></div>
+          <div
+            id="subscriberScreen"
+            [ngStyle]="{
+              display: !(sessionManager.$screenSubscribed | async)
+                ? 'none'
+                : 'block'
+            }"
+          ></div>
+          <div id="publisher"></div>
+          <div *ngIf="isFullScreen" class="videoscreen-features">
+            <div class="feature-wrapper">
+              <div
+                class="feature-btn"
+                (click)="onTabSelection(1); toggleFullScreen()"
+              >
+                {{ "MEDICAL_HISTORY" | translate }}
+              </div>
+              <div
+                class="feature-btn"
+                (click)="onTabSelection(2); toggleFullScreen()"
+              >
+                {{ "NOTES" | translate }}
+              </div>
+              <div
+                class="feature-btn"
+                (click)="onTabSelection(3); toggleFullScreen()"
+              >
+                {{ "PRESCRIPTION" | translate }}
+              </div>
+              <div
+                class="feature-btn"
+                (click)="onTabSelection(4); toggleFullScreen()"
+              >
+                {{ "REQUISITION" | translate }}
+              </div>
+              <div
+                class="feature-btn"
+                (click)="onTabSelection(5); toggleFullScreen()"
+              >
+                {{ "INVOICE" | translate }}
+              </div>
+              <div
+                class="feature-btn"
+                (click)="onTabSelection(6); toggleFullScreen()"
+              >
+                {{ "BILLING_HISTORY" | translate }}
+            </div>
+            </div>
+          </div>
+          <div class="fullscreen-icon" (click)="toggleFullScreen()"></div>
+
+          <app-chat-left-panel
+            [class.hide-chat]="!isFullScreen"
+            *ngIf="isCallConnected"
+            [bookingId]="bookingId"
+            (chatUnreadCount)="onFetchingUnreadCount($event)"
+          ></app-chat-left-panel>
+
+          <div class="videocall-controls">
+            <div class="control-btn">
+              <img
+                src="assets/images/video-call-icon/call-btn.svg"
+                alt=""
+                (click)="close()"
+              />
+            </div>
+
+            <div
+              class="control-btn mic-btn"
+              (click)="toggleAudio()"
+              [ngClass]="{
+                active: isAudioDisable == false,
+                inactive: isAudioDisable == true
+              }"
+            ></div>
+
+            <div
+              class="control-btn video-btn"
+              (click)="toggleVideo()"
+              [ngClass]="{
+                active: isVideoDisable == false,
+                inactive: isVideoDisable == true
+              }"
+            ></div>
+
+            <div class="control-btn chat-btn" *ngIf="!isFullScreen">
+              <img
+                src="assets/images/video-call-icon/chat-btn.svg"
+                (click)="toggleFullScreen(); openChatPanel()"
+                alt=""
+              />
+              <span
+                class="count"
+                [ngClass]="{ jump: triggerCount }"
+                *ngIf="unreadCount"
+                >{{ unreadCount > 9 ? "9+" : unreadCount }}</span
+              >
+            </div>
+          </div>
+        </div>
+        <!-- /Video Call container -->
+      </div>
+      <div *ngIf="!isPendingAppointment && !isConsultationStatus && appointmentType == 2" class="col-lg-4 psm0 card-default">
+        <div>
+          <div class="text-center">
+            <img src="../../../../../assets/images/group-44.png" alt="" style="width: 155px;" >
+          </div>
+          <p class="font-weight-bold mt-4 text-center">
+            {{ "STARTED_CONSULTATION" | translate }}
+          </p>
+        </div>
+        <div class="text-center mt-4">
+          <button
+          class="btn btn-primary"
+          (click)="close()"
+        >
+          {{ "STOP_CONSULTATION" | translate }}
+        </button>
+        </div>
+        
+      </div>
+      <div *ngIf="isPendingAppointment && !isConsultationStatus" class="col-lg-4 psm0">
+        <div (click)="backNavigate()" class="col-lg-12 start_text">
+          <img
+            src="assets/images/signin-icons/arrow-chevron-left.svg"
+            height="24"
+            width="24"
+            alt="back-arrow"
+          />
+          <span>{{ "BACK" | translate }}</span>
+        </div>
+        <div class="dentist-profile">
+          <img
+            class="dentist-profile__image"
+            [src]="profileImage || 'assets/images/profileImg.png'"
+            alt="patient_image"
+          />
+          <h4 class="dentist-profile__title">{{ patientName }}</h4>
+          <div class="dentist-profile__procedures" *ngIf="age">
+            {{ gender }}, {{ age }}yrs
+          </div>
+          <div class="dentist-profile__location">
+            <img
+              class="location__image"
+              src="/assets/images/appointment-calender.svg"
+              alt="location"
+            />
+            <div class="location__text">{{ startDate }} | {{ startTime }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div [ngClass]="!isConsultationStatus ? 'col-lg-8' : 'col-lg-12'" class="">
+        <div style="margin: 10px 0px; font-weight: bold; color: #ff0000;"*ngIf="!isPendingAppointment && !isConsultationStatus">{{ "BROWER_CLOSE_CUSTOM_MSG" | translate }}</div>
+        <div class="card-default">
+          <!-- this will be navbar -->
+          <ul class="tabs-menu">
+            <li
+              (click)="onTabSelection(1)"
+              [class.active]="selectedTab == 1"
+              class="clickable-hover"
+            >
+              {{ "MEDICAL_HISTORY" | translate }}
+            </li>
+            <li
+              (click)="onTabSelection(2)"
+              [class.active]="selectedTab == 2"
+              class="clickable-hover"
+            >
+              {{ "NOTES" | translate }}
+            </li>
+            <li
+              (click)="onTabSelection(3)"
+              [class.active]="selectedTab == 3"
+              class="clickable-hover"
+            >
+              {{ "PRESCRIPTION" | translate }}
+            </li>
+            <li
+              (click)="onTabSelection(4)"
+              [class.active]="selectedTab == 4"
+              class="clickable-hover"
+            >
+              {{ "REQUISITION" | translate }}
+            </li>
+            <li
+              (click)="onTabSelection(5)"
+              [class.active]="selectedTab == 5"
+              class="clickable-hover"
+            >
+              {{ "INVOICE" | translate }}
+            </li>
+            <li  *ngIf="consultationType == 'Public'"
+              (click)="onTabSelection(6)"
+              [class.active]="selectedTab == 6"
+              class="clickable-hover"
+            >
+              {{ "BILLING_HISTORY" | translate }}
+            </li>
+          </ul>
+
+          <app-medical-history
+            *ngIf="selectedTab === 1"
+            [patientId]="patientId"
+            [patientName]="patientName"
+            [bookingId]="bookingId"
+          ></app-medical-history>
+          <app-notes
+            [isFromPending]="isFromPending"
+            *ngIf="selectedTab === 2"
+            [bookingId]="bookingId"
+          >
+          </app-notes>
+          <app-prescriptions
+            [isFromPending]="isFromPending"
+            *ngIf="selectedTab === 3"
+          ></app-prescriptions>
+          <app-requisition
+            [isFromPending]="isFromPending"
+            *ngIf="selectedTab === 4"
+          ></app-requisition>
+          <app-invoices *ngIf="selectedTab === 5"></app-invoices>
+          <app-create-claim 
+            *ngIf="selectedTab ===6"
+            [patientId]="patientId"
+            [patientName]="patientName"
+            [bookingId]="bookingId"
+            modelView=false
+            ></app-create-claim>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

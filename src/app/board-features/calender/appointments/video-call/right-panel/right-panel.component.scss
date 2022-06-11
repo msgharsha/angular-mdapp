@@ -1,0 +1,19 @@
+.right-panel {
+  display: flex;
+  height: 100%;
+  position: relative;
+  background: white;
+  .icon {
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    margin: auto;
+    display: inline-block;
+    border-radius: 50%;
+    &.close-icon {
+      background-image: url("/assets/images/close-icon.svg");
+    }
+  }
+}

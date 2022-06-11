@@ -1,0 +1,19 @@
+<div
+  class="right-panel"
+  [@openClose]="panelName != panel.CLOSE ? 'open' : 'closed'"
+>
+  <div *ngIf="panelName != panel.CLOSE">
+    <app-diagnose-patient
+      *ngIf="panelName === panel.DIAGNOSIS"
+      (closePanel)="closePanel()"
+    ></app-diagnose-patient>
+    <medical-history
+      *ngIf="panelName === panel.MEDICAL_HISTORY"
+      (closePanel)="closePanel()"
+    ></medical-history>
+    <app-medical-report
+      *ngIf="panelName === panel.MEDICAL_REPORT"
+      (closePanel)="closePanel()"
+    ></app-medical-report>
+  </div>
+</div>

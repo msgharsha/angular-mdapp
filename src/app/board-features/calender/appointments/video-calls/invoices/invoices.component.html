@@ -1,0 +1,344 @@
+<div class="tab-content-card">
+  <div class="row mb-4">
+    <div class="col-12" *ngIf="invitePatientStatus && invoiceData && invoiceData.downloadUrl" style="text-align: right;">
+        <a class="print" target="_blank" [href]="invoiceData?.downloadUrl" download="invoiceData?.downloadUrl">{{ "DOWNLOAD_INVOICE" | translate }}</a>
+    </div>
+  </div>
+  <div class="invoice-header">
+    <div class="logo">
+      <img src="../../../../../../assets/images/invoice-logo.png" alt="lgog" />
+    </div>
+    <div class="invoice-table">
+      <div class="invoice-inner-section">
+        <div class="tr">
+          <div class="td">{{ "FACTURE_INVOICE" | translate }} #</div>
+          <div class="td">{{ invoiceNumber }}</div>
+        </div>
+        <div class="tr">
+          <div class="td">{{ "DATE" | translate }}</div>
+          <div class="td">{{ invoiceDate }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="invoice-table-wrap">
+    <div class="invoice-table mr-16">
+      <div class="invoice-inner-section">
+        <div class="tr">
+          <div class="td">{{ "PATIENT_NAME" | translate }}</div>
+          <div class="td">
+            {{ invoiceData?.patient?.patientFirstName }}&nbsp;{{
+              invoiceData?.patient?.patientLastName
+            }}
+          </div>
+        </div>
+        <div class="tr">
+          <div class="td">{{ "ADDRESS" | translate }}</div>
+          <div class="td">{{ invoiceData?.patient?.addressLine1 }}</div>
+        </div>
+        <div class="tr">
+          <div class="td">
+            {{ "CITY" | translate }}, {{ "PROVINCE" | translate }}
+          </div>
+          <div class="td">
+            {{ invoiceData?.patient?.city }}&nbsp;{{
+              invoiceData?.patient?.province
+            }}
+          </div>
+        </div>
+        <div class="tr">
+          <div class="td">{{ "POSTAL_CODE" | translate }}</div>
+          <div class="td">{{ invoiceData?.patient?.postalCode }}</div>
+        </div>
+        <div class="tr">
+          <div class="td">{{ "PHONE_NUMBER" | translate }}</div>
+          <div class="td">{{ invoiceData?.patient?.patientPhoneNumber }}</div>
+        </div>
+        <div class="tr">
+          <div class="td">{{ "EMAIL" | translate }}</div>
+          <div class="td">{{ invoiceData?.patient?.patientEmail }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="invoice-table">
+      <div class="invoice-inner-section">
+        <div class="tr">
+          <div class="td">{{ "DOCTOR_OFFICE_NAME" | translate }}</div>
+          <div class="td">{{ invoiceData?.doctor?.clinicName }}</div>
+        </div>
+        <div class="tr">
+          <div class="td">{{ "DOCTOR_OFFICE_ADDRESS" | translate }}</div>
+          <div class="td">{{ invoiceData?.doctor?.addressLine1 }}</div>
+        </div>
+        <div class="tr">
+          <div class="td">
+            {{ "CITY" | translate }}, {{ "PROVINCE" | translate }}
+          </div>
+          <div class="td">
+            {{ invoiceData?.doctor?.city }}&nbsp;{{
+              invoiceData?.doctor?.province
+            }}
+          </div>
+        </div>
+        <div class="tr">
+          <div class="td">{{ "POSTAL_CODE" | translate }}</div>
+          <div class="td">{{ invoiceData?.doctor?.postalCode }}</div>
+        </div>
+        <div class="tr">
+          <div class="td">{{ "PHONE_NUMBER" | translate }}</div>
+          <div class="td">{{ invoiceData?.doctor?.clinicPhoneNumber }}</div>
+        </div>
+        <div class="tr">
+          <div class="td">{{ "EMAIL" | translate }}:</div>
+          <div class="td">{{ invoiceData?.doctor?.email }}</div>
+        </div>
+        <div class="tr">
+          <div class="td">{{ "LICENSE_NUMBER" | translate }}:</div>
+          <div class="td">{{ invoiceData?.doctor?.licenseNumber }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="title-bg">
+    <label>{{ "PROFESSIONAL" | translate }}</label>
+    <div class="bg">
+      {{ invoiceData?.doctor?.firstName }}&nbsp;{{
+        invoiceData?.doctor?.lastName
+      }}&nbsp;({{ invoiceData?.doctor?.licenseNumber }})
+    </div>
+  </div>
+  <div
+    class="separate-invoice-table"
+    *ngIf="appointmentDetail?.bookingDetail?.consultation !== 'Public'"
+  >
+    <table style="width: 100%" aria-describedby="invoice-table">
+      <tr>
+        <th id="service" class="service-col">{{ "SERVICES" | translate }}</th>
+        <th id="fee">{{ "CONSULTATION_FEE" | translate }} ($)</th>
+        <th id="tax">{{ "TAX_ON_INVOICE" | translate }}</th>
+      </tr>
+      <tr *ngIf="notSelectedServices.length">
+        <td *ngIf="!isSend">
+          <select
+            class="form-control service-input"
+            [(ngModel)]="newSelectedService"
+            (change)="onSelection()"
+          >
+          <option [value]="''" *ngIf = "!serviceid ">--{{ "SELECT_SERVICE" | translate }}--</option>
+            <option
+              *ngFor="let service of notSelectedServices"
+              [ngValue]="service"
+            >
+              {{ service?.serviceName }}
+            </option>
+          </select>
+        </td>
+        <td *ngIf="!isSend">
+          <input
+            type="text"
+            class="form-control service-input"
+            placeholder="Enter Here"
+            id="consultation_fee"
+            disabled
+            (keypress)="isNumber($event)"
+            [(ngModel)]="newSelectedFee"
+          />
+        </td>
+        <td *ngIf="!isSend">
+        <input
+          id="includeTax" 
+          type="checkbox" 
+          [checked]="includeTaxValue" 
+          disabled
+          (change)="includeTaxChange($event)" />
+          </td>
+        <td *ngIf="!isSend">
+          <!-- <span
+            (click)="savePrivateService()"
+            class="action-icon circle-check"
+          ></span> -->
+          <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="savePrivateService()"
+                >
+                <span *ngIf = "!serviceid ">
+                  {{ "BILLING_MODULE.ADD" | translate }}
+                </span>
+                <span *ngIf = "serviceid ">
+                  {{ "UPDATE" | translate }}
+                </span>
+                </button>
+        </td>
+      </tr>
+      <tr *ngFor="let service of selectedServices">
+        <td>
+          <input
+            type="text"
+            class="form-control service-input"
+            [value]="service.serviceName"
+            disabled
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            class="form-control service-input"
+            [value]="service.consultationFee"
+            disabled
+          />
+        </td>
+        <td style="text-align: left;">
+          <input 
+            [id]="'includeTax_' + service['id']"
+            type="checkbox" 
+            [checked]="service.includeTax" 
+            disabled
+            />
+        </td>
+        <span *ngIf="!invitePatientStatus">
+        <td *ngIf="!isSend">
+          <span
+            (click)="updatePrivateService(service['id'])"
+            class="action-icon edit-icon"
+          ></span>
+          <span
+            (click)="deletePrivateService(service['id'])"
+            class="action-icon delete-icon"
+          ></span>
+        </td>
+      </span>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <div
+      class="invoice-table-btm-wrap"
+      *ngIf="appointmentDetail?.bookingDetail?.consultation != 'Public'"
+    >
+      <div>
+        <div class="invoice-table mb-30 mt-30">
+          <div class="invoice-inner-section"></div>
+        </div>
+        <div class="invoice-table">
+          <div class="invoice-inner-section">
+            <div class="tr">
+              <div class="td">{{ "GST_NUMBER" | translate }}</div>
+              <div class="td">{{ invoiceData?.gstNumber }}</div>
+            </div>
+            <div class="tr">
+              <div class="td">{{ "QST_NUMBER" | translate }}</div>
+              <div class="td">{{ invoiceData?.qstNumber }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="invoice-table ml-16">
+        <div class="invoice-inner-section">
+          <div class="tr">
+            <div class="td">{{ "SUBTOTAL" | translate }}</div>
+            <div class="td">${{ subTotal }}</div>
+          </div>
+          <div class="tr">
+            <div class="td">T.P.S. / G.S.T. ({{ this.invoiceData?.gst }}%)</div>
+            <div class="td" *ngIf="subTotal > 0">${{ gstPercentage }}</div>
+            <div class="td" *ngIf="subTotal == 0">0</div>
+          </div>
+          <div class="tr">
+            <div class="td">T.V.Q. / Q.S.T. ({{ this.invoiceData?.qst }}%)</div>
+            <div class="td" *ngIf="subTotal > 0">${{ qstPercentage }}</div>
+            <div class="td" *ngIf="subTotal == 0">0</div>
+          </div>
+          <div class="tr">
+            <div class="td">{{ "TOTAL" | translate }}</div>
+            <div class="td">${{ total }}</div>
+          </div>
+          <div class="tr">
+            <div class="td">{{ "BALANCE" | translate }}</div>
+            <div class="td">${{ total }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="thankyou-area">
+      <p>{{ "THANK_YOU" | translate }}</p>
+      <p>
+        {{
+          "THIS_DOCUMENT_IS_CONFIDENTIAL_INTENDED_FOR_NAMED_USER_ONLY"
+            | translate
+        }}.
+      </p>
+    </div>
+  </div>
+  <div class="bottom-email-btn" >
+    <button
+      type="button"
+      class="btn btn-secondary mt-20 mb-20"
+      [disabled]="
+        appointmentDetail?.bookingDetail?.consultation == 'Public' || isSend || total == 0
+      "
+      (click)="saveInvoice()">
+      {{ "SAVE" | translate }}</button>
+      &nbsp;
+    <button
+      type="button"
+      class="btn btn-secondary mt-20 mb-20"
+      [disabled]="
+        appointmentDetail?.bookingDetail?.consultation == 'Public' ||
+        !provinceIdExist ||
+        isSend || total == 0
+      "
+      (click)="sendInvoice()">
+      {{ "SEND" | translate }}</button>
+    
+  </div>
+    <!-- &nbsp;
+    <button type="button" class="btn btn-secondary mt-20 mb-20" disabled>
+      {{ "SEND_TO_PUBLIC_HEALTH" | translate }}
+    </button> -->
+    <!-- <div class="email-btn">
+      <div class="input-group info-wrap mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="{{ 'EMAIL' | translate }}"
+          disabled
+        />
+        <div>
+          <button class="btn btn btn-primary" type="button" disabled>
+            {{ "SEND_TO_EMAIL" | translate }}
+          </button>
+        </div>
+      </div>
+    </div> -->
+  
+  <!-- <div class="bottom-email-btn" *ngIf="invitePatientStatus">
+    <button
+      type="button"
+      class="btn btn-secondary mt-20 mb-20"
+      [disabled]="isSend"
+      (click)="sendInvoice()"
+    >
+      {{ "SEND" | translate }}</button
+    >&nbsp;
+    <button type="button" class="btn btn-secondary mt-20 mb-20" disabled>
+      {{ "SEND_TO_PUBLIC_HEALTH" | translate }}
+    </button>
+    <div class="email-btn">
+      <div class="input-group info-wrap mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="{{ 'EMAIL' | translate }}"
+          disabled
+        />
+        <div>
+          <button class="btn btn btn-primary" type="button" disabled>
+            {{ "SEND_TO_EMAIL" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>

@@ -1,0 +1,102 @@
+<div class="sidebar" *ngIf="!showDetails">
+  <div class="rectangle">
+    <div class="Medical-History">{{ "MEDICAL_HISTORY" | translate }}</div>
+    <div class="path" (click)="closeHistoryPage()"></div>
+  </div>
+
+  <div class="profile unset-profile-property">
+    <div class="profile-1">
+      <img
+        class="display-picture"
+        src="../../../../assets/images/profile-avtar.png"
+        alt=""
+      />
+    </div>
+    <div class="profile-2">
+      <div class="profile-name">{{ prescriptionFor?.name }}</div>
+      <div class="profile-details">
+        <div class="profile-contact">{{ prescriptionFor?.phoneNumber }}</div>
+      </div>
+    </div>
+  </div>
+  <mat-tab-group
+    [selectedIndex]="selectedIndex"
+    (selectedTabChange)="tabChanged($event)"
+  >
+    <mat-tab label="My Prescription">
+      <div class="loader-icon" *ngIf="loading">
+        <loader [show]="loading"></loader>
+      </div>
+      <div class="doctor-div" *ngIf="myPresciptions?.length > 0">
+        <div class="doctors-list" *ngFor="let myPresciption of myPresciptions">
+          <div class="doctor-name">
+            <div>{{ myPresciption?.doctorName }}</div>
+          </div>
+          <div class="doctor-prescription">
+            <div>
+              <a [href]="myPresciption?.prescriptionUrl" target="_blank" download>
+                <img
+                  class="unset-border"
+                  src="../../../../assets/images/download-2.svg"
+                  alt=""
+                />{{ "DOWNLOAD" | translate }}
+              </a>
+            </div>
+            <div class="pres-date">
+              {{ myPresciption?.date | date: "mediumDate" }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="myPresciptions?.length < 1">
+        <div class="nodata-found">
+          {{ "NO_DATA_FOUND" | translate }}
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Online Consults">
+      <div class="doctor-div" *ngIf="onlineConcerns?.length > 0">
+        <div class="doctors-list" *ngFor="let onlineConcern of onlineConcerns">
+          <div class="doctor-name">
+            <div>
+              {{ onlineConcern?.expert?.salutation }}
+              {{ onlineConcern?.expert?.name }}
+            </div>
+          </div>
+          <div class="doctor-prescription">
+            <div>
+              <a (click)="showPrescriptionDetails(onlineConcern)">
+                <img src="../../../../assets/images/prescription.svg" alt="" />
+                {{ "PRESCRIPTION" | translate }}
+              </a>
+              <a target="_blank" 
+                [href]="onlineConcern?.prescriptionUrl"
+                *ngIf="onlineConcern?.prescriptionUrl"
+                download
+              >
+                <img
+                  src="../../../../assets/images/attachment-4.jpeg"
+                  class="attch-icon"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div class="pres-date">
+              {{ onlineConcern?.createdAt | date: "mediumDate" }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="onlineConcerns?.length < 1">
+        <div class="nodata-found">
+          {{ "NO_DATA_FOUND" | translate }}
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<app-detail
+  *ngIf="showDetails"
+  (closeDetailPage)="closeDetailsPage($event)"
+  [presDetails]="selectedPrescriptionDetail"
+></app-detail>

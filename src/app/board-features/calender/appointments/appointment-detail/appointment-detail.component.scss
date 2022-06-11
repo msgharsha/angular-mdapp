@@ -1,0 +1,320 @@
+@import "../../../../../styles.scss";
+
+.dentist-common-profile-wrapper {
+  padding: 20px 15px 40px 15px;
+  .flex-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+  }
+}
+.dentist-profile {
+  background-color: $white-color;
+  padding: 26px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  margin-right: 8px;
+  .dentist-profile__image {
+    margin-top: 12px;
+    height: 120px;
+    width: 120px;
+    border-radius: 6px;
+    border: solid 2px $light-gray3;
+  }
+  .dentist-profile__title {
+    font-size: 18px;
+    margin-top: 16px;
+    margin-bottom: 0px;
+    color: $light-blue2;
+    font-weight: $font-bold;
+  }
+  .dentist-profile__procedures {
+    font-size: 14px;
+    margin: 0px;
+    color: $light-blue1;
+    font-weight: $font-semi-bold;
+    font-style: italic;
+  }
+  .button-wrapper__btn {
+    margin-top: 6px;
+  }
+  .dentist-profile__location {
+    display: flex;
+    margin: 16px 8px;
+    .location__text {
+      font-size: 14px;
+      padding-left: 15px;
+      color: $deep-blue;
+    }
+  }
+}
+
+.dcp-right-wrapper {
+  background: $white-color;
+  height: 100%;
+  @include border-radius(4px);
+  .dcp-heading-wrapper {
+    padding: 30px 40px;
+  }
+  .dcp-heading {
+    font-size: 18px;
+    font-weight: $font-bold;
+    color: $deep-blue;
+  }
+  .dcp-body-wrapper {
+    padding: 0px 40px 20px;
+    .reason {
+      margin-bottom: 40px;
+    }
+    .date {
+      margin-bottom: 40px;
+      .form-control {
+        background: url("/assets/images/calendar.svg") no-repeat;
+        background-position: right 15px center;
+        padding-right: 40px;
+        color: #383838;
+        font-size: $font-ml;
+      }
+    }
+    .time {
+      margin-bottom: 20px;
+      .time-container {
+        white-space: nowrap;
+        overflow-x: auto;
+        padding: 20px 0px 10px 12px;
+        background: rgba($light-green3, 0.3);
+        @include border-radius(8px);
+        .time-tag {
+          background: rgba($light-blue2, 0.08);
+          @include border-radius(4px);
+          min-width: 60px;
+          height: 30px;
+          font-size: $font-sms;
+          font-weight: $font-semi-bold;
+          color: $light-blue2;
+          line-height: 19px;
+          display: inline-block;
+          padding: 5px 0;
+          text-align: center;
+          margin-right: 12px;
+          cursor: pointer;
+        }
+        .slot-active {
+          background-color: $theme-blue;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.button-wrapper {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: auto;
+  .row {
+    width: 100%;
+  }
+  .button-wrapper__btn {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    min-width: 260px;
+    width: 100%;
+    justify-content: flex-end;
+    button {
+      min-width: 120px;
+      height: 40px;
+      margin-bottom: 5px;
+      border: none;
+      border-radius: 5px;
+      font-size: $font-ml;
+      font-weight: $font-bold;
+    }
+    .btn-cancel {
+      background-color: $light-gray3;
+      color: $light-blue1;
+      margin-right: 16px;
+    }
+    .btn-reschedule {
+      border: solid 2px $light-blue1;
+      background-color: $white-color;
+      color: $light-blue1;
+    }
+  }
+  .right-column {
+    float: right;
+  }
+}
+
+.call-wrapper {
+  display: flex;
+  justify-content: space-between;
+  .call-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .call-container__text {
+      margin-left: 5px;
+      font-size: $font-body;
+      font-weight: $font-bold;
+      color: $light-blue2;
+    }
+  }
+}
+
+.sub-head {
+  color: $light-gray4;
+  margin-top: 30px;
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: $font-semi-bold;
+  line-height: 1.4;
+}
+.heading-link {
+  color: $theme-link-color;
+  text-decoration: none;
+  float: right;
+  font-weight: normal;
+  font-size: 14px;
+  cursor: pointer;
+}
+.border-bottom {
+  border-bottom: 1px solid $primary-grey;
+}
+
+.ris-btm-text {
+  font-size: 14px;
+  color: $deep-blue;
+  font-weight: $font-semi-bold;
+  line-height: 1.4;
+  margin: 0 0 8px;
+}
+
+.main-head {
+  font-size: 14px;
+  color: $secondary-grey;
+}
+
+.mt-0 {
+  margin-top: 0px !important;
+}
+
+.btns {
+  margin-top: 32px;
+  button {
+    width: 150px;
+    height: 50px;
+    border-radius: 2px;
+    background-color: $theme-blue;
+    border: none;
+    color: $white-color;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 5px;
+    margin-left: 0;
+    margin-top: 10px;
+    &:last-child {
+      margin-right: 0;
+    }
+    &:focus {
+      outline: none;
+    }
+    &.cancel-btn {
+      width: 177px;
+      height: 40px;
+      border-radius: 4px;
+      background-color: $bg-grey2;
+      font-size: 14px;
+      font-weight: 500;
+      color: $theme-blue;
+    }
+  }
+}
+
+.box-pad {
+  padding: 40px 40px 20px 40px;
+}
+
+.span-text {
+  color: $text-grey;
+}
+
+.cancellation-reason {
+  font-size: 14px;
+  font-weight: $font-regular;
+  color: $theme-blue;
+}
+
+.cancelled-by {
+  font-size: 14px;
+  font-weight: $font-regular;
+  color: $theme-blue;
+  padding-top: 5px;
+}
+
+::ng-deep.txt-blk {
+  .main-div input {
+    color: black;
+    background: url("/assets/images/down-carat.svg") no-repeat;
+    background-position: right 1px center;
+    cursor: pointer;
+  }
+}
+
+.right-col-align {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+// media query for mobile
+@media screen and (max-width: 767px) {
+  .dentist-common-profile-wrapper {
+    .flex-row {
+      flex-direction: column;
+    }
+  }
+  .dentist-profile {
+    height: auto;
+    padding: 26px 20px;
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
+  .dcp-right-wrapper {
+    .dcp-heading-wrapper {
+      padding: 30px 20px;
+    }
+    .dcp-body-wrapper {
+      padding: 0px 20px 20px;
+    }
+  }
+  .button-wrapper {
+    .row {
+      width: 100%;
+    }
+    .button-wrapper__btn {
+      margin-top: 30px;
+    }
+  }
+}
+
+.start_text {
+  display: flex;
+  width: fit-content;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  color: $light-green1;
+  margin: 0px 0px 10px 0px;
+  padding-left: 10px;
+  img {
+    margin-right: 6px;
+  }
+}

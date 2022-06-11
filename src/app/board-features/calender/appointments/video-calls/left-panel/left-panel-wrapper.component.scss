@@ -1,0 +1,105 @@
+// ************* left panel chat box css ***********************
+@import "../../../../../../assets/sass/mixins";
+@import "../../../../../../assets/sass/variable";
+
+@keyframes jump {
+  0% {
+    transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  }
+  40% {
+    transform: translate3d(0, 30%, 0) scale3d(0.7, 1.5, 1);
+  }
+  100% {
+    transform: translate3d(0, 100%, 0) scale3d(1.5, 0.7, 1);
+  }
+}
+
+.chat-btn-div {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  display: flex;
+  text-align: left;
+  align-items: center;
+  padding-left: 15px;
+  cursor: pointer;
+  bottom: 45px;
+  right: 0;
+  z-index: 100000;
+  // background-color: $summer-sky;
+  color: $white-color;
+  font-weight: bold;
+  @include border-radius(50px);
+  &.icon {
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    margin: auto;
+    display: inline-block;
+  }
+  &.chat-icon {
+    background-image: url("/../../../assets/images/video-call-icon/chat.svg");
+    background-position: -8px -6px;
+    right: 30px;
+    bottom: 30px;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.33);
+  }
+  &.disabled {
+    cursor: not-allowed;
+    background-image: url("/../../../assets/images/video-call-icon/chat.svg");
+  }
+  &.loading {
+    cursor: progress;
+  }
+  &.chat-close {
+    background-image: url("/assets/images/video-call-icon/chat-close.svg");
+  }
+  .count {
+    @include border-radius(50%);
+    border: 1px solid $white-color;
+    padding: 3px;
+    position: absolute;
+    right: 0;
+    background: $dark-green;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    &.jump {
+      transform-origin: 50% 50%;
+      animation: jump 0.5s linear alternate;
+    }
+  }
+}
+
+.left-panel {
+  position: absolute;
+  top: 86px;
+  right: -400px;
+  z-index: 100000;
+  background-color: $white-color;
+  width: 340px;
+  height: calc(100vh - 200px);
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  font-family: $font-family;
+  border-radius: 10px;
+  &:after {
+    content: "";
+    position: absolute;
+    right: 12px;
+    bottom: -32px;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top: 20px solid #fbfbfb;
+  }
+}

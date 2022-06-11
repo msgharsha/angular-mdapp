@@ -1,0 +1,370 @@
+@import "../../../../../assets/sass/variable";
+@import "../../../../../assets/sass/mixins";
+
+#videos {
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#subscriber {
+  width: 100%;
+  height: calc(100vh - 65px);
+  z-index: 10;
+  background-color: #000;
+}
+#subscriberScreen {
+  width: 100%;
+  height: calc(100vh - 65px);
+  z-index: 10;
+  background-color: #000;
+}
+#publisher {
+  width: 130px;
+  height: 71px;
+  border-radius: 4px;
+  background-color: #d8d8d8;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  overflow: hidden;
+}
+
+.dentist-profile {
+  background-color: $white-color;
+  padding: 26px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-right: 8px;
+  .dentist-profile__image {
+    margin-top: 12px;
+    height: 120px;
+    width: 120px;
+    border-radius: 6px;
+    border: solid 2px $light-gray3;
+  }
+  .dentist-profile__title {
+    font-size: 18px;
+    margin-top: 16px;
+    margin-bottom: 0px;
+    color: $light-blue2;
+    font-weight: $font-bold;
+  }
+  .dentist-profile__procedures {
+    font-size: 14px;
+    margin: 0px;
+    color: $light-blue1;
+    font-weight: $font-semi-bold;
+    font-style: italic;
+  }
+  .button-wrapper__btn {
+    margin-top: 6px;
+  }
+  .dentist-profile__location {
+    display: flex;
+    margin: 16px 8px;
+    .location__text {
+      font-size: 14px;
+      padding-left: 15px;
+      color: $deep-blue;
+    }
+  }
+}
+
+.page-container {
+  padding: 20px 15px;
+}
+.card-default {
+  padding: 30px;
+  background-color: $white-color;
+  border-radius: 10px;
+  box-shadow: 0 0 22px 0 rgba(46, 51, 138, 0.13);
+  margin-bottom: 0;
+  height: calc(100vh - 105px);
+  max-height: calc(100vh - 105px);
+  overflow: auto;
+}
+
+.start_text {
+  display: flex;
+  width: fit-content;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  color: $light-green1;
+  margin: 0px 0px 10px 0px;
+  padding-left: 10px;
+  img {
+    margin-right: 6px;
+  }
+}
+
+.tabs-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  li {
+    font-size: 16px;
+    color: #67818c;
+    padding: 8px;
+    text-align: center;
+    background-color: #f7f8f9;
+    border-radius: 4px 4px 0 0;
+    flex: 1;
+    -webkit-flex: 1;
+    margin-right: 10px;
+    &:active,
+    &.active {
+      color: #fff;
+      background-color: #345766;
+    }
+  }
+}
+
+// Video Call styles
+.video-call-container {
+  height: calc(100vh - 105px);
+  max-height: calc(100vh - 105px);
+  border: 1px solid #e5eaeb;
+  border-radius: 10px;
+  box-shadow: 0 0 22px 0 rgba(46, 51, 138, 0.13);
+  position: relative;
+  margin-bottom: 0;
+  overflow: hidden;
+  max-width: 800px;
+  transition: max-width 0.4s;
+  .client-video {
+    height: 100%;
+    img {
+      height: 100%;
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+    }
+  }
+  .user-video {
+    width: 130px;
+    height: 71px;
+    border-radius: 4px;
+    background-color: #d8d8d8;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    overflow: hidden;
+  }
+  .fullscreen-icon {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    width: 42px;
+    height: 42px;
+    background: url("/assets/images/video-call-icon/expand.svg") no-repeat;
+    cursor: pointer;
+    z-index: 10000;
+    &:hover {
+      -webkit-animation: zoominout 0.4s;
+      animation: zoominout 0.4s;
+    }
+  }
+  .videoscreen-features {
+    position: absolute;
+    top: 30px;
+    right: 92px;
+    width: 800px;
+    z-index: 10000;
+    .feature-wrapper {
+      display: flex;
+      justify-content: space-between;
+      .feature-btn {
+        min-width: 145px;
+        height: 40px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        border: solid 1px #ffffff;
+        border-radius: 4px;
+        color: white;
+        padding: 5px 10px;
+        cursor: pointer;
+        background-color: rgba(0, 0, 0, 0.2);
+        &:hover {
+          transition-duration: 0.4s;
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+  .videocall-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    bottom: 30px;
+    width: 100%;
+    z-index: 10000;
+    .control-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      & + .control-btn {
+        margin-left: 20px;
+      }
+      &:hover {
+        -webkit-animation: zoominout 0.4s;
+        animation: zoominout 0.4s;
+      }
+      &.chat-btn {
+        position: relative;
+      }
+      &.mic-btn {
+        background-color: $white-color;
+        background-image: url("/assets/images/video-call-icon/mic-btn.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        &.active {
+          background-image: url("/assets/images/video-call-icon/mic-btn.svg");
+        }
+        &.inactive {
+          background-image: url("/assets/images/video-call-icon/mute.svg");
+        }
+      }
+      &.video-btn {
+        background-color: $white-color;
+        background-image: url("/assets/images/video-call-icon/video-btn.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        &.active {
+          background-image: url("/assets/images/video-call-icon/video-btn.svg");
+        }
+        &.inactive {
+          background-image: url("/assets/images/video-call-icon/disable-video.svg");
+        }
+      }
+    }
+  }
+}
+
+.video-full-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  height: 100vh;
+  max-height: 100vh;
+  margin: 0;
+  width: 100%;
+  border-radius: 0;
+  border: 0;
+  max-width: 100%;
+  #subscriber {
+    height: 100vh;
+  }
+  #publisher {
+    height: 185px;
+    width: 340px;
+    border-radius: 15px;
+    top: 30px;
+    left: 30px;
+  }
+  .fullscreen-icon {
+    top: 30px;
+    z-index: 10000;
+    background: url("/assets/images/video-call-icon/collapse-screen.svg")
+      no-repeat;
+  }
+}
+
+.hide-chat {
+  display: none;
+}
+
+.count {
+  @include border-radius(50%);
+  border: 1px solid $white-color;
+  padding: 3px;
+  position: absolute;
+  right: 0;
+  background: $dark-green;
+  color: whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  &.jump {
+    transform-origin: 50% 50%;
+    animation: jump 0.5s linear alternate;
+  }
+}
+
+@-webkit-keyframes zoominout {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.12, 1.12);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+@keyframes zoominout {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.12, 1.12);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+// media query for mobile
+@media screen and (max-width: 767px) {
+  .page-container {
+    padding: 0;
+    .psm0 {
+      padding: 0;
+    }
+  }
+  .video-call-container {
+    max-height: calc(100vh - 65px);
+    margin: 0;
+    border-radius: 0;
+    .videoscreen-features {
+      display: none;
+    }
+    .fullscreen-icon {
+      display: none;
+    }
+    .videocall-controls {
+      .chat-btn {
+        display: none;
+      }
+    }
+  }
+  .card-default {
+    display: none;
+    margin-bottom: 30px;
+  }
+  .tabs-menu {
+    flex-direction: column;
+    li {
+      margin-right: 0;
+    }
+  }
+  .video-full-screen {
+    .fullscreen-icon {
+      display: none;
+    }
+  }
+}

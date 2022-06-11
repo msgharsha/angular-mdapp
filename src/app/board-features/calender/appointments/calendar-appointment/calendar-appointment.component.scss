@@ -1,0 +1,162 @@
+@import "../../../../../assets/sass//variable";
+.cal-month-view .date-disabled,
+.cal-week-view .cal-day-columns .date-disabled,
+.cal-day-view .date-disabled {
+  background-color: #fafafa;
+  color: #aeaeae;
+}
+
+.doctor-dropdown {
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 4px;
+  .dropdown-value {
+    padding-right: 15px;
+    margin-left: 4px;
+    margin-right: auto;
+  }
+}
+.doctor-dropdown-menu {
+  width: 301px; //370px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0 6px 10px 2px rgba(96, 97, 112, 0.1),
+    0 -1px 0 0 rgba(40, 41, 61, 0.04);
+  max-height: 200px; //400px;
+  right: 0;
+  left: auto;
+  overflow: auto;
+  flex: none;
+  .dropdown-item {
+    font-size: 14px;
+    font-weight: bold;
+    color: $dark-grey;
+    line-height: 1.5;
+    padding: 12px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 -1px 0 0 #d9d9d9;
+    cursor: pointer;
+    &:active {
+      background-color: #f8f9fa;
+    }
+    &.selected {
+      background-color: $light-grey;
+    }
+    .checkbox {
+      margin-right: 10px;
+      label {
+        margin: 0;
+        height: 20px;
+      }
+    }
+    .dr-image {
+      margin-right: 12px;
+      img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+.location-dropdown-menu {
+  width: 301px; //233px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: 0 6px 10px 2px rgba(96, 97, 112, 0.1),
+    0 -1px 0 0 rgba(40, 41, 61, 0.04);
+  max-height: 400px; //400px
+  right: 0;
+  left: auto;
+  overflow: auto;
+  .dropdown-item {
+    font-size: 14px;
+    font-weight: bold;
+    color: $dark-grey;
+    line-height: 1.5;
+    padding: 12px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 -1px 0 0 #d9d9d9;
+    cursor: pointer;
+    &:active {
+      background-color: #f8f9fa;
+    }
+    &.selected {
+      background-color: $light-grey;
+    }
+    .checkbox {
+      margin-right: 10px;
+      label {
+        margin: 0;
+        height: 20px;
+      }
+    }
+    .dr-image {
+      margin-right: 12px;
+      img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+::ng-deep .mat-select-panel {
+  max-height: 330px !important;
+  // margin-top: 38px;
+  // min-width: calc(75% + 38px);
+  // // transform: scaleY(1);
+  // margin-left: 27px;
+}
+
+:host mat-select ::ng-deep .mat-select-arrow {
+  border-left: 0;
+  border-right: none !important;
+  border-top: 0;
+  border-image-repeat: stretch !important;
+  width: 24px;
+  height: 18px;
+  background-position: center;
+  background-image: url("../../../../../assets/images/down-carat-small.svg") !important;
+}
+
+.mat-option:after {
+  content: "";
+  width: 100%;
+  border-bottom: solid 1px lightgray;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  top: calc(3em - 2px);
+}
+
+.relative-tab {
+  position: relative;
+}
+.del-appt-btn {
+  position: absolute;
+  z-index: 3;
+  top: 6px;
+  right: 0;
+  .btn {
+    font-family: "Nunito", "Montserrat", sans-serif;
+    font-size: 12px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .relative-tab {
+    padding-top: 50px;
+  }
+}

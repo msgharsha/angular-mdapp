@@ -1,0 +1,35 @@
+<div class="homepage-wrapper">
+  <div class="section-wrapper" [@openCloseMotion]="isOpen ? 'open' : 'closed'">
+    <div [ngClass]="isCallConnected ? 'show' : 'hide'">
+      <video-call
+        #video
+        (onConnectionUpdate)="onConnectionUpdate($event)"
+      ></video-call>
+      <div class="report-btn-div" *ngIf="!isOpen && !isD2D">
+        <button class="diagnose-btn btn-small">{{ "BILL" | translate }}</button>
+        <button class="report-btn btn-small">{{ "NOTES" | translate }}</button>
+      </div>
+      <div class="diagnose-and-history-btn-div" *ngIf="!isOpen && !isD2D">
+        <button class="diagnose-btn" (click)="DiagnosePatient()">
+          {{ "PRESCRIPTION" | translate }}
+        </button>
+        <button class="history-btn" (click)="MedicalHistory()">
+          {{ "MEDICAL_HISTORY" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <right-panel
+    *ngIf="isCallConnected && !isD2D"
+    (toggleOpen)="closeRightPanel($event)"
+    id="appointment-prescription"
+    [panelName]="panelName"
+  ></right-panel>
+  <app-chat-left-panel
+    *ngIf="isCallConnected"
+    [bookingId]="bookingId"
+  ></app-chat-left-panel>
+  <div class="text-block" *ngIf="!isCallConnected">
+    {{ "THANK_YOU_FOR_USING_CACTUSMD" | translate }}.
+  </div>
+</div>

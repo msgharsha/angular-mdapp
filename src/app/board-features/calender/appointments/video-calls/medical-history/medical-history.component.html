@@ -1,0 +1,305 @@
+<div class="tab-content-card" *ngIf="medicalHistory">
+  <div class="row">
+    <div class="col-6">
+      <div class="profile-info">
+        <div class="profile-img">
+          <img
+            [src]="medicalHistory?.profileImage || 'assets/images/profile-img.svg'"
+            width="60"
+            alt=""
+            (error)="profileImg.src = 'assets/images/profileImg.png'"
+            #profileImg
+          />
+        </div>
+        <div class="profile-heading">
+          <h5>{{ medicalHistory.firstName }} {{ medicalHistory.lastName }}</h5>
+          <small *ngIf="medicalHistory?.height" class="info-legend"
+            >{{ medicalHistory.height }} {{ medicalHistory.heightUnit }} |
+            {{ medicalHistory.weight }} {{ "LBS" | translate }}</small
+          >
+        </div>
+      </div>
+    </div>
+      <div class="col-6" *ngIf="invitePatientStatus && medicalHistory.downloadUrl" style="text-align: right;">
+        <a class="print" target="_blank" [href]="medicalHistory?.downloadUrl" download="medicalHistory?.downloadUrl">{{ "DOWNLOAD_MEDICALHISTORY" | translate }}</a>
+    </div>
+  </div>
+  
+  <div class="row mb-30">
+    <div class="col-6">
+      <p class="card-label">{{ "HEALTH_CARD_NUMBER" | translate }}</p>
+      <div class="na-text-style" >
+      {{
+        medicalHistory.healthCareNumber
+          ? medicalHistory.healthCareNumber
+          : "N/A"
+      }}
+      </div>
+      <div class="validation" *ngIf="healthCardErrMsg">
+        {{ healthCardErrMsg }}
+
+      </div>
+      <div class="validation" style="font-size: 12px;" *ngIf="healthCardErrorRamq">
+
+        {{ "NOTE_DR" | translate }} {{userData.firstName}} {{userData.lastName}} {{"RAMQ_ERR_MSG1" | translate}} <a style="color: blue; text-decoration: underline;" (click) = "sendToPractice()">{{"LINK" | translate}}</a> {{"RAMQ_ERR_MSG2" | translate}}
+        
+      </div>
+      <span *ngIf="healthCardInfo.length !== 0" style="float: left; color: green;
+        font-weight: 500;">{{healthCardInfo[0].nom[0]}} {{healthCardInfo[0].pre[0]}}
+      ({{healthCardInfo[0].dat_naiss[0] | date: 'dd-MMM-yyyy'}}), Verify Date:
+      {{healthCardInfo[0].dat_verif_admis[0] | date: 'dd-MMM-yyyy'}}</span>
+      
+    </div>
+    <div class="col-6">
+      <p class="card-label">{{ "HEALTH_CARD_EXPIREDON" | translate }}</p>
+      <div class="na-text-style" >
+      {{
+        medicalHistory.healthCareExpiry
+          ? medicalHistory.healthCareExpiry
+          : "N/A"
+      }}
+      </div>
+    </div>
+    <div class="col-6">
+      <p class="card-label">{{
+        "FRONT_PHOTO_OF_HEALTH_CARD" | translate
+      }}</p>
+      <app-file-upload
+        id="img_specimen_cheque"
+        [isPdfSupported]="true"
+        [showImageOptions]="true"
+        [blockWidth]="100"
+        [blockHeight]="100"
+        [roundImage]="false"
+        [healthUrl]="medicalHistory?.healthCareFrontImage ||'assets/images/profileImg.png'"
+        [healthCardImage]="true"
+        [modalId]="'frontImage'"
+        [imageTitle]="'SPECIMEN_CHEQUE' | translate"
+      >
+      </app-file-upload>
+    </div>
+    <div class="col-6">
+      <p class="card-label">{{
+        "BACK_PHOTO_OF_HEALTH_CARD" | translate
+      }}</p>
+      <app-file-upload
+        id="img_specimen_cheque"
+        [isPdfSupported]="true"
+        [showImageOptions]="true"
+        [blockWidth]="100"
+        [blockHeight]="100"
+        [roundImage]="false"
+        [healthUrl]="medicalHistory?.healthCareBackImage ||'assets/images/profileImg.png'"
+        [healthCardImage]="true"
+        [modalId]="'frontImage'"
+        [imageTitle]="'SPECIMEN_CHEQUE' | translate"
+      >
+      </app-file-upload>
+    </div>
+  </div>
+
+  <p class="card-label">{{ "CURRENT_MEDICATION" | translate }}</p>
+  <div
+    class="na-text-style"
+    *ngIf="
+      !medicalHistory.medications || medicalHistory.medications.length == 0
+    "
+  >
+    {{ "NO_DATA" | translate }}
+  </div>
+  <div class="grid-card" *ngIf="medicalHistory.medications?.length">
+    <div class="grid-head">
+      <div class="row">
+        <div class="width_15">{{ "MEDICINE_NAME" | translate }}</div>
+        <div style="width: 12%;">{{ "FORMAT" | translate }}</div>
+        <div style="width: 13%;">{{ "DOSAGE" | translate }}</div>
+        <div class="width_15">{{ "FREQUENCY" | translate }}</div>
+        <div class="width_15">{{ "DURATION" | translate }}</div>
+        <div class="width_15">{{ "USAGETYPE" | translate }}</div>
+        <div class="width_15">{{ "USAGE_FORMAT" | translate }}</div>
+      </div>
+    </div>
+    <div class="grid-content">
+      <div class="row" *ngFor="let medication of medicalHistory.medications">
+        <div class="width_15">
+          <div class="text-box">{{ medication.medicineName }}</div>
+        </div>
+        <div style="width: 12%; padding-right: 10px;">
+          <div class="text-box">{{ getMeasureName(medication.medicineTypeId) }}</div>
+        </div>
+        <div style="width: 13%;">
+          <div class="form-group row width_0">
+            <div class="text-box">{{medication.dosageSchedule }}</div>
+            <div class="text-box">{{ getDosageName(medication.dosageId) }}</div>
+          </div>
+        </div>
+        <div class="width_15">
+          <div class="text-box">{{ getFrequencyName(medication.frequencyId) }}</div>
+        </div>
+        <div class="width_15">
+          <div class="form-group row width_0">
+            <div class="text-box">{{ medication.durationSchedule }}</div>
+            <div class="text-box">{{ getDurationName(medication.durationId) }}</div>
+          </div>
+        </div>
+        <div class="width_15">
+          <div class="text-box">{{ getUsageTypeName(medication.usageTypeId) }}</div>
+        </div>
+        <div class="width_15">
+          <div class="form-group row width_0">
+            <div class="text-box">{{ medication.usageSchedule }}</div>
+            <div class="text-box">{{ getUsageFormatName(medication.usageFormatId) }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <p class="card-label">{{ "ALLERGY_TYPE" | translate }}</p>
+  <div
+    class="na-text-style"
+    *ngIf="!medicalHistory.allergies || medicalHistory.allergies.length == 0"
+  >
+    {{ "NO_DATA" | translate }}
+  </div>
+  <div class="grid-card" *ngIf="medicalHistory.allergies?.length">
+    <div class="grid-head">
+      <div class="row">
+        <div class="col-4">{{ "DRUG" | translate }}</div>
+        <div class="col-4">{{ "ALLERGY" | translate }}</div>
+        <div class="col-4">{{ "REACTION" | translate }}</div>
+      </div>
+    </div>
+    <div class="grid-content">
+      <div class="row" *ngFor="let allergie of medicalHistory.allergies">
+        <div class="col-4">
+          <div class="text-box">{{ allergie.allergyType }}</div>
+        </div>
+        <div class="col-4">
+          <div class="text-box">{{ allergie.allergy }}</div>
+        </div>
+        <div class="col-4">
+          <div class="text-box">{{ allergie.reaction }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label class="text-label">{{ "TRAVEL_TEXT" | translate }}</label>
+        <p
+          *ngIf="
+            !medicalHistory.countries || medicalHistory.countries.length == 0
+          "
+          class="text-value"
+        >
+          N/A
+        </p>
+        <p *ngIf="medicalHistory.countries?.length" class="text-value">
+          <span *ngFor="let country of medicalHistory.countries; let i = index">
+            {{ country
+            }}<span *ngIf="i < medicalHistory.countries.length - 1"
+              >,
+            </span></span
+          >
+        </p>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label class="text-label">{{ "ALCOHOL_TEXT" | translate }}</label>
+        <p class="text-value">
+          {{
+            medicalHistory.alcoholFrequency
+              ? medicalHistory.alcoholFrequency
+              : "N/A"
+          }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label class="text-label">{{ "SMOKE_TEXT" | translate }}</label>
+        <p class="text-value">
+          {{
+            medicalHistory.smokeFrequency
+              ? medicalHistory.smokeFrequency + " times"
+              : "N/A"
+          }}
+        </p>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label class="text-label">{{ "LAST_VISIT_DOCTOR" | translate }}</label>
+        <p class="text-value">
+          {{ medicalHistory.lastDoctorVisit ? lastVisit : "N/A" }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label class="text-label">{{ "HEALTH_PROBLEM" | translate }}</label>
+        <p
+          *ngIf="
+            !medicalHistory.healthProblems ||
+            medicalHistory.healthProblems.length == 0
+          "
+          class="text-value"
+        >
+          N/A
+        </p>
+        <p *ngIf="medicalHistory.healthProblems?.length" class="text-value">
+          <span
+            *ngFor="
+              let healthProblem of medicalHistory.healthProblems;
+              let i = index
+            "
+            >{{ healthProblem
+            }}<span *ngIf="i < medicalHistory.healthProblems.length - 1"
+              >,
+            </span></span
+          >
+        </p>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label class="text-label">{{ "FAMILY_HISORY" | translate }}</label>
+        <p
+          *ngIf="
+            !medicalHistory.familyHealthProblems ||
+            medicalHistory.familyHealthProblems.length == 0
+          "
+          class="text-value"
+        >
+          N/A
+        </p>
+        <p
+          *ngIf="medicalHistory.familyHealthProblems?.length"
+          class="text-value"
+        >
+          <span
+            *ngFor="
+              let familyHealthProblem of medicalHistory.familyHealthProblems;
+              let i = index
+            "
+            >{{ familyHealthProblem
+            }}<span *ngIf="i < medicalHistory.familyHealthProblems.length - 1"
+              >,
+            </span></span
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

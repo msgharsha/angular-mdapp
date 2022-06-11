@@ -1,0 +1,48 @@
+<div class="dialog-wrapper" style="max-height: initial;">
+  <div class="heading-wrapper">
+    <h1 mat-dialog-title class="dialog-title">
+      {{ "DETAILED_REQUISITIONS" | translate }}
+    </h1>
+    <span class="close-icon" (click)="close()"></span>
+  </div>
+  <div class="dialogue-content">
+      <div class="prescribe-medicine-wrap">
+        <div class="left-wrapper" *ngFor="let reqhistory of requisitionHistorylist">
+          <div class="row">
+            <div class="col-2 font-weight-bold">{{"CONSULTATION_DATE" | translate}}:</div>
+            <div class="col-10">{{reqhistory.created_at | date: "dd MMM, yyyy"}}</div>
+          </div>
+          <!-- <label class="table-label">{{ "TEST" | translate }}</label> -->
+          <div class="test-table-wrapper" *ngFor="let test of reqhistory.testInfo.tests">
+            <div class="thead">
+              <div class="td">{{ "TEST_NAME" | translate }}</div>
+              <div class="td">{{ "DOCUMENT" | translate }}</div>
+              <div></div>
+            </div>
+            <div class="tbody">
+              <div class="tr row">
+                <div class="col-5">
+                  <input type="text" class="form-control" [value]="test.testName" disabled />
+                </div>
+                <div class="col-5">
+                  <input type="text" class="form-control" [value]="test.testUrl.split('/').pop()" disabled />
+                </div>
+                <div class="col-2 action-col">
+                  <div class="col-2 text-center" *ngIf="test.testUrl">
+                    <span class="download-icon" (click)="downloadFile(test.testUrl)"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="right-wrapper">
+            <div class="form-group">
+              <label class="table-label">{{ "REMARKS" | translate }}</label>
+              <div style="padding: 10px;">{{ reqhistory.testInfo.remarks || '--NA--' }}</div>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+</div>

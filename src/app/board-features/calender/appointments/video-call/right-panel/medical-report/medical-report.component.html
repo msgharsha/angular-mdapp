@@ -1,0 +1,87 @@
+<div class="sidebar">
+  <div class="rectangle">
+    <div class="Medical-Report">{{ "EDUCATIONAL_VIDEOS" | translate }}</div>
+    <div class="path" (click)="closeReportPage()"></div>
+  </div>
+
+  <div class="profile unset-profile-property">
+    <div class="profile-1">
+      <img
+        class="display-picture"
+        [src]="mySharedEducationalVideos?.appointmentFor?.imageUrl"
+        alt=""
+      />
+    </div>
+    <div class="profile-2">
+      <div class="profile-name">
+        {{ mySharedEducationalVideos?.appointmentFor?.name }}
+      </div>
+      <div class="profile-details"></div>
+    </div>
+  </div>
+
+  <div class="report-div">
+    <mat-tab-group
+      [selectedIndex]="selectedIndex"
+      (selectedTabChange)="tabChanged($event)"
+    >
+      <mat-tab label="Unshared">
+        <div class="loader-icon" *ngIf="loading">
+          <loader-component [show]="loading"></loader-component>
+        </div>
+        <div class="doctor-div">
+          <div
+            class="doctors-list"
+            *ngFor="let videoData of myEducationalVideos?.videos; let i = index"
+          >
+            <div class="doctor-name">
+              <div>
+                <a [href]="videoData.youtubeLink" target="_blank">{{
+                  videoData.title | titlecase
+                }}</a>
+              </div>
+            </div>
+            <div class="doctor-prescription">
+              <button class="btn-div" (click)="onShare(videoData.id)">
+                {{ "SHARE" | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!myEducationalVideos?.videos?.length">
+          <div class="nodata-found">
+            {{ "NO_DATA_FOUND" | translate }}
+          </div>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Shared">
+        <div class="loader-icon" *ngIf="loading">
+          <loader-component [show]="loading"></loader-component>
+        </div>
+        <div class="doctor-div">
+          <div
+            class="doctors-list"
+            *ngFor="let videoData of mySharedEducationalVideos?.videos"
+          >
+            <div class="doctor-name">
+              <div>
+                <a [href]="videoData.youtubeLink" target="_blank">
+                  {{ videoData.title | titlecase }}
+                </a>
+              </div>
+            </div>
+            <div class="doctor-prescription">
+              <div class="">{{ videoData.sharedBy }}</div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!mySharedEducationalVideos?.videos?.length">
+          <div class="nodata-found">
+            {{ "NO_DATA_FOUND" | translate }}
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

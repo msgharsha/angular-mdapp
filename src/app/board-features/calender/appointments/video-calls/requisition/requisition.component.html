@@ -1,0 +1,170 @@
+<div class="tab-content-card">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-6">
+          <p class="card-title">{{ "PRESCRIBE_TESTS" | translate }}</p>
+        </div>
+        <div class="col-6" style="text-align: right;">
+          <button type="button" class="btn btn-secondary" (click)="detailedRequisitions()" style="margin-left: 20px;">
+            {{ "DETAILED_REQUISITIONS" | translate }}
+            </button>
+        </div>
+      </div>
+
+      <div class="prescribe-medicine-wrap" [formGroup]="requistionForm">
+
+        <div class="form-group pharmacy-dropdown">
+          <label class="text-label">{{ "SELECT_LAB" | translate }}</label>
+          <select class="form-control form-select" formControlName="lab">
+            <option [value]="''">--{{ "SELECT_LAB" | translate }}--</option>
+            <option *ngFor="let lab of addressList" [value]="lab.id">
+              {{ lab.labName }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group pharmacy-dropdown">
+          <div class="row">
+            <div class="col-11">
+              <label class="text-label">{{ "SELECT_FORM" | translate }}</label>
+              <select class="form-control form-select" (change)="changeSelectedFile($event)">
+                <option [value]="''">--{{ "SELECT_FORM" | translate }}--</option>
+                <option *ngFor="let form of formsList" [value]="form.id">
+                  {{ form.name }}
+                </option>
+              </select>
+            </div>
+            <div class="col-1">
+              <button class="btn bg-white" style="color: #1a8ccd;margin-top:28px;margin-left: -25px;" (click)="printFile()" >
+                <fa-icon [icon]="fontIcons[0]"></fa-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="left-wrapper">
+          <!-- <label class="table-label">{{ "TEST" | translate }}</label> -->
+          <div class="test-table-wrapper">
+            <div class="thead">
+              <div class="td">{{ "TEST_NAME" | translate }}</div>
+              <div class="td">{{ "DOCUMENT" | translate }}</div>
+              <div></div>
+            </div>
+            <div class="tbody">
+              <div class="tr" *ngIf="!invitePatientStatus">
+                <div class="col-5">
+                  <input type="text" *ngIf="!isReadMode" class="form-control" formControlName="testName"
+                    placeholder="{{ 'ENTER_HERE' | translate }}" id="test_name" />
+                  <div *ngIf="hasError('required', 'testName') || showNameError" class="validation">
+                    {{ "REQUIRED" | translate }}
+                  </div>
+                </div>
+
+                <div class="col-5">
+                  <div class="file-upload-box" *ngIf="!isReadMode">
+                    <app-file-upload #file formControlName="testUrl" id="requisition"
+                      [isPdfSupported]="true" [showImageOptions]="true" [blockWidth]="100" [blockHeight]="100"
+                      [blockRadius]="200" [roundImage]="false" [modalId]="'requisition_modal'" [isProfilePage]="false" [isRequisition]="true"
+                      (disableButton)="uploadingStart($event)" [deleteImageSubscription]="true"
+                      (deleteRequisitionFiles)="deletedFiles($event)">
+                    </app-file-upload>
+                    <div *ngIf="hasError('required', 'testUrl') || showFileError" class="validation">
+                      {{ "REQUIRED" | translate }}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-2 action-col" *ngIf="!isReadMode">
+                  <button type="button" class="btn btn-primary" (click)="addToList(file)">
+                    <span>
+                      {{ "BILLING_MODULE.ADD" | translate }}
+                    </span>
+
+                  </button>
+                </div>
+              </div>
+
+              <div *ngFor="let group of requistionFormList.controls; let i = index">
+                <div [formGroup]="group" class="tr">
+                  <div class="col-5">
+                    <input type="text" class="form-control" formControlName="testName" />
+                    <span *ngIf="group.get('testName').errors?.required" class="validation">
+                      {{ "REQUIRED" | translate }}</span>
+                  </div>
+                  <div class="col-5" *ngIf="group.disabled || states[i] == 0">
+                    <input type="text" class="form-control" [value]="
+                        group.get('testUrl').value.url
+                          ? group.get('testUrl').value.url.split('/').pop()
+                          : group.get('testUrl').value.split('/').pop()
+                      " disabled />
+                  </div>
+                  
+                  <div class="col-5" *ngIf="!group.disabled && states[i] == 1">
+                    <div class="file-upload-box">
+                      <app-file-upload formControlName="testUrl" [id]="'requisition_modal' + i" [isPdfSupported]="true"
+                        [showImageOptions]="true" [blockWidth]="100" [blockHeight]="100" [blockRadius]="200"
+                        [roundImage]="false" [modalId]="'requisition_modal'" [isProfilePage]="false" [isRequisition]="true"
+                        (disableButton)="uploadingStart($event)" [deleteImageSubscription]="true"
+                        (deleteRequisitionFiles)="
+                          deletedFiles($event, group, i)
+                        ">
+                      </app-file-upload>
+                      <span *ngIf="group.get('testUrl').errors?.required" class="validation">
+                        {{ "REQUIRED" | translate }}</span>
+                    </div>
+                  </div>
+                  <div class="col-2 action-col" *ngIf="!invitePatientStatus">
+                    <div class="col-2 text-center" *ngIf="group.get('testUrl').value.url">
+                      <!-- <span class="view-icon" (click)="viewFile(group.get('testUrl').value)"></span> -->
+                      <span class="download-icon" (click)="downloadFile(group.get('testUrl').value.url)"></span>
+                    </div>
+                    <button type="button" class="btn btn-primary"
+                      *ngIf="!group.disabled && states[i] == 1 && !isReadMode" (click)="disableGroup(group, i)">
+                      <span>
+                        {{ "UPDATE" | translate }}
+                      </span>
+
+                    </button>
+
+                    <span *ngIf="(group.disabled || states[i] == 0) && !isReadMode" (click)="updateTest(group, i)"
+                      class="action-icon edit-icon"></span>
+                    <span *ngIf="!isReadMode" (click)="deleteTest(i)" class="action-icon delete-icon"></span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="right-wrapper">
+          <div class="form-group">
+            <label class="table-label">{{ "REMARKS" | translate }}</label>
+            <textarea *ngIf="!invitePatientStatus" class="form-control" [readonly]="isReadMode"
+              formControlName="remarks" rows="4" placeholder="{{ 'ADD_REMARKS' | translate }}"></textarea>
+            <div *ngIf="hasError('maxlength', 'remarks')" class="validation">
+              {{ "MAXIMUM_CHARACTERS_LIMIT_EXCEEDED" | translate }}{{ 150 }}
+            </div>
+          </div>
+          <div class="card-button" *ngIf="!invitePatientStatus">
+            <button type="button" *ngIf="!isFromPending" (click)="onSave()" 
+              class="btn btn-secondary">
+              {{ "SAVE" | translate }}
+            </button>
+            <ng-container *ngIf="isFromPending; else elseTemplate">
+              <button type="button" (click)="onSend()" class="btn btn-secondary">
+                {{ "SEND" | translate }}
+              </button>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <button type="button" (click)="onSend()"
+                class="btn btn-secondary">
+                {{ "SEND" | translate }}
+              </button>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

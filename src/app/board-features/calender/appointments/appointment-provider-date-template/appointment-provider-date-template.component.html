@@ -1,0 +1,106 @@
+<div
+  [autoClose]="false"
+  triggers="manual"
+  #p="ngbPopover"
+  (click)="openEventsPopOver(p, day.events)"
+  [ngbPopover]="popContent"
+  popoverClass="calendar-popover"
+>
+  <div class="d-flex">
+    <div class="cal-cell-top">
+      <span class="cal-day-number">{{
+        day.date | calendarDate: "monthViewDayNumber":locale
+      }}</span>
+      <div *ngIf="day.badgeTotal > 2">
+        <small class="more-events">+ {{ day.badgeTotal - 2 }} More</small>
+      </div>
+    </div>
+  </div>
+  <ul *ngIf="day.events.length" class="event-cal">
+    <li [ngClass]="{
+        'scheduled-event': day.events[0].meta.status === 'confirmed',
+        'cancelled-event': day.events[0].meta.status === 'cancelled',
+        'arrived-event': day.events[0].meta.status === 'arrived',
+        'completed-event': day.events[0].meta.status === 'completed',
+        'no-show-event': day.events[0].meta.status === 'no show'
+      }" [ngStyle]="{'background-color':(day.events[0].meta.bookingDetail.appointmentType == 1) ? '#b9deef' : '#c9fdc9' }"  >
+      {{ day.events[0].from | uppercase }} to
+      {{ day.events[0].to | uppercase }} |
+      {{ day.events[0].meta.patient.familyMemberName || day.events[0].meta.patient.patientName }}
+    </li>
+
+    <li [ngClass]="{ 'scheduled-event': day.events[1].meta.status === 'confirmed',
+        'cancelled-event': day.events[1].meta.status === 'cancelled',
+        'arrived-event': day.events[1].meta.status === 'arrived',
+        'completed-event': day.events[1].meta.status === 'completed',
+        'no-show-event': day.events[1].meta.status === 'no show'
+      }" *ngIf="day.events.length > 1" [ngStyle]="{'background-color':(day.events[1].meta.bookingDetail.appointmentType == 1) ? '#b9deef' : '#c9fdc9' }"  >
+      {{ day.events[1].from | uppercase }} to
+      {{ day.events[1].to | uppercase }} |
+      {{ day.events[1].meta.patient.familyMemberName || day.events[1].meta.patient.patientName }}
+    </li>
+  </ul>
+</div>
+<!-- calendar popover content -->
+<ng-template #popContent>
+  <div class="availabilty-modal">
+    <div>
+      <div class="modal-head">
+        <strong
+          >{{ "ALL_APPOINTMENTS" | translate }} ({{
+            day.date | date: "d MMM"
+          }})</strong
+        >
+        <div class="modal-action">
+          <!-- Close Popover -->
+          <span (click)="p.close()">
+            <img src="../../assets/images/popup-close.svg" alt="" />
+          </span>
+        </div>
+      </div>
+      <div class="modal-list">
+        <ul *ngFor="let patientData of day.events">
+          <li [ngStyle]="{'background-color':(patientData.meta.bookingDetail.appointmentType == 1) ? '#b9deef' : '#c9fdc9' }">
+            <div
+              class="d-flex"
+              (click)="
+                getAppointmentById(patientData?.meta.id, patientData.meta)
+              "
+            >
+              <div class="dr-image">
+                <img
+                  [src]="patientImage(patientData.meta?.patient?.profileImage)"
+                  width="40px"
+                  alt=""
+                />
+              </div>
+              <div class="dr-info">
+                <div class="dr-name">
+                  <h5>
+                    {{
+                      patientData.meta.patient.familyMemberName
+                        ? patientData.meta.patient.familyMemberName
+                        : patientData.meta.patient.patientName
+                    }}
+                  </h5>
+                  <div>
+                    {{getAppointmentType(patientData.meta.bookingDetail.appointmentType) | translate}}
+                  </div>
+                  <span
+                    >{{ patientData.from | uppercase }} to
+                    {{ patientData.to | uppercase }}</span
+                  >
+                </div>
+                <div class="dr-address">
+                  <span class="office-icon"></span>
+                  <p>{{ patientData.meta.location_name }}</p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- calendar popover content -->

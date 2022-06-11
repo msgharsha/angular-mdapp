@@ -1,0 +1,16 @@
+<div class="text-center">
+  <span *ngIf="!isError" class="custom-message-2 font-50">
+    <span class="welcome">{{ "WELCOME" | translate }}</span
+    >! {{ "TO" | translate }}
+    <span class="logo-text font-50">{{ "CACTUSMD" | translate }}</span>
+  </span>
+  <span *ngIf="isError" class="custom-message-2 large-text">
+    <span class="welcome">{{ "OOPS" | translate }}!</span>
+  </span>
+</div>
+
+<div class="text-wrapper">
+  <p class="text">
+    {{ message }}
+  </p>
+</div>

@@ -1,0 +1,37 @@
+@import "../../../../../../styles.scss";
+.text-center {
+  font-family: $font-family;
+  font-size: $font-24;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: $dark-text;
+  margin-top: 20vh;
+  .welcome {
+    font-weight: bold;
+  }
+  .custom-message-2 {
+    font-weight: $font-light;
+    &.large-text {
+      color: $summer-sky;
+      font-size: 101px;
+    }
+  }
+}
+
+.logo-text {
+  color: $summer-sky;
+  font-weight: bold;
+}
+
+.text {
+  text-align: center;
+  width: 500px;
+  color: #656582;
+  margin: auto;
+  font-size: $font-24;
+  padding: 40px 0;
+}

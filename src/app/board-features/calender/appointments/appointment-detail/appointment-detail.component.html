@@ -1,0 +1,218 @@
+<section class="dentist-common-profile-wrapper" *ngIf="appointmentDetails && appointmentDetails?.patient">
+  <div (click)="backNavigate()" class="col-lg-12 start_text">
+    <img src="assets/images/signin-icons/arrow-chevron-left.svg" height="24" width="24" alt="back-arrow" />
+    <span>{{ "BACK" | translate }}</span>
+  </div>
+  <div class="container-fluid">
+    <div class="row flex-row">
+      <div class="col-lg-4 p-0">
+        <div class="dentist-profile">
+          <img class="dentist-profile__image" [src]="
+              appointmentDetails?.patient?.profileImage ||
+              'assets/images/profileImg.png'
+            " alt="patient_image" (error)="profileImg.src = 'assets/images/profileImg.png'" #profileImg />
+          <h4 class="dentist-profile__title">
+            {{ appointmentDetails?.patient?.patientName }}
+          </h4>
+          <div class="dentist-profile__procedures" *ngIf="
+              appointmentDetails?.patient?.gender &&
+              appointmentDetails?.patient?.age >= 0
+            ">
+            {{ appointmentDetails?.patient?.gender.toUpperCase() | translate }},
+            {{ appointmentDetails?.patient?.age }}{{ "YRS" | translate }}
+          </div>
+          <div class="button-wrapper__btn" [hidden]="checkPermission('MEDICAL_HISTORY')">
+            <button class="btn btn-inverse" (click)="openMedicalHistoryModal()">
+              {{ "MEDICAL_HISTORY" | translate }}
+            </button>
+          </div>
+          <div class="dentist-profile__location">
+            <img class="location__image" src="/assets/images/appointment-calender.svg" alt="location" />
+            <div class="location__text">{{ startDate }} | {{ startTime }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 p-0">
+        <div *ngIf="appointmentDetails" class="dcp-right-wrapper">
+          <div class="dcp-heading-wrapper">
+            <div class="call-wrapper">
+              <div class="dcp-heading">
+                {{ "APPOINTMENT_DETAILS" | translate }}
+              </div>
+            </div>
+          </div>
+          <div class="dcp-body-wrapper">
+            <div class="button-wrapper">
+              <div class="row">
+                <div class="col-lg-6">
+                  <!-- Reason for visit headong starts here -->
+                  <p class="sub-head mt-0">
+                    {{ "REASON_FOR_VISIT" | translate }}
+                  </p>
+                  <p class="ris-btm-text">
+                    {{ appointmentDetails?.bookingDetail?.reasonForVisit }}
+                  </p>
+                  <!-- Reason for visit ends here -->
+                </div>
+                <div class="col-lg-6">
+                  <!-- Health Card Number starts here -->
+                  <p class="sub-head mt-0">
+                    {{ "HEALTH_CARD_NUMBER" | translate }}
+                  </p>
+                  <p class="ris-btm-text">
+                    {{ appointmentDetails?.patient?.healthCareNumber }}
+                  </p>
+                  <div class="validation" *ngIf="healthCardErrMsg">
+                    {{ healthCardErrMsg }}
+                  </div>
+                  <div class="validation" style="font-size: 12px;" *ngIf="healthCardErrorRamq">
+                    {{ "NOTE_DR" | translate }} {{userData.firstName}} {{userData.lastName}}{{"RAMQ_ERR_MSG1" | translate}} <span [hidden]="checkPermission('HEALTHCARD_VALIDLINK')">{{"RAMQ_ERR_MSG2" | translate}} <a style="color: blue; text-decoration: underline;" (click) = "sendToPractice()">{{"LINK" | translate}}</a> {{"RAMQ_ERR_MSG3" | translate}}</span>
+                  </div>
+                  <span *ngIf="healthCardInfo.length !== 0" style="float: left; color: green;
+                      font-weight: 500;">{{healthCardInfo[0].nom[0]}} {{healthCardInfo[0].pre[0]}}
+                    ({{healthCardInfo[0].dat_naiss[0] | date: 'dd-MMM-yyyy'}}), Verify Date:
+                    {{healthCardInfo[0].dat_verif_admis[0] | date: 'dd-MMM-yyyy'}}</span>
+                  <!-- Health Card Number starts here -->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+
+                  <p class="sub-head">{{
+                    "FRONT_PHOTO_OF_HEALTH_CARD" | translate
+                    }}</p>
+                  <app-file-upload id="img_specimen_cheque" [isPdfSupported]="true" [showImageOptions]="true"
+                    [blockWidth]="100" [blockHeight]="100" [roundImage]="false"
+                    [healthUrl]="appointmentDetails?.patient?.healthCareFrontImage ||'assets/images/profileImg.png'"
+                    [healthCardImage]="true" [modalId]="'frontImage'" [imageTitle]="'SPECIMEN_CHEQUE' | translate">
+                  </app-file-upload>
+                </div>
+                <div class="col-lg-6">
+                  <p class="sub-head">{{
+                    "BACK_PHOTO_OF_HEALTH_CARD" | translate
+                    }}</p>
+                  <app-file-upload id="img_specimen_cheque" [isPdfSupported]="true" [showImageOptions]="true"
+                    [blockWidth]="100" [blockHeight]="100" [roundImage]="false"
+                    [healthUrl]="appointmentDetails?.patient?.healthCareBackImage ||'assets/images/profileImg.png'"
+                    [healthCardImage]="true" [modalId]="'frontImage'" [imageTitle]="'SPECIMEN_CHEQUE' | translate">
+                  </app-file-upload>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-6">
+                  <!-- Consultation Type Starts here -->
+                  <p class="sub-head">{{ "CONSULTATION" | translate }}</p>
+                  <p class="ris-btm-text mb-0">
+                    {{
+                    appointmentDetails?.bookingDetail?.consultation?.toUpperCase()
+                    | translate
+                    }}
+                  </p>
+                  <!-- Consultation Type ends here -->
+                </div>
+                <div class="col-lg-6">
+                  <!-- Consultation Type Starts here -->
+                  <p class="sub-head">{{ "APPOINTMENT_TYPE" | translate }}</p>
+                  <p class="ris-btm-text mb-0" *ngIf="appointmentDetails?.bookingDetail?.appointmentType == 1">
+                    {{ "VIRTUAL" | translate }}
+                  </p>
+                  <p class="ris-btm-text mb-0" *ngIf="appointmentDetails?.bookingDetail?.appointmentType == 2">
+                    {{ "INOFFICE" | translate }}
+                  </p>
+                  <!-- Consultation Type ends here -->
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-6">
+                  <!-- Patient Notes starts here -->
+                  <div class="officeNotes">
+                    <p class="sub-head">{{ "PATIENT_NOTES" | translate }}</p>
+                    <p class="ris-btm-text mb-0" id="savedNotes">
+                      {{ appointmentDetails?.bookingDetail?.officeNotes }}
+                    </p>
+                  </div>
+                  <!-- Patient Notes ends here -->
+                </div>
+                <div class="col-lg-6">
+                  <!--Doctor Notes starts here -->
+                  <div class="Notes">
+                    <p class="sub-head">{{ "DOCTOR_NOTES" | translate }}</p>
+                    <p class="ris-btm-text mb-0" id="savedNotes" [innerHTML]="notes"></p>
+                  </div>
+                  <!--Doctor Notes ends here -->
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-6">
+                  <!-- Services Starts here -->
+                  <div class="m-0 p-0">
+                    <ng-container *ngIf="
+                                appointmentDetails?.bookingDetail?.service &&
+                                appointmentDetails?.bookingDetail?.service.length
+                              ">
+                      <p class="sub-head">{{ "SERVICE" | translate }}</p>
+                      <p class="ris-btm-text" *ngFor="
+                                  let service of appointmentDetails?.bookingDetail
+                                    ?.service
+                                ">
+                        {{ service?.serviceName }}- ${{
+                        service?.consultationFee
+                        }}
+                      </p>
+                    </ng-container>
+                  </div>
+                  <!-- Services ends here -->
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="right-col-align">
+                    <!-- Button starts here -->
+                    <div class="button-wrapper right-column">
+                      <ng-container *ngIf="
+                          appointmentDetails?.bookingDetail?.status !=
+                          'cancelled'
+                          ">
+                        <div class="button-wrapper__btn">
+                          <button class="btn btn-cancel" *ngIf="
+                              appointmentDetails?.bookingDetail?.startTime >
+                              currentTimestamp
+                            " (click)="cancelAppointment()">
+                            {{ "CANCEL" | translate }}
+                          </button>
+                          <span [hidden]="checkPermission('JOIN_CALL')">
+                            <button class="btn btn-primary" *ngIf="
+                                appointmentDetails?.bookingDetail?.callDisableTime >
+                                currentTimestamp && appointmentDetails?.bookingDetail?.appointmentType != 2
+                              " (click)="startVideoCall()">
+                              {{ "JOIN_CALL" | translate }}
+                            </button>
+                            <button class="btn btn-primary" *ngIf="
+                                appointmentDetails?.bookingDetail?.callDisableTime >
+                                currentTimestamp && appointmentDetails?.bookingDetail?.appointmentType == 2
+                              " (click)="startVideoCall()">
+                              {{ "START_CONSULTATION" | translate }}
+                            </button>
+                          </span>
+                          
+                        </div>
+                      </ng-container>
+                    </div>
+                    <!-- Button starts here -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- container ends here-->
+</section>

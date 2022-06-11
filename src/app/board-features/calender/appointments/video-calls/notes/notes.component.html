@@ -1,0 +1,106 @@
+
+<div class="tab-content-card" *ngIf="!invitePatientStatus">
+  <!-- <div class="row">
+    <div class="col-12" style="text-align: right;">
+      <span *ngIf="selectedTemplate && selectedTemplate.downloadUrl" >
+        <a class="print" target="_blank" [href]="selectedTemplate?.downloadUrl" download="selectedTemplate?.downloadUrl">{{ "DOWNLOAD_NOTES" | translate }}</a>
+      </span>
+      
+      <button type="button" class="btn btn-secondary" (click)="detailedNotes()" style="margin-left: 20px;">
+        {{ "DETAILED_NOTES" | translate }}
+        </button>
+    </div>
+  </div> -->
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="mb-20">
+        <button type="button" class="btn btn-secondary" (click)="allAvailableNotesModel()">
+          {{ "VIEW_ALL_AVAILABLE_NOTES" | translate }}
+          </button>
+      </div>
+      <div>{{ "ADD_TEMPLATE_ICON" | translate}} <p class="add-notes ml-4" (click)="addNote()">{{ "ADD_NOTE" | translate }}</p> </div>
+      
+      <div class="form-group info-wrap">
+        <label class="text-label">{{ "SELECT_TEMPLATE" | translate }}</label>
+        <select
+          class="form-control"
+          [(ngModel)]="templateSelection"
+          (change)="onSelection()"
+          [disabled]="isFromPending"
+        >
+          <option *ngFor="let item of this.template" [ngValue]="item">
+            {{ item.templateName }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-6 text-right">
+        <span *ngIf="selectedTemplate && selectedTemplate.downloadUrl" >
+          <a class="print" target="_blank" [href]="selectedTemplate?.downloadUrl" download="selectedTemplate?.downloadUrl">{{ "DOWNLOAD_NOTES" | translate }}</a>
+        </span>
+        
+        <button type="button" class="btn btn-secondary" (click)="detailedNotes()" style="margin-left: 20px;">
+          {{ "DETAILED_NOTES" | translate }}
+          </button>
+      <!-- <div class="text-right" style="margin-top: 30px;">
+        <p class="add-notes" (click)="addNote()">{{ "ADD_NOTE" | translate }}</p>
+      </div> -->
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="text-label">{{ "Content" | translate }}</label>
+    <editor
+      initialValue=""
+      [apiKey]="editorApiKey"
+      [init]="editorConfig"
+      [(ngModel)]="selectedContent"
+      [disabled]="isFromPending"
+    >
+    </editor>
+    <div *ngIf="!selectedContent && formSubmitted" class="validation">
+      {{ "REQUIRED" | translate }}
+    </div>
+  </div>
+
+  <div class="card-button">
+    <button
+      type="button"
+      [disabled]="isFromPending || !selectedContent"
+      class="btn btn-secondary"
+      (click)="saveTemplate()"
+    >
+      {{ "SAVE" | translate }}
+    </button>
+  </div>
+</div>
+<div class="tab-content-card" *ngIf="invitePatientStatus">
+  <div class="row">
+    <div class="col-12" *ngIf="selectedTemplate && selectedTemplate.downloadUrl" style="text-align: right;">
+      <a class="print" target="_blank" [href]="selectedTemplate?.downloadUrl" download="selectedTemplate?.downloadUrl">{{ "DOWNLOAD_NOTES" | translate }}</a>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="text-label" style="font-size: 16px">{{ "Content" | translate }}:</label>
+    <editor
+      initialValue=""
+      [apiKey]="editorApiKey"
+      [init]="editorConfig"
+      [(ngModel)]="selectedContent"
+    >
+    </editor>
+    <div *ngIf="!selectedContent && formSubmitted" class="validation">
+      {{ "REQUIRED" | translate }}
+    </div>
+  </div>
+  <div class="card-button">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="saveTemplate()"
+    >
+      {{ "SAVE" | translate }}
+    </button>
+  </div>
+</div>

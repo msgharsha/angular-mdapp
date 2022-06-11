@@ -1,0 +1,30 @@
+<!-- *********** left panel chat box **************************** -->
+<div
+  class="chat-btn-div icon chat-icon"
+  *ngIf="!isOpen"
+  (click)="openChat()"
+  [ngClass]="{ disabled: !chatToken, loading: loading }"
+>
+  <span class="count" [ngClass]="{ jump: triggerCount }" *ngIf="unreadCount">{{
+    unreadCount > 9 ? "9+" : unreadCount
+  }}</span>
+</div>
+<div
+  class="chat-btn-div icon chat-icon chat-close"
+  *ngIf="isOpen"
+  (click)="closeChat()"
+></div>
+
+<div class="left-panel" [@openClose]="isOpen ? 'open' : 'closed'">
+  <app-chat
+    [hasFocus]="isOpen"
+    (onCloseChat)="closeChat()"
+    [channelId]="channelId"
+    [chatToken]="chatToken"
+    [sender]="sender"
+    [receiver]="receiver"
+    [uuid]="uuid"
+    [isOpen]="isOpen"
+    (onUnreadCountUpdate)="triggerCountUpdate($event)"
+  ></app-chat>
+</div>
